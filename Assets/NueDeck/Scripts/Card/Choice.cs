@@ -23,11 +23,7 @@ namespace NueDeck.Scripts.Card
             HandManager.instance.sameChoiceContainerList.Add(_myChoiceProfile.myID);
             var clone =GameManager.instance.BuildAndGetCard(_myChoiceProfile.myID,cardTransform);
             GameManager.instance.choiceContainer.Add(clone);
-            if (LevelManager.instance.malfunctionController.currentMalfunction.myMalfunctionType == MalfunctionBase.MalfunctionType.VisualDisorder)
-            {
-                
-            }
-
+           
         }
 
         public void OnChoice()

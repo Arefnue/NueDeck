@@ -24,7 +24,7 @@ namespace NueDeck.Scripts.Managers
         public Camera mainCam;
         public LayerMask selectableLayer;
         public PlayerController playerController;
-        public MalfunctionController malfunctionController;
+       
         public Transform playerPos;
         public List<Transform> enemyPosList;
         public SoundProfile finalSoundProfile;
@@ -73,7 +73,6 @@ namespace NueDeck.Scripts.Managers
                 case LevelState.PlayerTurn:
 
                     
-                    malfunctionController.CountMalfunction();
                     HandManager.instance.currentMana = GameManager.instance.maxMana;
                     HandManager.instance.DrawCards(HandManager.instance.drawCount);
                     playerController.myHealth.TakeDamage(playerController.myHealth.poisonStack, true);
@@ -228,7 +227,7 @@ namespace NueDeck.Scripts.Managers
                 AudioManager.instance.PlayMusic(AudioManager.instance.bossMusic);
             }
             
-            malfunctionController.GetRandomMalfunction();
+            
             HandManager.instance.SetGameDeck();
             HandManager.instance.choiceParent.gameObject.SetActive(false);
             UIManager.instance.gameCanvas.SetActive(true);

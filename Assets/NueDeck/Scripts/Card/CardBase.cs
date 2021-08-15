@@ -47,13 +47,7 @@ namespace NueDeck.Scripts.Card
             manaText.text = myProfile.myManaCost.ToString();
             frontImage.sprite = myProfile.mySprite;
 
-            if (LevelManager.instance.malfunctionController.currentMalfunction.myMalfunctionType == MalfunctionBase.MalfunctionType.VisualDisorder)
-            {
-                if (Random.value<=0.25f)
-                {
-                    Hide();
-                }
-            }
+           
         }
 
         #endregion
@@ -99,15 +93,7 @@ namespace NueDeck.Scripts.Card
 
         public void SpendMana(int value)
         {
-            if (LevelManager.instance.malfunctionController.currentMalfunction.myMalfunctionType == MalfunctionBase.MalfunctionType.SuicidalViolence)
-            {
-                LevelManager.instance.playerController.myHealth.TakeDamage(value);
-            }
-            else
-            {
-                HandManager.instance.currentMana -= value;
-            }
-           
+            HandManager.instance.currentMana -= value;
         }
         
         

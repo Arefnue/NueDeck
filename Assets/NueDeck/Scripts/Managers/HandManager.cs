@@ -48,10 +48,7 @@ namespace NueDeck.Scripts.Managers
                 DrawCards(2);
             }
 
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                LevelManager.instance.malfunctionController.GetRandomMalfunction();
-            }
+            
 #endif
            
         }
@@ -67,49 +64,23 @@ namespace NueDeck.Scripts.Managers
 
             for (var i = 0; i < targetDrawCount; i++)
             {
-                if (LevelManager.instance.malfunctionController.currentMalfunction.myMalfunctionType == MalfunctionBase.MalfunctionType.ReverseDraw)
-                {
-                    reverseDraw = Random.value>=0.5f;
-                }
                 
-                if (reverseDraw)
+                if (drawPile.Count <= 0)
                 {
-                    if (discardPile.Count <= 0)
-                    {
-                        var nDrawCount = targetDrawCount - currentDrawCount;
-                        if (nDrawCount >= drawPile.Count) nDrawCount = drawPile.Count;
-                        ReshuffleDrawPile();
-                        DrawCards(nDrawCount);
-                        break;
-                    }
-
-                    var randomCard = discardPile[Random.Range(0, discardPile.Count)];
-                    var clone = GameManager.instance.BuildAndGetCard(randomCard, discardTransform);
-                    handController.AddCardToHand(clone);
-                    handPile.Add(randomCard);
-                    discardPile.Remove(randomCard);
-                    currentDrawCount++;
-                    UIManager.instance.SetPileTexts();
+                    var nDrawCount = targetDrawCount - currentDrawCount;
+                    if (nDrawCount >= discardPile.Count) nDrawCount = discardPile.Count;
+                    ReshuffleDiscardPile();
+                    DrawCards(nDrawCount);
+                    break;
                 }
-                else
-                {
-                    if (drawPile.Count <= 0)
-                    {
-                        var nDrawCount = targetDrawCount - currentDrawCount;
-                        if (nDrawCount >= discardPile.Count) nDrawCount = discardPile.Count;
-                        ReshuffleDiscardPile();
-                        DrawCards(nDrawCount);
-                        break;
-                    }
 
-                    var randomCard = drawPile[Random.Range(0, drawPile.Count)];
-                    var clone = GameManager.instance.BuildAndGetCard(randomCard, drawTransform);
-                    handController.AddCardToHand(clone);
-                    handPile.Add(randomCard);
-                    drawPile.Remove(randomCard);
-                    currentDrawCount++;
-                    UIManager.instance.SetPileTexts();
-                }
+                var randomCard = drawPile[Random.Range(0, drawPile.Count)];
+                var clone = GameManager.instance.BuildAndGetCard(randomCard, drawTransform);
+                handController.AddCardToHand(clone);
+                handPile.Add(randomCard);
+                drawPile.Remove(randomCard);
+                currentDrawCount++;
+                UIManager.instance.SetPileTexts();
             }
 
                 

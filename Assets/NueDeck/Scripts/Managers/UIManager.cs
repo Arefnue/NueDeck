@@ -71,19 +71,9 @@ namespace NueDeck.Scripts.Managers
 
         public void UpdateHealthText()
         {
-            healthText.text = LevelManager.instance.malfunctionController.currentMalfunction.myMalfunctionType == MalfunctionBase.MalfunctionType.LackOfEmpathy ? $"???/???" : $"{LevelManager.instance.playerController.myHealth.maxHealth.ToString()}/{GameManager.instance.playerMaxHealth.ToString()}";
+            healthText.text = $"{LevelManager.instance.playerController.myHealth.maxHealth.ToString()}/{GameManager.instance.playerMaxHealth.ToString()}";
         }
-        public void UpdateMalfunctionName(MalfunctionBase targetMalfunction = null)
-        {
-            var t = targetMalfunction == null ? "" : targetMalfunction.malfunctionName;
-            malfunctionNameText.text = $"Malfunction: {t}";
-        }
-        
-        public void UpdateMalfunctionCounter()
-        {
-            malfunctionCounterText.text = $"Next malfunction: {LevelManager.instance.malfunctionController.malfunctionTurnCounter.ToString()}";
-        }
-
+      
         public void EndTurn()
         {
             if (LevelManager.instance.CurrentLevelState == LevelManager.LevelState.PlayerTurn)

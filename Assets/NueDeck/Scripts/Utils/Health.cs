@@ -292,11 +292,6 @@ namespace NueDeck.Scripts.Utils
             {
                 UIManager.instance.UpdateHealthText();
             }
-
-            if (LevelManager.instance.malfunctionController.currentMalfunction.myMalfunctionType == MalfunctionBase.MalfunctionType.LackOfEmpathy)
-            {
-                currentHealthText.text = $"???/???";
-            }
             
             if (blockStack>0)
             {
