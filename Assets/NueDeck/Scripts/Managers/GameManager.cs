@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using NueDeck.Scripts.Card;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Managers
 {
+    [DefaultExecutionOrder(-1)]
     public class GameManager : MonoBehaviour
     {
         public static GameManager instance;
@@ -15,7 +18,6 @@ namespace NueDeck.Scripts.Managers
         public CardBase cardPrefab;
         
         [Header("Decks")]
-        //public List<int> initalDeckList = new List<int>();
         public List<int> myDeckIDList = new List<int>();
         public DeckSO initalDeck;
 
@@ -28,8 +30,10 @@ namespace NueDeck.Scripts.Managers
         public string playerName;
         public int maxMana = 3;
         
-        
         public bool isRandomHand;
+        
+        #region Setup
+
         private void Awake()
         {
             if (instance == null)
@@ -43,60 +47,39 @@ namespace NueDeck.Scripts.Managers
                 Destroy(gameObject);
             }
         }
-        public void BuildCard(int id,Transform parent)
-        {
-            foreach (var cardSO in allCardsList)
-            {
-                if (cardSO.myID == id)
-                {
-                    var clone = Instantiate(cardPrefab, parent);
-                    clone.myProfile = cardSO;
-                    clone.SetCard();
-                    
-                    break;
-                }
-            }
-        }
+        
+
+        #endregion
+        
         
         public CardBase BuildAndGetCard(int id,Transform parent)
         {
-            foreach (var cardSO in allCardsList)
+            var card = allCardsList.FirstOrDefault(x => x.myID == id);
+            if (card)
             {
-                if (cardSO.myID == id)
-                {
-                    var clone = Instantiate(cardPrefab, parent);
-                    clone.myProfile = cardSO;
-                    clone.SetCard();
-                    return clone;
-                    break;
-                }
+                var clone = Instantiate(cardPrefab, parent);
+                clone.SetCard(card);
+                return clone;
             }
-
             return null;
+           
         }
 
         public void SetInitalHand()
         {
+            myDeckIDList.Clear();
             if (isRandomHand)
             {
-                myDeckIDList.Clear();
                 for (int i = 0; i < 10; i++)
-                {
                     myDeckIDList.Add(allCardsList[Random.Range(0,allCardsList.Count)].myID);
-                }
             }
             else
             {
-                myDeckIDList.Clear();
-                foreach (var card in initalDeck.cards)
-                {
-                    myDeckIDList.Add(card.myID);
-                }
+                initalDeck.cards.ForEach(x=>myDeckIDList.Add(x.myID));
             }
         }
         public void ResetManager()
         {
-            //myDeckIDList = initalDeckList;
             choiceContainer?.Clear();
             playerCurrentHealth = 100;
             playerMaxHealth = 100;
@@ -108,13 +91,10 @@ namespace NueDeck.Scripts.Managers
             LevelManager.instance.playerController.myHealth.maxHealth = playerMaxHealth;
             LevelManager.instance.playerController.myHealth.ChangeHealthText();
         }
-
-
         public void ChangeScene(int target)
         {
             SceneManager.LoadScene(target);
         }
-        
         public int GetCurrentLevel()
         {
             return SceneManager.GetActiveScene().buildIndex-3;
@@ -126,7 +106,7 @@ namespace NueDeck.Scripts.Managers
             
             if (i>=SceneManager.sceneCountInBuildSettings)
             {
-                GameManager.instance.ResetManager();
+                ResetManager();
                 SceneManager.LoadScene(1);
             }
             else

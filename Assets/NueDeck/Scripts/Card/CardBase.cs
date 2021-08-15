@@ -33,8 +33,9 @@ namespace NueDeck.Scripts.Card
         private bool isInactive;
 
         #region Setup
-        public void SetCard()
+        public void SetCard(CardSO targetProfile)
         {
+            myProfile = targetProfile;
             meshRenderer = GetComponentInChildren<MeshRenderer>();
             material = meshRenderer.material; // Create material instance
 

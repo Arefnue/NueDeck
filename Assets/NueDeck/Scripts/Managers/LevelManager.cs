@@ -20,23 +20,20 @@ namespace NueDeck.Scripts.Managers
             Finished
         }
 
-        [Header("Settings")]
-        public Camera mainCam;
+        [Header("Settings")] public Camera mainCam;
         public LayerMask selectableLayer;
         public PlayerController playerController;
-       
+
         public Transform playerPos;
         public List<Transform> enemyPosList;
         public SoundProfile finalSoundProfile;
-       
-        [Header("Level")]
-        public List<EnemyBase> levelEnemyList;
+
+        [Header("Level")] public List<EnemyBase> levelEnemyList;
         public bool isFinalLevel;
 
         [HideInInspector] public List<EnemyBase> currentEnemies = new List<EnemyBase>();
 
-        
-        
+
         public LevelState CurrentLevelState
         {
             get => _currentLevelState;
@@ -47,6 +44,7 @@ namespace NueDeck.Scripts.Managers
                 _currentLevelState = value;
             }
         }
+
         private LevelState _currentLevelState;
 
         #region Setup
@@ -62,7 +60,7 @@ namespace NueDeck.Scripts.Managers
         {
             OnLevelStart();
         }
-        
+
 
         private void ExecuteLevelState(LevelState value)
         {
@@ -72,16 +70,13 @@ namespace NueDeck.Scripts.Managers
                     break;
                 case LevelState.PlayerTurn:
 
-                    
+
                     HandManager.instance.currentMana = GameManager.instance.maxMana;
                     HandManager.instance.DrawCards(HandManager.instance.drawCount);
                     playerController.myHealth.TakeDamage(playerController.myHealth.poisonStack, true);
                     playerController.myHealth.poisonStack -= 2;
-                    if (playerController.myHealth.poisonStack <0)
-                    {
-                        playerController.myHealth.ClearPoison();
-                    }
-                    
+                    if (playerController.myHealth.poisonStack < 0) playerController.myHealth.ClearPoison();
+
                     playerController.myHealth.ClearBlock();
 
                     foreach (var currentEnemy in currentEnemies) currentEnemy.ShowNextAction();
@@ -92,7 +87,7 @@ namespace NueDeck.Scripts.Managers
                 case LevelState.EnemyTurn:
 
                     HandManager.instance.DiscardHand();
-                    
+
                     StartCoroutine(nameof(EnemyTurnRoutine));
                     HandManager.instance.canSelectCards = false;
 
@@ -102,7 +97,7 @@ namespace NueDeck.Scripts.Managers
                     HandManager.instance.canSelectCards = false;
 
                     break;
-               
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(value), value, null);
             }
@@ -135,15 +130,6 @@ namespace NueDeck.Scripts.Managers
             LoseGame();
         }
 
-        public void OnFake()
-        {
-            //todo burada animasyon oynar
-            //StartCoroutine(FakeAnimation());
-        }
-
-
-        
-        
         public void LoseGame()
         {
             CurrentLevelState = LevelState.Finished;
@@ -154,27 +140,6 @@ namespace NueDeck.Scripts.Managers
             HandManager.instance.handController.hand.Clear();
             UIManager.instance.gameCanvas.SetActive(false);
             UIManager.instance.losePanel.SetActive(true);
-        }
-
-        public void CompressEnemies()
-        {
-            foreach (var enemyBase in currentEnemies)
-            {
-                enemyBase.transform.SetParent(enemyPosList[0]);
-                var localPos = enemyBase.transform.localPosition;
-                localPos.x = Random.Range(-0.1f, 0.1f);
-                localPos.y = Random.Range(-0.02f, 0.02f);
-                enemyBase.transform.localPosition = localPos;
-            }
-        }
-
-        public void DecompressEnemies()
-        {
-            for (int i = 0; i < currentEnemies.Count; i++)
-            {
-                currentEnemies[i].transform.SetParent(enemyPosList[i]);
-                currentEnemies[i].transform.localPosition = Vector3.zero;
-            }
         }
 
         #endregion
@@ -206,9 +171,9 @@ namespace NueDeck.Scripts.Managers
         {
             CurrentLevelState = LevelState.Finished;
             GameManager.instance.currentGold += Random.Range(25, 100);
-           // malfunctionController.ReleaseStatus(malfunctionController.currentMalfunction);
+            // malfunctionController.ReleaseStatus(malfunctionController.currentMalfunction);
 
-          
+
             foreach (var choice in HandManager.instance.choicesList) choice.DetermineChoice();
             HandManager.instance.DiscardHand();
             HandManager.instance.discardPile.Clear();
@@ -226,8 +191,7 @@ namespace NueDeck.Scripts.Managers
                 StartCoroutine("FinalSfxRoutine");
                 AudioManager.instance.PlayMusic(AudioManager.instance.bossMusic);
             }
-            
-            
+
             HandManager.instance.SetGameDeck();
             HandManager.instance.choiceParent.gameObject.SetActive(false);
             UIManager.instance.gameCanvas.SetActive(true);
@@ -246,10 +210,7 @@ namespace NueDeck.Scripts.Managers
             {
                 currentEnemy.myHealth.TakeDamage(currentEnemy.myHealth.poisonStack, true);
                 currentEnemy.myHealth.poisonStack -= 2;
-                if (currentEnemy.myHealth.poisonStack <0)
-                {
-                    currentEnemy.myHealth.ClearPoison();
-                }
+                if (currentEnemy.myHealth.poisonStack < 0) currentEnemy.myHealth.ClearPoison();
                 currentEnemy.myHealth.ClearBlock();
                 yield return currentEnemy.StartCoroutine(nameof(EnemyBase.ActionRoutine));
                 yield return waitDelay;
