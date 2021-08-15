@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
+  m_Name: 5-MaxHealth20
+  m_EditorClassIdentifier: 
+  myID: 5
+  myTargets: 1
+  playerActionList:
+  - myPlayerActionType: 4
+    value: 20
+    mySoundProfile: {fileID: 11400000, guid: 426f246404d64304f9887eb7ac6a418e, type: 2}
+  myManaCost: 3
+  myName: Strong Heart
+  myDescription: Increase your maximum health by 20
+  mySprite: {fileID: 21300000, guid: f699460fbf1b2404bb6c2e727663fc86, type: 3}

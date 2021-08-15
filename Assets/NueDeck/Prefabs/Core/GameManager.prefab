@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &717693092355008225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 717693092355008227}
+  - component: {fileID: 717693092355008224}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &717693092355008227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717693092355008225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.019463599, y: 0.01909995, z: -6.0435}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &717693092355008224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717693092355008225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fdd01bae58bee4090a64236b262aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allCardsList:
+  - {fileID: 11400000, guid: 8f655889219afa649a967e88e37f98ec, type: 2}
+  - {fileID: 11400000, guid: 1e43cdb39f5836b44942f367125cadde, type: 2}
+  - {fileID: 11400000, guid: e1783ca46b526944c969405b4c0a29ec, type: 2}
+  - {fileID: 11400000, guid: 97392c824000e4049a6299b2cef0e84d, type: 2}
+  - {fileID: 11400000, guid: 7c3fef23d2fb177478906e53364bf7fc, type: 2}
+  - {fileID: 11400000, guid: 1e5671bf6b0f90b428df809497a2f125, type: 2}
+  - {fileID: 11400000, guid: 9706119fd5cc9f34e90cb73be068200c, type: 2}
+  - {fileID: 11400000, guid: 4889456243c575442b34a89b3debcdbb, type: 2}
+  - {fileID: 11400000, guid: 6c7592c82199fdc418f687778ba6bce9, type: 2}
+  - {fileID: 11400000, guid: 5d6b018bf7dec554ba0a2eabfd89d3b1, type: 2}
+  - {fileID: 11400000, guid: ffd3079242e164645ba9365c7c965def, type: 2}
+  cardPrefab: {fileID: 2689473134106589740, guid: a9728682a56595f4989b8f224d934689, type: 3}
+  myDeckIDList: 
+  initalDeck: {fileID: 11400000, guid: 1f1db59d6dc1c1046b2ad72c336c615e, type: 2}
+  choiceCardList:
+  - {fileID: 11400000, guid: 1e5671bf6b0f90b428df809497a2f125, type: 2}
+  - {fileID: 11400000, guid: 9706119fd5cc9f34e90cb73be068200c, type: 2}
+  - {fileID: 11400000, guid: 4889456243c575442b34a89b3debcdbb, type: 2}
+  - {fileID: 11400000, guid: 6c7592c82199fdc418f687778ba6bce9, type: 2}
+  - {fileID: 11400000, guid: 5d6b018bf7dec554ba0a2eabfd89d3b1, type: 2}
+  - {fileID: 11400000, guid: ffd3079242e164645ba9365c7c965def, type: 2}
+  - {fileID: 11400000, guid: 8f655889219afa649a967e88e37f98ec, type: 2}
+  choiceContainer: []
+  playerCurrentHealth: 100
+  playerMaxHealth: 100
+  currentGold: 0
+  playerName: Jack
+  maxMana: 3
+  isRandomHand: 0
