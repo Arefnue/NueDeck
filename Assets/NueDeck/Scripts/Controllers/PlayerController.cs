@@ -6,15 +6,15 @@ namespace NueDeck.Scripts.Controllers
 {
     public class PlayerController : MonoBehaviour
     {
-        [HideInInspector] public Health myHealth;
+        // [HideInInspector] public Health myHealth;
        
         public GameObject playerHighlight;
         public Transform fxParent;
         
         private void Awake()
         {
-            myHealth = GetComponent<Health>();
-            myHealth.deathAction += OnDeath;
+            // myHealth = GetComponent<Health>();
+            // myHealth.deathAction += OnDeath;
            
             playerHighlight.SetActive(false);
         }

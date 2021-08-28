@@ -87,7 +87,6 @@ GameObject:
   - component: {fileID: 8639202950206681652}
   - component: {fileID: 8280380175991731082}
   - component: {fileID: 7609354405499549988}
-  - component: {fileID: 9149931910342321050}
   m_Layer: 12
   m_Name: PlayerHighlight
   m_TagString: Untagged
@@ -152,22 +151,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9149931910342321050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1366991566309915214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75bce29835700fe46a67c6ceef34a8ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  root: {fileID: 5946678429437462350}
-  rate: 2
-  scaleDiff: 0.1
-  scaleVector: {x: 0.5, y: 0.1, z: 0.1}
 --- !u!1 &1976586124510010338
 GameObject:
   m_ObjectHideFlags: 0
