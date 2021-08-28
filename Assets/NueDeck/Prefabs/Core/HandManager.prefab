@@ -248,9 +248,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawCount: 4
-  mana: 3
+  maxMana: 3
+  currentMana: 3
   canUseCards: 1
   canSelectCards: 1
+  isRandomHand: 0
   choiceParent: {fileID: 8584151387003895035}
   choicesList:
   - {fileID: 7007092376820994291}
@@ -259,6 +261,21 @@ MonoBehaviour:
   handController: {fileID: 7048625806080352387}
   discardTransform: {fileID: 2260814769065520540}
   drawTransform: {fileID: 1024105660326112242}
+  allCardsList:
+  - {fileID: 11400000, guid: 1e43cdb39f5836b44942f367125cadde, type: 2}
+  - {fileID: 11400000, guid: e1783ca46b526944c969405b4c0a29ec, type: 2}
+  - {fileID: 11400000, guid: 97392c824000e4049a6299b2cef0e84d, type: 2}
+  - {fileID: 11400000, guid: 7c3fef23d2fb177478906e53364bf7fc, type: 2}
+  - {fileID: 11400000, guid: 1e5671bf6b0f90b428df809497a2f125, type: 2}
+  - {fileID: 11400000, guid: 9706119fd5cc9f34e90cb73be068200c, type: 2}
+  - {fileID: 11400000, guid: 4889456243c575442b34a89b3debcdbb, type: 2}
+  - {fileID: 11400000, guid: 6c7592c82199fdc418f687778ba6bce9, type: 2}
+  - {fileID: 11400000, guid: 5d6b018bf7dec554ba0a2eabfd89d3b1, type: 2}
+  - {fileID: 11400000, guid: ffd3079242e164645ba9365c7c965def, type: 2}
+  - {fileID: 11400000, guid: 8f655889219afa649a967e88e37f98ec, type: 2}
+  cardPrefab: {fileID: 2689473134106589740, guid: a9728682a56595f4989b8f224d934689, type: 3}
+  myDeckIDList: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
+  initalDeck: {fileID: 11400000, guid: 1f1db59d6dc1c1046b2ad72c336c615e, type: 2}
   sameChoiceContainerList: 
   drawPile: 
   handPile: 
@@ -316,8 +333,8 @@ MonoBehaviour:
   handOffset: {x: 0, y: -0.3}
   handSize: {x: 9, y: 1.7}
   cam: {fileID: 7048625804953322726}
-  inactiveCardMaterial: {fileID: 2100000, guid: eee6bad7f248d1944a42b146f54d741a, type: 2}
   hand: []
+  inactiveCardMaterial: {fileID: 2100000, guid: eee6bad7f248d1944a42b146f54d741a, type: 2}
 --- !u!1 &7240263987990249813
 GameObject:
   m_ObjectHideFlags: 0

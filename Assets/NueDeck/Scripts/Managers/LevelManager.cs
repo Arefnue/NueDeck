@@ -167,7 +167,6 @@ namespace NueDeck.Scripts.Managers
             if (isFinalLevel)
             {
                 StartCoroutine("FinalSfxRoutine");
-                AudioManager.instance.PlayMusic(AudioManager.instance.bossMusic);
             }
 
             HandManager.instance.SetGameDeck();

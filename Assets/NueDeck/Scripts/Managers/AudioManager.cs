@@ -10,9 +10,6 @@ namespace NueDeck.Scripts.Managers
         public AudioSource sfxSource;
         public AudioSource buttonSource;
         
-        public AudioClip bgMusic;
-        public AudioClip bossMusic;
-        
         
         private void Awake()
         {
