@@ -1,53 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &698933303923914028
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7544822000332651869}
-  - component: {fileID: 442049399007708715}
-  m_Layer: 0
-  m_Name: Global Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7544822000332651869
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698933303923914028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.87406975, y: 0.10966825, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4666622058851079917}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &442049399007708715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698933303923914028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: b7fd2e365bf75874e89b4fe5b1dd2201, type: 2}
 --- !u!1 &755969861526583355
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +59,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4666622058851079917}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4944670631767673137
 MonoBehaviour:
@@ -199,9 +151,7 @@ Transform:
   - {fileID: 4666622059652342500}
   - {fileID: 2383129721520813663}
   - {fileID: 4086498741828882544}
-  - {fileID: 3352437963716000616}
   - {fileID: 1508435352256930151}
-  - {fileID: 7544822000332651869}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -222,7 +172,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   playerController: {fileID: 4666622059942155680}
-  malfunctionController: {fileID: 3355207583256820521}
   playerPos: {fileID: 4666622059652342500}
   enemyPosList:
   - {fileID: 4666622060345741832}
@@ -441,66 +390,6 @@ Transform:
   m_Father: {fileID: 4086498741828882544}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7346229853208452307
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3352437963716000616}
-  - component: {fileID: 3355207583256820521}
-  m_Layer: 0
-  m_Name: MalfunctionController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3352437963716000616
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7346229853208452307}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4666622058851079917}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3355207583256820521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7346229853208452307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8af4c4d6ed264be484bc088c638a040c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allMalfunctions:
-  - malfunctionName: Virtual Disorder
-    myMalfunctionType: 0
-  - malfunctionName: Reverse Draw
-    myMalfunctionType: 1
-  - malfunctionName: Bloody Pleasure
-    myMalfunctionType: 2
-  - malfunctionName: Point of View
-    myMalfunctionType: 3
-  - malfunctionName: Lack of Empathy
-    myMalfunctionType: 4
-  currentMalfunction:
-    malfunctionName: 
-    myMalfunctionType: 0
-  maxMalfunctionTurn: 3
-  malfunctionTurnCounter: 0
-  myVolume: {fileID: 442049399007708715}
 --- !u!1001 &4666622059139852140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -558,14 +447,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e81fa3d17dd2f6478c49d213ec328b0, type: 3}
---- !u!20 &2383129720346469258 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7048625804953322726, guid: 5e81fa3d17dd2f6478c49d213ec328b0, type: 3}
-  m_PrefabInstance: {fileID: 4666622059139852140}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2383129721520813663 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7048625805859230003, guid: 5e81fa3d17dd2f6478c49d213ec328b0, type: 3}
+  m_PrefabInstance: {fileID: 4666622059139852140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &2383129720346469258 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7048625804953322726, guid: 5e81fa3d17dd2f6478c49d213ec328b0, type: 3}
   m_PrefabInstance: {fileID: 4666622059139852140}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7465629084440390167
@@ -697,6 +586,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6472d62dc90afc04db103b9a3f293860, type: 3}
+--- !u!4 &4666622059942155681 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2835035829204582326, guid: 6472d62dc90afc04db103b9a3f293860, type: 3}
+  m_PrefabInstance: {fileID: 7465629084440390167}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4666622059942155680 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2835035829204582327, guid: 6472d62dc90afc04db103b9a3f293860, type: 3}
@@ -708,8 +602,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5449959a6647058155931d88dd8ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &4666622059942155681 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2835035829204582326, guid: 6472d62dc90afc04db103b9a3f293860, type: 3}
-  m_PrefabInstance: {fileID: 7465629084440390167}
-  m_PrefabAsset: {fileID: 0}

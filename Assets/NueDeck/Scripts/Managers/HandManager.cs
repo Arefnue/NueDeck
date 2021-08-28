@@ -177,7 +177,7 @@ namespace NueDeck.Scripts.Managers
 
         #endregion
 
-        #region PrivateMethods
+        #region Private Methods
 
         private void ReshuffleDiscardPile()
         {

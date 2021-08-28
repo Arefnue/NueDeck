@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.Utils;
 using TMPro;
@@ -27,7 +28,7 @@ namespace NueDeck.Scripts.Controllers
         public Sprite actionSprite;
         public SoundProfile mySoundProfile;
     }
-    public class EnemyBase : MonoBehaviour
+    public class EnemyBase : MonoBehaviour,IEnemy
     {
         public List<EnemyAction> myActions;
         [HideInInspector] public Health myHealth;
@@ -315,7 +316,26 @@ namespace NueDeck.Scripts.Controllers
         }
 
         #endregion
-        
-        
+
+
+        public void OnCardTargetHighlight()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCardOverHighlight()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCardPlayedForMe()
+        {
+            throw new NotImplementedException();
+        }
+
+        public EnemyBase GetEnemyBase()
+        {
+            return this;
+        }
     }
 }

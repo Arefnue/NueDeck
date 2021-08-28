@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NueDeck.Scripts.Card;
+using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
 using UnityEngine;
 
@@ -10,40 +11,40 @@ namespace NueDeck.Scripts.Controllers
     // handles hand movements
     public class HandController : MonoBehaviour
     {
-        [Header("Settings")] 
+        [Header("Card Settings")] 
         [SerializeField] private bool cardUprightWhenSelected = true;
         [SerializeField] private bool cardTilt = true;
+        
+        [Header("Hand Settings")]
         [SerializeField] [Range(0, 5)] private float selectionSpacing = 1;
-
-        private bool updateHierarchyOrder = false;
-
-        [SerializeField] private Vector3 curveStart = new Vector3(2f, -0.7f, 0), curveEnd = new Vector3(-2f, -0.7f, 0);
-
-        [SerializeField] private Vector2 handOffset = new Vector2(0, -0.3f), handSize = new Vector2(9, 1.7f);
+        [SerializeField] private Vector3 curveStart = new Vector3(2f, -0.7f, 0);
+        [SerializeField] private Vector3 curveEnd = new Vector3(-2f, -0.7f, 0);
+        [SerializeField] private Vector2 handOffset = new Vector2(0, -0.3f);
+        [SerializeField] private Vector2 handSize = new Vector2(9, 1.7f);
 
         [Header("References")] 
         public Camera cam = null;
-
+        public List<CardBase> hand; // Cards currently in hand
         [SerializeField] private Material inactiveCardMaterial = null;
 
-        private Plane plane; // world XY plane, used for mouse position raycasts
-        private Vector3 a, b, c; // Used for shaping hand into curve
+        
+        private Plane _plane; // world XY plane, used for mouse position raycasts
+        private Vector3 _a, _b, _c; // Used for shaping hand into curve
+       
+        private int _selected = -1; // Card index that is nearest to mouse
+        private int _dragged = -1; // Card index that is held by mouse (inside of hand)
+        private CardBase _heldCard; // Card that is held by mouse (when outside of hand)
+        private Vector3 _heldCardOffset;
+        private Vector2 _heldCardTilt;
+        private Vector2 _force;
+        private Vector3 _mouseWorldPos;
+        private Vector2 _prevMousePos;
+        private Vector2 _mousePosDelta;
 
-        public List<CardBase> hand; // Cards currently in hand
-
-        private int selected = -1; // Card index that is nearest to mouse
-        private int dragged = -1; // Card index that is held by mouse (inside of hand)
-        private CardBase heldCard; // Card that is held by mouse (when outside of hand)
-        private Vector3 heldCardOffset;
-        private Vector2 heldCardTilt;
-        private Vector2 force;
-        private Vector3 mouseWorldPos;
-        private Vector2 prevMousePos;
-        private Vector2 mousePosDelta;
-
-        private Rect handBounds;
-        private bool mouseInsideHand;
-
+        private Rect _handBounds;
+        private bool _mouseInsideHand;
+        
+        private bool updateHierarchyOrder = false;
         private bool showDebugGizmos = true;
 
         #region Setup
@@ -55,12 +56,12 @@ namespace NueDeck.Scripts.Controllers
 
         private void InitHand()
         {
-            a = transform.TransformPoint(curveStart);
-            b = transform.position;
-            c = transform.TransformPoint(curveEnd);
-            handBounds = new Rect((handOffset - handSize / 2), handSize);
-            plane = new Plane(-Vector3.forward, transform.position);
-            prevMousePos = Input.mousePosition;
+            _a = transform.TransformPoint(curveStart);
+            _b = transform.position;
+            _c = transform.TransformPoint(curveEnd);
+            _handBounds = new Rect((handOffset - handSize / 2), handSize);
+            _plane = new Plane(-Vector3.forward, transform.position);
+            _prevMousePos = Input.mousePosition;
         }
         
 
@@ -130,28 +131,28 @@ namespace NueDeck.Scripts.Controllers
                 // Set to inactive material if not enough mana required to use card
                 card.SetInactiveMaterialState(HandManager.instance.currentMana < card.myProfile.myManaCost, inactiveCardMaterial);
 
-                var noCardHeld = heldCard == null; // Whether a card is "held" (outside of hand)
-                var onSelectedCard = noCardHeld && selected == i;
-                var onDraggedCard = noCardHeld && dragged == i;
+                var noCardHeld = _heldCard == null; // Whether a card is "held" (outside of hand)
+                var onSelectedCard = noCardHeld && _selected == i;
+                var onDraggedCard = noCardHeld && _dragged == i;
 
                 // Get Position along Curve (for card positioning)
                 float selectOffset = 0;
                 if (noCardHeld)
                     selectOffset = 0.02f *
-                                   Mathf.Clamp01(1 - Mathf.Abs(Mathf.Abs(i - selected) - 1) / (float) count * 3) *
-                                   Mathf.Sign(i - selected);
+                                   Mathf.Clamp01(1 - Mathf.Abs(Mathf.Abs(i - _selected) - 1) / (float) count * 3) *
+                                   Mathf.Sign(i - _selected);
 
                 var t = (i + 0.5f) / count + selectOffset * selectionSpacing;
-                var p = GetCurvePoint(a, b, c, t);
+                var p = GetCurvePoint(_a, _b, _c, t);
 
-                var d = (p - mouseWorldPos).sqrMagnitude;
+                var d = (p - _mouseWorldPos).sqrMagnitude;
                 var mouseCloseToCard = d < 0.5f;
                 var mouseHoveringOnSelected =
-                    onSelectedCard && mouseCloseToCard && mouseInsideHand; //  && mouseInsideHand
+                    onSelectedCard && mouseCloseToCard && _mouseInsideHand; //  && mouseInsideHand
 
                 // Handle Card Position & Rotation
                 //Vector3 cardUp = p - (transform.position + Vector3.down * 7);
-                var cardUp = GetCurveNormal(a, b, c, t);
+                var cardUp = GetCurveNormal(_a, _b, _c, t);
                 var cardPos = p + (mouseHoveringOnSelected ? cardTransform.up * 0.3f : Vector3.zero);
                 var cardForward = Vector3.forward;
 
@@ -182,9 +183,9 @@ namespace NueDeck.Scripts.Controllers
                     var mouseButtonDown = Input.GetMouseButtonDown(0);
                     if (mouseButtonDown)
                     {
-                        dragged = i;
-                        heldCardOffset = cardTransform.position - mouseWorldPos;
-                        heldCardOffset.z = -0.1f;
+                        _dragged = i;
+                        _heldCardOffset = cardTransform.position - _mouseWorldPos;
+                        _heldCardOffset.z = -0.1f;
                     }
                 }
 
@@ -192,7 +193,7 @@ namespace NueDeck.Scripts.Controllers
                 if (onDraggedCard && mouseButton)
                 {
                     // Held by mouse / dragging
-                    cardPos = mouseWorldPos + heldCardOffset;
+                    cardPos = _mouseWorldPos + _heldCardOffset;
                     cardTransform.position = cardPos;
                 }
                 else
@@ -208,39 +209,39 @@ namespace NueDeck.Scripts.Controllers
                     if (d < sqrDistance)
                     {
                         sqrDistance = d;
-                        selected = i;
+                        _selected = i;
                     }
                 }
                 else
                 {
-                    selected = -1;
-                    dragged = -1;
+                    _selected = -1;
+                    _dragged = -1;
                 }
 
                 // Debug Gizmos
                 if (showDebugGizmos)
                 {
                     var c = new Color(0, 0, 0, 0.2f);
-                    if (i == selected)
+                    if (i == _selected)
                     {
                         c = Color.red;
                         if (sqrDistance > 2) c = Color.blue;
                     }
 
-                    Debug.DrawLine(p, mouseWorldPos, c);
+                    Debug.DrawLine(p, _mouseWorldPos, c);
                 }
             }
         }
 
         private void HandleDraggedCardOutsideHand(bool mouseButton, Vector2 mousePos)
         {
-            if (heldCard != null)
+            if (_heldCard != null)
             {
-                var cardTransform = heldCard.transform;
+                var cardTransform = _heldCard.transform;
                 var cardUp = Vector3.up;
-                var cardPos = mouseWorldPos + heldCardOffset;
+                var cardPos = _mouseWorldPos + _heldCardOffset;
                 var cardForward = Vector3.forward;
-                if (cardTilt && mouseButton) cardForward -= new Vector3(heldCardTilt.x, heldCardTilt.y, 0);
+                if (cardTilt && mouseButton) cardForward -= new Vector3(_heldCardTilt.x, _heldCardTilt.y, 0);
 
                 // Bring card to front
                 cardPos.z = transform.position.z - 0.2f;
@@ -250,17 +251,17 @@ namespace NueDeck.Scripts.Controllers
                     Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
                 cardTransform.position = cardPos;
 
-                HandManager.instance.HighlightCardTarget(heldCard.myProfile.myTargets);
+                HandManager.instance.HighlightCardTarget(_heldCard.myProfile.myTargets);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
-                if (!HandManager.instance.canSelectCards || mouseInsideHand)
+                if (!HandManager.instance.canSelectCards || _mouseInsideHand)
                 {
                     //  || sqrDistance <= 2
                     // Card has gone back into hand
-                    AddCardToHand(heldCard, selected);
-                    dragged = selected;
-                    selected = -1;
-                    heldCard = null;
+                    AddCardToHand(_heldCard, _selected);
+                    _dragged = _selected;
+                    _selected = -1;
+                    _heldCard = null;
 
                     HandManager.instance.DeactivateCardHighlights();
 
@@ -271,65 +272,44 @@ namespace NueDeck.Scripts.Controllers
             }
         }
 
+        //todo buraları toparla
         private void PlayCard(Vector2 mousePos)
         {
             // Use Card
             var mouseButtonUp = Input.GetMouseButtonUp(0);
-            if (mouseButtonUp)
+            if (!mouseButtonUp) return;
+            
+            //Remove highlights
+            HandManager.instance.DeactivateCardHighlights();
+            bool backToHand = true;
+                
+            if (HandManager.instance.canUseCards && HandManager.instance.currentMana >= _heldCard.myProfile.myManaCost)
             {
-                //Remove highlights
-                HandManager.instance.DeactivateCardHighlights();
-                //todo buraları toparla
-                if (heldCard.myProfile.myTargets == CardSO.CardTargets.Enemy)
+                if (_heldCard.myProfile.myTargets == CardSO.CardTargets.Enemy)
                 {
                     RaycastHit hit;
                     var mainRay = LevelManager.instance.mainCam.ScreenPointToRay(mousePos);
                     if (Physics.Raycast(mainRay, out hit, 1000, LevelManager.instance.selectableLayer))
                     {
-                        var enemy = hit.collider.gameObject.GetComponent<EnemyBase>();
+                        var enemy = hit.collider.gameObject.GetComponent<IEnemy>();
                         if (enemy != null)
                         {
-                            if (HandManager.instance.canUseCards && HandManager.instance.currentMana >= heldCard.myProfile.myManaCost)
-                            {
-                               
-                                heldCard.UseCard(enemy);
-                            }
-                            else
-                            {
-                                // Cannot use card / Not enough mana! Return card to hand!
-                                AddCardToHand(heldCard, selected);
-                            }
-
-                            heldCard = null;
+                            backToHand = false;
+                            _heldCard.UseCard(enemy.GetEnemyBase());
                         }
-                        else
-                        {
-                            AddCardToHand(heldCard, selected);
-                            heldCard = null;
-                        }
-                    }
-                    else
-                    {
-                        AddCardToHand(heldCard, selected);
-                        heldCard = null;
                     }
                 }
                 else
                 {
-                    if (HandManager.instance.canUseCards && HandManager.instance.currentMana >= heldCard.myProfile.myManaCost)
-                    {
-                        
-                        heldCard.UseCard();
-                    }
-                    else
-                    {
-                        // Cannot use card / Not enough mana! Return card to hand!
-                        AddCardToHand(heldCard, selected);
-                    }
-
-                    heldCard = null;
+                    backToHand = false;
+                    _heldCard.UseCard();
                 }
             }
+
+            if (backToHand) // Cannot use card / Not enough mana! Return card to hand!
+                AddCardToHand(_heldCard, _selected);
+
+            _heldCard = null;
         }
         
         private void HandleDraggedCardInsideHand(bool mouseButton, int count)
@@ -337,38 +317,38 @@ namespace NueDeck.Scripts.Controllers
             if (!mouseButton)
             {
                 // Stop dragging
-                heldCardOffset = Vector3.zero;
-                dragged = -1;
+                _heldCardOffset = Vector3.zero;
+                _dragged = -1;
             }
 
-            if (dragged != -1)
+            if (_dragged != -1)
             {
-                var card = hand[dragged];
-                if (mouseButton && !mouseInsideHand)
+                var card = hand[_dragged];
+                if (mouseButton && !_mouseInsideHand)
                 {
                     //  && sqrDistance > 2.1f
                     //if (cardPos.y > transform.position.y + 0.5) {
                     // Card is outside of the hand, so is considered "held" ready to be used
                     // Remove from hand, so that cards in hand fill the hole that the card left
-                    heldCard = card;
-                    RemoveCardFromHand(dragged);
+                    _heldCard = card;
+                    RemoveCardFromHand(_dragged);
                     count--;
-                    dragged = -1;
+                    _dragged = -1;
                 }
             }
 
-            if (heldCard == null && mouseButton && dragged != -1 && selected != -1 && dragged != selected)
+            if (_heldCard == null && mouseButton && _dragged != -1 && _selected != -1 && _dragged != _selected)
             {
                 // Move dragged card
-                MoveCardToIndex(dragged, selected);
-                dragged = selected;
+                MoveCardToIndex(_dragged, _selected);
+                _dragged = _selected;
             }
         }
 
         private void CheckMouseInsideHandBounds(out bool mouseButton)
         {
-            var point = transform.InverseTransformPoint(mouseWorldPos);
-            mouseInsideHand = handBounds.Contains(point);
+            var point = transform.InverseTransformPoint(_mouseWorldPos);
+            _mouseInsideHand = _handBounds.Contains(point);
 
             mouseButton = Input.GetMouseButton(0);
         }
@@ -377,39 +357,39 @@ namespace NueDeck.Scripts.Controllers
         {
             count = hand.Count;
             sqrDistance = 1000;
-            if (selected >= 0 && selected < count)
+            if (_selected >= 0 && _selected < count)
             {
-                var t = (selected + 0.5f) / count;
-                var p = GetCurvePoint(a, b, c, t);
-                sqrDistance = (p - mouseWorldPos).sqrMagnitude;
+                var t = (_selected + 0.5f) / count;
+                var p = GetCurvePoint(_a, _b, _c, t);
+                sqrDistance = (p - _mouseWorldPos).sqrMagnitude;
             }
         }
 
         private void GetMouseWorldPosition(Vector2 mousePos)
         {
             var ray = cam.ScreenPointToRay(mousePos);
-            if (plane.Raycast(ray, out var enter)) mouseWorldPos = ray.GetPoint(enter);
+            if (_plane.Raycast(ray, out var enter)) _mouseWorldPos = ray.GetPoint(enter);
         }
 
         private void TiltCard(Vector2 mousePos)
         {
-            mousePosDelta = (mousePos - prevMousePos) * new Vector2(1600f / Screen.width, 900f / Screen.height) *
+            _mousePosDelta = (mousePos - _prevMousePos) * new Vector2(1600f / Screen.width, 900f / Screen.height) *
                             Time.deltaTime;
-            prevMousePos = mousePos;
+            _prevMousePos = mousePos;
 
             var tiltStrength = 3f;
             var tiltDrag = 3f;
             var tiltSpeed = 50f;
 
-            force += (mousePosDelta * tiltStrength - heldCardTilt) * Time.deltaTime;
-            force *= 1 - tiltDrag * Time.deltaTime;
-            heldCardTilt += force * (Time.deltaTime * tiltSpeed);
+            _force += (_mousePosDelta * tiltStrength - _heldCardTilt) * Time.deltaTime;
+            _force *= 1 - tiltDrag * Time.deltaTime;
+            _heldCardTilt += _force * (Time.deltaTime * tiltSpeed);
             // these calculations probably aren't correct, but hey, they work...? :P
 
             if (showDebugGizmos)
             {
-                Debug.DrawRay(mouseWorldPos, mousePosDelta, Color.red);
-                Debug.DrawRay(mouseWorldPos, heldCardTilt, Color.cyan);
+                Debug.DrawRay(_mouseWorldPos, _mousePosDelta, Color.red);
+                Debug.DrawRay(_mouseWorldPos, _heldCardTilt, Color.cyan);
             }
         }
 
@@ -520,7 +500,7 @@ namespace NueDeck.Scripts.Controllers
                 p1 = p2;
             }
 
-            if (mouseInsideHand)
+            if (_mouseInsideHand)
             {
                 Gizmos.color = Color.red;
             }
