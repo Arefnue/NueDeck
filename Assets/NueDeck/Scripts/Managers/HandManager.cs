@@ -67,9 +67,7 @@ namespace NueDeck.Scripts.Managers
         #endregion
 
         #region Public Methods
-
-     
-
+        
         public void DrawCards(int targetDrawCount)
         {
             var currentDrawCount = 0;

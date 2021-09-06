@@ -58,11 +58,13 @@ namespace NueDeck.Scripts.Card
         public void UseCard(EnemyBase targetEnemy = null)
         {
             SpendMana(myProfile.myManaCost);
-            foreach (var playerAction in myProfile.playerActionList)
-            {
-                CardActions.PlayCardAction(targetEnemy, playerAction);
-                AudioManager.instance.PlayOneShot(playerAction.mySoundProfile.GetRandomClip());
-            }
+
+            myProfile.PlayCard(targetEnemy);
+            // foreach (var playerAction in )
+            // {
+            //     //CardActions.PlayCardAction(targetEnemy, playerAction);
+            //     AudioManager.instance.PlayOneShot(playerAction.mySoundProfile.GetRandomClip());
+            // }
             HandManager.instance.DiscardCard(this);
             StartCoroutine("DiscardRoutine");
         }

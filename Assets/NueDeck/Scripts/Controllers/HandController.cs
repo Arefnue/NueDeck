@@ -271,8 +271,7 @@ namespace NueDeck.Scripts.Controllers
                 PlayCard(mousePos);
             }
         }
-
-        //todo buraları toparla
+        
         private void PlayCard(Vector2 mousePos)
         {
             // Use Card

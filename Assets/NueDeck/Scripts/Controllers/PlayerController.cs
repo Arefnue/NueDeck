@@ -18,9 +18,7 @@ namespace NueDeck.Scripts.Controllers
            
             playerHighlight.SetActive(false);
         }
-
-       
-
+        
         private void OnDeath()
         {
             LevelManager.instance.OnPlayerDeath();
