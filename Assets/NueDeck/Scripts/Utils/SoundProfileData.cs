@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace NueDeck.Scripts.Utils
 {
-    [CreateAssetMenu(fileName = "SoundProfile", menuName = "SoundProfile", order = 0)]
-    public class SoundProfile : ScriptableObject
+    [CreateAssetMenu(fileName = "Sound Profile", menuName = "Data/Sound Profile", order = 3)]
+    public class SoundProfileData : ScriptableObject
     {
         public List<AudioClip> randomClipList;
         

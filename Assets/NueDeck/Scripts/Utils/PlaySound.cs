@@ -5,16 +5,16 @@ namespace NueDeck.Scripts.Utils
 {
     public class PlaySound : MonoBehaviour
     {
-        public SoundProfile myProfile;
+        public SoundProfileData myProfileData;
 
         public void PlaySfx()
         {
-            AudioManager.instance.PlayOneShot(myProfile.GetRandomClip());
+            AudioManager.instance.PlayOneShot(myProfileData.GetRandomClip());
         }
 
         public void PlayButton()
         {
-            AudioManager.instance.PlayOneShotButton(myProfile.GetRandomClip());
+            AudioManager.instance.PlayOneShotButton(myProfileData.GetRandomClip());
         }
     }
 }

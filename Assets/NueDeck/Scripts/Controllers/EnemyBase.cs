@@ -26,7 +26,7 @@ namespace NueDeck.Scripts.Controllers
         public EnemyActionType myEnemyActionType;
         public float value;
         public Sprite actionSprite;
-        public SoundProfile mySoundProfile;
+        public SoundProfileData mySoundProfileData;
     }
     public class EnemyBase : MonoBehaviour,IEnemy
     {
@@ -36,7 +36,7 @@ namespace NueDeck.Scripts.Controllers
         public TextMeshProUGUI nextActionText;
         public GameObject myCanvas;
         private EnemyAction _nextAction;
-        public SoundProfile deathSoundProfile;
+        public SoundProfileData deathSoundProfileData;
         public GameObject highlightObject;
         public Transform fxParent;
 
@@ -64,7 +64,7 @@ namespace NueDeck.Scripts.Controllers
         
         public void OnDeath()
         { 
-            AudioManager.instance.PlayOneShot(deathSoundProfile.GetRandomClip());
+            AudioManager.instance.PlayOneShot(deathSoundProfileData.GetRandomClip());
             Destroy(gameObject);
         }
         
@@ -127,7 +127,7 @@ namespace NueDeck.Scripts.Controllers
             }
 
             timer = 0f;
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfile.GetRandomClip());
+            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
             //LevelManager.instance.playerController.myHealth.ApplyPoisonDamage(randomAction.value);
             FxManager.instance.PlayFx(LevelManager.instance.playerController.fxParent,FxManager.FxType.Poison);
             yield return new WaitForEndOfFrame();
@@ -172,7 +172,7 @@ namespace NueDeck.Scripts.Controllers
             }
 
             timer = 0f;
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfile.GetRandomClip());
+            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
             //LevelManager.instance.playerController.myHealth.TakeDamage(randomAction.value);
             FxManager.instance.PlayFx(LevelManager.instance.playerController.fxParent,FxManager.FxType.Attack);
             while (true)
@@ -211,7 +211,7 @@ namespace NueDeck.Scripts.Controllers
 
                 yield return waitFrame;
             }
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfile.GetRandomClip());
+            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
           
             FxManager.instance.PlayFx(fxParent,FxManager.FxType.Heal);
             timer = 0f;
@@ -251,7 +251,7 @@ namespace NueDeck.Scripts.Controllers
 
                 yield return waitFrame;
             }
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfile.GetRandomClip());
+            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
          
             FxManager.instance.PlayFx(fxParent,FxManager.FxType.Block);
             timer = 0f;
@@ -291,7 +291,7 @@ namespace NueDeck.Scripts.Controllers
 
                 yield return waitFrame;
             }
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfile.GetRandomClip());
+            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
             HandManager.instance.ExhaustRandomCard();
             FxManager.instance.PlayFx(fxParent,FxManager.FxType.Buff);
             FxManager.instance.PlayFx(LevelManager.instance.playerController.fxParent,FxManager.FxType.Attack);

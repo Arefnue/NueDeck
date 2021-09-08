@@ -8,7 +8,7 @@ namespace NueDeck.Scripts.Card
     public class Choice : MonoBehaviour
     {
         public Transform cardTransform;
-        private CardSO _myChoiceProfile;
+        private CardData _myChoiceProfile;
         
         public void DetermineChoice()
         {

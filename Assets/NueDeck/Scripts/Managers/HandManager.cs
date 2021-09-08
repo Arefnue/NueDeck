@@ -32,12 +32,12 @@ namespace NueDeck.Scripts.Managers
         public Transform drawTransform;
         
         [Header("Card Settings")]
-        public List<CardSO> allCardsList;
+        public List<CardData> allCardsList;
         public CardBase cardPrefab;
         
         [Header("Decks")]
         public List<int> myDeckIDList = new List<int>();
-        public DeckSO initalDeck;
+        public DeckData initalDeck;
         
         [HideInInspector] public List<int> sameChoiceContainerList = new List<int>();
         [HideInInspector] public List<int> drawPile = new List<int>();
@@ -137,7 +137,7 @@ namespace NueDeck.Scripts.Managers
                 targetCard = handPile[Random.Range(0, handPile.Count)];
                 var tCard = handController.hand[0];
                 foreach (var cardBase in handController.hand)
-                    if (cardBase.myProfile.myID == targetCard)
+                    if (cardBase.myCardData.myID == targetCard)
                     {
                         tCard = cardBase;
                         break;
@@ -161,20 +161,20 @@ namespace NueDeck.Scripts.Managers
 
         public void DiscardCard(CardBase targetCard)
         {
-            handPile.Remove(targetCard.myProfile.myID);
-            discardPile.Add(targetCard.myProfile.myID);
+            handPile.Remove(targetCard.myCardData.myID);
+            discardPile.Add(targetCard.myCardData.myID);
             UIManager.instance.SetPileTexts();
         }
         
-        public void HighlightCardTarget(CardSO.CardTargets targetTargets)
+        public void HighlightCardTarget(CardData.CardTargets targetTargets)
         {
             switch (targetTargets)
             {
-                case CardSO.CardTargets.Enemy:
+                case CardData.CardTargets.Enemy:
                     foreach (var currentEnemy in LevelManager.instance.currentEnemies)
                         currentEnemy.highlightObject.SetActive(true);
                     break;
-                case CardSO.CardTargets.Player:
+                case CardData.CardTargets.Player:
                     LevelManager.instance.playerController.playerHighlight.SetActive(true);
                     break;
                 default:

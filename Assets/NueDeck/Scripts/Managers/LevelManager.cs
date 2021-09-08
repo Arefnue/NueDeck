@@ -26,7 +26,7 @@ namespace NueDeck.Scripts.Managers
 
         public Transform playerPos;
         public List<Transform> enemyPosList;
-        public SoundProfile finalSoundProfile;
+        public SoundProfileData finalSoundProfileData;
 
         [Header("Level")] public List<EnemyBase> levelEnemyList;
         public bool isFinalLevel;
@@ -197,7 +197,7 @@ namespace NueDeck.Scripts.Managers
             while (CurrentLevelState != LevelState.Finished)
             {
                 yield return new WaitForSeconds(Random.Range(5, 15));
-                AudioManager.instance.PlayOneShot(finalSoundProfile.GetRandomClip());
+                AudioManager.instance.PlayOneShot(finalSoundProfileData.GetRandomClip());
             }
         }
 

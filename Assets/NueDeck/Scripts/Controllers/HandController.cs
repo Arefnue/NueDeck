@@ -129,7 +129,7 @@ namespace NueDeck.Scripts.Controllers
                 var cardTransform = card.transform;
 
                 // Set to inactive material if not enough mana required to use card
-                card.SetInactiveMaterialState(HandManager.instance.currentMana < card.myProfile.myManaCost, inactiveCardMaterial);
+                card.SetInactiveMaterialState(HandManager.instance.currentMana < card.myCardData.myManaCost, inactiveCardMaterial);
 
                 var noCardHeld = _heldCard == null; // Whether a card is "held" (outside of hand)
                 var onSelectedCard = noCardHeld && _selected == i;
@@ -251,7 +251,7 @@ namespace NueDeck.Scripts.Controllers
                     Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
                 cardTransform.position = cardPos;
 
-                HandManager.instance.HighlightCardTarget(_heldCard.myProfile.myTargets);
+                HandManager.instance.HighlightCardTarget(_heldCard.myCardData.myTargets);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
                 if (!HandManager.instance.canSelectCards || _mouseInsideHand)
@@ -282,9 +282,9 @@ namespace NueDeck.Scripts.Controllers
             HandManager.instance.DeactivateCardHighlights();
             bool backToHand = true;
                 
-            if (HandManager.instance.canUseCards && HandManager.instance.currentMana >= _heldCard.myProfile.myManaCost)
+            if (HandManager.instance.canUseCards && HandManager.instance.currentMana >= _heldCard.myCardData.myManaCost)
             {
-                if (_heldCard.myProfile.myTargets == CardSO.CardTargets.Enemy)
+                if (_heldCard.myCardData.myTargets == CardData.CardTargets.Enemy)
                 {
                     RaycastHit hit;
                     var mainRay = LevelManager.instance.mainCam.ScreenPointToRay(mousePos);

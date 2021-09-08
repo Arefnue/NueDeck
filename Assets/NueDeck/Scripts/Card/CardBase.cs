@@ -22,7 +22,7 @@ namespace NueDeck.Scripts.Card
         public Image backImage;
 
         public Sprite hideSprite;
-        [HideInInspector]public CardSO myProfile;
+        [HideInInspector]public CardData myCardData;
         
         private Vector2 _dissolveOffset = new Vector2(0.1f, 0);
         private Vector2 _dissolveSpeed = new Vector2(2f, 2f);
@@ -33,9 +33,9 @@ namespace NueDeck.Scripts.Card
         private bool isInactive;
 
         #region Setup
-        public void SetCard(CardSO targetProfile)
+        public void SetCard(CardData targetProfile)
         {
-            myProfile = targetProfile;
+            myCardData = targetProfile;
             meshRenderer = GetComponentInChildren<MeshRenderer>();
             material = meshRenderer.material; // Create material instance
 
@@ -43,10 +43,10 @@ namespace NueDeck.Scripts.Card
             _color2 = material.GetColor("_OutlineColor");
             _dissolveColor = material.GetColor("_DissolveColor");
             
-            nameText.text = myProfile.myName;
-            descText.text = myProfile.myDescription;
-            manaText.text = myProfile.myManaCost.ToString();
-            frontImage.sprite = myProfile.mySprite;
+            nameText.text = myCardData.myName;
+            descText.text = myCardData.myDescription;
+            manaText.text = myCardData.myManaCost.ToString();
+            frontImage.sprite = myCardData.mySprite;
 
            
         }
@@ -57,14 +57,14 @@ namespace NueDeck.Scripts.Card
 
         public void UseCard(EnemyBase targetEnemy = null)
         {
-            SpendMana(myProfile.myManaCost);
-
-            myProfile.PlayCard(targetEnemy);
-            // foreach (var playerAction in )
-            // {
-            //     //CardActions.PlayCardAction(targetEnemy, playerAction);
-            //     AudioManager.instance.PlayOneShot(playerAction.mySoundProfile.GetRandomClip());
-            // }
+            SpendMana(myCardData.myManaCost);
+            
+            foreach (var playerAction in myCardData.actionList)
+            {
+                //CardActions.PlayCardAction(targetEnemy, playerAction);
+            }
+            
+            AudioManager.instance.PlayOneShot(myCardData.mySoundProfileData.GetRandomClip());
             HandManager.instance.DiscardCard(this);
             StartCoroutine("DiscardRoutine");
         }
@@ -88,10 +88,10 @@ namespace NueDeck.Scripts.Card
 
         public void Show()
         {
-            nameText.text = myProfile.myName;
-            descText.text = myProfile.myDescription;
-            manaText.text = myProfile.myManaCost.ToString();
-            frontImage.sprite = myProfile.mySprite;
+            nameText.text = myCardData.myName;
+            descText.text = myCardData.myDescription;
+            manaText.text = myCardData.myManaCost.ToString();
+            frontImage.sprite = myCardData.mySprite;
         }
 
         public void SpendMana(int value)

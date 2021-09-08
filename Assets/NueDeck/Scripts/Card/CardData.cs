@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace NueDeck.Scripts.Card
 {
-    public class CardSO : ScriptableObject
+    [CreateAssetMenu(fileName = "Card Data",menuName = "Data/Card Data",order = 0)]
+    public class CardData : ScriptableObject
     {
         public enum CardTargets
         {
@@ -23,21 +24,18 @@ namespace NueDeck.Scripts.Card
         [TextArea]
         public string myDescription;
         public Sprite mySprite;
-        public List<ActionSO> actionList;
-
-        public void PlayCard(EnemyBase targetEnemy)
-        {
-            foreach (var actionSO in actionList)
-            {
-                actionSO.PlayCard(targetEnemy);
-            }
-        }
+        public List<CardActionData> actionList;
+        public SoundProfileData mySoundProfileData;
+        
 
     }
 
     [Serializable]
-    public class PlayerAction
+    public class CardActionData
     {
+        public PlayerActionType myPlayerActionType;
+        public float value;
+        
         public enum PlayerActionType
         {
             Attack,
@@ -51,10 +49,6 @@ namespace NueDeck.Scripts.Card
             IncreaseMana,
             StealMaxHealth
         }
-        //todo sözlük yap
-        
-        public PlayerActionType myPlayerActionType;
-        public float value;
-        public SoundProfile mySoundProfile;
+      
     }
 }
