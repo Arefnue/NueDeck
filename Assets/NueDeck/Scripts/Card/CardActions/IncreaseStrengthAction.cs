@@ -1,0 +1,13 @@
+﻿using UnityEngine;
+
+namespace NueDeck.Scripts.Card.CardActions
+{
+    public class IncreaseStrengthAction : CardActionBase
+    {
+        public override CardActionType ActionType => CardActionType.IncreaseStrength;
+        public override void DoAction(CardActionParameters actionParameters)
+        {
+            Debug.Log("Increase Strength Action");
+        }
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using NueDeck.Scripts.Card.CardActions;
 using NueDeck.Scripts.Controllers;
 using NueDeck.Scripts.Managers;
 using TMPro;
@@ -48,7 +49,6 @@ namespace NueDeck.Scripts.Card
             manaText.text = myCardData.myManaCost.ToString();
             frontImage.sprite = myCardData.mySprite;
 
-           
         }
 
         #endregion
@@ -61,10 +61,10 @@ namespace NueDeck.Scripts.Card
             
             foreach (var playerAction in myCardData.actionList)
             {
-                //CardActions.PlayCardAction(targetEnemy, playerAction);
+                CardActionProcessor.GetAction(playerAction.myPlayerActionType).DoAction(new CardActionParameters(playerAction.value,targetEnemy));
             }
             
-            AudioManager.instance.PlayOneShot(myCardData.mySoundProfileData.GetRandomClip());
+            //AudioManager.instance.PlayOneShot(myCardData.mySoundProfileData.GetRandomClip());
             HandManager.instance.DiscardCard(this);
             StartCoroutine("DiscardRoutine");
         }
@@ -77,23 +77,7 @@ namespace NueDeck.Scripts.Card
         {
             StartCoroutine("Dissolve");
         }
-
-        public void Hide()
-        {
-            nameText.text = "cardProfile.name";
-            descText.text = "cardProfile.description";
-            manaText.text = "cardProfile.manaCost";
-            frontImage.sprite = hideSprite;
-        }
-
-        public void Show()
-        {
-            nameText.text = myCardData.myName;
-            descText.text = myCardData.myDescription;
-            manaText.text = myCardData.myManaCost.ToString();
-            frontImage.sprite = myCardData.mySprite;
-        }
-
+        
         public void SpendMana(int value)
         {
             HandManager.instance.currentMana -= value;

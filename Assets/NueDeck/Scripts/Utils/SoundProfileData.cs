@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NueExtentions;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Utils
@@ -10,7 +11,7 @@ namespace NueDeck.Scripts.Utils
         
         public AudioClip GetRandomClip()
         {
-            return randomClipList[Random.Range(0, randomClipList.Count)];
+            return randomClipList.Count>0 ? randomClipList.RandomItem():null;
         }
     }
 }

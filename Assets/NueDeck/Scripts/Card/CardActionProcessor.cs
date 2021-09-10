@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NueDeck.Scripts.Card.CardActions;
+using NueDeck.Scripts.Controllers;
 
 namespace NueDeck.Scripts.Card
 {
+   
     public static class CardActionProcessor
     {
-        private static Dictionary<CardActionData.PlayerActionType, CardActionBase> _cardActionDict =
-            new Dictionary<CardActionData.PlayerActionType, CardActionBase>();
+        private static Dictionary<CardActionType, CardActionBase> _cardActionDict =
+            new Dictionary<CardActionType, CardActionBase>();
 
         private static bool _initialized;
 
-        private static void Initialize()
+        public static void Initialize()
         {
             _cardActionDict.Clear();
 
@@ -29,7 +31,8 @@ namespace NueDeck.Scripts.Card
             _initialized = true;
         }
 
-
+        public static CardActionBase GetAction(CardActionType targetAction) =>
+            _cardActionDict[targetAction];
 
     }
 }

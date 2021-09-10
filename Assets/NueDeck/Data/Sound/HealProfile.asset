@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8f29259e87442338a016acd10256ddc, type: 3}
   m_Name: HealProfile
   m_EditorClassIdentifier: 
-  randomClipList:
-  - {fileID: 8300000, guid: c3fc4a0d60c1c6d43a656aac0b9d145c, type: 3}
+  randomClipList: []

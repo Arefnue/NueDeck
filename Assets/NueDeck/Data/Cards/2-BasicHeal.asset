@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myID: 2
   myTargets: 1
-  playerActionList:
-  - myPlayerActionType: 1
-    value: 5
-    mySoundProfile: {fileID: 11400000, guid: 5e1ae36013818124e8f86d99922c0cca, type: 2}
   myManaCost: 1
   myName: Heal
   myDescription: Restore 5 health
   mySprite: {fileID: 21300000, guid: f071ce71140638f469d6a10acc1a1b67, type: 3}
+  actionList:
+  - myPlayerActionType: 1
+    value: 10
+  mySoundProfileData: {fileID: 11400000, guid: 5e1ae36013818124e8f86d99922c0cca, type: 2}

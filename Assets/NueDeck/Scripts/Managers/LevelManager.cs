@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NueDeck.Scripts.Card;
 using NueDeck.Scripts.Controllers;
 using NueDeck.Scripts.Utils;
 using UnityEngine;
@@ -53,6 +54,7 @@ namespace NueDeck.Scripts.Managers
         {
             instance = this;
             BuildEnemies();
+            CardActionProcessor.Initialize();
             CurrentLevelState = LevelState.Prepare;
         }
 

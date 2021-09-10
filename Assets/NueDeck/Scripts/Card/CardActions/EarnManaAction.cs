@@ -2,13 +2,12 @@
 
 namespace NueDeck.Scripts.Card.CardActions
 {
-    public class HealAction: CardActionBase
+    public class EarnManaAction : CardActionBase
     {
-        public override CardActionType ActionType => CardActionType.Heal;
-
+        public override CardActionType ActionType => CardActionType.EarnMana;
         public override void DoAction(CardActionParameters actionParameters)
         {
-            Debug.Log("Heal");
+            Debug.Log("Earn Mana");
         }
     }
 }

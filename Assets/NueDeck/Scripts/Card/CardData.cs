@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NueDeck.Scripts.Card.CardActions;
 using NueDeck.Scripts.Controllers;
 using NueDeck.Scripts.Utils;
 using UnityEngine;
@@ -33,22 +34,10 @@ namespace NueDeck.Scripts.Card
     [Serializable]
     public class CardActionData
     {
-        public PlayerActionType myPlayerActionType;
+        public CardActionType myPlayerActionType;
         public float value;
         
-        public enum PlayerActionType
-        {
-            Attack,
-            Heal,
-            Block,
-            IncreaseStr,
-            IncreaseMaxHealth,
-            Draw,
-            ReversePoisonDamage,
-            ReversePoisonHeal,
-            IncreaseMana,
-            StealMaxHealth
-        }
+       
       
     }
 }
