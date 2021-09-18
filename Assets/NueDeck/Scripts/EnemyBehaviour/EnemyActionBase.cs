@@ -1,9 +1,18 @@
 ﻿using NueDeck.Scripts.Characters;
-using NueDeck.Scripts.Characters.Enemies;
 using NueDeck.Scripts.Enums;
+
 
 namespace NueDeck.Scripts.EnemyBehaviour
 {
+    
+    public abstract class EnemyActionBase
+    {
+        protected EnemyActionBase(){}
+        public abstract EnemyActionType ActionType { get;}
+        public abstract void DoAction(EnemyActionParameters actionParameters);
+        
+    }
+    
     public class EnemyActionParameters
     {
         public float value;
@@ -14,13 +23,6 @@ namespace NueDeck.Scripts.EnemyBehaviour
             this.value = value;
             this.targetAlly = targetAlly;
         }
-    }
-    public abstract class EnemyActionBase
-    {
-        protected EnemyActionBase(){}
-        public abstract EnemyActionType ActionType { get;}
-        public abstract void DoAction(EnemyActionParameters actionParameters);
-        
     }
     
     

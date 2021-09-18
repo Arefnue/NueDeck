@@ -6,6 +6,6 @@
         Heal,
         Poison,
         Block,
-        Space
+        StealCardFromDeck
     }
 }

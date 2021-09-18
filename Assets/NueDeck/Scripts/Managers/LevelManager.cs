@@ -6,6 +6,7 @@ using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Characters.Allies;
 using NueDeck.Scripts.Characters.Enemies;
 using NueDeck.Scripts.Collection;
+using NueDeck.Scripts.EnemyBehaviour;
 using NueDeck.Scripts.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -58,6 +59,7 @@ namespace NueDeck.Scripts.Managers
             instance = this;
             BuildEnemies();
             CardActionProcessor.Initialize();
+            EnemyActionProcessor.Initialize();
             CurrentLevelState = LevelState.Prepare;
         }
 

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
-using NueDeck.Scripts.Card.CardActions;
-using NueDeck.Scripts.Characters;
-using NueDeck.Scripts.Characters.Enemies;
+﻿using System.Collections;
 using NueDeck.Scripts.Collection;
-using NueDeck.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using EnemyBase = NueDeck.Scripts.Characters.EnemyBase;
 using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Card
@@ -61,7 +57,7 @@ namespace NueDeck.Scripts.Card
         
         #region Card Methods
 
-        public void Use(EnemyExample targetEnemy = null)
+        public void Use(EnemyBase targetEnemy = null)
         {
             SpendMana(CardData.myManaCost);
             

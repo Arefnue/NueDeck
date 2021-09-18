@@ -9,26 +9,35 @@ namespace NueDeck.Scripts.EnemyBehaviour
     [CreateAssetMenu(fileName = "Enemy Data",menuName = "Data/Enemy Data",order = 1)]
     public class EnemyData : ScriptableObject
     {
-       
         [Header("Enemy Defaults")]
-        public int myID;
-        public string myName;
-        public ActionTargets myTargets;
-        
+        public int enemyID;
+        public string enemyName;
         [TextArea]
-        public string myDescription;
-        public Sprite mySprite;
-        public EnemyIntentions myIntention;
-        public List<EnemyAction> actionList;
-        public SoundProfileData mySoundProfileData;
-        
-    }
+        public string enemyDescription;
+        public Sprite enemySprite;
+        public List<EnemyAbilityData> enemyAbilityList;
 
-    [Serializable]
-    public class EnemyAction
-    {
-        public CardActionType myPlayerActionType;
-        public float value;
-        
     }
+    
+    [Serializable]
+    public class EnemyAbilityData
+    {
+        public string name;
+        public ActionTargets abilityTarget;
+        public EnemyIntentionData intention;
+        public List<EnemyActionData> actionList;
+        public SoundProfileData soundProfile;
+        public bool hideActionValue;
+    }
+    
+    [Serializable]
+    public class EnemyActionData
+    {
+        public EnemyActionType enemyActionType;
+        public float value;
+
+    }
+    
+    
+    
 }

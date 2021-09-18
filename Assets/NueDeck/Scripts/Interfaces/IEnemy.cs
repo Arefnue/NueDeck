@@ -1,5 +1,6 @@
 ﻿using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Characters.Enemies;
+using EnemyBase = NueDeck.Scripts.Characters.EnemyBase;
 
 namespace NueDeck.Scripts.Interfaces
 {
@@ -9,6 +10,6 @@ namespace NueDeck.Scripts.Interfaces
         public void OnCardOverHighlight();
         public void OnCardPlayedForMe();
 
-        public EnemyExample GetEnemyBase();
+        public EnemyBase GetEnemyBase();
     }
 }

@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using NueDeck.Scripts.Collection;
+using NueDeck.Scripts.EnemyBehaviour;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.Utils;
+using NueExtentions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,26 +15,19 @@ using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Characters.Enemies
 {
-    [Serializable]
-    public class EnemyAction
+    public class EnemyExample : EnemyBase
     {
-        public EnemyActionType myEnemyActionType;
-        public float value;
-        public Sprite actionSprite;
-        public SoundProfileData mySoundProfileData;
-    }
-    public class EnemyExample : CharacterBase,IEnemy
-    {
-        public List<EnemyAction> myActions;
-       
-        public Image actionImage;
-        public TextMeshProUGUI nextActionText;
+        [Header("References")]
+        public Image intentionImage;
+        public TextMeshProUGUI nextActionValueText;
         public GameObject myCanvas;
-        private EnemyAction _nextAction;
+        public EnemyData enemyData;
         public SoundProfileData deathSoundProfileData;
         public GameObject highlightObject;
         public Transform fxParent;
 
+        private EnemyAbilityData _nextAbility;
+        
         private void Awake()
         {
             highlightObject.SetActive(false);
@@ -40,16 +35,17 @@ namespace NueDeck.Scripts.Characters.Enemies
         
         public void ShowNextAction()
         {
-            _nextAction = myActions[Random.Range(0, myActions.Count)];
-            actionImage.sprite = _nextAction.actionSprite;
-            if (_nextAction.value == -1)
+            _nextAbility = enemyData.enemyAbilityList.RandomItem();
+            intentionImage.sprite = _nextAbility.intention.intentionSprite;
+            
+            if (_nextAbility.hideActionValue)
             {
-                nextActionText.gameObject.SetActive(false);
+                nextActionValueText.gameObject.SetActive(false);
             }
             else
             {
-                nextActionText.gameObject.SetActive(true);
-                nextActionText.text = _nextAction.value.ToString();
+                nextActionValueText.gameObject.SetActive(true);
+                nextActionValueText.text = _nextAbility.actionList[0].value.ToString();
             }
             
 
@@ -64,50 +60,29 @@ namespace NueDeck.Scripts.Characters.Enemies
         public IEnumerator ActionRoutine()
         {
 
-            actionImage.gameObject.SetActive(false);
-            
-            switch (_nextAction.myEnemyActionType)
-            {
-                case EnemyActionType.Attack:
-                    yield return StartCoroutine(nameof(AttackAnim),_nextAction);
-                    break;
-                case EnemyActionType.Heal:
-                    yield return StartCoroutine(nameof(HealAnim),_nextAction);
-                    break;
-                case EnemyActionType.Poison:
-                    yield return StartCoroutine(nameof(PoisonAnim),_nextAction);
-                    break;
-                case EnemyActionType.Block:
-                    yield return StartCoroutine(nameof(BlockAnim),_nextAction);
-                    break;
-                case EnemyActionType.Space:
-                    yield return StartCoroutine(nameof(SpaceAnim),_nextAction);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            intentionImage.gameObject.SetActive(false);
 
-            actionImage.gameObject.SetActive(true);
+            if (_nextAbility.intention.enemyIntention == EnemyIntentions.Attack || _nextAbility.intention.enemyIntention == EnemyIntentions.Debuff)
+            {
+                yield return StartCoroutine(AttackRoutine(_nextAbility));
+            }
+            else
+            {
+                yield return StartCoroutine(BuffRoutine(_nextAbility));
+            }
+            
+            intentionImage.gameObject.SetActive(true);
             
         }
-
-        //todo Her enemy için ayrı sınıf aç
+        
         #region EnemyActions
 
-        private IEnumerator PoisonAnim(EnemyAction randomAction)
+        private IEnumerator MoveToTargetRoutine(WaitForEndOfFrame waitFrame,Vector3 startPos, Vector3 endPos, Quaternion startRot, Quaternion endRot, float speed)
         {
-            var waitFrame = new WaitForEndOfFrame();
             var timer = 0f;
-
-            var startPos = transform.position;
-            var endPos = LevelManager.instance.playerExample.transform.position;
-
-            var startRot = transform.localRotation;
-            var endRot = Quaternion.Euler(60, 0, 60);
-            
             while (true)
             {
-                timer += Time.deltaTime*5;
+                timer += Time.deltaTime*speed;
 
                 transform.position = Vector3.Lerp(startPos, endPos, timer);
                 transform.localRotation = Quaternion.Lerp(startRot,endRot,timer);
@@ -118,213 +93,47 @@ namespace NueDeck.Scripts.Characters.Enemies
 
                 yield return waitFrame;
             }
-
-            timer = 0f;
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
-            //LevelManager.instance.playerController.myHealth.ApplyPoisonDamage(randomAction.value);
-            FxManager.instance.PlayFx(LevelManager.instance.playerExample.fxParent,FxManager.FxType.Poison);
-            yield return new WaitForEndOfFrame();
-            while (true)
-            {
-                timer += Time.deltaTime*5;
-
-                transform.position = Vector3.Lerp(endPos, startPos, timer);
-                transform.localRotation = Quaternion.Lerp(endRot,startRot,timer);
-                if (timer>=1f)
-                {
-                    break;
-                }
-
-                yield return waitFrame;
-            }
         }
-        
-        private IEnumerator AttackAnim(EnemyAction randomAction)
+
+        private IEnumerator AttackRoutine(EnemyAbilityData targetAbility)
         {
             var waitFrame = new WaitForEndOfFrame();
-            var timer = 0f;
 
+            var target = LevelManager.instance.playerExample;
+            
             var startPos = transform.position;
-            var endPos = LevelManager.instance.playerExample.transform.position;
+            var endPos = target.transform.position;
 
             var startRot = transform.localRotation;
             var endRot = Quaternion.Euler(60, 0, 60);
             
-            while (true)
-            {
-                timer += Time.deltaTime*5;
-
-                transform.position = Vector3.Lerp(startPos, endPos, timer);
-                transform.localRotation = Quaternion.Lerp(startRot,endRot,timer);
-                if (timer>=1f)
-                {
-                    break;
-                }
-
-                yield return waitFrame;
-            }
-
-            timer = 0f;
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
-            //LevelManager.instance.playerController.myHealth.TakeDamage(randomAction.value);
-            FxManager.instance.PlayFx(LevelManager.instance.playerExample.fxParent,FxManager.FxType.Attack);
-            while (true)
-            {
-                timer += Time.deltaTime*5;
-
-                transform.position = Vector3.Lerp(endPos, startPos, timer);
-                transform.localRotation = Quaternion.Lerp(endRot,startRot,timer);
-                if (timer>=1f)
-                {
-                    break;
-                }
-
-                yield return waitFrame;
-            }
-        }
-
-        private IEnumerator HealAnim(EnemyAction randomAction)
-        {
-            var waitFrame = new WaitForEndOfFrame();
-            var timer = 0f;
-
-            var startPos = transform.position;
-            var endPos = startPos+new Vector3(0,0.2f,0);
             
-            while (true)
-            {
-                timer += Time.deltaTime*5;
-
-                transform.position = Vector3.Lerp(startPos, endPos, timer);
-                
-                if (timer>=1f)
-                {
-                    break;
-                }
-
-                yield return waitFrame;
-            }
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
+            yield return StartCoroutine(MoveToTargetRoutine(waitFrame, startPos, endPos, startRot, endRot, 5));
           
-            FxManager.instance.PlayFx(fxParent,FxManager.FxType.Heal);
-            timer = 0f;
-            while (true)
-            {
-                timer += Time.deltaTime*5;
-
-                transform.position = Vector3.Lerp(endPos, startPos, timer);
-                
-                if (timer>=1f)
-                {
-                    break;
-                }
-
-                yield return waitFrame;
-            }
+            targetAbility.actionList.ForEach(x=>EnemyActionProcessor.GetAction(x.enemyActionType).DoAction(new EnemyActionParameters(x.value,target)));
+            
+            yield return StartCoroutine(MoveToTargetRoutine(waitFrame, endPos, startPos, endRot, startRot, 5));
+            
         }
         
-        private IEnumerator BlockAnim(EnemyAction randomAction)
+        private IEnumerator BuffRoutine(EnemyAbilityData targetAbility)
         {
             var waitFrame = new WaitForEndOfFrame();
-            var timer = 0f;
-
+            
             var startPos = transform.position;
             var endPos = startPos+new Vector3(0,0.2f,0);
             
-            while (true)
-            {
-                timer += Time.deltaTime*5;
-
-                transform.position = Vector3.Lerp(startPos, endPos, timer);
-                
-                if (timer>=1f)
-                {
-                    break;
-                }
-
-                yield return waitFrame;
-            }
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
-         
-            FxManager.instance.PlayFx(fxParent,FxManager.FxType.Block);
-            timer = 0f;
-            while (true)
-            {
-                timer += Time.deltaTime*5;
-
-                transform.position = Vector3.Lerp(endPos, startPos, timer);
-                
-                if (timer>=1f)
-                {
-                    break;
-                }
-
-                yield return waitFrame;
-            }
+            var startRot = transform.localRotation;
+            var endRot = transform.localRotation;
+            
+            yield return StartCoroutine(MoveToTargetRoutine(waitFrame, startPos, endPos, startRot, endRot, 5));
+            
+            targetAbility.actionList.ForEach(x=>EnemyActionProcessor.GetAction(x.enemyActionType).DoAction(new EnemyActionParameters(x.value,null)));
+            
+            yield return StartCoroutine(MoveToTargetRoutine(waitFrame, endPos, startPos, endRot, startRot, 5));
         }
         
-        private IEnumerator SpaceAnim(EnemyAction randomAction)
-        {
-            var waitFrame = new WaitForEndOfFrame();
-            var timer = 0f;
-
-            var startPos = transform.position;
-            var endPos = startPos+new Vector3(0,0.2f,0);
-            
-            while (true)
-            {
-                timer += Time.deltaTime*5;
-
-                transform.position = Vector3.Lerp(startPos, endPos, timer);
-                
-                if (timer>=1f)
-                {
-                    break;
-                }
-
-                yield return waitFrame;
-            }
-            AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
-            CollectionManager.instance.ExhaustRandomCard();
-            FxManager.instance.PlayFx(fxParent,FxManager.FxType.Buff);
-            FxManager.instance.PlayFx(LevelManager.instance.playerExample.fxParent,FxManager.FxType.Attack);
-            timer = 0f;
-            while (true)
-            {
-                timer += Time.deltaTime*5;
-
-                transform.position = Vector3.Lerp(endPos, startPos, timer);
-                
-                if (timer>=1f)
-                {
-                    break;
-                }
-
-                yield return waitFrame;
-            }
-        }
-
         #endregion
-
-
-        public void OnCardTargetHighlight()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnCardOverHighlight()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnCardPlayedForMe()
-        {
-            throw new NotImplementedException();
-        }
-
-        public EnemyExample GetEnemyBase()
-        {
-            return this;
-        }
+        
     }
 }
