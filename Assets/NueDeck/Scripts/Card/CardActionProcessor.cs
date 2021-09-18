@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NueDeck.Scripts.Card.CardActions;
-using NueDeck.Scripts.Controllers;
+using NueDeck.Scripts.Enums;
 
 namespace NueDeck.Scripts.Card
-{
-   
+{ 
     public static class CardActionProcessor
     {
         private static Dictionary<CardActionType, CardActionBase> _cardActionDict =

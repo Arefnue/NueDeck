@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using NueDeck.Scripts.Collection;
+using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.Utils;
@@ -9,26 +11,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace NueDeck.Scripts.Controllers
+namespace NueDeck.Scripts.Characters.Enemies
 {
     [Serializable]
     public class EnemyAction
     {
-        public enum EnemyActionType
-        {
-            Attack,
-            Heal,
-            Poison,
-            Block,
-            Space
-        }
-        //todo SO yap
         public EnemyActionType myEnemyActionType;
         public float value;
         public Sprite actionSprite;
         public SoundProfileData mySoundProfileData;
     }
-    public class EnemyBase : MonoBehaviour,IEnemy
+    public class EnemyExample : CharacterBase,IEnemy
     {
         public List<EnemyAction> myActions;
        
@@ -75,19 +68,19 @@ namespace NueDeck.Scripts.Controllers
             
             switch (_nextAction.myEnemyActionType)
             {
-                case EnemyAction.EnemyActionType.Attack:
+                case EnemyActionType.Attack:
                     yield return StartCoroutine(nameof(AttackAnim),_nextAction);
                     break;
-                case EnemyAction.EnemyActionType.Heal:
+                case EnemyActionType.Heal:
                     yield return StartCoroutine(nameof(HealAnim),_nextAction);
                     break;
-                case EnemyAction.EnemyActionType.Poison:
+                case EnemyActionType.Poison:
                     yield return StartCoroutine(nameof(PoisonAnim),_nextAction);
                     break;
-                case EnemyAction.EnemyActionType.Block:
+                case EnemyActionType.Block:
                     yield return StartCoroutine(nameof(BlockAnim),_nextAction);
                     break;
-                case EnemyAction.EnemyActionType.Space:
+                case EnemyActionType.Space:
                     yield return StartCoroutine(nameof(SpaceAnim),_nextAction);
                     break;
                 default:
@@ -107,7 +100,7 @@ namespace NueDeck.Scripts.Controllers
             var timer = 0f;
 
             var startPos = transform.position;
-            var endPos = LevelManager.instance.playerController.transform.position;
+            var endPos = LevelManager.instance.playerExample.transform.position;
 
             var startRot = transform.localRotation;
             var endRot = Quaternion.Euler(60, 0, 60);
@@ -129,7 +122,7 @@ namespace NueDeck.Scripts.Controllers
             timer = 0f;
             AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
             //LevelManager.instance.playerController.myHealth.ApplyPoisonDamage(randomAction.value);
-            FxManager.instance.PlayFx(LevelManager.instance.playerController.fxParent,FxManager.FxType.Poison);
+            FxManager.instance.PlayFx(LevelManager.instance.playerExample.fxParent,FxManager.FxType.Poison);
             yield return new WaitForEndOfFrame();
             while (true)
             {
@@ -152,7 +145,7 @@ namespace NueDeck.Scripts.Controllers
             var timer = 0f;
 
             var startPos = transform.position;
-            var endPos = LevelManager.instance.playerController.transform.position;
+            var endPos = LevelManager.instance.playerExample.transform.position;
 
             var startRot = transform.localRotation;
             var endRot = Quaternion.Euler(60, 0, 60);
@@ -174,7 +167,7 @@ namespace NueDeck.Scripts.Controllers
             timer = 0f;
             AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
             //LevelManager.instance.playerController.myHealth.TakeDamage(randomAction.value);
-            FxManager.instance.PlayFx(LevelManager.instance.playerController.fxParent,FxManager.FxType.Attack);
+            FxManager.instance.PlayFx(LevelManager.instance.playerExample.fxParent,FxManager.FxType.Attack);
             while (true)
             {
                 timer += Time.deltaTime*5;
@@ -292,9 +285,9 @@ namespace NueDeck.Scripts.Controllers
                 yield return waitFrame;
             }
             AudioManager.instance.PlayOneShot(randomAction.mySoundProfileData.GetRandomClip());
-            HandManager.instance.ExhaustRandomCard();
+            CollectionManager.instance.ExhaustRandomCard();
             FxManager.instance.PlayFx(fxParent,FxManager.FxType.Buff);
-            FxManager.instance.PlayFx(LevelManager.instance.playerController.fxParent,FxManager.FxType.Attack);
+            FxManager.instance.PlayFx(LevelManager.instance.playerExample.fxParent,FxManager.FxType.Attack);
             timer = 0f;
             while (true)
             {
@@ -329,7 +322,7 @@ namespace NueDeck.Scripts.Controllers
             throw new NotImplementedException();
         }
 
-        public EnemyBase GetEnemyBase()
+        public EnemyExample GetEnemyBase()
         {
             return this;
         }

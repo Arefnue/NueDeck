@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using NueDeck.Scripts.Card.CardActions;
-using NueDeck.Scripts.Controllers;
+using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Characters.Enemies;
+using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.Managers;
 using TMPro;
 using UnityEngine;
@@ -10,7 +12,7 @@ using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Card
 {
-    public class CardBase : MonoBehaviour
+    public class CardObject : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private MeshRenderer cardMeshRenderer;
@@ -59,20 +61,20 @@ namespace NueDeck.Scripts.Card
         
         #region Card Methods
 
-        public void Use(EnemyBase targetEnemy = null)
+        public void Use(EnemyExample targetEnemy = null)
         {
             SpendMana(CardData.myManaCost);
             
             foreach (var playerAction in CardData.actionList)
                 CardActionProcessor.GetAction(playerAction.myPlayerActionType).DoAction(new CardActionParameters(playerAction.value,targetEnemy));
             
-            HandManager.instance.OnCardPlayed(this);
+            CollectionManager.instance.OnCardPlayed(this);
             
             StartCoroutine(nameof(DiscardRoutine));
         }
         public void Discard()
         {
-            HandManager.instance.OnCardDiscarded(this);
+            CollectionManager.instance.OnCardDiscarded(this);
             StartCoroutine(nameof(DiscardRoutine));
         }
         public void Exhaust()
@@ -82,7 +84,7 @@ namespace NueDeck.Scripts.Card
 
         private void SpendMana(int value)
         {
-            HandManager.instance.currentMana -= value;
+            CollectionManager.instance.currentMana -= value;
         }
         
         public void SetInactiveMaterialState(bool isInactive, Material inactiveMaterial = null) 
@@ -117,7 +119,7 @@ namespace NueDeck.Scripts.Card
            
             var timer = 0f;
             
-            transform.SetParent(HandManager.instance.discardTransform);
+            transform.SetParent(CollectionManager.instance.discardTransform);
             
             var startPos = _transform.localPosition;
             var endPos = Vector3.zero;

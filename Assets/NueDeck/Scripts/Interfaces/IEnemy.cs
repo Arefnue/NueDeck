@@ -1,4 +1,5 @@
-﻿using NueDeck.Scripts.Controllers;
+﻿using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Characters.Enemies;
 
 namespace NueDeck.Scripts.Interfaces
 {
@@ -8,6 +9,6 @@ namespace NueDeck.Scripts.Interfaces
         public void OnCardOverHighlight();
         public void OnCardPlayedForMe();
 
-        public EnemyBase GetEnemyBase();
+        public EnemyExample GetEnemyBase();
     }
 }

@@ -1,21 +1,16 @@
 ﻿using NueDeck.Scripts.Managers;
-using NueDeck.Scripts.Utils;
 using UnityEngine;
 
-namespace NueDeck.Scripts.Controllers
+namespace NueDeck.Scripts.Characters.Allies
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerExample : AllyBase
     {
-        // [HideInInspector] public Health myHealth;
-       
+      
         public GameObject playerHighlight;
         public Transform fxParent;
         
         private void Awake()
         {
-            // myHealth = GetComponent<Health>();
-            // myHealth.deathAction += OnDeath;
-           
             playerHighlight.SetActive(false);
         }
         

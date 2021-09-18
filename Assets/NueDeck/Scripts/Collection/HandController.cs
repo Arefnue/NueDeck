@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using NueDeck.Scripts.Card;
+using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
 using UnityEngine;
 
-namespace NueDeck.Scripts.Controllers
+namespace NueDeck.Scripts.Collection
 {
-    //Thanks to Cyan
-
-    // handles hand movements
     public class HandController : MonoBehaviour
     {
         [Header("Card Settings")] 
@@ -24,7 +23,7 @@ namespace NueDeck.Scripts.Controllers
 
         [Header("References")] 
         public Camera cam = null;
-        public List<CardBase> hand; // Cards currently in hand
+        public List<CardObject> hand; // Cards currently in hand
         [SerializeField] private Material inactiveCardMaterial = null;
 
         
@@ -33,7 +32,7 @@ namespace NueDeck.Scripts.Controllers
        
         private int _selected = -1; // Card index that is nearest to mouse
         private int _dragged = -1; // Card index that is held by mouse (inside of hand)
-        private CardBase _heldCard; // Card that is held by mouse (when outside of hand)
+        private CardObject _heldCard; // Card that is held by mouse (when outside of hand)
         private Vector3 _heldCardOffset;
         private Vector2 _heldCardTilt;
         private Vector2 _force;
@@ -129,7 +128,7 @@ namespace NueDeck.Scripts.Controllers
                 var cardTransform = card.transform;
 
                 // Set to inactive material if not enough mana required to use card
-                card.SetInactiveMaterialState(HandManager.instance.currentMana < card.CardData.myManaCost, inactiveCardMaterial);
+                card.SetInactiveMaterialState(CollectionManager.instance.currentMana < card.CardData.myManaCost, inactiveCardMaterial);
 
                 var noCardHeld = _heldCard == null; // Whether a card is "held" (outside of hand)
                 var onSelectedCard = noCardHeld && _selected == i;
@@ -203,7 +202,7 @@ namespace NueDeck.Scripts.Controllers
                 }
 
                 // Get Selected Card
-                if (HandManager.instance.canSelectCards)
+                if (CollectionManager.instance.canSelectCards)
                 {
                     //float d = (p - mouseWorldPos).sqrMagnitude;
                     if (d < sqrDistance)
@@ -251,10 +250,10 @@ namespace NueDeck.Scripts.Controllers
                     Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
                 cardTransform.position = cardPos;
 
-                HandManager.instance.HighlightCardTarget(_heldCard.CardData.myTargets);
+                CollectionManager.instance.HighlightCardTarget(_heldCard.CardData.myTargets);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
-                if (!HandManager.instance.canSelectCards || _mouseInsideHand)
+                if (!CollectionManager.instance.canSelectCards || _mouseInsideHand)
                 {
                     //  || sqrDistance <= 2
                     // Card has gone back into hand
@@ -263,7 +262,7 @@ namespace NueDeck.Scripts.Controllers
                     _selected = -1;
                     _heldCard = null;
 
-                    HandManager.instance.DeactivateCardHighlights();
+                    CollectionManager.instance.DeactivateCardHighlights();
 
                     return;
                 }
@@ -279,12 +278,12 @@ namespace NueDeck.Scripts.Controllers
             if (!mouseButtonUp) return;
             
             //Remove highlights
-            HandManager.instance.DeactivateCardHighlights();
+            CollectionManager.instance.DeactivateCardHighlights();
             bool backToHand = true;
                 
-            if (HandManager.instance.canUseCards && HandManager.instance.currentMana >= _heldCard.CardData.myManaCost)
+            if (CollectionManager.instance.canUseCards && CollectionManager.instance.currentMana >= _heldCard.CardData.myManaCost)
             {
-                if (_heldCard.CardData.myTargets == CardData.CardTargets.Enemy)
+                if (_heldCard.CardData.myTargets == ActionTargets.Enemy)
                 {
                     RaycastHit hit;
                     var mainRay = LevelManager.instance.mainCam.ScreenPointToRay(mousePos);
@@ -429,7 +428,7 @@ namespace NueDeck.Scripts.Controllers
         public void MoveCardToIndex(int currentIndex, int toIndex)
         {
             if (currentIndex == toIndex) return; // Same index, do nothing
-            CardBase card = hand[currentIndex];
+            CardObject card = hand[currentIndex];
             hand.RemoveAt(currentIndex);
             hand.Insert(toIndex, card);
 
@@ -442,7 +441,7 @@ namespace NueDeck.Scripts.Controllers
         /// <summary>
         /// Adds a card to the hand. Optional param to insert it at a given index.
         /// </summary>
-        public void AddCardToHand(CardBase card, int index = -1)
+        public void AddCardToHand(CardObject card, int index = -1)
         {
             if (index < 0)
             {
@@ -470,7 +469,7 @@ namespace NueDeck.Scripts.Controllers
         {
             if (updateHierarchyOrder)
             {
-                CardBase card = hand[index];
+                CardObject card = hand[index];
                 card.transform.SetParent(transform.parent);
                 card.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
             }

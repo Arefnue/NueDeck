@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NueDeck.Scripts.Enums;
+using UnityEngine;
 
 namespace NueDeck.Scripts.Card.CardActions
 {

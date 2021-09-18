@@ -1,4 +1,4 @@
-using NueDeck.Scripts.Controllers;
+using NueDeck.Scripts.Collection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,14 +18,14 @@ namespace NueDeck.Scripts.Managers
         private void Awake()
         {
             instance = this;
-            randomizedDeck.SetActive(HandManager.instance.isRandomHand);
+            randomizedDeck.SetActive(CollectionManager.instance.isRandomHand);
         }
         
         public void SetPileTexts()
         {
-            drawPileText.text = $"{HandManager.instance.drawPile.Count.ToString()}";
-            discardPileText.text = $"{HandManager.instance.discardPile.Count.ToString()}";
-            manaText.text = $"{HandManager.instance.currentMana.ToString()}/{HandManager.instance.maxMana}";
+            drawPileText.text = $"{CollectionManager.instance.drawPile.Count.ToString()}";
+            discardPileText.text = $"{CollectionManager.instance.discardPile.Count.ToString()}";
+            manaText.text = $"{CollectionManager.instance.currentMana.ToString()}/{CollectionManager.instance.maxMana}";
         }
 
         

@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NueDeck.Scripts.Card;
-using NueDeck.Scripts.Controllers;
+using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Characters.Allies;
+using NueDeck.Scripts.Characters.Enemies;
+using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -23,16 +26,16 @@ namespace NueDeck.Scripts.Managers
 
         [Header("Settings")] public Camera mainCam;
         public LayerMask selectableLayer;
-        public PlayerController playerController;
+        public PlayerExample playerExample;
 
         public Transform playerPos;
         public List<Transform> enemyPosList;
         public SoundProfileData finalSoundProfileData;
 
-        [Header("Level")] public List<EnemyBase> levelEnemyList;
+        [Header("Level")] public List<EnemyExample> levelEnemyList;
         public bool isFinalLevel;
 
-        [HideInInspector] public List<EnemyBase> currentEnemies = new List<EnemyBase>();
+        [HideInInspector] public List<EnemyExample> currentEnemies = new List<EnemyExample>();
 
 
         public LevelState CurrentLevelState
@@ -73,25 +76,25 @@ namespace NueDeck.Scripts.Managers
                 case LevelState.PlayerTurn:
 
 
-                    HandManager.instance.currentMana = HandManager.instance.maxMana;
-                    HandManager.instance.DrawCards(HandManager.instance.drawCount);
+                    CollectionManager.instance.currentMana = CollectionManager.instance.maxMana;
+                    CollectionManager.instance.DrawCards(CollectionManager.instance.drawCount);
 
                     foreach (var currentEnemy in currentEnemies) currentEnemy.ShowNextAction();
 
-                    HandManager.instance.canSelectCards = true;
+                    CollectionManager.instance.canSelectCards = true;
 
                     break;
                 case LevelState.EnemyTurn:
 
-                    HandManager.instance.DiscardHand();
+                    CollectionManager.instance.DiscardHand();
 
                     StartCoroutine(nameof(EnemyTurnRoutine));
-                    HandManager.instance.canSelectCards = false;
+                    CollectionManager.instance.canSelectCards = false;
 
                     break;
                 case LevelState.Finished:
 
-                    HandManager.instance.canSelectCards = false;
+                    CollectionManager.instance.canSelectCards = false;
 
                     break;
 
@@ -117,11 +120,11 @@ namespace NueDeck.Scripts.Managers
         public void LoseGame()
         {
             CurrentLevelState = LevelState.Finished;
-            HandManager.instance.DiscardHand();
-            HandManager.instance.discardPile.Clear();
-            HandManager.instance.drawPile.Clear();
-            HandManager.instance.handPile.Clear();
-            HandManager.instance.handController.hand.Clear();
+            CollectionManager.instance.DiscardHand();
+            CollectionManager.instance.discardPile.Clear();
+            CollectionManager.instance.drawPile.Clear();
+            CollectionManager.instance.handPile.Clear();
+            CollectionManager.instance.handController.hand.Clear();
             UIManager.instance.gameCanvas.SetActive(false);
         }
 
@@ -141,11 +144,11 @@ namespace NueDeck.Scripts.Managers
         private void OnFinal()
         {
             CurrentLevelState = LevelState.Finished;
-            HandManager.instance.DiscardHand();
-            HandManager.instance.discardPile.Clear();
-            HandManager.instance.drawPile.Clear();
-            HandManager.instance.handPile.Clear();
-            HandManager.instance.handController.hand.Clear();
+            CollectionManager.instance.DiscardHand();
+            CollectionManager.instance.discardPile.Clear();
+            CollectionManager.instance.drawPile.Clear();
+            CollectionManager.instance.handPile.Clear();
+            CollectionManager.instance.handController.hand.Clear();
             UIManager.instance.gameCanvas.SetActive(false);
           
         }
@@ -154,13 +157,13 @@ namespace NueDeck.Scripts.Managers
         {
             CurrentLevelState = LevelState.Finished;
             
-            foreach (var choice in HandManager.instance.choicesList) choice.DetermineChoice();
-            HandManager.instance.DiscardHand();
-            HandManager.instance.discardPile.Clear();
-            HandManager.instance.drawPile.Clear();
-            HandManager.instance.handPile.Clear();
-            HandManager.instance.handController.hand.Clear();
-            HandManager.instance.choiceParent.gameObject.SetActive(true);
+            foreach (var choice in CollectionManager.instance.choicesList) choice.DetermineChoice();
+            CollectionManager.instance.DiscardHand();
+            CollectionManager.instance.discardPile.Clear();
+            CollectionManager.instance.drawPile.Clear();
+            CollectionManager.instance.handPile.Clear();
+            CollectionManager.instance.handController.hand.Clear();
+            CollectionManager.instance.choiceParent.gameObject.SetActive(true);
             UIManager.instance.gameCanvas.SetActive(false);
         }
 
@@ -171,8 +174,8 @@ namespace NueDeck.Scripts.Managers
                 StartCoroutine("FinalSfxRoutine");
             }
 
-            HandManager.instance.SetGameDeck();
-            HandManager.instance.choiceParent.gameObject.SetActive(false);
+            CollectionManager.instance.SetGameDeck();
+            CollectionManager.instance.choiceParent.gameObject.SetActive(false);
             UIManager.instance.gameCanvas.SetActive(true);
             CurrentLevelState = LevelState.PlayerTurn;
         }
@@ -187,7 +190,7 @@ namespace NueDeck.Scripts.Managers
 
             foreach (var currentEnemy in currentEnemies)
             {
-                yield return currentEnemy.StartCoroutine(nameof(EnemyBase.ActionRoutine));
+                yield return currentEnemy.StartCoroutine(nameof(EnemyExample.ActionRoutine));
                 yield return waitDelay;
             }
 

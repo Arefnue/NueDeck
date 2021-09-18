@@ -1,33 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using NueDeck.Scripts.Card.CardActions;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Utils;
 using UnityEngine;
 
-namespace NueDeck.Scripts.Card
+namespace NueDeck.Scripts.EnemyBehaviour
 {
-    [CreateAssetMenu(fileName = "Card Data",menuName = "Data/Card Data",order = 0)]
-    public class CardData : ScriptableObject
+    [CreateAssetMenu(fileName = "Enemy Data",menuName = "Data/Enemy Data",order = 1)]
+    public class EnemyData : ScriptableObject
     {
        
-
-        [Header("Card Defaults")]
+        [Header("Enemy Defaults")]
         public int myID;
-        public ActionTargets myTargets;
-       
-        public int myManaCost;
         public string myName;
+        public ActionTargets myTargets;
+        
         [TextArea]
         public string myDescription;
         public Sprite mySprite;
-        public List<CardActionData> actionList;
+        public EnemyIntentions myIntention;
+        public List<EnemyAction> actionList;
         public SoundProfileData mySoundProfileData;
         
     }
 
     [Serializable]
-    public class CardActionData
+    public class EnemyAction
     {
         public CardActionType myPlayerActionType;
         public float value;

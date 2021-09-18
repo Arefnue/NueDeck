@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NueDeck.Scripts.Card;
-using NueDeck.Scripts.Controllers;
+using NueDeck.Scripts.Enums;
+using NueDeck.Scripts.Managers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace NueDeck.Scripts.Managers
+namespace NueDeck.Scripts.Collection
 {
-    public class HandManager : MonoBehaviour
+    public class CollectionManager : MonoBehaviour
     {
-        public static HandManager instance;
+        public static CollectionManager instance;
 
         [Header("Gameplay Settings")] 
         public int drawCount = 4;
         public int maxMana = 3;
         public int currentMana = 3;
-        
         public bool canUseCards = true;
         public bool canSelectCards = true;
         public bool isRandomHand = false;
@@ -33,7 +33,7 @@ namespace NueDeck.Scripts.Managers
         
         [Header("Card Settings")]
         public List<CardData> allCardsList;
-        public CardBase cardPrefab;
+        public CardObject cardPrefab;
         
         [Header("Decks")]
         public List<int> myDeckIDList = new List<int>();
@@ -71,8 +71,7 @@ namespace NueDeck.Scripts.Managers
         public void DrawCards(int targetDrawCount)
         {
             var currentDrawCount = 0;
-            var reverseDraw = false;
-
+            
             for (var i = 0; i < targetDrawCount; i++)
             {
                 
@@ -102,7 +101,7 @@ namespace NueDeck.Scripts.Managers
             foreach (var currentEnemy in LevelManager.instance.currentEnemies)
                 currentEnemy.highlightObject.SetActive(false);
 
-            LevelManager.instance.playerController.playerHighlight.SetActive(false);
+            LevelManager.instance.playerExample.playerHighlight.SetActive(false);
         }
 
         public void IncreaseMana(int target)
@@ -159,30 +158,30 @@ namespace NueDeck.Scripts.Managers
             UIManager.instance.SetPileTexts();
         }
 
-        public void OnCardDiscarded(CardBase targetCard)
+        public void OnCardDiscarded(CardObject targetCard)
         {
             handPile.Remove(targetCard.CardData.myID);
             discardPile.Add(targetCard.CardData.myID);
             UIManager.instance.SetPileTexts();
         }
         
-        public void OnCardPlayed(CardBase targetCard)
+        public void OnCardPlayed(CardObject targetCard)
         {
             handPile.Remove(targetCard.CardData.myID);
             discardPile.Add(targetCard.CardData.myID);
             UIManager.instance.SetPileTexts();
         }
         
-        public void HighlightCardTarget(CardData.CardTargets targetTargets)
+        public void HighlightCardTarget(ActionTargets targetTargets)
         {
             switch (targetTargets)
             {
-                case CardData.CardTargets.Enemy:
+                case ActionTargets.Enemy:
                     foreach (var currentEnemy in LevelManager.instance.currentEnemies)
                         currentEnemy.highlightObject.SetActive(true);
                     break;
-                case CardData.CardTargets.Player:
-                    LevelManager.instance.playerController.playerHighlight.SetActive(true);
+                case ActionTargets.Ally:
+                    LevelManager.instance.playerExample.playerHighlight.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(targetTargets), targetTargets, null);
@@ -197,7 +196,7 @@ namespace NueDeck.Scripts.Managers
 
         #region Private Methods
         
-        private CardBase BuildAndGetCard(int id,Transform parent)
+        private CardObject BuildAndGetCard(int id,Transform parent)
         {
             var card = allCardsList.FirstOrDefault(x => x.myID == id);
             if (card)
