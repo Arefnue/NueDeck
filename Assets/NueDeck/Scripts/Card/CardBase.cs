@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using NueDeck.Scripts.Card.CardActions;
 using NueDeck.Scripts.Controllers;
 using NueDeck.Scripts.Managers;
@@ -11,127 +12,133 @@ namespace NueDeck.Scripts.Card
 {
     public class CardBase : MonoBehaviour
     {
-        [Header("Components")]
-        public MeshRenderer meshRenderer;
-        public Material material;
-        
-        [Header("Texts")] 
-        public TextMeshProUGUI nameText;
-        public TextMeshProUGUI descText;
-        public TextMeshProUGUI manaText;
-        public Image frontImage;
-        public Image backImage;
+        [Header("References")]
+        [SerializeField] private MeshRenderer cardMeshRenderer;
+        [SerializeField] private TextMeshProUGUI nameText;
+        [SerializeField] private TextMeshProUGUI descText;
+        [SerializeField] private TextMeshProUGUI manaText;
+        [SerializeField] private Image frontImage;
+        [SerializeField] private Image backImage;
+        public CardData CardData { get; private set; }
 
-        public Sprite hideSprite;
-        [HideInInspector]public CardData myCardData;
-        
-        private Vector2 _dissolveOffset = new Vector2(0.1f, 0);
-        private Vector2 _dissolveSpeed = new Vector2(2f, 2f);
+        private readonly Vector2 _dissolveOffset = new Vector2(0.1f, 0);
+        private readonly Vector2 _dissolveSpeed = new Vector2(2f, 2f);
         private Color _dissolveColor;
         private Color _color;
         private Color _color2;
+        private bool _isInactive;
+        private Material _cardMaterial;
+        private Transform _transform;
+        private WaitForEndOfFrame _waitFrame;
         
-        private bool isInactive;
-
         #region Setup
+
+        private void Awake()
+        {
+            _transform = transform;
+            _waitFrame = new WaitForEndOfFrame();
+        }
+
         public void SetCard(CardData targetProfile)
         {
-            myCardData = targetProfile;
-            meshRenderer = GetComponentInChildren<MeshRenderer>();
-            material = meshRenderer.material; // Create material instance
+            CardData = targetProfile;
+            _cardMaterial = cardMeshRenderer.material;
 
-            _color = material.GetColor("_Color");
-            _color2 = material.GetColor("_OutlineColor");
-            _dissolveColor = material.GetColor("_DissolveColor");
+            _color = _cardMaterial.GetColor("_Color");
+            _color2 = _cardMaterial.GetColor("_OutlineColor");
+            _dissolveColor = _cardMaterial.GetColor("_DissolveColor");
             
-            nameText.text = myCardData.myName;
-            descText.text = myCardData.myDescription;
-            manaText.text = myCardData.myManaCost.ToString();
-            frontImage.sprite = myCardData.mySprite;
+            nameText.text = CardData.myName;
+            descText.text = CardData.myDescription;
+            manaText.text = CardData.myManaCost.ToString();
+            frontImage.sprite = CardData.mySprite;
 
         }
 
         #endregion
         
-        #region CardActions
+        #region Card Methods
 
-        public void UseCard(EnemyBase targetEnemy = null)
+        public void Use(EnemyBase targetEnemy = null)
         {
-            SpendMana(myCardData.myManaCost);
+            SpendMana(CardData.myManaCost);
             
-            foreach (var playerAction in myCardData.actionList)
-            {
+            foreach (var playerAction in CardData.actionList)
                 CardActionProcessor.GetAction(playerAction.myPlayerActionType).DoAction(new CardActionParameters(playerAction.value,targetEnemy));
-            }
             
-            //AudioManager.instance.PlayOneShot(myCardData.mySoundProfileData.GetRandomClip());
-            HandManager.instance.DiscardCard(this);
-            StartCoroutine("DiscardRoutine");
+            HandManager.instance.OnCardPlayed(this);
+            
+            StartCoroutine(nameof(DiscardRoutine));
         }
         public void Discard()
         {
-            HandManager.instance.DiscardCard(this);
-            StartCoroutine("DiscardRoutine");
+            HandManager.instance.OnCardDiscarded(this);
+            StartCoroutine(nameof(DiscardRoutine));
         }
         public void Exhaust()
         {
-            StartCoroutine("Dissolve");
+            StartCoroutine(nameof(Dissolve));
         }
-        
-        public void SpendMana(int value)
+
+        private void SpendMana(int value)
         {
             HandManager.instance.currentMana -= value;
         }
         
+        public void SetInactiveMaterialState(bool isInactive, Material inactiveMaterial = null) 
+        {
+            if (isInactive == this._isInactive) return; 
+            
+            _isInactive = isInactive;
+            cardMeshRenderer.sharedMaterial = isInactive ? inactiveMaterial : _cardMaterial;
+        }
         
         #endregion
         
         #region Routines
 
-        protected IEnumerator Dissolve() {
+        protected IEnumerator Dissolve() 
+        {
             Vector2 t = Vector2.zero - _dissolveOffset;
             while (t.x < 1) {
                 t.x = (t.x + Time.deltaTime * _dissolveSpeed.x);
                 if (t.y < 1) {
                     t.y = (t.y + Time.deltaTime * _dissolveSpeed.y);
                 }
-                material.SetVector("_Dissolve", t);
-                material.SetColor("_DissolveColor", _dissolveColor * 4 * t.y);
-                yield return null;
+                _cardMaterial.SetVector("_Dissolve", t);
+                _cardMaterial.SetColor("_DissolveColor", _dissolveColor * 4 * t.y);
+                yield return _waitFrame;
             }
             Destroy(gameObject);
         }
 
         private IEnumerator DiscardRoutine()
         {
-            var waitFrame = new WaitForEndOfFrame();
+           
             var timer = 0f;
             
             transform.SetParent(HandManager.instance.discardTransform);
             
-            var startPos = transform.localPosition;
+            var startPos = _transform.localPosition;
             var endPos = Vector3.zero;
 
-            var startScale = transform.localScale;
+            var startScale = _transform.localScale;
             var endScale = Vector3.zero;
 
-            var startRot = transform.localRotation;
+            var startRot = _transform.localRotation;
             var endRot = Quaternion.Euler(Random.value * 360, Random.value * 360, Random.value * 360);
             
             while (true)
             {
-
                 timer += Time.deltaTime*5;
 
-                transform.localPosition = Vector3.Lerp(startPos, endPos, timer);
-                transform.localScale = Vector3.Lerp(startScale, endScale, timer);
-                transform.localRotation = Quaternion.Lerp(startRot,endRot,timer);
-                if (timer>=1f)
-                {
-                    break;
-                }
+                _transform.localPosition = Vector3.Lerp(startPos, endPos, timer);
+                _transform.localRotation = Quaternion.Lerp(startRot,endRot,timer);
+                _transform.localScale = Vector3.Lerp(startScale, endScale, timer);
                 
-                yield return waitFrame;
+                if (timer>=1f)  break;
+                
+                yield return _waitFrame;
             }
             
             Destroy(gameObject);
@@ -139,25 +146,6 @@ namespace NueDeck.Scripts.Card
 
         #endregion
         
-        #region Methods
-
-        public void SetInactiveMaterialState(bool isInactive, Material inactiveMaterial = null) {
-            if (isInactive == this.isInactive) {
-                return; 
-            }
-            this.isInactive = isInactive;
-            if (isInactive) {
-                
-                // Switch to Inactive Material
-                meshRenderer.sharedMaterial = inactiveMaterial;
-            } else {
-
-                // Switch back to normal Material
-                meshRenderer.sharedMaterial = material;
-            }
-        }
-
-        #endregion
        
         
     }

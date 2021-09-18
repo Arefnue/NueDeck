@@ -137,7 +137,7 @@ namespace NueDeck.Scripts.Managers
                 targetCard = handPile[Random.Range(0, handPile.Count)];
                 var tCard = handController.hand[0];
                 foreach (var cardBase in handController.hand)
-                    if (cardBase.myCardData.myID == targetCard)
+                    if (cardBase.CardData.myID == targetCard)
                     {
                         tCard = cardBase;
                         break;
@@ -159,10 +159,17 @@ namespace NueDeck.Scripts.Managers
             UIManager.instance.SetPileTexts();
         }
 
-        public void DiscardCard(CardBase targetCard)
+        public void OnCardDiscarded(CardBase targetCard)
         {
-            handPile.Remove(targetCard.myCardData.myID);
-            discardPile.Add(targetCard.myCardData.myID);
+            handPile.Remove(targetCard.CardData.myID);
+            discardPile.Add(targetCard.CardData.myID);
+            UIManager.instance.SetPileTexts();
+        }
+        
+        public void OnCardPlayed(CardBase targetCard)
+        {
+            handPile.Remove(targetCard.CardData.myID);
+            discardPile.Add(targetCard.CardData.myID);
             UIManager.instance.SetPileTexts();
         }
         

@@ -254,15 +254,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f14e233234845678af96ebfd2f45fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 3644388676854649612}
-  material: {fileID: 2100000, guid: eee6bad7f248d1944a42b146f54d741a, type: 2}
+  cardMeshRenderer: {fileID: 3644388676854649612}
   nameText: {fileID: 1768136776442562566}
   descText: {fileID: 3085244622617530667}
   manaText: {fileID: 3660415334001918324}
   frontImage: {fileID: 8603284245693264279}
   backImage: {fileID: 8593444577226125877}
-  hideSprite: {fileID: 0}
-  myProfile: {fileID: 11400000, guid: 97392c824000e4049a6299b2cef0e84d, type: 2}
 --- !u!1 &3677811352146201060
 GameObject:
   m_ObjectHideFlags: 0
