@@ -39,7 +39,7 @@ namespace NueDeck.Scripts.Managers
             CurrentCombatState = CombatState.PrepareCombat;
         }
         
-        private void OnCombatStarted()
+        public void StartCombat()
         {
             BuildEnemies();
             BuildAllies();
@@ -83,9 +83,7 @@ namespace NueDeck.Scripts.Managers
         }
 
         #endregion
-
-
-
+        
         #region Methods
 
         public void EndTurn()
@@ -111,16 +109,14 @@ namespace NueDeck.Scripts.Managers
         
         private void BuildAllies()
         {
-            for (var i = 0; i < LevelManager.instance.levelAllyList.Count; i++)
+            for (var i = 0; i < GameManager.instance.allyList.Count; i++)
             {
-                var clone = Instantiate(LevelManager.instance.levelAllyList[i], allyPosList.Count >= i ? allyPosList[i] : allyPosList[0]);
+                var clone = Instantiate(GameManager.instance.allyList[i], allyPosList.Count >= i ? allyPosList[i] : allyPosList[0]);
                 currentAllies.Add(clone);
             }
         }
 
         #endregion
-        
-      
         
         #region Routines
 

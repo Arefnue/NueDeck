@@ -1,16 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using NueDeck.Scripts.Card;
 using NueDeck.Scripts.Characters;
-using NueDeck.Scripts.Characters.Allies;
-using NueDeck.Scripts.Characters.Enemies;
 using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.EnemyBehaviour;
 using NueDeck.Scripts.Enums;
-using NueDeck.Scripts.Utils;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Managers
 {
@@ -20,16 +15,11 @@ namespace NueDeck.Scripts.Managers
         
         [Header("Settings")] 
         public Camera mainCam;
-        public Transform playerPos;
-      
         
         [Header("Level")] 
         public List<EnemyBase> levelEnemyList;
-        public List<AllyBase> levelAllyList;
-        public bool isFinalLevel;
         
         #region Setup
-
         private void Awake()
         {
             instance = this;
@@ -39,11 +29,14 @@ namespace NueDeck.Scripts.Managers
            
         }
 
+        private void Start()
+        {
+            CombatManager.instance.StartCombat();
+        }
+
         #endregion
 
         #region Public Methods
-
-       
         public void LoseGame()
         {
             CombatManager.instance.CurrentCombatState = CombatState.EndCombat;
@@ -58,9 +51,6 @@ namespace NueDeck.Scripts.Managers
         #endregion
 
         #region Private Methods
-
-      
-        
         private void OnChoiceStart()
         {
             CombatManager.instance.CurrentCombatState = CombatState.EndCombat;
@@ -74,9 +64,7 @@ namespace NueDeck.Scripts.Managers
             CollectionManager.instance.choiceParent.gameObject.SetActive(true);
             UIManager.instance.gameCanvas.SetActive(false);
         }
-
-       
-
+        
         #endregion
 
       
