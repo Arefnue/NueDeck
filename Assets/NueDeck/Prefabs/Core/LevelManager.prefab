@@ -170,14 +170,14 @@ MonoBehaviour:
   mainCam: {fileID: 4666622059495250645}
   selectableLayer:
     serializedVersion: 2
-    m_Bits: 4096
-  playerController: {fileID: 4666622059942155680}
+    m_Bits: 1024
+  playerExample: {fileID: 4666622059942155680}
   playerPos: {fileID: 4666622059652342500}
   enemyPosList:
   - {fileID: 4666622060345741832}
   - {fileID: 6447578551529050431}
   - {fileID: 4499567592050563834}
-  finalSoundProfile: {fileID: 11400000, guid: 878a9164ecb40de41bc561562f12d2fc, type: 2}
+  finalSoundProfileData: {fileID: 11400000, guid: 878a9164ecb40de41bc561562f12d2fc, type: 2}
   levelEnemyList:
   - {fileID: 2924474335899651609, guid: f4d61cf01ae2f2a4eb4ef92cb53480c7, type: 3}
   isFinalLevel: 0

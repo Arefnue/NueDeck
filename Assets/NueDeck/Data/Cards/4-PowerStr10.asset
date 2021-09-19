@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myID: 4
   myTargets: 1
-  playerActionList:
-  - myPlayerActionType: 3
-    value: 10
-    mySoundProfile: {fileID: 11400000, guid: 426f246404d64304f9887eb7ac6a418e, type: 2}
   myManaCost: 2
   myName: Hard Work
   myDescription: Increase strength by 10
   mySprite: {fileID: 21300000, guid: a0c75614ede963a46af4bc352b3faabd, type: 3}
+  actionList: []
+  mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}

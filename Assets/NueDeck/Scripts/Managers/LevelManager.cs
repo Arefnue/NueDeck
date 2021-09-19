@@ -25,18 +25,20 @@ namespace NueDeck.Scripts.Managers
             Finished
         }
 
-        [Header("Settings")] public Camera mainCam;
-        public LayerMask selectableLayer;
-        public PlayerExample playerExample;
-
+        [Header("Settings")] 
+        public Camera mainCam;
+        
         public Transform playerPos;
         public List<Transform> enemyPosList;
-        public SoundProfileData finalSoundProfileData;
-
-        [Header("Level")] public List<EnemyExample> levelEnemyList;
+        public List<Transform> allyPosList;
+        
+        [Header("Level")] 
+        public List<EnemyBase> levelEnemyList;
+        public List<AllyBase> levelAllyList;
         public bool isFinalLevel;
 
-        [HideInInspector] public List<EnemyExample> currentEnemies = new List<EnemyExample>();
+        [HideInInspector] public List<EnemyBase> currentEnemies = new List<EnemyBase>();
+        [HideInInspector] public List<AllyBase> currentAllies = new List<AllyBase>();
 
 
         public LevelState CurrentLevelState
@@ -58,6 +60,7 @@ namespace NueDeck.Scripts.Managers
         {
             instance = this;
             BuildEnemies();
+            BuildAllies();
             CardActionProcessor.Initialize();
             EnemyActionProcessor.Initialize();
             CurrentLevelState = LevelState.Prepare;
@@ -81,7 +84,7 @@ namespace NueDeck.Scripts.Managers
                     CollectionManager.instance.currentMana = CollectionManager.instance.maxMana;
                     CollectionManager.instance.DrawCards(CollectionManager.instance.drawCount);
 
-                    foreach (var currentEnemy in currentEnemies) currentEnemy.ShowNextAction();
+                    foreach (var currentEnemy in currentEnemies) currentEnemy.ShowNextAbility();
 
                     CollectionManager.instance.canSelectCards = true;
 
@@ -114,7 +117,7 @@ namespace NueDeck.Scripts.Managers
             CurrentLevelState = LevelState.EnemyTurn;
         }
         
-        public void OnPlayerDeath()
+        public void OnAllyDeath()
         {
             LoseGame();
         }
@@ -140,6 +143,15 @@ namespace NueDeck.Scripts.Managers
             {
                 var clone = Instantiate(levelEnemyList[i], enemyPosList.Count >= i ? enemyPosList[i] : enemyPosList[0]);
                 currentEnemies.Add(clone);
+            }
+        }
+        
+        private void BuildAllies()
+        {
+            for (var i = 0; i < levelAllyList.Count; i++)
+            {
+                var clone = Instantiate(levelAllyList[i], allyPosList.Count >= i ? allyPosList[i] : allyPosList[0]);
+                currentAllies.Add(clone);
             }
         }
 
@@ -171,11 +183,6 @@ namespace NueDeck.Scripts.Managers
 
         private void OnLevelStart()
         {
-            if (isFinalLevel)
-            {
-                StartCoroutine("FinalSfxRoutine");
-            }
-
             CollectionManager.instance.SetGameDeck();
             CollectionManager.instance.choiceParent.gameObject.SetActive(false);
             UIManager.instance.gameCanvas.SetActive(true);
@@ -198,15 +205,7 @@ namespace NueDeck.Scripts.Managers
 
             CurrentLevelState = LevelState.PlayerTurn;
         }
-
-        private IEnumerator FinalSfxRoutine()
-        {
-            while (CurrentLevelState != LevelState.Finished)
-            {
-                yield return new WaitForSeconds(Random.Range(5, 15));
-                AudioManager.instance.PlayOneShot(finalSoundProfileData.GetRandomClip());
-            }
-        }
+        
 
         #endregion
     }

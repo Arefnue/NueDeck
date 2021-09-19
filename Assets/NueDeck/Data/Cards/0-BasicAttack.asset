@@ -21,4 +21,4 @@ MonoBehaviour:
   actionList:
   - myPlayerActionType: 0
     value: 0
-  mySoundProfileData: {fileID: 0}
+  mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}

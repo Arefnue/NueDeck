@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myID: 1
   myTargets: 1
-  playerActionList:
-  - myPlayerActionType: 2
-    value: 8
-    mySoundProfile: {fileID: 11400000, guid: ff6628141ca0c2b47ae1c7ef0636513c, type: 2}
   myManaCost: 1
   myName: Guard
   myDescription: Block 8 damage
   mySprite: {fileID: 21300000, guid: 0a60e9c983046544091ff0f23327da5a, type: 3}
+  actionList: []
+  mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}

@@ -22,6 +22,7 @@ namespace NueDeck.Scripts.Collection
         [SerializeField] private Vector2 handSize = new Vector2(9, 1.7f);
 
         [Header("References")] 
+        public LayerMask selectableLayer;
         public Camera cam = null;
         public List<CardObject> hand; // Cards currently in hand
         [SerializeField] private Material inactiveCardMaterial = null;
@@ -287,7 +288,7 @@ namespace NueDeck.Scripts.Collection
                 {
                     RaycastHit hit;
                     var mainRay = LevelManager.instance.mainCam.ScreenPointToRay(mousePos);
-                    if (Physics.Raycast(mainRay, out hit, 1000, LevelManager.instance.selectableLayer))
+                    if (Physics.Raycast(mainRay, out hit, 1000, selectableLayer))
                     {
                         var enemy = hit.collider.gameObject.GetComponent<IEnemy>();
                         if (enemy != null)

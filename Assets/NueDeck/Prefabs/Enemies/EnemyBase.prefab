@@ -49,31 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ba82d88df94f47bdd0998ffa0a43f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myActions:
-  - myEnemyActionType: 0
-    value: 0
-    actionSprite: {fileID: -2470339811056895368, guid: 1fb0c0cb02c616d49815abb7a9a0fc0f, type: 3}
-    mySoundProfile: {fileID: 0}
-  - myEnemyActionType: 1
-    value: 0
-    actionSprite: {fileID: 5528129905629852119, guid: 1fb0c0cb02c616d49815abb7a9a0fc0f, type: 3}
-    mySoundProfile: {fileID: 0}
-  - myEnemyActionType: 2
-    value: 0
-    actionSprite: {fileID: -214828719786938277, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
-    mySoundProfile: {fileID: 0}
-  - myEnemyActionType: 3
-    value: 0
-    actionSprite: {fileID: -1513487178384027574, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
-    mySoundProfile: {fileID: 0}
-  - myEnemyActionType: 4
-    value: 0
-    actionSprite: {fileID: 1944889613778695005, guid: 1fb0c0cb02c616d49815abb7a9a0fc0f, type: 3}
-    mySoundProfile: {fileID: 0}
-  actionImage: {fileID: 3686843824972010952}
-  nextActionText: {fileID: 71995653963877586}
+  intentionImage: {fileID: 3686843824972010952}
+  nextActionValueText: {fileID: 71995653963877586}
   myCanvas: {fileID: 1287917797642487525}
-  deathSoundProfile: {fileID: 11400000, guid: 7e15e2a10065ab54c8eaf26154af0156, type: 2}
+  enemyData: {fileID: 11400000, guid: b1d13a4519e7f5e449ada40af494fdc9, type: 2}
+  deathSoundProfileData: {fileID: 11400000, guid: 7e15e2a10065ab54c8eaf26154af0156, type: 2}
   highlightObject: {fileID: 3771189902776544292}
   fxParent: {fileID: 1385074832727238964}
 --- !u!54 &735061151
@@ -450,6 +430,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 243822687015991149}
     m_Modifications:
+    - target: {fileID: 2652069514411626810, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_Name
+      value: IntentionImage
+      objectReference: {fileID: 0}
     - target: {fileID: 4054441476979124075, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
       propertyPath: m_IsActive
       value: 1

@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myID: 6
   myTargets: 0
-  playerActionList:
-  - myPlayerActionType: 6
-    value: 2
-    mySoundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
   myManaCost: 1
   myName: Purged Attack
   myDescription: Deal 2x your Poison to target. Clear your Poison
   mySprite: {fileID: 21300000, guid: 5da79233f66c40346875f782a8679a4a, type: 3}
+  actionList: []
+  mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}

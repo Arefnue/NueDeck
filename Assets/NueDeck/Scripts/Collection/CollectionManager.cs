@@ -101,7 +101,8 @@ namespace NueDeck.Scripts.Collection
             foreach (var currentEnemy in LevelManager.instance.currentEnemies)
                 currentEnemy.highlightObject.SetActive(false);
 
-            LevelManager.instance.playerExample.playerHighlight.SetActive(false);
+            foreach (var currentAlly in LevelManager.instance.currentAllies)
+                currentAlly.highlightObject.SetActive(false);
         }
 
         public void IncreaseMana(int target)
@@ -181,7 +182,8 @@ namespace NueDeck.Scripts.Collection
                         currentEnemy.highlightObject.SetActive(true);
                     break;
                 case ActionTargets.Ally:
-                    LevelManager.instance.playerExample.playerHighlight.SetActive(true);
+                    foreach (var currentAlly in LevelManager.instance.currentAllies)
+                        currentAlly.highlightObject.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(targetTargets), targetTargets, null);
