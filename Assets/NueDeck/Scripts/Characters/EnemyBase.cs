@@ -16,8 +16,9 @@ namespace NueDeck.Scripts.Characters
         [Header("Enemy Base References")]
         public EnemyData enemyData;
         public Image intentionImage;
-        protected EnemyAbilityData nextAbility;
         public TextMeshProUGUI nextActionValueText;
+        
+        protected EnemyAbilityData nextAbility;
         
         #region Setup
 
@@ -90,7 +91,7 @@ namespace NueDeck.Scripts.Characters
         {
             var waitFrame = new WaitForEndOfFrame();
 
-            var target = LevelManager.instance.currentAllies.RandomItem();
+            var target = CombatManager.instance.currentAllies.RandomItem();
             
             var startPos = transform.position;
             var endPos = target.transform.position;

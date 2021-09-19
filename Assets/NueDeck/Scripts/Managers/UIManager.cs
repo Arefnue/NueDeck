@@ -1,4 +1,5 @@
 using NueDeck.Scripts.Collection;
+using NueDeck.Scripts.Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,9 +32,9 @@ namespace NueDeck.Scripts.Managers
         
         public void EndTurn()
         {
-            if (LevelManager.instance.CurrentLevelState == LevelManager.LevelState.PlayerTurn)
+            if (CombatManager.instance.CurrentCombatState == CombatState.AllyTurn)
             {
-                LevelManager.instance.EndTurn();
+                CombatManager.instance.EndTurn();
             }
 
         }

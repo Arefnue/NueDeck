@@ -98,10 +98,10 @@ namespace NueDeck.Scripts.Collection
 
         public void DeactivateCardHighlights()
         {
-            foreach (var currentEnemy in LevelManager.instance.currentEnemies)
+            foreach (var currentEnemy in CombatManager.instance.currentEnemies)
                 currentEnemy.highlightObject.SetActive(false);
 
-            foreach (var currentAlly in LevelManager.instance.currentAllies)
+            foreach (var currentAlly in CombatManager.instance.currentAllies)
                 currentAlly.highlightObject.SetActive(false);
         }
 
@@ -124,13 +124,13 @@ namespace NueDeck.Scripts.Collection
             {
                 targetCard = drawPile[Random.Range(0, drawPile.Count)];
                 StartCoroutine(ExhaustCardRoutine(targetCard, drawTransform,
-                    LevelManager.instance.currentEnemies[0].transform));
+                    CombatManager.instance.currentEnemies[0].transform));
             }
             else if (discardPile.Count > 0)
             {
                 targetCard = discardPile[Random.Range(0, discardPile.Count)];
                 StartCoroutine(ExhaustCardRoutine(targetCard, discardTransform,
-                    LevelManager.instance.currentEnemies[0].transform));
+                    CombatManager.instance.currentEnemies[0].transform));
             }
             else if (instance.handPile.Count > 0)
             {
@@ -144,7 +144,7 @@ namespace NueDeck.Scripts.Collection
                     }
 
                 StartCoroutine(ExhaustCardRoutine(targetCard, tCard.transform,
-                    LevelManager.instance.currentEnemies[0].transform));
+                    CombatManager.instance.currentEnemies[0].transform));
                 handController.hand?.Remove(tCard);
                 Destroy(tCard.gameObject);
             }
@@ -178,11 +178,11 @@ namespace NueDeck.Scripts.Collection
             switch (targetTargets)
             {
                 case ActionTargets.Enemy:
-                    foreach (var currentEnemy in LevelManager.instance.currentEnemies)
+                    foreach (var currentEnemy in CombatManager.instance.currentEnemies)
                         currentEnemy.highlightObject.SetActive(true);
                     break;
                 case ActionTargets.Ally:
-                    foreach (var currentAlly in LevelManager.instance.currentAllies)
+                    foreach (var currentAlly in CombatManager.instance.currentAllies)
                         currentAlly.highlightObject.SetActive(true);
                     break;
                 default:

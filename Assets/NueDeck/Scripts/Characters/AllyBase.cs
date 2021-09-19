@@ -14,7 +14,7 @@ namespace NueDeck.Scripts.Characters
         protected override void OnDeath()
         {
             base.OnDeath();
-            LevelManager.instance.OnAllyDeath();
+            CombatManager.instance.OnAllyDeath(this);
         }
     }
 }
