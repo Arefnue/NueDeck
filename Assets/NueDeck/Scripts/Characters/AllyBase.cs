@@ -16,5 +16,6 @@ namespace NueDeck.Scripts.Characters
             base.OnDeath();
             CombatManager.instance.OnAllyDeath(this);
         }
+        
     }
 }

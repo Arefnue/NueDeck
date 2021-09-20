@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using NueDeck.Scripts.EnemyBehaviour;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Utils;
 using UnityEngine;
 
-namespace NueDeck.Scripts.EnemyBehaviour
+namespace NueDeck.Scripts.Characters
 {
     [CreateAssetMenu(fileName = "Enemy Data",menuName = "Data/Enemy Data",order = 1)]
-    public class EnemyData : ScriptableObject
+    public class EnemyData : CharacterData
     {
         [Header("Enemy Defaults")]
-        public int enemyID;
-        public string enemyName;
-        [TextArea]
-        public string enemyDescription;
-        public Sprite enemySprite;
+      
         public List<EnemyAbilityData> enemyAbilityList;
 
     }

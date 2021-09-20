@@ -7,8 +7,11 @@ namespace NueDeck.Scripts.Characters
     {
         [Header("Base References")]
         public GameObject highlightObject;
+        public CharacterData characterData;
+        public CharacterHealth CharacterHealth { get; protected set; }
         public virtual void Awake()
         {
+            CharacterHealth = new CharacterHealth(characterData.maxHealth);
             highlightObject.SetActive(false);
         }
         
@@ -16,5 +19,6 @@ namespace NueDeck.Scripts.Characters
         {
             
         }
+
     }
 }
