@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NueDeck.Scripts.Card.CardActions;
 using NueDeck.Scripts.Enums;
 
 namespace NueDeck.Scripts.Card

@@ -13,14 +13,6 @@ namespace NueDeck.Scripts.Collection
     public class CollectionManager : MonoBehaviour
     {
         public static CollectionManager instance;
-
-        [Header("Gameplay Settings")] 
-        public int drawCount = 4;
-        public int maxMana = 3;
-        public int currentMana = 3;
-        public bool canUseCards = true;
-        public bool canSelectCards = true;
-        public bool isRandomHand = false;
         
         [Header("Choice")]
         public Transform choiceParent;
@@ -36,14 +28,13 @@ namespace NueDeck.Scripts.Collection
         public CardObject cardPrefab;
         
         [Header("Decks")]
-        public List<int> myDeckIDList = new List<int>();
+        public List<CardData> myDeckIDList = new List<CardData>();
         public DeckData initalDeck;
         
-        [HideInInspector] public List<int> sameChoiceContainerList = new List<int>();
-        [HideInInspector] public List<int> drawPile = new List<int>();
-        [HideInInspector] public List<int> handPile = new List<int>();
-        [HideInInspector] public List<int> discardPile = new List<int>();
-        
+        [HideInInspector] public List<CardData> sameChoiceContainerList = new List<CardData>();
+        [HideInInspector] public List<CardData> drawPile = new List<CardData>();
+        [HideInInspector] public List<CardData> handPile = new List<CardData>();
+        [HideInInspector] public List<CardData> discardPile = new List<CardData>();
         
         #region Setup
 
@@ -52,18 +43,7 @@ namespace NueDeck.Scripts.Collection
             instance = this;
             SetInitalHand();
         }
-
-        private void Update()
-        {
-#if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                DrawCards(2);
-            }
-
-#endif
-        }
-
+        
         #endregion
 
         #region Public Methods
@@ -107,7 +87,7 @@ namespace NueDeck.Scripts.Collection
 
         public void IncreaseMana(int target)
         {
-            currentMana += target;
+            GameManager.instance.PersistentGameplayData.CurrentMana += target;
             UIManager.instance.SetPileTexts();
         }
 
@@ -119,7 +99,7 @@ namespace NueDeck.Scripts.Collection
         
         public void ExhaustRandomCard()
         {
-            var targetCard = 0;
+            CardData targetCard = null;
             if (drawPile.Count > 0)
             {
                 targetCard = drawPile[Random.Range(0, drawPile.Count)];
@@ -137,7 +117,7 @@ namespace NueDeck.Scripts.Collection
                 targetCard = handPile[Random.Range(0, handPile.Count)];
                 var tCard = handController.hand[0];
                 foreach (var cardBase in handController.hand)
-                    if (cardBase.CardData.myID == targetCard)
+                    if (cardBase.CardData == targetCard)
                     {
                         tCard = cardBase;
                         break;
@@ -161,15 +141,15 @@ namespace NueDeck.Scripts.Collection
 
         public void OnCardDiscarded(CardObject targetCard)
         {
-            handPile.Remove(targetCard.CardData.myID);
-            discardPile.Add(targetCard.CardData.myID);
+            handPile.Remove(targetCard.CardData);
+            discardPile.Add(targetCard.CardData);
             UIManager.instance.SetPileTexts();
         }
         
         public void OnCardPlayed(CardObject targetCard)
         {
-            handPile.Remove(targetCard.CardData.myID);
-            discardPile.Add(targetCard.CardData.myID);
+            handPile.Remove(targetCard.CardData);
+            discardPile.Add(targetCard.CardData);
             UIManager.instance.SetPileTexts();
         }
         
@@ -198,30 +178,24 @@ namespace NueDeck.Scripts.Collection
 
         #region Private Methods
         
-        private CardObject BuildAndGetCard(int id,Transform parent)
+        private CardObject BuildAndGetCard(CardData targetData,Transform parent)
         {
-            var card = allCardsList.FirstOrDefault(x => x.myID == id);
-            if (card)
-            {
-                var clone = Instantiate(cardPrefab, parent);
-                clone.SetCard(card);
-                return clone;
-            }
-            return null;
-           
+            var clone = Instantiate(cardPrefab, parent);
+            clone.SetCard(targetData);
+            return clone;
         }
 
         private void SetInitalHand()
         {
             myDeckIDList.Clear();
-            if (isRandomHand)
+            if (GameManager.instance.PersistentGameplayData.IsRandomHand)
             {
                 for (int i = 0; i < 10; i++)
-                    myDeckIDList.Add(allCardsList[Random.Range(0,allCardsList.Count)].myID);
+                    myDeckIDList.Add(allCardsList[Random.Range(0,allCardsList.Count)]);
             }
             else
             {
-                initalDeck.cards.ForEach(x=>myDeckIDList.Add(x.myID));
+                initalDeck.cards.ForEach(x=>myDeckIDList.Add(x));
             }
         }
 
@@ -241,12 +215,12 @@ namespace NueDeck.Scripts.Collection
 
         #region Routines
 
-        private IEnumerator ExhaustCardRoutine(int targetID, Transform startTransform, Transform endTransform)
+        private IEnumerator ExhaustCardRoutine(CardData targetData, Transform startTransform, Transform endTransform)
         {
             var waitFrame = new WaitForEndOfFrame();
             var timer = 0f;
 
-            var card = BuildAndGetCard(targetID, startTransform);
+            var card = BuildAndGetCard(targetData, startTransform);
             card.transform.SetParent(endTransform);
             var startPos = card.transform.localPosition;
             var endPos = Vector3.zero;
@@ -275,12 +249,6 @@ namespace NueDeck.Scripts.Collection
         }
 
         #endregion
-
-
         
-
-       
-
-       
     }
 }

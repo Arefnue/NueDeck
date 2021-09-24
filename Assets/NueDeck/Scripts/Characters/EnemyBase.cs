@@ -18,7 +18,7 @@ namespace NueDeck.Scripts.Characters
         public Image intentionImage;
         public TextMeshProUGUI nextActionValueText;
         
-        protected EnemyAbilityData nextAbility;
+        protected EnemyAbilityData NextAbility;
         
         #region Setup
 
@@ -33,17 +33,17 @@ namespace NueDeck.Scripts.Characters
 
         public void ShowNextAbility()
         {
-            nextAbility = enemyData.enemyAbilityList.RandomItem();
-            intentionImage.sprite = nextAbility.intention.intentionSprite;
+            NextAbility = enemyData.enemyAbilityList.RandomItem();
+            intentionImage.sprite = NextAbility.intention.intentionSprite;
             
-            if (nextAbility.hideActionValue)
+            if (NextAbility.hideActionValue)
             {
                 nextActionValueText.gameObject.SetActive(false);
             }
             else
             {
                 nextActionValueText.gameObject.SetActive(true);
-                nextActionValueText.text = nextAbility.actionList[0].value.ToString();
+                nextActionValueText.text = NextAbility.actionList[0].value.ToString();
             }
         }
 
@@ -75,13 +75,13 @@ namespace NueDeck.Scripts.Characters
         public virtual IEnumerator ActionRoutine()
         {
             intentionImage.gameObject.SetActive(false);
-            if (nextAbility.intention.enemyIntention == EnemyIntentions.Attack || nextAbility.intention.enemyIntention == EnemyIntentions.Debuff)
+            if (NextAbility.intention.enemyIntention == EnemyIntentions.Attack || NextAbility.intention.enemyIntention == EnemyIntentions.Debuff)
             {
-                yield return StartCoroutine(AttackRoutine(nextAbility));
+                yield return StartCoroutine(AttackRoutine(NextAbility));
             }
             else
             {
-                yield return StartCoroutine(BuffRoutine(nextAbility));
+                yield return StartCoroutine(BuffRoutine(NextAbility));
             }
             
             intentionImage.gameObject.SetActive(true);

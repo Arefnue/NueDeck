@@ -19,14 +19,14 @@ namespace NueDeck.Scripts.Managers
         private void Awake()
         {
             instance = this;
-            randomizedDeck.SetActive(CollectionManager.instance.isRandomHand);
+            randomizedDeck.SetActive(GameManager.instance.PersistentGameplayData.IsRandomHand);
         }
         
         public void SetPileTexts()
         {
             drawPileText.text = $"{CollectionManager.instance.drawPile.Count.ToString()}";
             discardPileText.text = $"{CollectionManager.instance.discardPile.Count.ToString()}";
-            manaText.text = $"{CollectionManager.instance.currentMana.ToString()}/{CollectionManager.instance.maxMana}";
+            manaText.text = $"{GameManager.instance.PersistentGameplayData.CurrentMana.ToString()}/{GameManager.instance.PersistentGameplayData.MAXMana}";
         }
 
         

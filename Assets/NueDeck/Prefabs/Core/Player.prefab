@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightObject: {fileID: 8373013888499713339}
+  characterData: {fileID: 11400000, guid: fc1a85bb53bd2694ea1143c9b9a6baf3, type: 2}
 --- !u!65 &1757283783
 BoxCollider:
   m_ObjectHideFlags: 0

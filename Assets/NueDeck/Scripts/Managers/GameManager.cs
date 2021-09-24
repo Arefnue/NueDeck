@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Gameplay;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Managers
@@ -10,9 +11,9 @@ namespace NueDeck.Scripts.Managers
     {
         public static GameManager instance;
         
-        public List<AllyBase> allyList;
-        
-        
+        [SerializeField] private GameplayData gameplayData;
+        public PersistentGameplayData PersistentGameplayData { get; private set; }
+
         private void Awake()
         {
             if (instance == null)
@@ -24,6 +25,12 @@ namespace NueDeck.Scripts.Managers
             {
                 Destroy(gameObject);
             }
+        }
+
+        public void InitGameplayData()
+        {
+            PersistentGameplayData = new PersistentGameplayData(gameplayData);
+            
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using NueDeck.Scripts.Collection;
+using NueDeck.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -80,7 +81,7 @@ namespace NueDeck.Scripts.Card
 
         private void SpendMana(int value)
         {
-            CollectionManager.instance.currentMana -= value;
+            GameManager.instance.PersistentGameplayData.CurrentMana -= value;
         }
         
         public void SetInactiveMaterialState(bool isInactive, Material inactiveMaterial = null) 

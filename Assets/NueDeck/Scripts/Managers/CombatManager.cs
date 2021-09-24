@@ -59,22 +59,22 @@ namespace NueDeck.Scripts.Managers
                     break;
                 case CombatState.AllyTurn:
                     
-                    CollectionManager.instance.currentMana = CollectionManager.instance.maxMana;
-                    CollectionManager.instance.DrawCards(CollectionManager.instance.drawCount);
+                    GameManager.instance.PersistentGameplayData.CurrentMana = GameManager.instance.PersistentGameplayData.MAXMana;
+                    CollectionManager.instance.DrawCards(GameManager.instance.PersistentGameplayData.DrawCount);
                     foreach (var currentEnemy in currentEnemies) currentEnemy.ShowNextAbility();
-                    CollectionManager.instance.canSelectCards = true;
+                    GameManager.instance.PersistentGameplayData.CanSelectCards = true;
                     
                     break;
                 case CombatState.EnemyTurn:
                     
                     CollectionManager.instance.DiscardHand();
                     StartCoroutine(nameof(EnemyTurnRoutine));
-                    CollectionManager.instance.canSelectCards = false;
+                    GameManager.instance.PersistentGameplayData.CanSelectCards = false;
                     
                     break;
                 case CombatState.EndCombat:
                     
-                    CollectionManager.instance.canSelectCards = false;
+                    GameManager.instance.PersistentGameplayData.CanSelectCards = false;
                     
                     break;
                 default:
@@ -109,9 +109,9 @@ namespace NueDeck.Scripts.Managers
         
         private void BuildAllies()
         {
-            for (var i = 0; i < GameManager.instance.allyList.Count; i++)
+            for (var i = 0; i < GameManager.instance.PersistentGameplayData.AllyList.Count; i++)
             {
-                var clone = Instantiate(GameManager.instance.allyList[i], allyPosList.Count >= i ? allyPosList[i] : allyPosList[0]);
+                var clone = Instantiate(GameManager.instance.PersistentGameplayData.AllyList[i], allyPosList.Count >= i ? allyPosList[i] : allyPosList[0]);
                 currentAllies.Add(clone);
             }
         }

@@ -129,7 +129,7 @@ namespace NueDeck.Scripts.Collection
                 var cardTransform = card.transform;
 
                 // Set to inactive material if not enough mana required to use card
-                card.SetInactiveMaterialState(CollectionManager.instance.currentMana < card.CardData.myManaCost, inactiveCardMaterial);
+                card.SetInactiveMaterialState(GameManager.instance.PersistentGameplayData.CurrentMana < card.CardData.myManaCost, inactiveCardMaterial);
 
                 var noCardHeld = _heldCard == null; // Whether a card is "held" (outside of hand)
                 var onSelectedCard = noCardHeld && _selected == i;
@@ -203,7 +203,7 @@ namespace NueDeck.Scripts.Collection
                 }
 
                 // Get Selected Card
-                if (CollectionManager.instance.canSelectCards)
+                if (GameManager.instance.PersistentGameplayData.CanSelectCards)
                 {
                     //float d = (p - mouseWorldPos).sqrMagnitude;
                     if (d < sqrDistance)
@@ -254,7 +254,7 @@ namespace NueDeck.Scripts.Collection
                 CollectionManager.instance.HighlightCardTarget(_heldCard.CardData.myTargets);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
-                if (!CollectionManager.instance.canSelectCards || _mouseInsideHand)
+                if (!GameManager.instance.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
                 {
                     //  || sqrDistance <= 2
                     // Card has gone back into hand
@@ -282,7 +282,7 @@ namespace NueDeck.Scripts.Collection
             CollectionManager.instance.DeactivateCardHighlights();
             bool backToHand = true;
                 
-            if (CollectionManager.instance.canUseCards && CollectionManager.instance.currentMana >= _heldCard.CardData.myManaCost)
+            if (GameManager.instance.PersistentGameplayData.CanUseCards && GameManager.instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.myManaCost)
             {
                 if (_heldCard.CardData.myTargets == ActionTargets.Enemy)
                 {

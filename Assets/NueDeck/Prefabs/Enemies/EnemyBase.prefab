@@ -49,13 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ba82d88df94f47bdd0998ffa0a43f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightObject: {fileID: 3771189902776544292}
+  characterData: {fileID: 11400000, guid: b1d13a4519e7f5e449ada40af494fdc9, type: 2}
+  enemyData: {fileID: 11400000, guid: b1d13a4519e7f5e449ada40af494fdc9, type: 2}
   intentionImage: {fileID: 3686843824972010952}
   nextActionValueText: {fileID: 71995653963877586}
-  myCanvas: {fileID: 1287917797642487525}
-  enemyData: {fileID: 11400000, guid: b1d13a4519e7f5e449ada40af494fdc9, type: 2}
   deathSoundProfileData: {fileID: 11400000, guid: 7e15e2a10065ab54c8eaf26154af0156, type: 2}
-  highlightObject: {fileID: 3771189902776544292}
-  fxParent: {fileID: 1385074832727238964}
 --- !u!54 &735061151
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -628,11 +627,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
---- !u!1 &1287917797642487525 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6193311657365782718, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
-  m_PrefabInstance: {fileID: 4912453345143195227}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9054804388977840621 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4144906860905666486, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
