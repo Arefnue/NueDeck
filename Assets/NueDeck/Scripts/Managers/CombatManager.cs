@@ -45,7 +45,7 @@ namespace NueDeck.Scripts.Managers
             BuildAllies();
             
             CollectionManager.instance.SetGameDeck();
-            CollectionManager.instance.choiceParent.gameObject.SetActive(false);
+            CollectionManager.instance.rewardController.choiceParent.gameObject.SetActive(false);
             UIManager.instance.gameCanvas.SetActive(true);
             
             CurrentCombatState = CombatState.AllyTurn;
@@ -113,6 +113,38 @@ namespace NueDeck.Scripts.Managers
             {
                 var clone = Instantiate(GameManager.instance.PersistentGameplayData.AllyList[i], allyPosList.Count >= i ? allyPosList[i] : allyPosList[0]);
                 currentAllies.Add(clone);
+            }
+        }
+        
+        public void DeactivateCardHighlights()
+        {
+            foreach (var currentEnemy in currentEnemies)
+                currentEnemy.highlightObject.SetActive(false);
+
+            foreach (var currentAlly in currentAllies)
+                currentAlly.highlightObject.SetActive(false);
+        }
+
+        public void IncreaseMana(int target)
+        {
+            GameManager.instance.PersistentGameplayData.CurrentMana += target;
+            UIManager.instance.SetPileTexts();
+        }
+        
+        public void HighlightCardTarget(ActionTargets targetTargets)
+        {
+            switch (targetTargets)
+            {
+                case ActionTargets.Enemy:
+                    foreach (var currentEnemy in CombatManager.instance.currentEnemies)
+                        currentEnemy.highlightObject.SetActive(true);
+                    break;
+                case ActionTargets.Ally:
+                    foreach (var currentAlly in CombatManager.instance.currentAllies)
+                        currentAlly.highlightObject.SetActive(true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(targetTargets), targetTargets, null);
             }
         }
 

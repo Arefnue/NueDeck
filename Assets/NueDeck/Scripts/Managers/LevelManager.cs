@@ -55,13 +55,13 @@ namespace NueDeck.Scripts.Managers
         {
             CombatManager.instance.CurrentCombatState = CombatState.EndCombat;
             
-            foreach (var choice in CollectionManager.instance.choicesList) choice.DetermineChoice();
+            foreach (var choice in CollectionManager.instance.rewardController.choicesList) choice.DetermineChoice();
             CollectionManager.instance.DiscardHand();
             CollectionManager.instance.discardPile.Clear();
             CollectionManager.instance.drawPile.Clear();
             CollectionManager.instance.handPile.Clear();
             CollectionManager.instance.handController.hand.Clear();
-            CollectionManager.instance.choiceParent.gameObject.SetActive(true);
+            CollectionManager.instance.rewardController.choiceParent.gameObject.SetActive(true);
             UIManager.instance.gameCanvas.SetActive(false);
         }
         

@@ -251,7 +251,7 @@ namespace NueDeck.Scripts.Collection
                     Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
                 cardTransform.position = cardPos;
 
-                CollectionManager.instance.HighlightCardTarget(_heldCard.CardData.myTargets);
+                CombatManager.instance.HighlightCardTarget(_heldCard.CardData.myTargets);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
                 if (!GameManager.instance.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
@@ -263,7 +263,7 @@ namespace NueDeck.Scripts.Collection
                     _selected = -1;
                     _heldCard = null;
 
-                    CollectionManager.instance.DeactivateCardHighlights();
+                    CombatManager.instance.DeactivateCardHighlights();
 
                     return;
                 }
@@ -279,7 +279,7 @@ namespace NueDeck.Scripts.Collection
             if (!mouseButtonUp) return;
             
             //Remove highlights
-            CollectionManager.instance.DeactivateCardHighlights();
+            CombatManager.instance.DeactivateCardHighlights();
             bool backToHand = true;
                 
             if (GameManager.instance.PersistentGameplayData.CanUseCards && GameManager.instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.myManaCost)

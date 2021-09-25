@@ -1,41 +1,31 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using NueDeck.Scripts.Card;
-using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Managers;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Collection
 {
     public class CollectionManager : MonoBehaviour
     {
         public static CollectionManager instance;
-        
-        [Header("Choice")]
-        public Transform choiceParent;
-        public List<Choice> choicesList;
 
-        [Header("Hand")]
-        public HandController handController;
-        public Transform discardTransform;
+        [Header("Controllers")] public HandController handController;
+        public RewardController rewardController;
+
+        [Header("Hand")] public Transform discardTransform;
         public Transform drawTransform;
-        
-        [Header("Card Settings")]
-        public List<CardData> allCardsList;
+
+        [Header("Card Settings")] public List<CardData> allCardsList;
         public CardObject cardPrefab;
-        
-        [Header("Decks")]
-        public List<CardData> myDeckIDList = new List<CardData>();
+
+        [Header("Decks")] public List<CardData> myDeckList = new List<CardData>();
         public DeckData initalDeck;
-        
-        [HideInInspector] public List<CardData> sameChoiceContainerList = new List<CardData>();
+
         [HideInInspector] public List<CardData> drawPile = new List<CardData>();
         [HideInInspector] public List<CardData> handPile = new List<CardData>();
         [HideInInspector] public List<CardData> discardPile = new List<CardData>();
-        
+
         #region Setup
 
         private void Awake()
@@ -43,18 +33,17 @@ namespace NueDeck.Scripts.Collection
             instance = this;
             SetInitalHand();
         }
-        
+
         #endregion
 
         #region Public Methods
-        
+
         public void DrawCards(int targetDrawCount)
         {
             var currentDrawCount = 0;
-            
+
             for (var i = 0; i < targetDrawCount; i++)
             {
-                
                 if (drawPile.Count <= 0)
                 {
                     var nDrawCount = targetDrawCount - currentDrawCount;
@@ -72,23 +61,6 @@ namespace NueDeck.Scripts.Collection
                 currentDrawCount++;
                 UIManager.instance.SetPileTexts();
             }
-
-                
-        }
-
-        public void DeactivateCardHighlights()
-        {
-            foreach (var currentEnemy in CombatManager.instance.currentEnemies)
-                currentEnemy.highlightObject.SetActive(false);
-
-            foreach (var currentAlly in CombatManager.instance.currentAllies)
-                currentAlly.highlightObject.SetActive(false);
-        }
-
-        public void IncreaseMana(int target)
-        {
-            GameManager.instance.PersistentGameplayData.CurrentMana += target;
-            UIManager.instance.SetPileTexts();
         }
 
         public void DiscardHand()
@@ -96,7 +68,7 @@ namespace NueDeck.Scripts.Collection
             foreach (var cardBase in handController.hand) cardBase.Discard();
             handController.hand.Clear();
         }
-        
+
         public void ExhaustRandomCard()
         {
             CardData targetCard = null;
@@ -145,40 +117,24 @@ namespace NueDeck.Scripts.Collection
             discardPile.Add(targetCard.CardData);
             UIManager.instance.SetPileTexts();
         }
-        
+
         public void OnCardPlayed(CardObject targetCard)
         {
             handPile.Remove(targetCard.CardData);
             discardPile.Add(targetCard.CardData);
             UIManager.instance.SetPileTexts();
         }
-        
-        public void HighlightCardTarget(ActionTargets targetTargets)
-        {
-            switch (targetTargets)
-            {
-                case ActionTargets.Enemy:
-                    foreach (var currentEnemy in CombatManager.instance.currentEnemies)
-                        currentEnemy.highlightObject.SetActive(true);
-                    break;
-                case ActionTargets.Ally:
-                    foreach (var currentAlly in CombatManager.instance.currentAllies)
-                        currentAlly.highlightObject.SetActive(true);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(targetTargets), targetTargets, null);
-            }
-        }
+
         public void SetGameDeck()
         {
-            foreach (var i in myDeckIDList) drawPile.Add(i);
+            foreach (var i in myDeckList) drawPile.Add(i);
         }
 
         #endregion
 
         #region Private Methods
-        
-        private CardObject BuildAndGetCard(CardData targetData,Transform parent)
+
+        private CardObject BuildAndGetCard(CardData targetData, Transform parent)
         {
             var clone = Instantiate(cardPrefab, parent);
             clone.SetCard(targetData);
@@ -187,16 +143,12 @@ namespace NueDeck.Scripts.Collection
 
         private void SetInitalHand()
         {
-            myDeckIDList.Clear();
+            myDeckList.Clear();
             if (GameManager.instance.PersistentGameplayData.IsRandomHand)
-            {
-                for (int i = 0; i < 10; i++)
-                    myDeckIDList.Add(allCardsList[Random.Range(0,allCardsList.Count)]);
-            }
+                for (var i = 0; i < 10; i++)
+                    myDeckList.Add(allCardsList[Random.Range(0, allCardsList.Count)]);
             else
-            {
-                initalDeck.cards.ForEach(x=>myDeckIDList.Add(x));
-            }
+                initalDeck.cards.ForEach(x => myDeckList.Add(x));
         }
 
         private void ReshuffleDiscardPile()
@@ -204,7 +156,7 @@ namespace NueDeck.Scripts.Collection
             foreach (var i in discardPile) drawPile.Add(i);
             discardPile.Clear();
         }
-        
+
         private void ReshuffleDrawPile()
         {
             foreach (var i in drawPile) discardPile.Add(i);
@@ -231,7 +183,6 @@ namespace NueDeck.Scripts.Collection
             var startRot = transform.localRotation;
             var endRot = Quaternion.Euler(Random.value * 360, Random.value * 360, Random.value * 360);
 
-
             while (true)
             {
                 timer += Time.deltaTime * 5;
@@ -249,6 +200,5 @@ namespace NueDeck.Scripts.Collection
         }
 
         #endregion
-        
     }
 }
