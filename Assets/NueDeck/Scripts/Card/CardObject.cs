@@ -118,7 +118,7 @@ namespace NueDeck.Scripts.Card
            
             var timer = 0f;
             
-            transform.SetParent(CollectionManager.instance.discardTransform);
+            transform.SetParent(CollectionManager.instance.handController.discardTransform);
             
             var startPos = _transform.localPosition;
             var endPos = Vector3.zero;

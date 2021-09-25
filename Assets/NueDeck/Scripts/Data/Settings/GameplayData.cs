@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Data.Characters;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Data.Settings
@@ -14,5 +15,6 @@ namespace NueDeck.Scripts.Data.Settings
         public bool canSelectCards = true;
         public bool isRandomHand = false;
         public List<AllyBase> allyList;
+        
     }
 }

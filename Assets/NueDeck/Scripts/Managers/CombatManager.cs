@@ -40,16 +40,20 @@ namespace NueDeck.Scripts.Managers
             
             CurrentCombatState = CombatState.PrepareCombat;
         }
-        
+
+        private void Start()
+        {
+            StartCombat();
+        }
+
         public void StartCombat()
         {
             BuildEnemies();
             BuildAllies();
-            
+          
             CollectionManager.instance.SetGameDeck();
             CollectionManager.instance.rewardController.choiceParent.gameObject.SetActive(false);
             UIManager.instance.combatCanvas.gameObject.SetActive(true);
-            
             CurrentCombatState = CombatState.AllyTurn;
         }
         
@@ -97,14 +101,16 @@ namespace NueDeck.Scripts.Managers
         {
             currentAllies.Remove(targetAlly);
             if (currentAllies.Count<=0)
-                LevelManager.instance.LoseGame();
+                LoseGame();
         }
         
         private void BuildEnemies()
         {
-            for (var i = 0; i < LevelManager.instance.levelEnemyList.Count; i++)
+            var encounter = GameManager.instance.EncounterData.GetEnemyEncounter().enemyList;
+            for (var i = 0; i < encounter.Count; i++)
             {
-                var clone = Instantiate(LevelManager.instance.levelEnemyList[i], enemyPosList.Count >= i ? enemyPosList[i] : enemyPosList[0]);
+                var clone = Instantiate(encounter[i], enemyPosList.Count >= i ? enemyPosList[i] : enemyPosList[0]);
+                clone.BuildCharacter();
                 currentEnemies.Add(clone);
             }
         }
@@ -114,6 +120,7 @@ namespace NueDeck.Scripts.Managers
             for (var i = 0; i < GameManager.instance.PersistentGameplayData.AllyList.Count; i++)
             {
                 var clone = Instantiate(GameManager.instance.PersistentGameplayData.AllyList[i], allyPosList.Count >= i ? allyPosList[i] : allyPosList[0]);
+                clone.BuildCharacter();
                 currentAllies.Add(clone);
             }
         }
@@ -121,10 +128,10 @@ namespace NueDeck.Scripts.Managers
         public void DeactivateCardHighlights()
         {
             foreach (var currentEnemy in currentEnemies)
-                currentEnemy.highlightObject.SetActive(false);
+                currentEnemy.enemyCanvas.SetHighlight(false);
 
             foreach (var currentAlly in currentAllies)
-                currentAlly.highlightObject.SetActive(false);
+                currentAlly.allyCanvas.SetHighlight(false);
         }
 
         public void IncreaseMana(int target)
@@ -139,15 +146,40 @@ namespace NueDeck.Scripts.Managers
             {
                 case ActionTargets.Enemy:
                     foreach (var currentEnemy in CombatManager.instance.currentEnemies)
-                        currentEnemy.highlightObject.SetActive(true);
+                        currentEnemy.enemyCanvas.SetHighlight(true);
                     break;
                 case ActionTargets.Ally:
                     foreach (var currentAlly in CombatManager.instance.currentAllies)
-                        currentAlly.highlightObject.SetActive(true);
+                       currentAlly.allyCanvas.SetHighlight(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(targetTargets), targetTargets, null);
             }
+        }
+        
+        public void LoseGame()
+        {
+            CurrentCombatState = CombatState.EndCombat;
+            CollectionManager.instance.DiscardHand();
+            CollectionManager.instance.discardPile.Clear();
+            CollectionManager.instance.drawPile.Clear();
+            CollectionManager.instance.handPile.Clear();
+            CollectionManager.instance.handController.hand.Clear();
+            UIManager.instance.combatCanvas.gameObject.SetActive(false);
+        }
+        
+        private void OnChoiceStart()
+        {
+            CombatManager.instance.CurrentCombatState = CombatState.EndCombat;
+            
+            foreach (var choice in CollectionManager.instance.rewardController.choicesList) choice.DetermineChoice();
+            CollectionManager.instance.DiscardHand();
+            CollectionManager.instance.discardPile.Clear();
+            CollectionManager.instance.drawPile.Clear();
+            CollectionManager.instance.handPile.Clear();
+            CollectionManager.instance.handController.hand.Clear();
+            CollectionManager.instance.rewardController.choiceParent.gameObject.SetActive(true);
+            UIManager.instance.combatCanvas.gameObject.SetActive(false);
         }
 
         #endregion

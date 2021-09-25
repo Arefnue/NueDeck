@@ -17,8 +17,8 @@ namespace NueDeck.Scripts.Characters
         [SerializeField] private StatusIconsData statusIconsData;
         [SerializeField] private Transform highlightRoot;
         [SerializeField] private Image highlightImage;
-        
-        
+
+
         private Dictionary<StatusType, StatusIcon> _statusDict = new Dictionary<StatusType, StatusIcon>();
 
         private void Awake()

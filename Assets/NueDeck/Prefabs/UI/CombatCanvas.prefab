@@ -2411,8 +2411,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Arif.Scripts.UIManager, Assembly-CSharp
+      - m_Target: {fileID: 3588941169079050271}
+        m_TargetAssemblyTypeName: NueDeck.Scripts.UI.CombatCanvas, Assembly-CSharp
         m_MethodName: EndTurn
         m_Mode: 1
         m_Arguments:

@@ -101,7 +101,7 @@ Camera:
   m_GameObject: {fileID: 7048625804953322723}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 1
+  m_CameraType: 0
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -220,6 +220,8 @@ MonoBehaviour:
   curveEnd: {x: -2, y: -0.7, z: 0}
   handOffset: {x: 0, y: -0.3}
   handSize: {x: 9, y: 1.7}
+  discardTransform: {fileID: 1301813272609245044}
+  drawTransform: {fileID: 236058445813137690}
   selectableLayer:
     serializedVersion: 2
     m_Bits: 1024

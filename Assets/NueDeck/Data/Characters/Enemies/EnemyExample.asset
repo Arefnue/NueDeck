@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2612027158f847538279f7d8f10dff91, type: 3}
   m_Name: EnemyExample
   m_EditorClassIdentifier: 
-  enemyID: 0
-  enemyName: Example
-  enemyDescription: Example character
-  enemySprite: {fileID: 21300000, guid: 02284fe64271ba949bf3ac093709ff33, type: 3}
+  characterID: 0
+  characterName: Enemy Example
+  characterDescription: Enemy Description
+  characterSprite: {fileID: 21300000, guid: 7bccc46933a496d4b9493d31aa39aeb9, type: 3}
+  maxHealth: 150
   enemyAbilityList:
   - name: Attack Single
     abilityTarget: 1

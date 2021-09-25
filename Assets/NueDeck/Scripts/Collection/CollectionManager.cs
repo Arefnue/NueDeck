@@ -16,11 +16,7 @@ namespace NueDeck.Scripts.Collection
         [Header("Controllers")] 
         public HandController handController;
         public RewardController rewardController;
-
-        [Header("Hand")] 
-        public Transform discardTransform;
-        public Transform drawTransform;
-
+        
         [Header("Card Settings")] 
         public List<CardData> allCardsList;
         public CardObject cardPrefab;
@@ -61,7 +57,7 @@ namespace NueDeck.Scripts.Collection
                 }
 
                 var randomCard = drawPile[Random.Range(0, drawPile.Count)];
-                var clone = BuildAndGetCard(randomCard, drawTransform);
+                var clone = BuildAndGetCard(randomCard, handController.drawTransform);
                 handController.AddCardToHand(clone);
                 handPile.Add(randomCard);
                 drawPile.Remove(randomCard);
@@ -82,13 +78,13 @@ namespace NueDeck.Scripts.Collection
             if (drawPile.Count > 0)
             {
                 targetCard = drawPile[Random.Range(0, drawPile.Count)];
-                StartCoroutine(ExhaustCardRoutine(targetCard, drawTransform,
+                StartCoroutine(ExhaustCardRoutine(targetCard, handController.drawTransform,
                     CombatManager.instance.currentEnemies[0].transform));
             }
             else if (discardPile.Count > 0)
             {
                 targetCard = discardPile[Random.Range(0, discardPile.Count)];
-                StartCoroutine(ExhaustCardRoutine(targetCard, discardTransform,
+                StartCoroutine(ExhaustCardRoutine(targetCard, handController.discardTransform,
                     CombatManager.instance.currentEnemies[0].transform));
             }
             else if (instance.handPile.Count > 0)
@@ -109,7 +105,7 @@ namespace NueDeck.Scripts.Collection
             }
             else
             {
-                LevelManager.instance.LoseGame();
+                //LevelManager.instance.LoseGame();
             }
 
             drawPile?.Remove(targetCard);
@@ -148,7 +144,7 @@ namespace NueDeck.Scripts.Collection
             return clone;
         }
 
-        private void SetInitalHand()
+        public void SetInitalHand()
         {
             myDeckList.Clear();
             if (GameManager.instance.PersistentGameplayData.IsRandomHand)

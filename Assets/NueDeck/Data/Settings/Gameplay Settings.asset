@@ -18,4 +18,4 @@ MonoBehaviour:
   canSelectCards: 1
   isRandomHand: 0
   allyList:
-  - {fileID: 0}
+  - {fileID: 2835035829204582327, guid: 6472d62dc90afc04db103b9a3f293860, type: 3}

@@ -23,6 +23,12 @@ namespace NueDeck.Scripts.Characters
         
         #region Setup
 
+        public override void BuildCharacter()
+        {
+            base.BuildCharacter();
+            CharacterHealth = new CharacterHealth(enemyData.maxHealth);
+        }
+
         protected override void OnDeath()
         {
             base.OnDeath();

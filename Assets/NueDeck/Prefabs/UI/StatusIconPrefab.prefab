@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5de49f67cd142dc9e93e84f8056ad92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusImage: {fileID: 0}
-  statusValueText: {fileID: 0}
+  statusImage: {fileID: 1019663063172262507}
+  statusValueText: {fileID: 3915566933830408401}
 --- !u!1 &9188085531626665256
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.8
+  m_fontSize: 0
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

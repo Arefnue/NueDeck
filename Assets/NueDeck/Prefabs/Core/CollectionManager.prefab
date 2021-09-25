@@ -47,8 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handController: {fileID: 7048625806080352387}
   rewardController: {fileID: 7316975663398207672}
-  discardTransform: {fileID: 2260814769065520540}
-  drawTransform: {fileID: 1024105660326112242}
   allCardsList:
   - {fileID: 11400000, guid: 1e43cdb39f5836b44942f367125cadde, type: 2}
   - {fileID: 11400000, guid: e1783ca46b526944c969405b4c0a29ec, type: 2}
@@ -140,16 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34484b9e4c8699c4cae91a78013d51a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2260814769065520540 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1301813272609245044, guid: a45e8add0d26bd5499f54577a1579ee7, type: 3}
-  m_PrefabInstance: {fileID: 968554621512985320}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1024105660326112242 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 236058445813137690, guid: a45e8add0d26bd5499f54577a1579ee7, type: 3}
-  m_PrefabInstance: {fileID: 968554621512985320}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &7827608653124152846 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7048625804953322726, guid: a45e8add0d26bd5499f54577a1579ee7, type: 3}

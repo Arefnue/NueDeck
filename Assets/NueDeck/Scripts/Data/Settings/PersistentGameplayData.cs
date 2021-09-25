@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Data.Characters;
 using NueDeck.Scripts.Data.Settings;
 
 namespace NueDeck.Scripts.Data
