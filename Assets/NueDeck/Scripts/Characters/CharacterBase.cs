@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using NueDeck.Scripts.Data;
+using NueDeck.Scripts.Data.Characters;
+using UnityEngine;
 
 namespace NueDeck.Scripts.Characters
 {

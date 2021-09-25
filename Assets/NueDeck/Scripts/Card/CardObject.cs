@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using NueDeck.Scripts.Collection;
+using NueDeck.Scripts.Data;
+using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Managers;
 using TMPro;
 using UnityEngine;

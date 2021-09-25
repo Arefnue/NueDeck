@@ -1,4 +1,7 @@
-﻿using NueDeck.Scripts.Managers;
+﻿using NueDeck.Scripts.Data;
+using NueDeck.Scripts.Data.Containers;
+using NueDeck.Scripts.Data.Settings;
+using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.Utils;
 using UnityEngine;
 

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using NueDeck.Scripts.Characters.Enemies;
+using NueDeck.Scripts.Data;
+using NueDeck.Scripts.Data.Characters;
 using NueDeck.Scripts.EnemyBehaviour;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Interfaces;
@@ -15,9 +17,8 @@ namespace NueDeck.Scripts.Characters
     {
         [Header("Enemy Base References")]
         public EnemyData enemyData;
-        public Image intentionImage;
-        public TextMeshProUGUI nextActionValueText;
-        
+        public EnemyCanvas enemyCanvas;
+      
         protected EnemyAbilityData NextAbility;
         
         #region Setup
@@ -34,16 +35,16 @@ namespace NueDeck.Scripts.Characters
         public void ShowNextAbility()
         {
             NextAbility = enemyData.enemyAbilityList.RandomItem();
-            intentionImage.sprite = NextAbility.intention.intentionSprite;
+            enemyCanvas.intentionImage.sprite = NextAbility.intention.intentionSprite;
             
             if (NextAbility.hideActionValue)
             {
-                nextActionValueText.gameObject.SetActive(false);
+                enemyCanvas.nextActionValueText.gameObject.SetActive(false);
             }
             else
             {
-                nextActionValueText.gameObject.SetActive(true);
-                nextActionValueText.text = NextAbility.actionList[0].value.ToString();
+                enemyCanvas.nextActionValueText.gameObject.SetActive(true);
+                enemyCanvas.nextActionValueText.text = NextAbility.actionList[0].value.ToString();
             }
         }
 
@@ -74,7 +75,7 @@ namespace NueDeck.Scripts.Characters
 
         public virtual IEnumerator ActionRoutine()
         {
-            intentionImage.gameObject.SetActive(false);
+            enemyCanvas.intentionImage.gameObject.SetActive(false);
             if (NextAbility.intention.enemyIntention == EnemyIntentions.Attack || NextAbility.intention.enemyIntention == EnemyIntentions.Debuff)
             {
                 yield return StartCoroutine(AttackRoutine(NextAbility));
@@ -84,7 +85,7 @@ namespace NueDeck.Scripts.Characters
                 yield return StartCoroutine(BuffRoutine(NextAbility));
             }
             
-            intentionImage.gameObject.SetActive(true);
+            enemyCanvas.intentionImage.gameObject.SetActive(true);
         }
         
         protected virtual IEnumerator AttackRoutine(EnemyAbilityData targetAbility)

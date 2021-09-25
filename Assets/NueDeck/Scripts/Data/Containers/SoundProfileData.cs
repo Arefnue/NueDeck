@@ -2,9 +2,9 @@
 using NueExtentions;
 using UnityEngine;
 
-namespace NueDeck.Scripts.Utils
+namespace NueDeck.Scripts.Data.Containers
 {
-    [CreateAssetMenu(fileName = "Sound Profile", menuName = "Data/Sound Profile", order = 3)]
+    [CreateAssetMenu(fileName = "Sound Profile", menuName = "Data/Containers/SoundProfile", order = 1)]
     public class SoundProfileData : ScriptableObject
     {
         public List<AudioClip> randomClipList;

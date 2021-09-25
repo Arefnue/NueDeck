@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using NueDeck.Scripts.EnemyBehaviour;
+using NueDeck.Scripts.Data.Containers;
+using NueDeck.Scripts.Data.Settings;
 using NueDeck.Scripts.Enums;
-using NueDeck.Scripts.Utils;
 using UnityEngine;
 
-namespace NueDeck.Scripts.Characters
+namespace NueDeck.Scripts.Data.Characters
 {
-    [CreateAssetMenu(fileName = "Enemy Data",menuName = "Data/Characters/Enemy Data",order = 1)]
+    [CreateAssetMenu(fileName = "Enemy Data",menuName = "Data/Characters/Enemy",order = 1)]
     public class EnemyData : CharacterData
     {
         [Header("Enemy Defaults")]

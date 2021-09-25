@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using NueDeck.Scripts.Card;
+using NueDeck.Scripts.Data;
+using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Managers;
 using UnityEngine;
 
@@ -10,18 +12,22 @@ namespace NueDeck.Scripts.Collection
     {
         public static CollectionManager instance;
 
-        [Header("Controllers")] public HandController handController;
+        [Header("Controllers")] 
+        public HandController handController;
         public RewardController rewardController;
 
-        [Header("Hand")] public Transform discardTransform;
+        [Header("Hand")] 
+        public Transform discardTransform;
         public Transform drawTransform;
 
-        [Header("Card Settings")] public List<CardData> allCardsList;
+        [Header("Card Settings")] 
+        public List<CardData> allCardsList;
         public CardObject cardPrefab;
 
-        [Header("Decks")] public List<CardData> myDeckList = new List<CardData>();
+        [Header("Decks")] 
         public DeckData initalDeck;
 
+        [HideInInspector] public List<CardData> myDeckList = new List<CardData>();
         [HideInInspector] public List<CardData> drawPile = new List<CardData>();
         [HideInInspector] public List<CardData> handPile = new List<CardData>();
         [HideInInspector] public List<CardData> discardPile = new List<CardData>();

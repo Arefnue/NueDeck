@@ -2,9 +2,9 @@
 using NueDeck.Scripts.Characters;
 using UnityEngine;
 
-namespace NueDeck.Scripts.Gameplay
+namespace NueDeck.Scripts.Data.Settings
 {
-    [CreateAssetMenu(fileName = "Gameplay Data", menuName = "Data/Gameplay Data", order = 5)]
+    [CreateAssetMenu(fileName = "Gameplay Data", menuName = "Data/Settings/GameplayData", order = 0)]
     public class GameplayData : ScriptableObject
     {
         [Header("Gameplay Settings")] 

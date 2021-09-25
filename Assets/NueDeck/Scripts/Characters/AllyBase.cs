@@ -5,6 +5,8 @@ namespace NueDeck.Scripts.Characters
 {
     public abstract class AllyBase : CharacterBase,IAlly
     {
+        public AllyCanvas allyCanvas;
+        
         public override void Awake()
         {
             base.Awake();

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Data.Settings;
 
-namespace NueDeck.Scripts.Gameplay
+namespace NueDeck.Scripts.Data
 {
     [Serializable]
     public class PersistentGameplayData

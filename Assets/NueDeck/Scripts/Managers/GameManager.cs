@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
-using NueDeck.Scripts.Gameplay;
+using NueDeck.Scripts.Data;
+using NueDeck.Scripts.Data.Settings;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Managers

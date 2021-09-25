@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NueDeck.Scripts.Characters
+namespace NueDeck.Scripts.Data.Characters
 {
     public class CharacterData : ScriptableObject
     {

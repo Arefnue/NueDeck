@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using NueDeck.Scripts.Data.Containers;
+using NueDeck.Scripts.Data.Settings;
 using NueDeck.Scripts.Enums;
-using NueDeck.Scripts.Utils;
 using UnityEngine;
 
-namespace NueDeck.Scripts.Card
+namespace NueDeck.Scripts.Data.Collection
 {
-    [CreateAssetMenu(fileName = "Card Data",menuName = "Data/Card Data",order = 0)]
+    [CreateAssetMenu(fileName = "Card Data",menuName = "Data/Collection/Card",order = 0)]
     public class CardData : ScriptableObject
     {
         [Header("Card Defaults")]
