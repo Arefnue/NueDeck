@@ -19,7 +19,6 @@ namespace NueDeck.Scripts.Managers
         
         [HideInInspector] public List<EnemyBase> currentEnemies = new List<EnemyBase>();
         [HideInInspector] public List<AllyBase> currentAllies = new List<AllyBase>();
-        public CombatUI combatUI;
         
         
         #region Setup
@@ -49,7 +48,7 @@ namespace NueDeck.Scripts.Managers
             
             CollectionManager.instance.SetGameDeck();
             CollectionManager.instance.rewardController.choiceParent.gameObject.SetActive(false);
-            combatUI.gameCanvas.SetActive(true);
+            UIManager.instance.combatCanvas.gameObject.SetActive(true);
             
             CurrentCombatState = CombatState.AllyTurn;
         }
@@ -131,7 +130,7 @@ namespace NueDeck.Scripts.Managers
         public void IncreaseMana(int target)
         {
             GameManager.instance.PersistentGameplayData.CurrentMana += target;
-            combatUI.SetPileTexts();
+            UIManager.instance.combatCanvas.SetPileTexts();
         }
         
         public void HighlightCardTarget(ActionTargets targetTargets)

@@ -46,7 +46,7 @@ namespace NueDeck.Scripts.Managers
             CollectionManager.instance.drawPile.Clear();
             CollectionManager.instance.handPile.Clear();
             CollectionManager.instance.handController.hand.Clear();
-            CombatManager.instance.combatUI.gameCanvas.SetActive(false);
+            UIManager.instance.combatCanvas.gameObject.SetActive(false);
         }
 
         #endregion
@@ -63,7 +63,7 @@ namespace NueDeck.Scripts.Managers
             CollectionManager.instance.handPile.Clear();
             CollectionManager.instance.handController.hand.Clear();
             CollectionManager.instance.rewardController.choiceParent.gameObject.SetActive(true);
-            CombatManager.instance.combatUI.gameCanvas.SetActive(false);
+            UIManager.instance.combatCanvas.gameObject.SetActive(false);
         }
         
         #endregion

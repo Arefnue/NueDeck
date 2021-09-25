@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 4666622059495250645}
-  playerPos: {fileID: 4666622059652342500}
   levelEnemyList:
   - {fileID: 2924474335899651609, guid: f4d61cf01ae2f2a4eb4ef92cb53480c7, type: 3}
 --- !u!1 &4666622059495250647
@@ -357,10 +356,5 @@ PrefabInstance:
 --- !u!4 &263208652038853276 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8708447814713431381, guid: 36c7284207bc0f143bdc3f1933146cf5, type: 3}
-  m_PrefabInstance: {fileID: 8898415748407396297}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4666622059652342500 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4305065158797223213, guid: 36c7284207bc0f143bdc3f1933146cf5, type: 3}
   m_PrefabInstance: {fileID: 8898415748407396297}
   m_PrefabAsset: {fileID: 0}

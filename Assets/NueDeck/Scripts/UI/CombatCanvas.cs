@@ -1,4 +1,5 @@
-﻿using NueDeck.Scripts.Collection;
+﻿using System;
+using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Managers;
 using TMPro;
@@ -6,19 +7,21 @@ using UnityEngine;
 
 namespace NueDeck.Scripts.UI
 {
-    public class CombatUI : MonoBehaviour
+    public class CombatCanvas : MonoBehaviour
     {
         public TextMeshProUGUI drawPileText;
         public TextMeshProUGUI discardPileText;
         public TextMeshProUGUI manaText;
-        public GameObject gameCanvas;
-        public GameObject randomizedDeck;
-        
+        public GameObject combatWinPanel;
+        public GameObject combatLosePanel;
+
+
         private void Awake()
         {
-            randomizedDeck.SetActive(GameManager.instance.PersistentGameplayData.IsRandomHand);
+            combatWinPanel.SetActive(false);
+            combatLosePanel.SetActive(false);
         }
-        
+
         public void SetPileTexts()
         {
             drawPileText.text = $"{CollectionManager.instance.drawPile.Count.ToString()}";
