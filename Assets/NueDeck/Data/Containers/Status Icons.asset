@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f964cc6b134ac99d71c4559321fc49, type: 3}
+  m_Name: Status Icons
+  m_EditorClassIdentifier: 
+  statusIconPrefab: {fileID: 6777904196308813527, guid: f4e76bc2e67da6241b52b8d7c6034e01, type: 3}
+  statusIconList:
+  - iconStatus: 0
+    iconSprite: {fileID: -1513487178384027574, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
+  - iconStatus: 1
+    iconSprite: {fileID: -214828719786938277, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
+  - iconStatus: 2
+    iconSprite: {fileID: 8414397559482299720, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
