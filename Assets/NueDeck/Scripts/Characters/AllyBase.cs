@@ -1,4 +1,5 @@
 ﻿using NueDeck.Scripts.Data.Characters;
+using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
 using UnityEngine;
@@ -19,7 +20,8 @@ namespace NueDeck.Scripts.Characters
         public override void BuildCharacter()
         {
             base.BuildCharacter();
-            CharacterHealth = new CharacterHealth(allyData.maxHealth);
+            CharacterHealth = new CharacterHealth(allyData.maxHealth,allyCanvas);
+            
         }
         
         protected override void OnDeath()

@@ -26,7 +26,7 @@ namespace NueDeck.Scripts.Characters
         public override void BuildCharacter()
         {
             base.BuildCharacter();
-            CharacterHealth = new CharacterHealth(enemyData.maxHealth);
+            CharacterHealth = new CharacterHealth(enemyData.maxHealth,enemyCanvas);
         }
 
         protected override void OnDeath()

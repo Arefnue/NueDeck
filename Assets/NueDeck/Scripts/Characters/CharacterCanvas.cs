@@ -27,6 +27,7 @@ namespace NueDeck.Scripts.Characters
             {
                 _statusDict.Add((StatusType)i,null);
             }
+            highlightRoot.gameObject.SetActive(false);
         }
 
         public void ApplyStatus(StatusType targetStatus, int value)
@@ -50,7 +51,13 @@ namespace NueDeck.Scripts.Characters
             _statusDict[targetStatus] = null;
         }
 
-
+        public void UpdateStatusText(StatusType targetStatus, int value)
+        {
+            if (_statusDict[targetStatus] == null)  return;
+          
+            _statusDict[targetStatus].statusValueText.text = $"{value}";
+        }
+        
         public void UpdateHealthText(int currentHealth,int maxHealth)
         {
             currentHealthText.text = $"{currentHealth}/{maxHealth}";
