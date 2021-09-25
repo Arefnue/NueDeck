@@ -1,15 +1,13 @@
-using NueDeck.Scripts.Collection;
+﻿using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.Enums;
+using NueDeck.Scripts.Managers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-namespace NueDeck.Scripts.Managers
+namespace NueDeck.Scripts.UI
 {
-    public class UIManager : MonoBehaviour
+    public class CombatUI : MonoBehaviour
     {
-        public static UIManager instance;
-
         public TextMeshProUGUI drawPileText;
         public TextMeshProUGUI discardPileText;
         public TextMeshProUGUI manaText;
@@ -18,7 +16,6 @@ namespace NueDeck.Scripts.Managers
         
         private void Awake()
         {
-            instance = this;
             randomizedDeck.SetActive(GameManager.instance.PersistentGameplayData.IsRandomHand);
         }
         
@@ -38,6 +35,5 @@ namespace NueDeck.Scripts.Managers
             }
 
         }
-        
     }
 }

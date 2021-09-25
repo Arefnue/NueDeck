@@ -5,6 +5,7 @@ using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.EnemyBehaviour;
 using NueDeck.Scripts.Enums;
+using NueDeck.Scripts.UI;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Managers
@@ -45,7 +46,7 @@ namespace NueDeck.Scripts.Managers
             CollectionManager.instance.drawPile.Clear();
             CollectionManager.instance.handPile.Clear();
             CollectionManager.instance.handController.hand.Clear();
-            UIManager.instance.gameCanvas.SetActive(false);
+            CombatManager.instance.combatUI.gameCanvas.SetActive(false);
         }
 
         #endregion
@@ -62,7 +63,7 @@ namespace NueDeck.Scripts.Managers
             CollectionManager.instance.handPile.Clear();
             CollectionManager.instance.handController.hand.Clear();
             CollectionManager.instance.rewardController.choiceParent.gameObject.SetActive(true);
-            UIManager.instance.gameCanvas.SetActive(false);
+            CombatManager.instance.combatUI.gameCanvas.SetActive(false);
         }
         
         #endregion

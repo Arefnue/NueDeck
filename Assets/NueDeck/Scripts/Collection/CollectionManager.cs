@@ -4,6 +4,7 @@ using NueDeck.Scripts.Card;
 using NueDeck.Scripts.Data;
 using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Managers;
+using NueDeck.Scripts.UI;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Collection
@@ -65,7 +66,7 @@ namespace NueDeck.Scripts.Collection
                 handPile.Add(randomCard);
                 drawPile.Remove(randomCard);
                 currentDrawCount++;
-                UIManager.instance.SetPileTexts();
+                CombatManager.instance.combatUI.SetPileTexts();
             }
         }
 
@@ -114,21 +115,21 @@ namespace NueDeck.Scripts.Collection
             drawPile?.Remove(targetCard);
             handPile?.Remove(targetCard);
             discardPile?.Remove(targetCard);
-            UIManager.instance.SetPileTexts();
+            CombatManager.instance.combatUI.SetPileTexts();
         }
 
         public void OnCardDiscarded(CardObject targetCard)
         {
             handPile.Remove(targetCard.CardData);
             discardPile.Add(targetCard.CardData);
-            UIManager.instance.SetPileTexts();
+            CombatManager.instance.combatUI.SetPileTexts();
         }
 
         public void OnCardPlayed(CardObject targetCard)
         {
             handPile.Remove(targetCard.CardData);
             discardPile.Add(targetCard.CardData);
-            UIManager.instance.SetPileTexts();
+            CombatManager.instance.combatUI.SetPileTexts();
         }
 
         public void SetGameDeck()
