@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 2886762276097739794}
   - component: {fileID: 4629050936817657982}
   m_Layer: 0
-  m_Name: NotificationCanvas
+  m_Name: InformationCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -665,6 +665,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomizedDeck: {fileID: 7710481754293286358}
+  roomText: {fileID: 2627394894104042102}
+  goldText: {fileID: 518337495935948590}
+  nameText: {fileID: 5293955611471582949}
+  healthText: {fileID: 1706101381463657962}
 --- !u!223 &6619236169260507774
 Canvas:
   m_ObjectHideFlags: 0
