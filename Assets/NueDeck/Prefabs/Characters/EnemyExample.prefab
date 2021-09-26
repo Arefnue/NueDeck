@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 243822687015991123}
   - component: {fileID: 735061151}
   - component: {fileID: 735061152}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: EnemyExample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ba82d88df94f47bdd0998ffa0a43f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSprite: {fileID: 243822687401075094}
   enemyData: {fileID: 11400000, guid: b1d13a4519e7f5e449ada40af494fdc9, type: 2}
   enemyCanvas: {fileID: 7422249267346903092}
   deathSoundProfileData: {fileID: 11400000, guid: 7e15e2a10065ab54c8eaf26154af0156, type: 2}
@@ -91,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 243822687401075089}
   - component: {fileID: 243822687401075094}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: p3_stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1385074832727238964}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FxParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 491162778199269420}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SpriteRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,6 +230,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 243822687015991149}
     m_Modifications:
+    - target: {fileID: 1175344233530988249, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549308196153670307, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652069514411626810, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4144906860905666486, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -322,6 +333,22 @@ PrefabInstance:
     - target: {fileID: 6193311657365782718, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
       propertyPath: m_Name
       value: EnemyCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193311657365782718, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731970660975103386, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717519892667723655, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104649149807962751, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a531535fdf794e4893297aa72798b93, type: 3}

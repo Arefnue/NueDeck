@@ -8,7 +8,14 @@ namespace NueDeck.Scripts.Card.CardActions
         public override CardActionType ActionType => CardActionType.Block;
         public override void DoAction(CardActionParameters actionParameters)
         {
-            Debug.Log("Block");
+            if (actionParameters.targetCharacter != null)
+            {
+                actionParameters.targetCharacter.CharacterHealth.EarnBlock(Mathf.RoundToInt(actionParameters.value));
+            }
+            else
+            {
+                actionParameters.selfCharacter.CharacterHealth.EarnBlock(Mathf.RoundToInt(actionParameters.value));
+            }
         }
     }
 }

@@ -225,6 +225,9 @@ MonoBehaviour:
   selectableLayer:
     serializedVersion: 2
     m_Bits: 1024
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   cam: {fileID: 7048625804953322726}
   hand: []
   inactiveCardMaterial: {fileID: 2100000, guid: eee6bad7f248d1944a42b146f54d741a, type: 2}

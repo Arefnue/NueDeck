@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.Data;
 using NueDeck.Scripts.Data.Collection;
@@ -60,12 +61,14 @@ namespace NueDeck.Scripts.Card
         
         #region Card Methods
 
-        public void Use(EnemyBase targetEnemy = null)
+        public void Use(CharacterBase self,CharacterBase target)
         {
             SpendMana(CardData.myManaCost);
             
             foreach (var playerAction in CardData.actionList)
-                CardActionProcessor.GetAction(playerAction.myPlayerActionType).DoAction(new CardActionParameters(playerAction.value,targetEnemy));
+                CardActionProcessor.GetAction(playerAction.myPlayerActionType)
+                    .DoAction(new CardActionParameters(playerAction.value,
+                        target,self));
             
             CollectionManager.instance.OnCardPlayed(this);
             

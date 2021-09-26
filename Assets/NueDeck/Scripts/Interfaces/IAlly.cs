@@ -1,7 +1,9 @@
-﻿namespace NueDeck.Scripts.Interfaces
+﻿using NueDeck.Scripts.Characters;
+
+namespace NueDeck.Scripts.Interfaces
 {
-    public interface IAlly
+    public interface IAlly : ICharacter
     {
-        
+       
     }
 }

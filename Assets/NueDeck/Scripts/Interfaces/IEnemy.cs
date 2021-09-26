@@ -4,12 +4,8 @@ using EnemyBase = NueDeck.Scripts.Characters.EnemyBase;
 
 namespace NueDeck.Scripts.Interfaces
 {
-    public interface IEnemy
+    public interface IEnemy : ICharacter
     {
-        public void OnCardTargetHighlight();
-        public void OnCardOverHighlight();
-        public void OnCardPlayedForMe();
-
-        public EnemyBase GetEnemyBase();
+       
     }
 }

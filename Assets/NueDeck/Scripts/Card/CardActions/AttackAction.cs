@@ -8,7 +8,10 @@ namespace NueDeck.Scripts.Card.CardActions
         public override CardActionType ActionType => CardActionType.Attack;
         public override void DoAction(CardActionParameters actionParameters)
         {
-            Debug.Log("Attack");
+            if (actionParameters.targetCharacter)
+            {
+                actionParameters.targetCharacter.CharacterHealth.Damage(Mathf.RoundToInt(actionParameters.value));
+            }
         }
     }
 }

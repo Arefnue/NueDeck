@@ -74,8 +74,8 @@ namespace NueDeck.Scripts.Characters
             
         }
 
-        public EnemyBase GetEnemyBase() => this;
-
+        public CharacterBase GetCharacterBase() => this;
+        
         #endregion
         
         #region Action Routines
@@ -110,7 +110,7 @@ namespace NueDeck.Scripts.Characters
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, startPos, endPos, startRot, endRot, 5));
           
-            targetAbility.actionList.ForEach(x=>EnemyActionProcessor.GetAction(x.enemyActionType).DoAction(new EnemyActionParameters(x.value,target)));
+            targetAbility.actionList.ForEach(x=>EnemyActionProcessor.GetAction(x.enemyActionType).DoAction(new EnemyActionParameters(x.value,target,this)));
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, endPos, startPos, endRot, startRot, 5));
             
@@ -128,7 +128,7 @@ namespace NueDeck.Scripts.Characters
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, startPos, endPos, startRot, endRot, 5));
             
-            targetAbility.actionList.ForEach(x=>EnemyActionProcessor.GetAction(x.enemyActionType).DoAction(new EnemyActionParameters(x.value,null)));
+            targetAbility.actionList.ForEach(x=>EnemyActionProcessor.GetAction(x.enemyActionType).DoAction(new EnemyActionParameters(x.value,null,this)));
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, endPos, startPos, endRot, startRot, 5));
         }

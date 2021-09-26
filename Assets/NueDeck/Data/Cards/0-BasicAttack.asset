@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myID: 0
   myTargets: 0
+  usableWithoutTarget: 0
   myManaCost: 1
   myName: Hook
   myDescription: Deal 10 damage
   mySprite: {fileID: 21300000, guid: 8510ca3a47f6c23479e9992c04455698, type: 3}
   actionList:
   - myPlayerActionType: 0
-    value: 0
+    value: 15
   mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}

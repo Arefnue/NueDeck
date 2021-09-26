@@ -30,6 +30,23 @@ namespace NueDeck.Scripts.Characters
             base.OnDeath();
             CombatManager.instance.OnAllyDeath(this);
         }
-        
+
+        public void OnCardTargetHighlight()
+        {
+            
+        }
+
+        public void OnCardOverHighlight()
+        {
+            
+        }
+
+        public void OnCardPlayedForMe()
+        {
+            
+        }
+
+        public CharacterBase GetCharacterBase() => this;
+
     }
 }

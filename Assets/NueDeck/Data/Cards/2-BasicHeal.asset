@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myID: 2
   myTargets: 1
+  usableWithoutTarget: 1
   myManaCost: 1
   myName: Heal
   myDescription: Restore 5 health

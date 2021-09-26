@@ -25,6 +25,7 @@ namespace NueDeck.Scripts.Collection
         public Transform discardTransform;
         public Transform drawTransform;
         public LayerMask selectableLayer;
+        public LayerMask targetLayer;
         public Camera cam = null;
         public List<CardObject> hand; // Cards currently in hand
         [SerializeField] private Material inactiveCardMaterial = null;
@@ -286,25 +287,39 @@ namespace NueDeck.Scripts.Collection
                 
             if (GameManager.instance.PersistentGameplayData.CanUseCards && GameManager.instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.myManaCost)
             {
-                if (_heldCard.CardData.myTargets == ActionTargets.Enemy)
+                RaycastHit hit;
+                var mainRay = GameManager.instance.mainCam.ScreenPointToRay(mousePos);
+                
+                if (Physics.Raycast(mainRay, out hit, 1000, targetLayer))
                 {
-                    RaycastHit hit;
-                    var mainRay = GameManager.instance.mainCam.ScreenPointToRay(mousePos);
-                    if (Physics.Raycast(mainRay, out hit, 1000, selectableLayer))
+                    var character = hit.collider.gameObject.GetComponent<ICharacter>();
+                    
+                    if (character != null)
                     {
-                        var enemy = hit.collider.gameObject.GetComponent<IEnemy>();
-                        if (enemy != null)
+                        if ((_heldCard.CardData.myTargets == ActionTargets.Enemy &&
+                             character.GetCharacterBase()
+                                 .GetComponent<EnemyBase>()) ||
+                            (_heldCard.CardData.myTargets == ActionTargets.Ally &&
+                             character.GetCharacterBase()
+                                 .GetComponent<AllyBase>()))
                         {
                             backToHand = false;
-                            _heldCard.Use(enemy.GetEnemyBase());
+                            _heldCard.Use(CombatManager.instance.currentAllies[0],character.GetCharacterBase());
                         }
+                        
                     }
+                    
                 }
                 else
                 {
-                    backToHand = false;
-                    _heldCard.Use();
+                    Debug.Log("AA");
+                    if (_heldCard.CardData.usableWithoutTarget)
+                    {
+                        backToHand = false;
+                        _heldCard.Use(CombatManager.instance.currentAllies[0],null);
+                    }
                 }
+                
             }
 
             if (backToHand) // Cannot use card / Not enough mana! Return card to hand!

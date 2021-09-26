@@ -16,12 +16,14 @@ namespace NueDeck.Scripts.EnemyBehaviour
     public class EnemyActionParameters
     {
         public float value;
-        public AllyBase targetAlly;
+        public CharacterBase targetCharacter;
+        public CharacterBase selfCharacter;
 
-        public EnemyActionParameters(float value,AllyBase targetAlly)
+        public EnemyActionParameters(float value,CharacterBase target, CharacterBase self)
         {
             this.value = value;
-            this.targetAlly = targetAlly;
+            targetCharacter = target;
+            selfCharacter = self;
         }
     }
     

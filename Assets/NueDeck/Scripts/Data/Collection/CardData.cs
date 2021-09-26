@@ -13,6 +13,7 @@ namespace NueDeck.Scripts.Data.Collection
         [Header("Card Defaults")]
         public int myID;
         public ActionTargets myTargets;
+        public bool usableWithoutTarget;
         public int myManaCost;
         public string myName;
         [TextArea]

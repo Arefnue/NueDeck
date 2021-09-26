@@ -9,7 +9,14 @@ namespace NueDeck.Scripts.Card.CardActions
 
         public override void DoAction(CardActionParameters actionParameters)
         {
-            Debug.Log("Heal");
+            if (actionParameters.targetCharacter)
+            {
+                actionParameters.targetCharacter.CharacterHealth.Heal(Mathf.RoundToInt(actionParameters.value));
+            }
+            else
+            {
+                actionParameters.selfCharacter.CharacterHealth.Heal(Mathf.RoundToInt(actionParameters.value));
+            }
         }
     }
 }
