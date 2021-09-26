@@ -8,7 +8,7 @@ namespace NueDeck.Scripts.Card.CardActions
         public override CardActionType ActionType => CardActionType.IncreaseStrength;
         public override void DoAction(CardActionParameters actionParameters)
         {
-            Debug.Log("Increase Strength Action");
+           
         }
     }
 }

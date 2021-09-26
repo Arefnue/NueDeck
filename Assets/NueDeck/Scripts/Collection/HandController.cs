@@ -312,7 +312,6 @@ namespace NueDeck.Scripts.Collection
                 }
                 else
                 {
-                    Debug.Log("AA");
                     if (_heldCard.CardData.usableWithoutTarget)
                     {
                         backToHand = false;

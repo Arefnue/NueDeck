@@ -10,7 +10,7 @@ namespace NueDeck.Scripts.Card.CardActions
         {
             if (actionParameters.targetCharacter)
             {
-                actionParameters.targetCharacter.CharacterHealth.Damage(Mathf.RoundToInt(actionParameters.value));
+                actionParameters.targetCharacter.CharacterStats.Damage(Mathf.RoundToInt(actionParameters.value));
             }
         }
     }

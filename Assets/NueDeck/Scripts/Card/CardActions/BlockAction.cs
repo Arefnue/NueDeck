@@ -10,11 +10,11 @@ namespace NueDeck.Scripts.Card.CardActions
         {
             if (actionParameters.targetCharacter != null)
             {
-                actionParameters.targetCharacter.CharacterHealth.EarnBlock(Mathf.RoundToInt(actionParameters.value));
+                actionParameters.targetCharacter.CharacterStats.ApplyStatus(StatusType.Block,Mathf.RoundToInt(actionParameters.value));
             }
             else
             {
-                actionParameters.selfCharacter.CharacterHealth.EarnBlock(Mathf.RoundToInt(actionParameters.value));
+                actionParameters.selfCharacter.CharacterStats.ApplyStatus(StatusType.Block,Mathf.RoundToInt(actionParameters.value));
             }
         }
     }

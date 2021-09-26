@@ -1,4 +1,5 @@
 ﻿using NueDeck.Scripts.Enums;
+using NueDeck.Scripts.Managers;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Card.CardActions
@@ -8,7 +9,7 @@ namespace NueDeck.Scripts.Card.CardActions
         public override CardActionType ActionType => CardActionType.EarnMana;
         public override void DoAction(CardActionParameters actionParameters)
         {
-            Debug.Log("Earn Mana");
+            CombatManager.instance.IncreaseMana(Mathf.RoundToInt(actionParameters.value));
         }
     }
 }

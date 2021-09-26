@@ -20,8 +20,8 @@ namespace NueDeck.Scripts.Characters
         public override void BuildCharacter()
         {
             base.BuildCharacter();
-            CharacterHealth = new CharacterHealth(allyData.maxHealth,allyCanvas);
-            CharacterHealth.SetCurrentHealth(CharacterHealth.CurrentHealth);
+            CharacterStats = new CharacterStats(allyData.maxHealth,allyCanvas);
+            CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
            
         }
         

@@ -11,11 +11,11 @@ namespace NueDeck.Scripts.Card.CardActions
         {
             if (actionParameters.targetCharacter)
             {
-                actionParameters.targetCharacter.CharacterHealth.Heal(Mathf.RoundToInt(actionParameters.value));
+                actionParameters.targetCharacter.CharacterStats.Heal(Mathf.RoundToInt(actionParameters.value));
             }
             else
             {
-                actionParameters.selfCharacter.CharacterHealth.Heal(Mathf.RoundToInt(actionParameters.value));
+                actionParameters.selfCharacter.CharacterStats.Heal(Mathf.RoundToInt(actionParameters.value));
             }
         }
     }

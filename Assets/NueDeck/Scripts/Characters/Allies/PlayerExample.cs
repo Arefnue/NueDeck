@@ -8,8 +8,8 @@ namespace NueDeck.Scripts.Characters.Allies
         public override void BuildCharacter()
         {
             base.BuildCharacter();
-            CharacterHealth.OnHealthChanged += UIManager.instance.informationCanvas.SetHealthText;
-            CharacterHealth.SetCurrentHealth(CharacterHealth.CurrentHealth);
+            CharacterStats.OnHealthChanged += UIManager.instance.informationCanvas.SetHealthText;
+            CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
         }
     }
 }

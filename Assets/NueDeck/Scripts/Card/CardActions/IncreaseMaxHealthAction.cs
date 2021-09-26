@@ -8,7 +8,14 @@ namespace NueDeck.Scripts.Card.CardActions
         public override CardActionType ActionType => CardActionType.IncreaseMaxHealth;
         public override void DoAction(CardActionParameters actionParameters)
         {
-            Debug.Log("Increase Max Health");
+            if (actionParameters.targetCharacter)
+            {
+                actionParameters.targetCharacter.CharacterStats.IncreaseMaxHealth(Mathf.RoundToInt(actionParameters.value));
+            }
+            else
+            {
+                actionParameters.selfCharacter.CharacterStats.IncreaseMaxHealth(Mathf.RoundToInt(actionParameters.value));
+            }
         }
     }
 }
