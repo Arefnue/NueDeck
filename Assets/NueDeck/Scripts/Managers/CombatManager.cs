@@ -100,8 +100,16 @@ namespace NueDeck.Scripts.Managers
         public void OnAllyDeath(AllyBase targetAlly)
         {
             currentAllies.Remove(targetAlly);
+            
             if (currentAllies.Count<=0)
-                LoseGame();
+                LoseCombat();
+        } 
+        
+        public void OnEnemyDeath(EnemyBase targetEnemy)
+        {
+            currentEnemies.Remove(targetEnemy);
+            if (currentEnemies.Count<=0)
+                WinCombat();
         }
         
         private void BuildEnemies()
@@ -157,7 +165,7 @@ namespace NueDeck.Scripts.Managers
             }
         }
         
-        public void LoseGame()
+        public void LoseCombat()
         {
             CurrentCombatState = CombatState.EndCombat;
             CollectionManager.instance.DiscardHand();
@@ -166,6 +174,11 @@ namespace NueDeck.Scripts.Managers
             CollectionManager.instance.handPile.Clear();
             CollectionManager.instance.handController.hand.Clear();
             UIManager.instance.combatCanvas.gameObject.SetActive(false);
+        }
+
+        public void WinCombat()
+        {
+            
         }
         
         private void OnChoiceStart()

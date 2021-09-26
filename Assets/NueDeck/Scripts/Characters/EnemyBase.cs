@@ -27,12 +27,15 @@ namespace NueDeck.Scripts.Characters
         {
             base.BuildCharacter();
             CharacterStats = new CharacterStats(enemyData.maxHealth,enemyCanvas);
+            CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
         }
 
         protected override void OnDeath()
         {
             base.OnDeath();
+            CombatManager.instance.OnEnemyDeath(this);
+            Destroy(gameObject);
         }
 
         #endregion

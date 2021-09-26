@@ -138,27 +138,26 @@ namespace NueDeck.Scripts.Characters
         }
         public void Damage(int value, bool canPierceArmor = false)
         {
-            var remainingDamage = 0;
-
+            var remainingDamage = value;
+            
             if (!canPierceArmor)
             {
-                ApplyStatus(StatusType.Block,-value);
-                
-                if (statusDict[StatusType.Block].StatusValue < 0)
+                if (statusDict[StatusType.Block].IsActive)
                 {
-                    remainingDamage = statusDict[StatusType.Block].StatusValue * -1;
-                    ClearStatus(StatusType.Block);
+                    ApplyStatus(StatusType.Block,-value);
+                
+                    if (statusDict[StatusType.Block].StatusValue < 0)
+                    {
+                        remainingDamage = statusDict[StatusType.Block].StatusValue * -1;
+                        ClearStatus(StatusType.Block);
+                    }
                 }
+                
             }
-            else
-            {
-                remainingDamage = value;
-            }
-           
-           
+            
             CurrentHealth -= remainingDamage;
             
-            if (CurrentHealth < 0)
+            if (CurrentHealth <= 0)
             {
                 CurrentHealth = 0;
                 OnDeath?.Invoke();

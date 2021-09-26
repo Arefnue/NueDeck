@@ -21,6 +21,7 @@ namespace NueDeck.Scripts.Characters
         {
             base.BuildCharacter();
             CharacterStats = new CharacterStats(allyData.maxHealth,allyCanvas);
+            CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
            
         }
@@ -29,6 +30,7 @@ namespace NueDeck.Scripts.Characters
         {
             base.OnDeath();
             CombatManager.instance.OnAllyDeath(this);
+            Destroy(gameObject);
         }
 
         public void OnCardTargetHighlight()
