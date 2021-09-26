@@ -2,6 +2,7 @@
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
+using NueDeck.Scripts.UI;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Characters
@@ -13,7 +14,6 @@ namespace NueDeck.Scripts.Characters
        
         public override void Awake()
         {
-           
             base.Awake();
         }
         
@@ -21,7 +21,8 @@ namespace NueDeck.Scripts.Characters
         {
             base.BuildCharacter();
             CharacterHealth = new CharacterHealth(allyData.maxHealth,allyCanvas);
-            
+            CharacterHealth.SetCurrentHealth(CharacterHealth.CurrentHealth);
+           
         }
         
         protected override void OnDeath()

@@ -8,7 +8,6 @@ namespace NueDeck.Scripts.Data.Characters
         public string characterName;
         [TextArea]
         public string characterDescription;
-        public Sprite characterSprite;
         public int maxHealth;
         
     }

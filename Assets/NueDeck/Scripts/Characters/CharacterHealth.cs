@@ -12,31 +12,39 @@ namespace NueDeck.Scripts.Characters
         public int CurrentPoison { get; set; }
 
         public Action OnDeath;
-
+        public Action<int, int> OnHealthChanged;
+        public Action<StatusType,int> OnStatusChanged;
+        public Action<StatusType, int> OnStatusApplied;
+        public Action<StatusType> OnStatusCleared;
         private CharacterCanvas _characterCanvas;
-
-        public CharacterHealth(int maxHealth,CharacterCanvas characterCanvas)
+        
+        
+        
+        public CharacterHealth(int maxHealth, CharacterCanvas characterCanvas)
         {
             MaxHealth = maxHealth;
             CurrentHealth = maxHealth;
             CurrentBlock = 0;
             CurrentPoison = 0;
             _characterCanvas = characterCanvas;
+            OnHealthChanged += _characterCanvas.UpdateHealthText;
+            OnStatusChanged += _characterCanvas.UpdateStatusText;
+            OnStatusApplied += _characterCanvas.ApplyStatus;
+            OnStatusCleared += _characterCanvas.ClearStatus;
+           
         }
 
         public void SetCurrentHealth(int targetCurrentHealth)
         {
             CurrentHealth = targetCurrentHealth <=0 ? 1 : targetCurrentHealth;
-            _characterCanvas.UpdateHealthText(CurrentHealth,MaxHealth);
-            UIManager.instance.informationCanvas.SetHealthText(CurrentHealth,MaxHealth);
+            OnHealthChanged?.Invoke(CurrentHealth,MaxHealth);
         } 
         
         public void Heal(int value)
         {
             CurrentHealth += value;
             if (CurrentHealth>MaxHealth)  CurrentHealth = MaxHealth;
-            _characterCanvas.UpdateHealthText(CurrentHealth,MaxHealth);
-            UIManager.instance.informationCanvas.SetHealthText(CurrentHealth,MaxHealth);
+            OnHealthChanged?.Invoke(CurrentHealth,MaxHealth);
         }
         public void Damage(int value, bool canPierceArmor = false)
         {
@@ -50,10 +58,7 @@ namespace NueDeck.Scripts.Characters
                 {
                     remainingDamage = CurrentBlock * -1;
                     CurrentBlock = 0;
-                    _characterCanvas.ClearStatus(StatusType.Block);
                 }
-                _characterCanvas.UpdateStatusText(StatusType.Block,CurrentBlock);
-                UIManager.instance.informationCanvas.SetHealthText(CurrentHealth,MaxHealth);
             }
             else
             {
@@ -63,22 +68,18 @@ namespace NueDeck.Scripts.Characters
            
             CurrentHealth -= remainingDamage;
             
-           
-            
             if (CurrentHealth < 0)
             {
                 CurrentHealth = 0;
                 OnDeath?.Invoke();
             }
-            
-            _characterCanvas.UpdateHealthText(CurrentHealth,MaxHealth);
-            UIManager.instance.informationCanvas.SetHealthText(CurrentHealth,MaxHealth);
+            OnHealthChanged?.Invoke(CurrentHealth,MaxHealth);
         }
 
         public void ApplyPoison(int value)
         {
             CurrentPoison += value;
-            _characterCanvas.ApplyStatus(StatusType.Poison,value);
+            
         } 
         
         public void DamagePoison()
@@ -89,21 +90,20 @@ namespace NueDeck.Scripts.Characters
             if (CurrentPoison < 0)
             {
                 CurrentPoison = 0;
-                _characterCanvas.ClearStatus(StatusType.Poison);
             }
-            _characterCanvas.UpdateStatusText(StatusType.Poison,CurrentPoison);
+            
         }
 
         public void EarnBlock(int value)
         {
             CurrentBlock += value;
-           _characterCanvas.ApplyStatus(StatusType.Block,value);
+          
         }
 
         public void IncreaseMaxHealth(int value)
         {
             MaxHealth += value;
-           _characterCanvas.UpdateHealthText(CurrentHealth,MaxHealth);
+            OnHealthChanged?.Invoke(CurrentHealth,MaxHealth);
         } 
     }
 }

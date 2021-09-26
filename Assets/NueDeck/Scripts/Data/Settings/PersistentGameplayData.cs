@@ -15,7 +15,6 @@ namespace NueDeck.Scripts.Data
         public bool CanUseCards { get; set; }
         public bool CanSelectCards { get; set; }
         public bool IsRandomHand { get; set; }
-        
         public List<AllyBase> AllyList { get; set; }
 
         private readonly GameplayData _gameplayData;
