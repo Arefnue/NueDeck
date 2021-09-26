@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.UI;
+using UnityEngine;
 
 namespace NueDeck.Scripts.Characters
 {
@@ -14,10 +15,10 @@ namespace NueDeck.Scripts.Characters
         public bool DecreaseOverTurn { get; set; }
         public bool IsPermanent { get; set; }
         public bool IsActive { get; set; }
-      
         public bool CanNegativeStack { get; set; }
+        public bool ClearAtNextTurn { get; set; }
         
-        public StatusStats(StatusType statusType,int statusValue,bool decreaseOverTurn = false, bool isPermanent = false,bool isActive = false,bool canNegativeStack = false)
+        public StatusStats(StatusType statusType,int statusValue,bool decreaseOverTurn = false, bool isPermanent = false,bool isActive = false,bool canNegativeStack = false,bool clearAtNextTurn = false)
         {
             StatusType = statusType;
             StatusValue = statusValue;
@@ -25,6 +26,7 @@ namespace NueDeck.Scripts.Characters
             IsPermanent = isPermanent;
             IsActive = isActive;
             CanNegativeStack = canNegativeStack;
+            ClearAtNextTurn = clearAtNextTurn;
         }
     }
     public class CharacterStats
@@ -64,6 +66,8 @@ namespace NueDeck.Scripts.Characters
             statusDict[StatusType.Poison].DecreaseOverTurn = true;
             statusDict[StatusType.Poison].OnTriggerAction += DamagePoison;
 
+            statusDict[StatusType.Block].ClearAtNextTurn = true;
+
             statusDict[StatusType.Strength].CanNegativeStack = true;
 
         }
@@ -73,13 +77,14 @@ namespace NueDeck.Scripts.Characters
             if (statusDict[targetStatus].IsActive)
             {
                 statusDict[targetStatus].StatusValue += value;
-                OnStatusChanged?.Invoke(targetStatus,value);
+                OnStatusChanged?.Invoke(targetStatus, statusDict[targetStatus].StatusValue);
+                
             }
             else
             {
                 statusDict[targetStatus].StatusValue += value;
                 statusDict[targetStatus].IsActive = true;
-                OnStatusApplied?.Invoke(targetStatus,value);
+                OnStatusApplied?.Invoke(targetStatus, statusDict[targetStatus].StatusValue);
             }
             
         }
@@ -96,10 +101,14 @@ namespace NueDeck.Scripts.Characters
         public void TriggerStatus(StatusType targetStatus)
         {
             statusDict[targetStatus].OnTriggerAction?.Invoke();
-            if (statusDict[targetStatus].DecreaseOverTurn) 
-                statusDict[targetStatus].StatusValue--;
-           
+          
 
+            if (statusDict[targetStatus].ClearAtNextTurn)
+            {
+                ClearStatus(targetStatus);
+                return;
+            }
+            
             if (statusDict[targetStatus].StatusValue <= 0)
             {
                 if (statusDict[targetStatus].CanNegativeStack)
@@ -113,8 +122,10 @@ namespace NueDeck.Scripts.Characters
                     if (!statusDict[targetStatus].IsPermanent)
                         ClearStatus(targetStatus);
                 }
-               
             }
+            
+            if (statusDict[targetStatus].DecreaseOverTurn) 
+                statusDict[targetStatus].StatusValue--;
         }
 
         public void ClearStatus(StatusType targetStatus)

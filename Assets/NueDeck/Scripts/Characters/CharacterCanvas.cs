@@ -23,11 +23,15 @@ namespace NueDeck.Scripts.Characters
 
         private void Awake()
         {
+            highlightRoot.gameObject.SetActive(false);
+        }
+
+        public void InitCanvas()
+        {
             for (int i = 0; i < Enum.GetNames(typeof(StatusType)).Length; i++)
             {
-                _statusDict.Add((StatusType)i,null);
+                _statusDict.Add((StatusType) i, null);
             }
-            highlightRoot.gameObject.SetActive(false);
         }
 
         public void ApplyStatus(StatusType targetStatus, int value)
@@ -40,6 +44,7 @@ namespace NueDeck.Scripts.Characters
                 
                 var clone = Instantiate(statusIconsData.statusIconPrefab, statusIconRoot);
                 clone.SetStatus(targetData);
+                _statusDict[targetStatus] = clone;
             }
             
             _statusDict[targetStatus].SetStatusValue(value);
@@ -47,7 +52,11 @@ namespace NueDeck.Scripts.Characters
 
         public void ClearStatus(StatusType targetStatus)
         {
-            Destroy(_statusDict[targetStatus].gameObject);
+            if (_statusDict[targetStatus])
+            {
+                Destroy(_statusDict[targetStatus].gameObject);
+            }
+           
             _statusDict[targetStatus] = null;
         }
 

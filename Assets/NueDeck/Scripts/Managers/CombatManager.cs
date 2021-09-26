@@ -64,17 +64,29 @@ namespace NueDeck.Scripts.Managers
                 case CombatState.PrepareCombat:
                     break;
                 case CombatState.AllyTurn:
+
+                    foreach (var currentAlly in currentAllies)
+                        currentAlly.CharacterStats.TriggerAllStatus();
                     
                     GameManager.instance.PersistentGameplayData.CurrentMana = GameManager.instance.PersistentGameplayData.MAXMana;
+                    
                     CollectionManager.instance.DrawCards(GameManager.instance.PersistentGameplayData.DrawCount);
-                    foreach (var currentEnemy in currentEnemies) currentEnemy.ShowNextAbility();
+                    
+                    foreach (var currentEnemy in currentEnemies) 
+                        currentEnemy.ShowNextAbility();
+                    
                     GameManager.instance.PersistentGameplayData.CanSelectCards = true;
                     
                     break;
                 case CombatState.EnemyTurn:
+
+                    foreach (var currentEnemy in currentEnemies)
+                        currentEnemy.CharacterStats.TriggerAllStatus();
                     
                     CollectionManager.instance.DiscardHand();
+                    
                     StartCoroutine(nameof(EnemyTurnRoutine));
+                    
                     GameManager.instance.PersistentGameplayData.CanSelectCards = false;
                     
                     break;
@@ -100,7 +112,6 @@ namespace NueDeck.Scripts.Managers
         public void OnAllyDeath(AllyBase targetAlly)
         {
             currentAllies.Remove(targetAlly);
-            
             if (currentAllies.Count<=0)
                 LoseCombat();
         } 
@@ -183,7 +194,7 @@ namespace NueDeck.Scripts.Managers
         
         private void OnChoiceStart()
         {
-            CombatManager.instance.CurrentCombatState = CombatState.EndCombat;
+            CurrentCombatState = CombatState.EndCombat;
             
             foreach (var choice in CollectionManager.instance.rewardController.choicesList) choice.DetermineChoice();
             CollectionManager.instance.DiscardHand();
@@ -209,7 +220,12 @@ namespace NueDeck.Scripts.Managers
                 yield return waitDelay;
             }
 
-            CurrentCombatState = CombatState.AllyTurn;
+
+            yield return new WaitForSeconds(1f);
+            if (CurrentCombatState != CombatState.EndCombat)
+            {
+                CurrentCombatState = CombatState.AllyTurn;
+            }
         }
         
 

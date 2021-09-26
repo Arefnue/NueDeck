@@ -20,6 +20,7 @@ namespace NueDeck.Scripts.Characters
         public override void BuildCharacter()
         {
             base.BuildCharacter();
+            allyCanvas.InitCanvas();
             CharacterStats = new CharacterStats(allyData.maxHealth,allyCanvas);
             CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);

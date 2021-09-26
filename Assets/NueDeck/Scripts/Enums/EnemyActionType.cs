@@ -5,7 +5,6 @@
         Attack,
         Heal,
         Poison,
-        Block,
-        StealCardFromDeck
+        Block
     }
 }

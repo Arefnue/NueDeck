@@ -9,7 +9,14 @@ namespace NueDeck.Scripts.EnemyBehaviour.EnemyActions
         
         public override void DoAction(EnemyActionParameters actionParameters)
         {
-            Debug.Log("Enemy blocked");
+            if (actionParameters.targetCharacter)
+            {
+                actionParameters.targetCharacter.CharacterStats.ApplyStatus(StatusType.Block,Mathf.RoundToInt(actionParameters.value));
+            }
+            else
+            {
+                actionParameters.selfCharacter.CharacterStats.ApplyStatus(StatusType.Block,Mathf.RoundToInt(actionParameters.value));
+            }
         }
     }
 }
