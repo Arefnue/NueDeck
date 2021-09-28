@@ -11,8 +11,6 @@ namespace NueDeck.Scripts.UI
         public CombatCanvas combatCanvas;
         public InformationCanvas informationCanvas;
         
-      
-
         private void Awake()
         {
             if (instance == null)

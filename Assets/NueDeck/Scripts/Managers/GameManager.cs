@@ -7,6 +7,7 @@ using NueDeck.Scripts.Data.Containers;
 using NueDeck.Scripts.Data.Settings;
 using NueDeck.Scripts.EnemyBehaviour;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Managers
 {
@@ -46,6 +47,16 @@ namespace NueDeck.Scripts.Managers
         public void InitGameplayData()
         {
             PersistentGameplayData = new PersistentGameplayData(gameplayData);
+        }
+
+        public void NextEncounter()
+        {
+            PersistentGameplayData.CurrentEncounterId++;
+            if (PersistentGameplayData.CurrentEncounterId>=EncounterData.enemyEncounterList[PersistentGameplayData.CurrentStageId].enemyEncounterList.Count)
+            {
+                PersistentGameplayData.CurrentEncounterId = Random.Range(0,
+                    EncounterData.enemyEncounterList[PersistentGameplayData.CurrentStageId].enemyEncounterList.Count);
+            }
         }
         
     }

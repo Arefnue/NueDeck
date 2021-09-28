@@ -14,6 +14,8 @@ namespace NueDeck.Scripts.Data.Settings
         public bool CanSelectCards { get; set; }
         public bool IsRandomHand { get; set; }
         public List<AllyBase> AllyList { get; set; }
+        public int CurrentStageId { get; set; }
+        public int CurrentEncounterId { get; set; }
 
         private readonly GameplayData _gameplayData;
         
@@ -33,6 +35,8 @@ namespace NueDeck.Scripts.Data.Settings
             CanSelectCards = _gameplayData.canSelectCards;
             IsRandomHand = _gameplayData.isRandomHand;
             AllyList = _gameplayData.allyList;
+            CurrentEncounterId = 0;
+            CurrentStageId = 0;
         }
     }
 }

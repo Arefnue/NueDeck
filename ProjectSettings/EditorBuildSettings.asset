@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/NueDeck/Scenes/MainMenuTest.unity
+    guid: 7f635b4cc029df543b6d000eb300aad4
+  - enabled: 1
+    path: Assets/NueDeck/Scenes/TestScene.unity
+    guid: 27c8685eabe409f4fa3d614fc62e702d
+  - enabled: 1
+    path: Assets/NueDeck/Scenes/TestScene 1.unity
+    guid: d0503976d12880841b1ae8d5fc2b9028
   m_configObjects: {}

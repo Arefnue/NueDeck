@@ -56,6 +56,7 @@ namespace NueDeck.Scripts.Managers
             CollectionManager.instance.SetGameDeck();
             CollectionManager.instance.rewardController.choiceParent.gameObject.SetActive(false);
             UIManager.instance.combatCanvas.gameObject.SetActive(true);
+            UIManager.instance.informationCanvas.gameObject.SetActive(true);
             CurrentCombatState = CombatState.AllyTurn;
         }
         
@@ -122,7 +123,7 @@ namespace NueDeck.Scripts.Managers
         
         private void BuildEnemies()
         {
-            var encounter = GameManager.instance.EncounterData.GetEnemyEncounter().enemyList;
+            var encounter = GameManager.instance.EncounterData.GetEnemyEncounter(GameManager.instance.PersistentGameplayData.CurrentStageId,GameManager.instance.PersistentGameplayData.CurrentEncounterId).enemyList;
             for (var i = 0; i < encounter.Count; i++)
             {
                 var clone = Instantiate(encounter[i], enemyPosList.Count >= i ? enemyPosList[i] : enemyPosList[0]);

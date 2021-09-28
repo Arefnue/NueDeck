@@ -22,13 +22,7 @@ namespace NueDeck.Scripts.Data.Containers
                 ? selectedStage.enemyEncounterList.RandomItem()
                 : selectedStage.enemyEncounterList[encounterId];
         }
-
-        public EnemyEncounterStage GetEnemyEncounterStage(int stageId =0)
-        {
-            var selectedStage = enemyEncounterList.First(x => x.stageId == stageId);
-            return selectedStage;
-        }
-
+        
     }
 
 
