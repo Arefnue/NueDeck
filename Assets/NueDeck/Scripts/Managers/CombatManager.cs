@@ -19,7 +19,9 @@ namespace NueDeck.Scripts.Managers
         
         [HideInInspector] public List<EnemyBase> currentEnemies = new List<EnemyBase>();
         [HideInInspector] public List<AllyBase> currentAllies = new List<AllyBase>();
-        
+
+        public Action OnAllyTurnStarted;
+        public Action OnEnemyTurnStarted;
         
         #region Setup
         
@@ -65,23 +67,18 @@ namespace NueDeck.Scripts.Managers
                     break;
                 case CombatState.AllyTurn:
 
-                    foreach (var currentAlly in currentAllies)
-                        currentAlly.CharacterStats.TriggerAllStatus();
+                    OnAllyTurnStarted?.Invoke();
                     
                     GameManager.instance.PersistentGameplayData.CurrentMana = GameManager.instance.PersistentGameplayData.MAXMana;
                     
                     CollectionManager.instance.DrawCards(GameManager.instance.PersistentGameplayData.DrawCount);
-                    
-                    foreach (var currentEnemy in currentEnemies) 
-                        currentEnemy.ShowNextAbility();
                     
                     GameManager.instance.PersistentGameplayData.CanSelectCards = true;
                     
                     break;
                 case CombatState.EnemyTurn:
 
-                    foreach (var currentEnemy in currentEnemies)
-                        currentEnemy.CharacterStats.TriggerAllStatus();
+                    OnEnemyTurnStarted?.Invoke();
                     
                     CollectionManager.instance.DiscardHand();
                     
@@ -189,7 +186,7 @@ namespace NueDeck.Scripts.Managers
 
         public void WinCombat()
         {
-            
+            Debug.Log("Win");
         }
         
         private void OnChoiceStart()
@@ -212,7 +209,7 @@ namespace NueDeck.Scripts.Managers
 
         private IEnumerator EnemyTurnRoutine()
         {
-            var waitDelay = new WaitForSeconds(currentEnemies.Count > 0 ? (1 / currentEnemies.Count) : 0.1f);
+            var waitDelay = new WaitForSeconds(0.1f);
 
             foreach (var currentEnemy in currentEnemies)
             {
@@ -220,8 +217,6 @@ namespace NueDeck.Scripts.Managers
                 yield return waitDelay;
             }
 
-
-            yield return new WaitForSeconds(1f);
             if (CurrentCombatState != CombatState.EndCombat)
             {
                 CurrentCombatState = CombatState.AllyTurn;

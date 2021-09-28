@@ -24,12 +24,14 @@ namespace NueDeck.Scripts.Characters
             CharacterStats = new CharacterStats(allyData.maxHealth,allyCanvas);
             CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
-           
+            CombatManager.instance.OnAllyTurnStarted += CharacterStats.TriggerAllStatus;
+
         }
         
         protected override void OnDeath()
         {
             base.OnDeath();
+            CombatManager.instance.OnAllyTurnStarted -= CharacterStats.TriggerAllStatus;
             CombatManager.instance.OnAllyDeath(this);
             Destroy(gameObject);
         }

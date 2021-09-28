@@ -30,11 +30,15 @@ namespace NueDeck.Scripts.Characters
             CharacterStats = new CharacterStats(enemyData.maxHealth,enemyCanvas);
             CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
+            CombatManager.instance.OnAllyTurnStarted += ShowNextAbility;
+            CombatManager.instance.OnEnemyTurnStarted += CharacterStats.TriggerAllStatus;
         }
 
         protected override void OnDeath()
         {
             base.OnDeath();
+            CombatManager.instance.OnAllyTurnStarted -= ShowNextAbility;
+            CombatManager.instance.OnEnemyTurnStarted -= CharacterStats.TriggerAllStatus;
             CombatManager.instance.OnEnemyDeath(this);
             Destroy(gameObject);
         }
@@ -57,6 +61,8 @@ namespace NueDeck.Scripts.Characters
                 enemyCanvas.nextActionValueText.gameObject.SetActive(true);
                 enemyCanvas.nextActionValueText.text = NextAbility.actionList[0].value.ToString();
             }
+            
+            enemyCanvas.intentionImage.gameObject.SetActive(true);
         }
 
         #endregion
@@ -96,7 +102,7 @@ namespace NueDeck.Scripts.Characters
                 yield return StartCoroutine(BuffRoutine(NextAbility));
             }
             
-            enemyCanvas.intentionImage.gameObject.SetActive(true);
+           
         }
         
         protected virtual IEnumerator AttackRoutine(EnemyAbilityData targetAbility)
