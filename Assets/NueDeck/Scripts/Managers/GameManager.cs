@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using NueDeck.Scripts.Card;
 using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Data;
+using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Data.Containers;
 using NueDeck.Scripts.Data.Settings;
 using NueDeck.Scripts.EnemyBehaviour;
+using NueExtentions;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -41,6 +43,8 @@ namespace NueDeck.Scripts.Managers
             CardActionProcessor.Initialize();
             EnemyActionProcessor.Initialize();
             InitGameplayData();
+            SetInitalHand();
+            Debug.Log(PersistentGameplayData.CurrentCardsList.Count);
         }
         
 
@@ -48,7 +52,29 @@ namespace NueDeck.Scripts.Managers
         {
             PersistentGameplayData = new PersistentGameplayData(gameplayData);
         }
+        
+        public CardObject BuildAndGetCard(CardData targetData, Transform parent)
+        {
+            var clone = Instantiate(GameplayData.cardPrefab, parent);
+            clone.SetCard(targetData);
+            return clone;
+        }
 
+        
+        public void SetInitalHand()
+        {
+            PersistentGameplayData.CurrentCardsList.Clear();
+            if (PersistentGameplayData.IsRandomHand)
+                for (var i = 0; i < GameplayData.randomCardCount; i++)
+                    PersistentGameplayData.CurrentCardsList.Add(GameplayData.allCardsList.RandomItem());
+            else
+                foreach (var cardData in GameplayData.initalDeck.cards)
+                {
+                    PersistentGameplayData.CurrentCardsList.Add(cardData);
+                }
+          
+        }
+        
         public void NextEncounter()
         {
             PersistentGameplayData.CurrentEncounterId++;

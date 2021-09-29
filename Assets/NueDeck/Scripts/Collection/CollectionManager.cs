@@ -17,14 +17,6 @@ namespace NueDeck.Scripts.Collection
         public HandController handController;
         public RewardController rewardController;
         
-        [Header("Card Settings")] 
-        public List<CardData> allCardsList;
-        public CardObject cardPrefab;
-
-        [Header("Decks")] 
-        public DeckData initalDeck;
-
-        [HideInInspector] public List<CardData> myDeckList = new List<CardData>();
         [HideInInspector] public List<CardData> drawPile = new List<CardData>();
         [HideInInspector] public List<CardData> handPile = new List<CardData>();
         [HideInInspector] public List<CardData> discardPile = new List<CardData>();
@@ -34,7 +26,6 @@ namespace NueDeck.Scripts.Collection
         private void Awake()
         {
             instance = this;
-            SetInitalHand();
         }
 
         #endregion
@@ -47,6 +38,9 @@ namespace NueDeck.Scripts.Collection
 
             for (var i = 0; i < targetDrawCount; i++)
             {
+                if (GameManager.instance.GameplayData.maxCardOnHand<=handPile.Count)
+                    return;
+                
                 if (drawPile.Count <= 0)
                 {
                     var nDrawCount = targetDrawCount - currentDrawCount;
@@ -57,7 +51,7 @@ namespace NueDeck.Scripts.Collection
                 }
 
                 var randomCard = drawPile[Random.Range(0, drawPile.Count)];
-                var clone = BuildAndGetCard(randomCard, handController.drawTransform);
+                var clone = GameManager.instance.BuildAndGetCard(randomCard, handController.drawTransform);
                 handController.AddCardToHand(clone);
                 handPile.Add(randomCard);
                 drawPile.Remove(randomCard);
@@ -130,29 +124,17 @@ namespace NueDeck.Scripts.Collection
 
         public void SetGameDeck()
         {
-            foreach (var i in myDeckList) drawPile.Add(i);
+            foreach (var i in GameManager.instance.PersistentGameplayData.CurrentCardsList) 
+                drawPile.Add(i);
         }
 
         #endregion
 
         #region Private Methods
 
-        private CardObject BuildAndGetCard(CardData targetData, Transform parent)
-        {
-            var clone = Instantiate(cardPrefab, parent);
-            clone.SetCard(targetData);
-            return clone;
-        }
+       
 
-        public void SetInitalHand()
-        {
-            myDeckList.Clear();
-            if (GameManager.instance.PersistentGameplayData.IsRandomHand)
-                for (var i = 0; i < 10; i++)
-                    myDeckList.Add(allCardsList[Random.Range(0, allCardsList.Count)]);
-            else
-                initalDeck.cards.ForEach(x => myDeckList.Add(x));
-        }
+       
 
         private void ReshuffleDiscardPile()
         {
@@ -175,7 +157,7 @@ namespace NueDeck.Scripts.Collection
             var waitFrame = new WaitForEndOfFrame();
             var timer = 0f;
 
-            var card = BuildAndGetCard(targetData, startTransform);
+            var card = GameManager.instance.BuildAndGetCard(targetData, startTransform);
             card.transform.SetParent(endTransform);
             var startPos = card.transform.localPosition;
             var endPos = Vector3.zero;

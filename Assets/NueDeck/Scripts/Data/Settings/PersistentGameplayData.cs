@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Data.Collection;
+using NueDeck.Scripts.UI;
 
 namespace NueDeck.Scripts.Data.Settings
 {
@@ -16,6 +18,24 @@ namespace NueDeck.Scripts.Data.Settings
         public List<AllyBase> AllyList { get; set; }
         public int CurrentStageId { get; set; }
         public int CurrentEncounterId { get; set; }
+        
+        public List<CardData> CurrentCardsList{ get; set; }
+
+        public int CurrentGold
+        {
+            get
+            {
+                return _currentGold;
+            }
+            set
+            {
+                _currentGold = value;
+                if (UIManager.instance)  UIManager.instance.informationCanvas.goldText.text = _currentGold.ToString();
+               
+            }
+        }
+
+        private int _currentGold;
 
         private readonly GameplayData _gameplayData;
         
@@ -37,6 +57,8 @@ namespace NueDeck.Scripts.Data.Settings
             AllyList = _gameplayData.allyList;
             CurrentEncounterId = 0;
             CurrentStageId = 0;
+            CurrentGold = 0;
+            CurrentCardsList = new List<CardData>();
         }
     }
 }

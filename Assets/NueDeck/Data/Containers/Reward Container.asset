@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ee6923251c40c0a25c5714f844ad43, type: 3}
+  m_Name: Reward Container
+  m_EditorClassIdentifier: 
+  cardReward:
+    rewardSprite: {fileID: 7599432968757225573, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
+    rewardDescription: Choose card
+    rewardCardList:
+    - {fileID: 11400000, guid: 8f655889219afa649a967e88e37f98ec, type: 2}
+    - {fileID: 11400000, guid: 5d6b018bf7dec554ba0a2eabfd89d3b1, type: 2}
+    - {fileID: 11400000, guid: ffd3079242e164645ba9365c7c965def, type: 2}
+    - {fileID: 11400000, guid: 4889456243c575442b34a89b3debcdbb, type: 2}
+    - {fileID: 11400000, guid: 6c7592c82199fdc418f687778ba6bce9, type: 2}
+  goldReward:
+    rewardSprite: {fileID: 4322673043527013044, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
+    rewardDescription: 
+    minGold: 10
+    maxGold: 100
