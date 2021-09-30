@@ -10,6 +10,11 @@ namespace NueDeck.Scripts.Utils
         {
             SceneManager.LoadScene(sceneId);
         }
+
+        public void ExitApp()
+        {
+            Application.Quit();
+        }
         
     }
 }

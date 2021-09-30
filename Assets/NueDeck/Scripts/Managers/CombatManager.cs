@@ -187,7 +187,15 @@ namespace NueDeck.Scripts.Managers
 
         public void WinCombat()
         {
-            Debug.Log("Win");
+            CurrentCombatState = CombatState.EndCombat;
+            CollectionManager.instance.discardPile.Clear();
+            CollectionManager.instance.drawPile.Clear();
+            CollectionManager.instance.handPile.Clear();
+            CollectionManager.instance.handController.hand.Clear();
+            UIManager.instance.combatCanvas.gameObject.SetActive(false);
+            UIManager.instance.rewardCanvas.gameObject.SetActive(true);
+            UIManager.instance.rewardCanvas.BuildReward(RewardType.Gold);
+            UIManager.instance.rewardCanvas.BuildReward(RewardType.Card);
         }
         
         private void OnChoiceStart()

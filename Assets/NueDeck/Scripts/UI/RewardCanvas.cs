@@ -25,11 +25,11 @@ namespace NueDeck.Scripts.UI
             {
                 case RewardType.Gold:
                     var rewardGold = rewardData.GetRandomGoldReward();
-                    //rewardDescription = $"{rewardGold} gold";
                     rewardClone.BuildReward(rewardData.goldReward.rewardSprite,rewardData.goldReward.rewardDescription);
                     rewardClone.rewardButton.onClick.AddListener(()=>GetGoldReward(rewardClone,rewardGold));
                     break;
                 case RewardType.Card:
+                    rewardClone.BuildReward(rewardData.cardReward.rewardSprite,rewardData.cardReward.rewardDescription);
                     break;
                 case RewardType.Relic:
                     break;
@@ -46,7 +46,7 @@ namespace NueDeck.Scripts.UI
             Destroy(rewardContainer.gameObject);
         }
 
-        private void GetCardReward(RewardContainer rewardContainer)
+        private void GetCardReward(RewardContainer rewardContainer,int amount)
         {
             
         }

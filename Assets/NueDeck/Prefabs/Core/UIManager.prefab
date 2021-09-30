@@ -240,10 +240,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2388636854935074172}
     m_Modifications:
-    - target: {fileID: 1500030367669715146, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2388636854935074175}
     - target: {fileID: 1805954121755700899, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -328,21 +324,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1960091423992165413, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2753420811411518559, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2388636854935074175}
     - target: {fileID: 9173700988199943096, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
       propertyPath: m_Name
       value: RewardCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 9173700988199943096, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}

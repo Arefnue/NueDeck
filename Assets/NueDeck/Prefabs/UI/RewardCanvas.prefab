@@ -31,6 +31,7 @@ RectTransform:
   m_Children:
   - {fileID: 2753420811919632567}
   - {fileID: 8356462358083751223}
+  - {fileID: 3115588932749632940}
   m_Father: {fileID: 3975758537094236638}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -183,7 +184,7 @@ RectTransform:
   m_Children:
   - {fileID: 2753420810945079732}
   m_Father: {fileID: 1805954121755700899}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -256,17 +257,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5904982284142632224}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1627635797302064291}
-  m_Father: {fileID: 1805954121755700899}
-  m_RootOrder: 0
+  m_Father: {fileID: 2753420810945079732}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -236.2, y: 137.9}
+  m_AnchoredPosition: {x: -91.665, y: 57.083}
   m_SizeDelta: {x: 150, y: 67.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3247685414415874585
@@ -358,7 +359,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -453,7 +454,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: End Turn
+  m_text: Next
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
   m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
@@ -603,7 +604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1805954121755700899
 RectTransform:
   m_ObjectHideFlags: 0
@@ -615,7 +616,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 3115588932749632940}
   - {fileID: 3975758537094236638}
   m_Father: {fileID: 0}
   m_RootOrder: 0

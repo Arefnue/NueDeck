@@ -228,7 +228,7 @@ RectTransform:
   - {fileID: 1212796281}
   - {fileID: 1094073177}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -326,7 +326,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1094073176
 GameObject:
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 1094073179}
   - component: {fileID: 1094073178}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Encounter_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next
+  m_text: Encounter 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: NextNext
+  m_text: Encounter 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 1212796282}
   - component: {fileID: 1212796285}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Encounter_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -909,7 +909,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3747954644409722057, guid: fe4c5d93acf671e48b2593ed75c25a5f, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3747954644409722057, guid: fe4c5d93acf671e48b2593ed75c25a5f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -966,7 +966,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2388636854935074172, guid: e75f7099a69ce3b469d565d045c707d2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2388636854935074172, guid: e75f7099a69ce3b469d565d045c707d2, type: 3}
       propertyPath: m_LocalPosition.x
