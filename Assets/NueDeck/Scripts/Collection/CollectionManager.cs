@@ -131,11 +131,7 @@ namespace NueDeck.Scripts.Collection
         #endregion
 
         #region Private Methods
-
-       
-
-       
-
+        
         private void ReshuffleDiscardPile()
         {
             foreach (var i in discardPile) drawPile.Add(i);

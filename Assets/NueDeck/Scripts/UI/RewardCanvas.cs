@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using NueDeck.Scripts.Data.Containers;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Managers;
+using NueExtentions;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace NueDeck.Scripts.UI
 {
-    public class RewardCanvas : MonoBehaviour
+    public class RewardCanvas : CanvasBase
     {
         [SerializeField] private RewardData rewardData;
         [SerializeField] private Transform rewardRoot;
@@ -30,6 +30,7 @@ namespace NueDeck.Scripts.UI
                     break;
                 case RewardType.Card:
                     rewardClone.BuildReward(rewardData.cardReward.rewardSprite,rewardData.cardReward.rewardDescription);
+                    rewardClone.rewardButton.onClick.AddListener(()=>GetCardReward(rewardClone,1));
                     break;
                 case RewardType.Relic:
                     break;
@@ -48,8 +49,18 @@ namespace NueDeck.Scripts.UI
 
         private void GetCardReward(RewardContainer rewardContainer,int amount)
         {
-            
+            GameManager.instance.PersistentGameplayData.CurrentCardsList.Add(GameManager.instance.GameplayData.allCardsList.RandomItem());
+            _currentRewardsList.Remove(rewardContainer);
+            Destroy(rewardContainer.gameObject);
         }
-        
+
+        public override void ResetCanvas()
+        {
+            foreach (var rewardContainer in _currentRewardsList)
+            {
+                Destroy(rewardContainer.gameObject);
+            }
+            _currentRewardsList.Clear();
+        }
     }
 }

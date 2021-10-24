@@ -47,6 +47,7 @@ MonoBehaviour:
   mainCam: {fileID: 5766937972527556861}
   gameplayData: {fileID: 11400000, guid: 1ff5bb128064a2d449207d35299f803a, type: 2}
   encounterData: {fileID: 11400000, guid: 35bec8ea199d6ee428e6ec0812189364, type: 2}
+  sceneData: {fileID: 11400000, guid: 5ae2ae3ff5f3b8349b31eea9f8fd748e, type: 2}
 --- !u!1 &5766937972527556863
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Collection;
-using NueDeck.Scripts.Data;
 using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using EnemyBase = NueDeck.Scripts.Characters.EnemyBase;
 using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Card

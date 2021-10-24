@@ -25,6 +25,17 @@ namespace NueDeck.Scripts.UI
             }
            
         }
-
+        
+        public void SetCanvas(CanvasBase targetCanvas,bool open,bool reset = false)
+        {
+            if (reset)
+                targetCanvas.ResetCanvas();
+            
+            if (open)
+                targetCanvas.OpenCanvas();
+            else
+                targetCanvas.CloseCanvas();
+        }
+        
     }
 }

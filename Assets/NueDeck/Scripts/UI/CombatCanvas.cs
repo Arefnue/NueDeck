@@ -1,13 +1,14 @@
 ﻿using System;
 using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.Enums;
+using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 
 namespace NueDeck.Scripts.UI
 {
-    public class CombatCanvas : MonoBehaviour
+    public class CombatCanvas : CanvasBase
     {
         public TextMeshProUGUI drawPileText;
         public TextMeshProUGUI discardPileText;
@@ -21,7 +22,7 @@ namespace NueDeck.Scripts.UI
             combatWinPanel.SetActive(false);
             combatLosePanel.SetActive(false);
         }
-
+        
         public void SetPileTexts()
         {
             drawPileText.text = $"{CollectionManager.instance.drawPile.Count.ToString()}";
@@ -29,7 +30,13 @@ namespace NueDeck.Scripts.UI
             manaText.text = $"{GameManager.instance.PersistentGameplayData.CurrentMana.ToString()}/{GameManager.instance.PersistentGameplayData.MAXMana}";
         }
 
-        
+        public override void ResetCanvas()
+        {
+            base.ResetCanvas();
+            combatWinPanel.SetActive(false);
+            combatLosePanel.SetActive(false);
+        }
+
         public void EndTurn()
         {
             if (CombatManager.instance.CurrentCombatState == CombatState.AllyTurn)

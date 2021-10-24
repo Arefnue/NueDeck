@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NueDeck.Scripts.UI
 {
-    public class InformationCanvas : MonoBehaviour
+    public class InformationCanvas : CanvasBase
     {
         public GameObject randomizedDeck;
         public TextMeshProUGUI roomText;
@@ -16,9 +16,7 @@ namespace NueDeck.Scripts.UI
         {
             randomizedDeck.SetActive(GameManager.instance.PersistentGameplayData.IsRandomHand);
         }
-
-
-
+        
         public void SetRoomText(int roomNumber,bool useStage = false, int stageNumber = -1) => 
             roomText.text = useStage ? $"Room {stageNumber}/{roomNumber}" : $"Room {roomNumber}";
 
@@ -27,5 +25,10 @@ namespace NueDeck.Scripts.UI
         public void SetNameText(string name) => nameText.text = $"{name}";
 
         public void SetHealthText(int currentHealth,int maxHealth) => healthText.text = $"{currentHealth}/{maxHealth}";
+
+        public override void ResetCanvas()
+        {
+            randomizedDeck.SetActive(GameManager.instance.PersistentGameplayData.IsRandomHand);
+        }
     }
 }

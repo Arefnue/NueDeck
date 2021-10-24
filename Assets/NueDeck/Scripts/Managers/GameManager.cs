@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using NueDeck.Scripts.Card;
-using NueDeck.Scripts.Characters;
-using NueDeck.Scripts.Data;
 using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Data.Containers;
 using NueDeck.Scripts.Data.Settings;
@@ -23,7 +19,9 @@ namespace NueDeck.Scripts.Managers
 
         [SerializeField] private GameplayData gameplayData;
         [SerializeField] private EncounterData encounterData;
+        [SerializeField] private SceneData sceneData;
 
+        public SceneData SceneData => sceneData;
         public EncounterData EncounterData => encounterData;
         public GameplayData GameplayData => gameplayData;
         public PersistentGameplayData PersistentGameplayData { get; private set; }
@@ -38,13 +36,13 @@ namespace NueDeck.Scripts.Managers
             else
             {
                 Destroy(gameObject);
+                return;
             }
             
             CardActionProcessor.Initialize();
             EnemyActionProcessor.Initialize();
             InitGameplayData();
             SetInitalHand();
-            Debug.Log(PersistentGameplayData.CurrentCardsList.Count);
         }
         
 
@@ -84,6 +82,11 @@ namespace NueDeck.Scripts.Managers
                     EncounterData.enemyEncounterList[PersistentGameplayData.CurrentStageId].enemyEncounterList.Count);
             }
         }
-        
+
+        public void ExitApp()
+        {
+            
+        }
+
     }
 }
