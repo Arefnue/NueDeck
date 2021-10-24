@@ -17,13 +17,18 @@ namespace NueDeck.Scripts.Data.Settings
         public bool canSelectCards = true;
         public bool isRandomHand = false;
         public List<AllyBase> allyList;
+        
         [Header("Decks")] 
         public DeckData initalDeck;
         public int randomCardCount;
         public int maxCardOnHand;
+        
         [Header("Card Settings")] 
         public List<CardData> allCardsList;
         public CardObject cardPrefab;
 
+        [Header("Customization Settings")]
+        public string defaultName = "Nue";
+        public bool useStageSystem;
     }
 }

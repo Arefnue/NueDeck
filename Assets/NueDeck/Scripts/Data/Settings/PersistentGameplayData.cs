@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Data.Collection;
+using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.UI;
 
 namespace NueDeck.Scripts.Data.Settings
@@ -17,9 +18,13 @@ namespace NueDeck.Scripts.Data.Settings
         public bool IsRandomHand { get; set; }
         public List<AllyBase> AllyList { get; set; }
         public int CurrentStageId { get; set; }
+        
         public int CurrentEncounterId { get; set; }
         
         public List<CardData> CurrentCardsList{ get; set; }
+
+        public Dictionary<int, int> CurrentHealthDict { get; set; } = new Dictionary<int, int>();
+        public Dictionary<int, int> MaxHealthDict { get; set; } = new Dictionary<int, int>();
 
         public int CurrentGold
         {
@@ -59,6 +64,9 @@ namespace NueDeck.Scripts.Data.Settings
             CurrentStageId = 0;
             CurrentGold = 0;
             CurrentCardsList = new List<CardData>();
+            
+            CurrentHealthDict?.Clear();
+            MaxHealthDict?.Clear();
         }
     }
 }

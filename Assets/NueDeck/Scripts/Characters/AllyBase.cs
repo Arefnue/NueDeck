@@ -1,8 +1,7 @@
-﻿using NueDeck.Scripts.Data.Characters;
-using NueDeck.Scripts.Enums;
+﻿using System.Linq;
+using NueDeck.Scripts.Data.Characters;
 using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
-using NueDeck.Scripts.UI;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Characters
@@ -22,6 +21,20 @@ namespace NueDeck.Scripts.Characters
             base.BuildCharacter();
             allyCanvas.InitCanvas();
             CharacterStats = new CharacterStats(allyData.maxHealth,allyCanvas);
+
+            if (GameManager.instance.PersistentGameplayData.CurrentHealthDict.ContainsKey(allyData.characterID))
+            {
+                CharacterStats.CurrentHealth = GameManager.instance.PersistentGameplayData.CurrentHealthDict[allyData.characterID];
+                CharacterStats.MaxHealth = GameManager.instance.PersistentGameplayData.MaxHealthDict[allyData.characterID];
+                Debug.Log("AA");
+            }
+            else
+            {
+                Debug.Log("BB");
+                GameManager.instance.PersistentGameplayData.CurrentHealthDict.Add(allyData.characterID,CharacterStats.CurrentHealth);
+                GameManager.instance.PersistentGameplayData.MaxHealthDict.Add(allyData.characterID,CharacterStats.MaxHealth);
+            }
+            
             CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
             CombatManager.instance.OnAllyTurnStarted += CharacterStats.TriggerAllStatus;

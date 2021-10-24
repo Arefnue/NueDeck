@@ -12,11 +12,12 @@ namespace NueDeck.Scripts.UI
         public TextMeshProUGUI goldText;
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI healthText;
+      
         private void Awake()
         {
-            randomizedDeck.SetActive(GameManager.instance.PersistentGameplayData.IsRandomHand);
+           ResetCanvas();
         }
-        
+
         public void SetRoomText(int roomNumber,bool useStage = false, int stageNumber = -1) => 
             roomText.text = useStage ? $"Room {stageNumber}/{roomNumber}" : $"Room {roomNumber}";
 
@@ -29,6 +30,9 @@ namespace NueDeck.Scripts.UI
         public override void ResetCanvas()
         {
             randomizedDeck.SetActive(GameManager.instance.PersistentGameplayData.IsRandomHand);
+            SetHealthText(GameManager.instance.PersistentGameplayData.AllyList[0].allyData.maxHealth,GameManager.instance.PersistentGameplayData.AllyList[0].allyData.maxHealth);
+            SetNameText(GameManager.instance.GameplayData.defaultName);
+            SetRoomText(GameManager.instance.PersistentGameplayData.CurrentEncounterId+1,GameManager.instance.GameplayData.useStageSystem,GameManager.instance.PersistentGameplayData.CurrentStageId+1);
         }
     }
 }
