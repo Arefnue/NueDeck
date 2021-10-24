@@ -26,11 +26,9 @@ namespace NueDeck.Scripts.Characters
             {
                 CharacterStats.CurrentHealth = GameManager.instance.PersistentGameplayData.CurrentHealthDict[allyData.characterID];
                 CharacterStats.MaxHealth = GameManager.instance.PersistentGameplayData.MaxHealthDict[allyData.characterID];
-                Debug.Log("AA");
             }
             else
             {
-                Debug.Log("BB");
                 GameManager.instance.PersistentGameplayData.CurrentHealthDict.Add(allyData.characterID,CharacterStats.CurrentHealth);
                 GameManager.instance.PersistentGameplayData.MaxHealthDict.Add(allyData.characterID,CharacterStats.MaxHealth);
             }

@@ -35,3 +35,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ffd3079242e164645ba9365c7c965def, type: 2}
   - {fileID: 11400000, guid: 8f655889219afa649a967e88e37f98ec, type: 2}
   cardPrefab: {fileID: 2689473134106589740, guid: a9728682a56595f4989b8f224d934689, type: 3}
+  defaultName: Nue
+  useStageSystem: 0
