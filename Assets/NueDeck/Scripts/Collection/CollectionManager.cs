@@ -58,6 +58,11 @@ namespace NueDeck.Scripts.Collection
                 currentDrawCount++;
                 UIManager.instance.combatCanvas.SetPileTexts();
             }
+            
+            foreach (var cardObject in handController.hand)
+            {
+                cardObject.UpdateCardText();
+            }
         }
 
         public void DiscardHand()
@@ -120,6 +125,10 @@ namespace NueDeck.Scripts.Collection
             handPile.Remove(targetCard.CardData);
             discardPile.Add(targetCard.CardData);
             UIManager.instance.combatCanvas.SetPileTexts();
+            foreach (var cardObject in handController.hand)
+            {
+                cardObject.UpdateCardText();
+            }
         }
 
         public void SetGameDeck()

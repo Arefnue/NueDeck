@@ -51,10 +51,18 @@ namespace NueDeck.Scripts.Card
             _dissolveColor = _cardMaterial.GetColor("_DissolveColor");
             
             nameText.text = CardData.myName;
-            descText.text = CardData.myDescription;
+            descText.text = CardData.MyDescription;
             manaText.text = CardData.myManaCost.ToString();
             frontImage.sprite = CardData.mySprite;
 
+        }
+
+        public void UpdateCardText()
+        {
+            CardData.UpdateDescription();
+            nameText.text = CardData.myName;
+            descText.text = CardData.MyDescription;
+            manaText.text = CardData.myManaCost.ToString();
         }
 
         #endregion

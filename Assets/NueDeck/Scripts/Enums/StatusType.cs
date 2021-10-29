@@ -4,6 +4,8 @@
     {
         Block,
         Poison,
-        Strength
+        Strength,
+        Dexterity,
+        
     }
 }

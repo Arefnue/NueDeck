@@ -69,7 +69,7 @@ namespace NueDeck.Scripts.Characters
             statusDict[StatusType.Block].ClearAtNextTurn = true;
 
             statusDict[StatusType.Strength].CanNegativeStack = true;
-
+            statusDict[StatusType.Dexterity].CanNegativeStack = true;
         }
 
         public void ApplyStatus(StatusType targetStatus,int value)
