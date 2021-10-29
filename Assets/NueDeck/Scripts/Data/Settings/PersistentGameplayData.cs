@@ -18,9 +18,9 @@ namespace NueDeck.Scripts.Data.Settings
         public bool IsRandomHand { get; set; }
         public List<AllyBase> AllyList { get; set; }
         public int CurrentStageId { get; set; }
-        
         public int CurrentEncounterId { get; set; }
         
+        public bool IsFinalEncounter { get; set; }
         public List<CardData> CurrentCardsList{ get; set; }
 
         public Dictionary<int, int> CurrentHealthDict { get; set; } = new Dictionary<int, int>();
@@ -64,7 +64,7 @@ namespace NueDeck.Scripts.Data.Settings
             CurrentStageId = 0;
             CurrentGold = 0;
             CurrentCardsList = new List<CardData>();
-            
+            IsFinalEncounter = false;
             CurrentHealthDict?.Clear();
             MaxHealthDict?.Clear();
         }

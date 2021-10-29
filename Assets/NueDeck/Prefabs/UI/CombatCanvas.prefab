@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 6074641411779666212}
   - component: {fileID: 2010911190834215212}
   m_Layer: 5
-  m_Name: WinCombatPanel
+  m_Name: WinGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,7 +905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2253876569134549277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1913,7 +1913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4550346563000777829
 RectTransform:
   m_ObjectHideFlags: 0

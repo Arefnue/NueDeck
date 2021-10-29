@@ -211,10 +211,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: InformationCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6334593025835562393, guid: 701d4c09c8f0880498fb64626727d7bc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 701d4c09c8f0880498fb64626727d7bc, type: 3}
 --- !u!224 &279775570707090529 stripped
@@ -328,10 +324,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RewardCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 9173700988199943096, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
 --- !u!224 &6382937254159657753 stripped
@@ -357,18 +349,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2388636854935074172}
     m_Modifications:
-    - target: {fileID: 1244391065, guid: 3cb5ee0c41b0f3145bdb870938f278a7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2388636854935074175}
-    - target: {fileID: 973998050907216772, guid: 3cb5ee0c41b0f3145bdb870938f278a7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3667953264884879884, guid: 3cb5ee0c41b0f3145bdb870938f278a7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2388636854935074175}
     - target: {fileID: 4550346563000777829, guid: 3cb5ee0c41b0f3145bdb870938f278a7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -456,10 +436,6 @@ PrefabInstance:
     - target: {fileID: 6447349071978735998, guid: 3cb5ee0c41b0f3145bdb870938f278a7, type: 3}
       propertyPath: m_Name
       value: CombatCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6447349071978735998, guid: 3cb5ee0c41b0f3145bdb870938f278a7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cb5ee0c41b0f3145bdb870938f278a7, type: 3}

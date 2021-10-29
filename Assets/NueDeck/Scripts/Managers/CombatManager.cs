@@ -124,7 +124,7 @@ namespace NueDeck.Scripts.Managers
         
         private void BuildEnemies()
         {
-            var encounter = GameManager.instance.EncounterData.GetEnemyEncounter(GameManager.instance.PersistentGameplayData.CurrentStageId,GameManager.instance.PersistentGameplayData.CurrentEncounterId).enemyList;
+            var encounter = GameManager.instance.EncounterData.GetEnemyEncounter(GameManager.instance.PersistentGameplayData.CurrentStageId,GameManager.instance.PersistentGameplayData.CurrentEncounterId,GameManager.instance.PersistentGameplayData.IsFinalEncounter).enemyList;
             for (var i = 0; i < encounter.Count; i++)
             {
                 var clone = Instantiate(encounter[i], enemyPosList.Count >= i ? enemyPosList[i] : enemyPosList[0]);
@@ -202,10 +202,20 @@ namespace NueDeck.Scripts.Managers
             CollectionManager.instance.handPile.Clear();
             CollectionManager.instance.handController.hand.Clear();
             
-            UIManager.instance.combatCanvas.gameObject.SetActive(false);
-            UIManager.instance.rewardCanvas.gameObject.SetActive(true);
-            UIManager.instance.rewardCanvas.BuildReward(RewardType.Gold);
-            UIManager.instance.rewardCanvas.BuildReward(RewardType.Card);
+           
+            if (GameManager.instance.PersistentGameplayData.IsFinalEncounter)
+            {
+                UIManager.instance.combatCanvas.combatWinPanel.SetActive(true);
+            }
+            else
+            {
+                GameManager.instance.PersistentGameplayData.CurrentEncounterId++;
+                UIManager.instance.combatCanvas.gameObject.SetActive(false);
+                UIManager.instance.rewardCanvas.gameObject.SetActive(true);
+                UIManager.instance.rewardCanvas.BuildReward(RewardType.Gold);
+                UIManager.instance.rewardCanvas.BuildReward(RewardType.Card);
+            }
+           
         }
     
         #endregion

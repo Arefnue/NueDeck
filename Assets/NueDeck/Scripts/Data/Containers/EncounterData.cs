@@ -15,12 +15,14 @@ namespace NueDeck.Scripts.Data.Containers
         public bool encounterRandomlyAtStage; 
         public List<EnemyEncounterStage> enemyEncounterList;
 
-        public EnemyEncounter GetEnemyEncounter(int stageId = 0,int encounterId =0)
+        public EnemyEncounter GetEnemyEncounter(int stageId = 0,int encounterId =0,bool isFinal = false)
         {
             var selectedStage = enemyEncounterList.First(x => x.stageId == stageId);
+            if (isFinal) return selectedStage.bossEncounterList.RandomItem();
+           
             return encounterRandomlyAtStage
                 ? selectedStage.enemyEncounterList.RandomItem()
-                : selectedStage.enemyEncounterList[encounterId];
+                : selectedStage.enemyEncounterList[encounterId] ?? selectedStage.enemyEncounterList.RandomItem();
         }
         
     }
@@ -31,6 +33,7 @@ namespace NueDeck.Scripts.Data.Containers
     {
         public string name;
         public int stageId;
+        public List<EnemyEncounter> bossEncounterList;
         public List<EnemyEncounter> enemyEncounterList;
     }
     
