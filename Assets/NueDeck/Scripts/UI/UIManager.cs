@@ -1,4 +1,5 @@
 using NueDeck.Scripts.Managers;
+using NueDeck.Scripts.UI.Reward;
 using UnityEngine;
 
 namespace NueDeck.Scripts.UI

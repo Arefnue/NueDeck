@@ -19,6 +19,8 @@ namespace NueDeck.Scripts.Card
         [SerializeField] private TextMeshProUGUI manaText;
         [SerializeField] private Image frontImage;
         [SerializeField] private Image backImage;
+        [SerializeField] private Image inactiveImage;
+        
         public CardData CardData { get; private set; }
 
         private readonly Vector2 _dissolveOffset = new Vector2(0.1f, 0);
@@ -93,6 +95,8 @@ namespace NueDeck.Scripts.Card
             
             _isInactive = isInactive;
             cardMeshRenderer.sharedMaterial = isInactive ? inactiveMaterial : _cardMaterial;
+
+            inactiveImage.gameObject.SetActive(isInactive);
         }
         
         #endregion
@@ -147,8 +151,6 @@ namespace NueDeck.Scripts.Card
         }
 
         #endregion
-        
-       
         
     }
 }

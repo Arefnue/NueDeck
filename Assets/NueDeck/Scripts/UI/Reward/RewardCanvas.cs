@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using NueDeck.Scripts.Card;
+using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Data.Containers;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Managers;
 using NueExtentions;
 using UnityEngine;
 
-namespace NueDeck.Scripts.UI
+namespace NueDeck.Scripts.UI.Reward
 {
     public class RewardCanvas : CanvasBase
     {
@@ -14,8 +16,15 @@ namespace NueDeck.Scripts.UI
         [SerializeField] private Transform rewardRoot;
         [SerializeField] private RewardContainer rewardContainerPrefab;
 
+        [Header("Choice")]
+        [SerializeField] private List<Transform> choiceCardSpawnTransformList;
+        [SerializeField] private Choice choicePrefab;
+        public ChoicePanel choicePanel;
+        
         private List<RewardContainer> _currentRewardsList = new List<RewardContainer>();
-
+        private List<Choice> _spawnedChoiceList = new List<Choice>();
+        private List<CardData> _cardRewardList = new List<CardData>();
+       
         public void BuildReward(RewardType rewardType)
         {
             var rewardClone = Instantiate(rewardContainerPrefab, rewardRoot);
@@ -30,7 +39,7 @@ namespace NueDeck.Scripts.UI
                     break;
                 case RewardType.Card:
                     rewardClone.BuildReward(rewardData.cardReward.rewardSprite,rewardData.cardReward.rewardDescription);
-                    rewardClone.rewardButton.onClick.AddListener(()=>GetCardReward(rewardClone,1));
+                    rewardClone.rewardButton.onClick.AddListener(()=>GetCardReward(rewardClone,3));
                     break;
                 case RewardType.Relic:
                     break;
@@ -47,10 +56,26 @@ namespace NueDeck.Scripts.UI
             Destroy(rewardContainer.gameObject);
         }
 
-        private void GetCardReward(RewardContainer rewardContainer,int amount)
+        private void GetCardReward(RewardContainer rewardContainer,int amount = 3)
         {
-            GameManager.instance.PersistentGameplayData.CurrentCardsList.Add(GameManager.instance.GameplayData.allCardsList.RandomItem());
-            _currentRewardsList.Remove(rewardContainer);
+            choicePanel.gameObject.SetActive(true);
+
+            foreach (var cardData in rewardData.cardReward.rewardCardList)
+            {
+                _cardRewardList.Add(cardData);
+            }
+            
+            for (int i = 0; i < amount; i++)
+            {
+                var choice = Instantiate(choicePrefab, choiceCardSpawnTransformList[i]);
+                var reward = _cardRewardList.RandomItem();
+                choice.BuildReward(reward);
+                _cardRewardList.Remove(reward);
+                choice.transform.localPosition = Vector3.zero;
+                _spawnedChoiceList.Add(choice);
+                _currentRewardsList.Remove(rewardContainer);
+            }
+            
             Destroy(rewardContainer.gameObject);
         }
 
@@ -60,7 +85,14 @@ namespace NueDeck.Scripts.UI
             {
                 Destroy(rewardContainer.gameObject);
             }
-            _currentRewardsList.Clear();
+
+            foreach (var choice in _spawnedChoiceList)
+            {
+                Destroy(choice.gameObject);
+            }
+            choicePanel.DisablePanel();
+            _spawnedChoiceList?.Clear();
+            _currentRewardsList?.Clear();
         }
     }
 }

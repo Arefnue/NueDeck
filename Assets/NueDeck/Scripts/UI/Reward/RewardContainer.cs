@@ -1,13 +1,8 @@
-﻿using System;
-using NueDeck.Scripts.Data.Containers;
-using NueDeck.Scripts.Enums;
-using NueDeck.Scripts.Managers;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace NueDeck.Scripts.UI
+namespace NueDeck.Scripts.UI.Reward
 {
     public class RewardContainer : MonoBehaviour
     {
