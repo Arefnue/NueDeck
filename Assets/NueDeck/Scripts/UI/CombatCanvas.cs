@@ -16,7 +16,6 @@ namespace NueDeck.Scripts.UI
         public GameObject combatWinPanel;
         public GameObject combatLosePanel;
 
-
         private void Awake()
         {
             combatWinPanel.SetActive(false);

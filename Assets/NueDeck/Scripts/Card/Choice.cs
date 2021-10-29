@@ -21,23 +21,7 @@ namespace NueDeck.Scripts.Card
         {
             _cardObject.SetCard(cardData);
         }
-
-        public void DetermineChoice()
-        {
-            // do
-            // {
-            //     _myChoiceProfile = HandManager.instance.choiceCardList[Random.Range(0, GameManager.instance.choiceCardList.Count)];
-            //     if (HandManager.instance.sameChoiceContainerList.Count>= GameManager.instance.choiceCardList.Count)
-            //     {
-            //         break;
-            //     }
-            // } while (HandManager.instance.sameChoiceContainerList.Contains(_myChoiceProfile.myID));
-            //
-            // HandManager.instance.sameChoiceContainerList.Add(_myChoiceProfile.myID);
-            // var clone =GameManager.instance.BuildAndGetCard(_myChoiceProfile.myID,cardTransform);
-            // GameManager.instance.choiceContainer.Add(clone);
-           
-        }
+        
 
         public void OnChoice()
         {

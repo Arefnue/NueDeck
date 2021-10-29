@@ -110,6 +110,7 @@ namespace NueDeck.Scripts.Managers
         public void OnAllyDeath(AllyBase targetAlly)
         {
             currentAllies.Remove(targetAlly);
+            Debug.Log(currentAllies.Count);
             if (currentAllies.Count<=0)
                 LoseCombat();
         } 
@@ -182,7 +183,8 @@ namespace NueDeck.Scripts.Managers
             CollectionManager.instance.drawPile.Clear();
             CollectionManager.instance.handPile.Clear();
             CollectionManager.instance.handController.hand.Clear();
-            UIManager.instance.combatCanvas.gameObject.SetActive(false);
+            UIManager.instance.combatCanvas.gameObject.SetActive(true);
+            UIManager.instance.combatCanvas.combatLosePanel.SetActive(true);
         }
 
         public void WinCombat()
@@ -205,21 +207,7 @@ namespace NueDeck.Scripts.Managers
             UIManager.instance.rewardCanvas.BuildReward(RewardType.Gold);
             UIManager.instance.rewardCanvas.BuildReward(RewardType.Card);
         }
-        
-        private void OnChoiceStart()
-        {
-            CurrentCombatState = CombatState.EndCombat;
-            
-            foreach (var choice in CollectionManager.instance.rewardController.choicesList) choice.DetermineChoice();
-            CollectionManager.instance.DiscardHand();
-            CollectionManager.instance.discardPile.Clear();
-            CollectionManager.instance.drawPile.Clear();
-            CollectionManager.instance.handPile.Clear();
-            CollectionManager.instance.handController.hand.Clear();
-            CollectionManager.instance.rewardController.choiceParent.gameObject.SetActive(true);
-            UIManager.instance.combatCanvas.gameObject.SetActive(false);
-        }
-
+    
         #endregion
         
         #region Routines
