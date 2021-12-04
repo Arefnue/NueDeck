@@ -12,12 +12,12 @@ namespace NueDeck.Scripts.Utils
 
         public void PlaySfx()
         {
-            AudioManager.instance.PlayOneShot(myProfileData.GetRandomClip());
+            AudioManager.Instance.PlayOneShot(myProfileData.GetRandomClip());
         }
 
         public void PlayButton()
         {
-            AudioManager.instance.PlayOneShotButton(myProfileData.GetRandomClip());
+            AudioManager.Instance.PlayOneShotButton(myProfileData.GetRandomClip());
         }
     }
 }

@@ -8,14 +8,14 @@ namespace NueDeck.Scripts.Card
 { 
     public static class CardActionProcessor
     {
-        private static Dictionary<CardActionType, CardActionBase> _cardActionDict =
+        private static readonly Dictionary<CardActionType, CardActionBase> CardActionDict =
             new Dictionary<CardActionType, CardActionBase>();
 
-        private static bool _initialized;
+        public static bool IsInitialized { get; private set; }
 
         public static void Initialize()
         {
-            _cardActionDict.Clear();
+            CardActionDict.Clear();
 
             var allActionCards = Assembly.GetAssembly(typeof(CardActionBase)).GetTypes()
                 .Where(t => typeof(CardActionBase).IsAssignableFrom(t) && t.IsAbstract == false);
@@ -23,14 +23,14 @@ namespace NueDeck.Scripts.Card
             foreach (var actionCard in allActionCards)
             {
                 CardActionBase action = Activator.CreateInstance(actionCard) as CardActionBase;
-                _cardActionDict.Add(action.ActionType,action);
+                if (action != null) CardActionDict.Add(action.ActionType, action);
             }
 
-            _initialized = true;
+            IsInitialized = true;
         }
 
         public static CardActionBase GetAction(CardActionType targetAction) =>
-            _cardActionDict[targetAction];
+            CardActionDict[targetAction];
 
     }
 }

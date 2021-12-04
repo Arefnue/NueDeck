@@ -1,5 +1,4 @@
 using NueDeck.Scripts.Data.Collection;
-using NueDeck.Scripts.Data.Containers;
 using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.UI;
 using UnityEngine;
@@ -11,6 +10,8 @@ namespace NueDeck.Scripts.Card
     {
         private CardObject _cardObject;
         private Vector3 _initalScale;
+        [SerializeField] private float showScaleRate = 1.15f;
+
         private void Awake()
         {
             _cardObject = GetComponent<CardObject>();
@@ -20,10 +21,11 @@ namespace NueDeck.Scripts.Card
         public void BuildReward(CardData cardData)
         {
             _cardObject.SetCard(cardData);
+            _cardObject.UpdateCardText();
         }
-        
 
-        public void OnChoice()
+
+        private void OnChoice()
         {
             GameManager.instance.PersistentGameplayData.CurrentCardsList.Add(_cardObject.CardData);
             
@@ -32,7 +34,7 @@ namespace NueDeck.Scripts.Card
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            transform.localScale = _initalScale * 1.15f;
+            transform.localScale = _initalScale * showScaleRate;
         }
 
         public void OnPointerDown(PointerEventData eventData)

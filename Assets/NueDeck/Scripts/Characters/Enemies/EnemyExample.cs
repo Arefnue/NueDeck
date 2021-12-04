@@ -14,7 +14,7 @@ namespace NueDeck.Scripts.Characters.Enemies
         protected override void OnDeath()
         { 
             base.OnDeath();
-            AudioManager.instance.PlayOneShot(deathSoundProfileData.GetRandomClip());
+            AudioManager.Instance.PlayOneShot(deathSoundProfileData.GetRandomClip());
             Destroy(gameObject);
         }
 

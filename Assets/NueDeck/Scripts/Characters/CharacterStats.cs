@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using NueDeck.Scripts.Enums;
-using NueDeck.Scripts.UI;
-using UnityEngine;
 
 namespace NueDeck.Scripts.Characters
 {
@@ -10,14 +8,13 @@ namespace NueDeck.Scripts.Characters
     {
         public StatusType StatusType { get; set; }
         public int StatusValue { get; set; }
-
-        public Action OnTriggerAction;
         public bool DecreaseOverTurn { get; set; }
         public bool IsPermanent { get; set; }
         public bool IsActive { get; set; }
         public bool CanNegativeStack { get; set; }
         public bool ClearAtNextTurn { get; set; }
         
+        public Action OnTriggerAction;
         public StatusStats(StatusType statusType,int statusValue,bool decreaseOverTurn = false, bool isPermanent = false,bool isActive = false,bool canNegativeStack = false,bool clearAtNextTurn = false)
         {
             StatusType = statusType;
@@ -36,55 +33,53 @@ namespace NueDeck.Scripts.Characters
        
         public Action OnDeath;
         public Action<int, int> OnHealthChanged;
-        public Action<StatusType,int> OnStatusChanged;
-        public Action<StatusType, int> OnStatusApplied;
-        public Action<StatusType> OnStatusCleared;
-        private CharacterCanvas _characterCanvas;
-
-        public Dictionary<StatusType, StatusStats> statusDict = new Dictionary<StatusType, StatusStats>();
+        private readonly Action<StatusType,int> OnStatusChanged;
+        private readonly Action<StatusType, int> OnStatusApplied;
+        private readonly Action<StatusType> OnStatusCleared;
+        
+        public readonly Dictionary<StatusType, StatusStats> StatusDict = new Dictionary<StatusType, StatusStats>();
         
         public CharacterStats(int maxHealth, CharacterCanvas characterCanvas)
         {
             MaxHealth = maxHealth;
             CurrentHealth = maxHealth;
             SetAllStatus();
-
-            _characterCanvas = characterCanvas;
-            OnHealthChanged += _characterCanvas.UpdateHealthText;
-            OnStatusChanged += _characterCanvas.UpdateStatusText;
-            OnStatusApplied += _characterCanvas.ApplyStatus;
-            OnStatusCleared += _characterCanvas.ClearStatus;
+            
+            OnHealthChanged += characterCanvas.UpdateHealthText;
+            OnStatusChanged += characterCanvas.UpdateStatusText;
+            OnStatusApplied += characterCanvas.ApplyStatus;
+            OnStatusCleared += characterCanvas.ClearStatus;
         }
 
         private void SetAllStatus()
         {
             for (int i = 0; i < Enum.GetNames(typeof(StatusType)).Length; i++)
             {
-                statusDict.Add((StatusType) i, new StatusStats((StatusType) i, 0));
+                StatusDict.Add((StatusType) i, new StatusStats((StatusType) i, 0));
             }
 
-            statusDict[StatusType.Poison].DecreaseOverTurn = true;
-            statusDict[StatusType.Poison].OnTriggerAction += DamagePoison;
+            StatusDict[StatusType.Poison].DecreaseOverTurn = true;
+            StatusDict[StatusType.Poison].OnTriggerAction += DamagePoison;
 
-            statusDict[StatusType.Block].ClearAtNextTurn = true;
+            StatusDict[StatusType.Block].ClearAtNextTurn = true;
 
-            statusDict[StatusType.Strength].CanNegativeStack = true;
-            statusDict[StatusType.Dexterity].CanNegativeStack = true;
+            StatusDict[StatusType.Strength].CanNegativeStack = true;
+            StatusDict[StatusType.Dexterity].CanNegativeStack = true;
         }
 
         public void ApplyStatus(StatusType targetStatus,int value)
         {
-            if (statusDict[targetStatus].IsActive)
+            if (StatusDict[targetStatus].IsActive)
             {
-                statusDict[targetStatus].StatusValue += value;
-                OnStatusChanged?.Invoke(targetStatus, statusDict[targetStatus].StatusValue);
+                StatusDict[targetStatus].StatusValue += value;
+                OnStatusChanged?.Invoke(targetStatus, StatusDict[targetStatus].StatusValue);
                 
             }
             else
             {
-                statusDict[targetStatus].StatusValue += value;
-                statusDict[targetStatus].IsActive = true;
-                OnStatusApplied?.Invoke(targetStatus, statusDict[targetStatus].StatusValue);
+                StatusDict[targetStatus].StatusValue += value;
+                StatusDict[targetStatus].IsActive = true;
+                OnStatusApplied?.Invoke(targetStatus, StatusDict[targetStatus].StatusValue);
             }
             
         }
@@ -92,46 +87,50 @@ namespace NueDeck.Scripts.Characters
         public void TriggerAllStatus()
         {
             for (int i = 0; i < Enum.GetNames(typeof(StatusType)).Length; i++)
-            {
                 TriggerStatus((StatusType) i);
-            }
            
         }
 
         public void TriggerStatus(StatusType targetStatus)
         {
-            statusDict[targetStatus].OnTriggerAction?.Invoke();
+            StatusDict[targetStatus].OnTriggerAction?.Invoke();
           
 
-            if (statusDict[targetStatus].ClearAtNextTurn)
+            if (StatusDict[targetStatus].ClearAtNextTurn)
             {
                 ClearStatus(targetStatus);
+                OnStatusChanged?.Invoke(targetStatus, StatusDict[targetStatus].StatusValue);
                 return;
             }
             
-            if (statusDict[targetStatus].StatusValue <= 0)
+            if (StatusDict[targetStatus].StatusValue <= 0)
             {
-                if (statusDict[targetStatus].CanNegativeStack)
+                if (StatusDict[targetStatus].CanNegativeStack)
                 {
-                    if (statusDict[targetStatus].StatusValue == 0)
-                        if (!statusDict[targetStatus].IsPermanent)
-                            ClearStatus(targetStatus);
+                    if (StatusDict[targetStatus].StatusValue == 0 && !StatusDict[targetStatus].IsPermanent)
+                        ClearStatus(targetStatus);
                 }
                 else
                 {
-                    if (!statusDict[targetStatus].IsPermanent)
+                    if (!StatusDict[targetStatus].IsPermanent)
                         ClearStatus(targetStatus);
                 }
             }
             
-            if (statusDict[targetStatus].DecreaseOverTurn) 
-                statusDict[targetStatus].StatusValue--;
+            if (StatusDict[targetStatus].DecreaseOverTurn) 
+                StatusDict[targetStatus].StatusValue--;
+            
+            if (StatusDict[targetStatus].StatusValue == 0)
+                if (!StatusDict[targetStatus].IsPermanent)
+                    ClearStatus(targetStatus);
+            
+            OnStatusChanged?.Invoke(targetStatus, StatusDict[targetStatus].StatusValue);
         }
 
         public void ClearStatus(StatusType targetStatus)
         {
-            statusDict[targetStatus].IsActive = false;
-            statusDict[targetStatus].StatusValue = 0;
+            StatusDict[targetStatus].IsActive = false;
+            StatusDict[targetStatus].StatusValue = 0;
             OnStatusCleared?.Invoke(targetStatus);
         }
 
@@ -153,13 +152,14 @@ namespace NueDeck.Scripts.Characters
             
             if (!canPierceArmor)
             {
-                if (statusDict[StatusType.Block].IsActive)
+                if (StatusDict[StatusType.Block].IsActive)
                 {
                     ApplyStatus(StatusType.Block,-value);
-                
-                    if (statusDict[StatusType.Block].StatusValue < 0)
+
+                    remainingDamage = 0;
+                    if (StatusDict[StatusType.Block].StatusValue <= 0)
                     {
-                        remainingDamage = statusDict[StatusType.Block].StatusValue * -1;
+                        remainingDamage = StatusDict[StatusType.Block].StatusValue * -1;
                         ClearStatus(StatusType.Block);
                     }
                 }
@@ -178,8 +178,8 @@ namespace NueDeck.Scripts.Characters
         
         private void DamagePoison()
         {
-            if (statusDict[StatusType.Poison].StatusValue<=0) return;
-            Damage(statusDict[StatusType.Poison].StatusValue,true);
+            if (StatusDict[StatusType.Poison].StatusValue<=0) return;
+            Damage(StatusDict[StatusType.Poison].StatusValue,true);
         }
         
         public void IncreaseMaxHealth(int value)

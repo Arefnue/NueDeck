@@ -9,7 +9,7 @@ namespace NueDeck.Scripts.EnemyBehaviour.EnemyActions
         
         public override void DoAction(EnemyActionParameters actionParameters)
         {
-            actionParameters.targetCharacter.CharacterStats.Damage(Mathf.RoundToInt(actionParameters.value)+actionParameters.selfCharacter.CharacterStats.statusDict[StatusType.Strength].StatusValue);
+            actionParameters.targetCharacter.CharacterStats.Damage(Mathf.RoundToInt(actionParameters.value)+actionParameters.selfCharacter.CharacterStats.StatusDict[StatusType.Strength].StatusValue);
         }
     }
 }

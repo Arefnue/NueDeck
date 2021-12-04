@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NueDeck.Scripts.Enums;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Managers
 {
     public class FxManager : MonoBehaviour
     {
-        public static FxManager instance;
-        
-        public enum FxType
-        {
-            Attack,
-            Heal,
-            Poison,
-            Block,
-            Str,
-            Buff
-        }
-
+        public static FxManager Instance;
+    
         [Header("Fx")] 
         public List<FxBundle> fxList;
 
@@ -27,17 +18,22 @@ namespace NueDeck.Scripts.Managers
         
         private void Awake()
         {
-            instance = this;
+            if (Instance)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            
             for (int i = 0; i < Enum.GetValues(typeof(FxType)).Length; i++)
             {
-                fxDict.Add((FxType)i,fxList.FirstOrDefault(x=>x.myType == (FxType)i).myObject);
+                fxDict.Add((FxType)i,fxList.FirstOrDefault(x=>x.myType == (FxType)i)?.myObject);
             }
         }
 
         public void PlayFx(Transform targetTransform, FxType targetFx)
         {
-            var clone = Instantiate(fxDict[targetFx], targetTransform);
-            
+            Instantiate(fxDict[targetFx], targetTransform);
         }
         
     }
@@ -45,7 +41,7 @@ namespace NueDeck.Scripts.Managers
     [Serializable]
     public class FxBundle
     {
-        public FxManager.FxType myType;
+        public FxType myType;
         public GameObject myObject;
     }
 }

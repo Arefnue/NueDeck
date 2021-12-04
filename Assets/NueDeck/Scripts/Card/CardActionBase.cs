@@ -1,18 +1,21 @@
 ﻿using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Enums;
 
 namespace NueDeck.Scripts.Card
 {
     public class CardActionParameters
     {
-        public float value;
-        public CharacterBase targetCharacter;
-        public CharacterBase selfCharacter;
-        public CardActionParameters(float value,CharacterBase target, CharacterBase self)
+        public readonly float Value;
+        public readonly CharacterBase TargetCharacter;
+        public readonly CharacterBase SelfCharacter;
+        public readonly CardData CardData;
+        public CardActionParameters(float value,CharacterBase target, CharacterBase self,CardData cardData)
         {
-            this.value = value;
-            targetCharacter = target;
-            selfCharacter = self;
+            Value = value;
+            TargetCharacter = target;
+            SelfCharacter = self;
+            CardData = cardData;
         }
     }
     public abstract class CardActionBase

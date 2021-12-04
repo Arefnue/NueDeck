@@ -8,6 +8,8 @@
         IncreaseStrength,
         IncreaseMaxHealth,
         Draw,
-        EarnMana
+        EarnMana,
+        ConvertPoisonToHeal,
+        ConvertPoisonToDamage
     }
 }

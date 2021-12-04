@@ -11,7 +11,7 @@ namespace NueDeck.Scripts.Collection
 {
     public class CollectionManager : MonoBehaviour
     {
-        public static CollectionManager instance;
+        public static CollectionManager Instance;
 
         [Header("Controllers")] 
         public HandController handController;
@@ -25,7 +25,7 @@ namespace NueDeck.Scripts.Collection
 
         private void Awake()
         {
-            instance = this;
+            Instance = this;
         }
 
         #endregion
@@ -78,15 +78,15 @@ namespace NueDeck.Scripts.Collection
             {
                 targetCard = drawPile[Random.Range(0, drawPile.Count)];
                 StartCoroutine(ExhaustCardRoutine(targetCard, handController.drawTransform,
-                    CombatManager.instance.currentEnemies[0].transform));
+                    CombatManager.Instance.currentEnemies[0].transform));
             }
             else if (discardPile.Count > 0)
             {
                 targetCard = discardPile[Random.Range(0, discardPile.Count)];
                 StartCoroutine(ExhaustCardRoutine(targetCard, handController.discardTransform,
-                    CombatManager.instance.currentEnemies[0].transform));
+                    CombatManager.Instance.currentEnemies[0].transform));
             }
-            else if (instance.handPile.Count > 0)
+            else if (Instance.handPile.Count > 0)
             {
                 targetCard = handPile[Random.Range(0, handPile.Count)];
                 var tCard = handController.hand[0];
@@ -98,7 +98,7 @@ namespace NueDeck.Scripts.Collection
                     }
 
                 StartCoroutine(ExhaustCardRoutine(targetCard, tCard.transform,
-                    CombatManager.instance.currentEnemies[0].transform));
+                    CombatManager.Instance.currentEnemies[0].transform));
                 handController.hand?.Remove(tCard);
                 Destroy(tCard.gameObject);
             }

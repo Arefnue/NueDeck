@@ -1,4 +1,5 @@
 ﻿using NueDeck.Scripts.Enums;
+using NueDeck.Scripts.Managers;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Card.CardActions
@@ -8,10 +9,13 @@ namespace NueDeck.Scripts.Card.CardActions
         public override CardActionType ActionType => CardActionType.Attack;
         public override void DoAction(CardActionParameters actionParameters)
         {
-            if (actionParameters.targetCharacter)
-            {
-                actionParameters.targetCharacter.CharacterStats.Damage(Mathf.RoundToInt(actionParameters.value)+actionParameters.selfCharacter.CharacterStats.statusDict[StatusType.Strength].StatusValue);
-            }
+            if (!actionParameters.TargetCharacter) return;
+            
+            actionParameters.TargetCharacter.CharacterStats.Damage(Mathf.RoundToInt(actionParameters.Value +
+                actionParameters.SelfCharacter.CharacterStats.StatusDict[StatusType.Strength].StatusValue));
+            
+            FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
+            AudioManager.Instance.PlayOneShot(actionParameters.CardData.audioType);
         }
     }
 }

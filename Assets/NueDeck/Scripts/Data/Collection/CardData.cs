@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using NueDeck.Scripts.Data.Containers;
-using NueDeck.Scripts.Data.Settings;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Managers;
 using NueExtentions;
@@ -24,8 +22,8 @@ namespace NueDeck.Scripts.Data.Collection
         public Sprite mySprite;
         public List<CardActionData> actionList;
         public List<DescriptionData> descriptionDataList;
-        public SoundProfileData mySoundProfileData;
-
+        public AudioActionType audioType;
+        
         public void UpdateDescription()
         {
             MyDescription = "";
@@ -81,10 +79,10 @@ namespace NueDeck.Scripts.Data.Collection
                 if (useModifer)
                 {
                    
-                    var player = CombatManager.instance.currentAllies[0];
+                    var player = CombatManager.Instance.currentAllies[0];
                     if (player)
                     {
-                        var modifer =player.CharacterStats.statusDict[modiferStatus].StatusValue;
+                        var modifer =player.CharacterStats.StatusDict[modiferStatus].StatusValue;
                         value += modifer;
                         if (modifer!= 0)
                         {

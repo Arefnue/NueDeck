@@ -254,7 +254,7 @@ namespace NueDeck.Scripts.Collection
                     Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
                 cardTransform.position = cardPos;
 
-                CombatManager.instance.HighlightCardTarget(_heldCard.CardData.myTargets);
+                CombatManager.Instance.HighlightCardTarget(_heldCard.CardData.myTargets);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
                 if (!GameManager.instance.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
@@ -266,7 +266,7 @@ namespace NueDeck.Scripts.Collection
                     _selected = -1;
                     _heldCard = null;
 
-                    CombatManager.instance.DeactivateCardHighlights();
+                    CombatManager.Instance.DeactivateCardHighlights();
 
                     return;
                 }
@@ -282,7 +282,7 @@ namespace NueDeck.Scripts.Collection
             if (!mouseButtonUp) return;
             
             //Remove highlights
-            CombatManager.instance.DeactivateCardHighlights();
+            CombatManager.Instance.DeactivateCardHighlights();
             bool backToHand = true;
                 
             if (GameManager.instance.PersistentGameplayData.CanUseCards && GameManager.instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.myManaCost)
@@ -304,7 +304,7 @@ namespace NueDeck.Scripts.Collection
                                  .GetComponent<AllyBase>()))
                         {
                             backToHand = false;
-                            _heldCard.Use(CombatManager.instance.currentAllies[0],character.GetCharacterBase());
+                            _heldCard.Use(CombatManager.Instance.currentAllies[0],character.GetCharacterBase());
                         }
                         
                     }
@@ -315,7 +315,7 @@ namespace NueDeck.Scripts.Collection
                     if (_heldCard.CardData.usableWithoutTarget)
                     {
                         backToHand = false;
-                        _heldCard.Use(CombatManager.instance.currentAllies[0],null);
+                        _heldCard.Use(CombatManager.Instance.currentAllies[0],null);
                     }
                 }
                 

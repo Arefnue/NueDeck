@@ -57,13 +57,7 @@ namespace NueDeck.Scripts.Card
 
         }
 
-        public void UpdateCardText()
-        {
-            CardData.UpdateDescription();
-            nameText.text = CardData.myName;
-            descText.text = CardData.MyDescription;
-            manaText.text = CardData.myManaCost.ToString();
-        }
+       
 
         #endregion
         
@@ -76,15 +70,15 @@ namespace NueDeck.Scripts.Card
             foreach (var playerAction in CardData.actionList)
                 CardActionProcessor.GetAction(playerAction.myPlayerActionType)
                     .DoAction(new CardActionParameters(playerAction.value,
-                        target,self));
+                        target,self,CardData));
             
-            CollectionManager.instance.OnCardPlayed(this);
+            CollectionManager.Instance.OnCardPlayed(this);
             
             StartCoroutine(nameof(DiscardRoutine));
         }
         public void Discard()
         {
-            CollectionManager.instance.OnCardDiscarded(this);
+            CollectionManager.Instance.OnCardDiscarded(this);
             StartCoroutine(nameof(DiscardRoutine));
         }
         public void Exhaust()
@@ -105,6 +99,14 @@ namespace NueDeck.Scripts.Card
             cardMeshRenderer.sharedMaterial = isInactive ? inactiveMaterial : _cardMaterial;
 
             inactiveImage.gameObject.SetActive(isInactive);
+        }
+        
+        public void UpdateCardText()
+        {
+            CardData.UpdateDescription();
+            nameText.text = CardData.myName;
+            descText.text = CardData.MyDescription;
+            manaText.text = CardData.myManaCost.ToString();
         }
         
         #endregion
@@ -131,7 +133,7 @@ namespace NueDeck.Scripts.Card
            
             var timer = 0f;
             
-            transform.SetParent(CollectionManager.instance.handController.discardTransform);
+            transform.SetParent(CollectionManager.Instance.handController.discardTransform);
             
             var startPos = _transform.localPosition;
             var endPos = Vector3.zero;

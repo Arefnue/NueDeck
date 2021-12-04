@@ -1,45 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using NueDeck.Scripts.Data.Containers;
+using NueDeck.Scripts.Enums;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Managers
 {
     public class AudioManager : MonoBehaviour
     {
-        public static AudioManager instance;
+        public static AudioManager Instance;
 
-        public AudioSource musicSource;
-        public AudioSource sfxSource;
-        public AudioSource buttonSource;
+        [SerializeField]private AudioSource musicSource;
+        [SerializeField]private AudioSource sfxSource;
+        [SerializeField]private AudioSource buttonSource;
         
+        [SerializeField] private List<SoundProfileData> soundProfileDataList;
+        
+        private Dictionary<AudioActionType, SoundProfileData> _audioDict = new Dictionary<AudioActionType, SoundProfileData>();
+
         
         private void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = this;
+                Instance = this;
 
                 DontDestroyOnLoad(gameObject);
             }
             else
             {
                 Destroy(gameObject);
+                return;
             }
+            
+            for (int i = 0; i < Enum.GetValues(typeof(AudioActionType)).Length; i++)
+            {
+                _audioDict.Add((AudioActionType)i,soundProfileDataList.FirstOrDefault(x=>x.audioType == (AudioActionType)i));
+            }
+
         }
 
 
         public void PlayMusic(AudioClip clip)
         {
-            musicSource.clip = clip;
-            musicSource.Play();
+            if (clip)
+            {
+                musicSource.clip = clip;
+                musicSource.Play();
+            }
+        }
+
+        public void PlayMusic(AudioActionType type)
+        {
+            var clip = _audioDict[type].GetRandomClip();
+            PlayMusic(clip);
+        }
+
+        public void PlayOneShot(AudioActionType type)
+        {
+            var clip = _audioDict[type].GetRandomClip();
+            PlayOneShot(clip);
+        }
+
+        public void PlayOneShotButton(AudioActionType type)
+        {
+            var clip = _audioDict[type].GetRandomClip();
+            PlayOneShotButton(clip);
         }
 
         public void PlayOneShot(AudioClip clip)
         {
-            sfxSource.PlayOneShot(clip);
+            if (clip)
+            {
+                sfxSource.PlayOneShot(clip);
+            }
         }
         
         public void PlayOneShotButton(AudioClip clip)
         {
-            buttonSource.PlayOneShot(clip);
+            if (clip)
+            {
+                buttonSource.PlayOneShot(clip);
+            }
         }
     }
 }
