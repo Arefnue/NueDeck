@@ -21,9 +21,9 @@ namespace NueDeck.Scripts.UI.Reward
         [SerializeField] private Choice choicePrefab;
         public ChoicePanel choicePanel;
         
-        private List<RewardContainer> _currentRewardsList = new List<RewardContainer>();
-        private List<Choice> _spawnedChoiceList = new List<Choice>();
-        private List<CardData> _cardRewardList = new List<CardData>();
+        private readonly List<RewardContainer> _currentRewardsList = new List<RewardContainer>();
+        private readonly List<Choice> _spawnedChoiceList = new List<Choice>();
+        private readonly List<CardData> _cardRewardList = new List<CardData>();
        
         public void BuildReward(RewardType rewardType)
         {
@@ -51,7 +51,7 @@ namespace NueDeck.Scripts.UI.Reward
 
         private void GetGoldReward(RewardContainer rewardContainer,int amount)
         {
-            GameManager.instance.PersistentGameplayData.CurrentGold += amount;
+            GameManager.Instance.PersistentGameplayData.CurrentGold += amount;
             _currentRewardsList.Remove(rewardContainer);
             Destroy(rewardContainer.gameObject);
         }

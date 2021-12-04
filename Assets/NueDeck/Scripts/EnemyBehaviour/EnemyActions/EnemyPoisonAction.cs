@@ -8,13 +8,13 @@ namespace NueDeck.Scripts.EnemyBehaviour.EnemyActions
         public override EnemyActionType ActionType => EnemyActionType.Poison;
         public override void DoAction(EnemyActionParameters actionParameters)
         {
-            if (actionParameters.targetCharacter)
+            if (actionParameters.TargetCharacter)
             {
-                actionParameters.targetCharacter.CharacterStats.ApplyStatus(StatusType.Poison,Mathf.RoundToInt(actionParameters.value));
+                actionParameters.TargetCharacter.CharacterStats.ApplyStatus(StatusType.Poison,Mathf.RoundToInt(actionParameters.Value));
             }
             else
             {
-                actionParameters.selfCharacter.CharacterStats.ApplyStatus(StatusType.Poison,Mathf.RoundToInt(actionParameters.value));
+                actionParameters.SelfCharacter.CharacterStats.ApplyStatus(StatusType.Poison,Mathf.RoundToInt(actionParameters.Value));
             }
         }
     }

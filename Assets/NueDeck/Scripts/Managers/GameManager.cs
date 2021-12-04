@@ -12,7 +12,7 @@ namespace NueDeck.Scripts.Managers
     [DefaultExecutionOrder(-5)]
     public class GameManager : MonoBehaviour
     {
-        public static GameManager instance;
+        public static GameManager Instance;
         
         [Header("Settings")] 
         public Camera mainCam;
@@ -28,9 +28,9 @@ namespace NueDeck.Scripts.Managers
 
         private void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = this;
+                Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -46,10 +46,8 @@ namespace NueDeck.Scripts.Managers
         }
         
 
-        public void InitGameplayData()
-        {
-            PersistentGameplayData = new PersistentGameplayData(gameplayData);
-        }
+        public void InitGameplayData() => PersistentGameplayData = new PersistentGameplayData(gameplayData);
+
         
         public CardObject BuildAndGetCard(CardData targetData, Transform parent)
         {
@@ -83,7 +81,7 @@ namespace NueDeck.Scripts.Managers
             }
         }
 
-        public void ExitApp()
+        public void OnExitApp()
         {
             
         }

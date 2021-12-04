@@ -8,14 +8,14 @@ namespace NueDeck.Scripts.EnemyBehaviour
 {
     public static class EnemyActionProcessor
     {
-        private static Dictionary<EnemyActionType, EnemyActionBase> _enemyActionDict =
+        private static readonly Dictionary<EnemyActionType, EnemyActionBase> EnemyActionDict =
             new Dictionary<EnemyActionType, EnemyActionBase>();
 
-        private static bool _initialized;
+        public static bool IsInitialized { get; private set; }
 
         public static void Initialize()
         {
-            _enemyActionDict.Clear();
+            EnemyActionDict.Clear();
 
             var allEnemyActions = Assembly.GetAssembly(typeof(EnemyActionBase)).GetTypes()
                 .Where(t => typeof(EnemyActionBase).IsAssignableFrom(t) && t.IsAbstract == false);
@@ -23,13 +23,13 @@ namespace NueDeck.Scripts.EnemyBehaviour
             foreach (var enemyAction in allEnemyActions)
             {
                 EnemyActionBase action = Activator.CreateInstance(enemyAction) as EnemyActionBase;
-                _enemyActionDict.Add(action.ActionType,action);
+                if (action != null) EnemyActionDict.Add(action.ActionType, action);
             }
 
-            _initialized = true;
+            IsInitialized = true;
         }
 
         public static EnemyActionBase GetAction(EnemyActionType targetAction) =>
-            _enemyActionDict[targetAction];
+            EnemyActionDict[targetAction];
     }
 }

@@ -9,13 +9,13 @@ namespace NueDeck.Scripts.EnemyBehaviour.EnemyActions
         
         public override void DoAction(EnemyActionParameters actionParameters)
         {
-            if (actionParameters.targetCharacter)
+            if (actionParameters.TargetCharacter)
             {
-                actionParameters.targetCharacter.CharacterStats.ApplyStatus(StatusType.Block,Mathf.RoundToInt(actionParameters.value)+actionParameters.targetCharacter.CharacterStats.StatusDict[StatusType.Dexterity].StatusValue);
+                actionParameters.TargetCharacter.CharacterStats.ApplyStatus(StatusType.Block,Mathf.RoundToInt(actionParameters.Value)+actionParameters.TargetCharacter.CharacterStats.StatusDict[StatusType.Dexterity].StatusValue);
             }
             else
             {
-                actionParameters.selfCharacter.CharacterStats.ApplyStatus(StatusType.Block,Mathf.RoundToInt(actionParameters.value)+actionParameters.selfCharacter.CharacterStats.StatusDict[StatusType.Dexterity].StatusValue);
+                actionParameters.SelfCharacter.CharacterStats.ApplyStatus(StatusType.Block,Mathf.RoundToInt(actionParameters.Value)+actionParameters.SelfCharacter.CharacterStats.StatusDict[StatusType.Dexterity].StatusValue);
             }
         }
     }

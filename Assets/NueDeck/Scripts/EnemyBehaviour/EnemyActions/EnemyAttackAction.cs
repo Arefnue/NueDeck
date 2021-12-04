@@ -1,4 +1,5 @@
 ﻿using NueDeck.Scripts.Enums;
+using NueDeck.Scripts.Managers;
 using UnityEngine;
 
 namespace NueDeck.Scripts.EnemyBehaviour.EnemyActions
@@ -9,7 +10,11 @@ namespace NueDeck.Scripts.EnemyBehaviour.EnemyActions
         
         public override void DoAction(EnemyActionParameters actionParameters)
         {
-            actionParameters.targetCharacter.CharacterStats.Damage(Mathf.RoundToInt(actionParameters.value)+actionParameters.selfCharacter.CharacterStats.StatusDict[StatusType.Strength].StatusValue);
+            if (!actionParameters.TargetCharacter) return;
+           
+            actionParameters.TargetCharacter.CharacterStats.Damage(Mathf.RoundToInt(actionParameters.Value+actionParameters.SelfCharacter.CharacterStats.StatusDict[StatusType.Strength].StatusValue));
+            FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
+            AudioManager.Instance.PlayOneShot(AudioActionType.Attack);
         }
     }
 }

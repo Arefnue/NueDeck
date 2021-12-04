@@ -88,7 +88,7 @@ namespace NueDeck.Scripts.Card
 
         private void SpendMana(int value)
         {
-            GameManager.instance.PersistentGameplayData.CurrentMana -= value;
+            GameManager.Instance.PersistentGameplayData.CurrentMana -= value;
         }
         
         public void SetInactiveMaterialState(bool isInactive, Material inactiveMaterial = null) 

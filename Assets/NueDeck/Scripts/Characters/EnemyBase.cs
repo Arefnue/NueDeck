@@ -2,6 +2,7 @@
 using NueDeck.Scripts.Characters.Enemies;
 using NueDeck.Scripts.Data;
 using NueDeck.Scripts.Data.Characters;
+using NueDeck.Scripts.Data.Containers;
 using NueDeck.Scripts.EnemyBehaviour;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Interfaces;
@@ -18,7 +19,7 @@ namespace NueDeck.Scripts.Characters
         [Header("Enemy Base References")]
         public EnemyData enemyData;
         public EnemyCanvas enemyCanvas;
-      
+        public SoundProfileData deathSoundProfileData;
         protected EnemyAbilityData NextAbility;
         
         #region Setup
@@ -40,6 +41,7 @@ namespace NueDeck.Scripts.Characters
             CombatManager.Instance.OnAllyTurnStarted -= ShowNextAbility;
             CombatManager.Instance.OnEnemyTurnStarted -= CharacterStats.TriggerAllStatus;
             CombatManager.Instance.OnEnemyDeath(this);
+            AudioManager.Instance.PlayOneShot(deathSoundProfileData.GetRandomClip());
             Destroy(gameObject);
         }
 
@@ -47,7 +49,7 @@ namespace NueDeck.Scripts.Characters
 
         #region Other Methods
 
-        public void ShowNextAbility()
+        private void ShowNextAbility()
         {
             NextAbility = enemyData.enemyAbilityList.RandomItem();
             enemyCanvas.intentionImage.sprite = NextAbility.intention.intentionSprite;

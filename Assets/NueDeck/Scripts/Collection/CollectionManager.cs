@@ -15,7 +15,7 @@ namespace NueDeck.Scripts.Collection
 
         [Header("Controllers")] 
         public HandController handController;
-        public RewardController rewardController;
+        
         
         [HideInInspector] public List<CardData> drawPile = new List<CardData>();
         [HideInInspector] public List<CardData> handPile = new List<CardData>();
@@ -25,6 +25,11 @@ namespace NueDeck.Scripts.Collection
 
         private void Awake()
         {
+            if (Instance)
+            {
+                Destroy(gameObject);
+                return;
+            }
             Instance = this;
         }
 
@@ -38,36 +43,39 @@ namespace NueDeck.Scripts.Collection
 
             for (var i = 0; i < targetDrawCount; i++)
             {
-                if (GameManager.instance.GameplayData.maxCardOnHand<=handPile.Count)
+                if (GameManager.Instance.GameplayData.maxCardOnHand<=handPile.Count)
                     return;
                 
                 if (drawPile.Count <= 0)
                 {
                     var nDrawCount = targetDrawCount - currentDrawCount;
-                    if (nDrawCount >= discardPile.Count) nDrawCount = discardPile.Count;
+                    
+                    if (nDrawCount >= discardPile.Count) 
+                        nDrawCount = discardPile.Count;
+                    
                     ReshuffleDiscardPile();
                     DrawCards(nDrawCount);
                     break;
                 }
 
                 var randomCard = drawPile[Random.Range(0, drawPile.Count)];
-                var clone = GameManager.instance.BuildAndGetCard(randomCard, handController.drawTransform);
+                var clone = GameManager.Instance.BuildAndGetCard(randomCard, handController.drawTransform);
                 handController.AddCardToHand(clone);
                 handPile.Add(randomCard);
                 drawPile.Remove(randomCard);
                 currentDrawCount++;
-                UIManager.instance.combatCanvas.SetPileTexts();
+                UIManager.Instance.combatCanvas.SetPileTexts();
             }
             
             foreach (var cardObject in handController.hand)
-            {
                 cardObject.UpdateCardText();
-            }
         }
 
         public void DiscardHand()
         {
-            foreach (var cardBase in handController.hand) cardBase.Discard();
+            foreach (var cardBase in handController.hand) 
+                cardBase.Discard();
+            
             handController.hand.Clear();
         }
 
@@ -110,30 +118,28 @@ namespace NueDeck.Scripts.Collection
             drawPile?.Remove(targetCard);
             handPile?.Remove(targetCard);
             discardPile?.Remove(targetCard);
-            UIManager.instance.combatCanvas.SetPileTexts();
+            UIManager.Instance.combatCanvas.SetPileTexts();
         }
 
         public void OnCardDiscarded(CardObject targetCard)
         {
             handPile.Remove(targetCard.CardData);
             discardPile.Add(targetCard.CardData);
-            UIManager.instance.combatCanvas.SetPileTexts();
+            UIManager.Instance.combatCanvas.SetPileTexts();
         }
 
         public void OnCardPlayed(CardObject targetCard)
         {
             handPile.Remove(targetCard.CardData);
             discardPile.Add(targetCard.CardData);
-            UIManager.instance.combatCanvas.SetPileTexts();
+            UIManager.Instance.combatCanvas.SetPileTexts();
             foreach (var cardObject in handController.hand)
-            {
                 cardObject.UpdateCardText();
-            }
         }
 
         public void SetGameDeck()
         {
-            foreach (var i in GameManager.instance.PersistentGameplayData.CurrentCardsList) 
+            foreach (var i in GameManager.Instance.PersistentGameplayData.CurrentCardsList) 
                 drawPile.Add(i);
         }
 
@@ -143,13 +149,17 @@ namespace NueDeck.Scripts.Collection
         
         private void ReshuffleDiscardPile()
         {
-            foreach (var i in discardPile) drawPile.Add(i);
+            foreach (var i in discardPile) 
+                drawPile.Add(i);
+            
             discardPile.Clear();
         }
 
         private void ReshuffleDrawPile()
         {
-            foreach (var i in drawPile) discardPile.Add(i);
+            foreach (var i in drawPile) 
+                discardPile.Add(i);
+            
             drawPile.Clear();
         }
 
@@ -162,7 +172,7 @@ namespace NueDeck.Scripts.Collection
             var waitFrame = new WaitForEndOfFrame();
             var timer = 0f;
 
-            var card = GameManager.instance.BuildAndGetCard(targetData, startTransform);
+            var card = GameManager.Instance.BuildAndGetCard(targetData, startTransform);
             card.transform.SetParent(endTransform);
             var startPos = card.transform.localPosition;
             var endPos = Vector3.zero;

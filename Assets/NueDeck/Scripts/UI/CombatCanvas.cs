@@ -26,7 +26,7 @@ namespace NueDeck.Scripts.UI
         {
             drawPileText.text = $"{CollectionManager.Instance.drawPile.Count.ToString()}";
             discardPileText.text = $"{CollectionManager.Instance.discardPile.Count.ToString()}";
-            manaText.text = $"{GameManager.instance.PersistentGameplayData.CurrentMana.ToString()}/{GameManager.instance.PersistentGameplayData.MAXMana}";
+            manaText.text = $"{GameManager.Instance.PersistentGameplayData.CurrentMana.ToString()}/{GameManager.Instance.PersistentGameplayData.MAXMana}";
         }
 
         public override void ResetCanvas()

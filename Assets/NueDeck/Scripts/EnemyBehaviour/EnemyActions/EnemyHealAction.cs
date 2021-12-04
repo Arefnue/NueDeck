@@ -8,13 +8,13 @@ namespace NueDeck.Scripts.EnemyBehaviour.EnemyActions
         public override EnemyActionType ActionType => EnemyActionType.Heal;
         public override void DoAction(EnemyActionParameters actionParameters)
         {
-            if (actionParameters.targetCharacter)
+            if (actionParameters.TargetCharacter)
             {
-                actionParameters.targetCharacter.CharacterStats.Heal(Mathf.RoundToInt(actionParameters.value));
+                actionParameters.TargetCharacter.CharacterStats.Heal(Mathf.RoundToInt(actionParameters.Value));
             }
             else
             {
-                actionParameters.selfCharacter.CharacterStats.Heal(Mathf.RoundToInt(actionParameters.value));
+                actionParameters.SelfCharacter.CharacterStats.Heal(Mathf.RoundToInt(actionParameters.Value));
             }
         }
     }

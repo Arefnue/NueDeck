@@ -35,7 +35,7 @@ namespace NueDeck.Scripts.Data.Settings
             set
             {
                 _currentGold = value;
-                if (UIManager.instance)  UIManager.instance.informationCanvas.SetGoldText(CurrentGold);
+                if (UIManager.Instance)  UIManager.Instance.informationCanvas.SetGoldText(CurrentGold);
                
             }
         }

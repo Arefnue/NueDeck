@@ -1,23 +1,27 @@
+using System.Collections;
 using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.UI.Reward;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace NueDeck.Scripts.UI
 {
     [DefaultExecutionOrder(-4)]
     public class UIManager : MonoBehaviour
     {
-        public static UIManager instance;
+        public static UIManager Instance;
         
         public CombatCanvas combatCanvas;
         public InformationCanvas informationCanvas;
         public RewardCanvas rewardCanvas;
+        [SerializeField] private CanvasGroup fader;
+        [SerializeField] private float fadeSpeed = 1f;
 
         private void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = this;
+                Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -38,5 +42,32 @@ namespace NueDeck.Scripts.UI
                 targetCanvas.CloseCanvas();
         }
         
+        public void ChangeScene(int index)
+        {
+            StartCoroutine(ChangeSceneRoutine(index));
+        }
+
+        private IEnumerator ChangeSceneRoutine(int index)
+        {
+            SceneManager.LoadScene(index);
+            yield return StartCoroutine(Fade(false));
+        }
+        
+        public IEnumerator Fade(bool isIn)
+        {
+            var waitFrame = new WaitForEndOfFrame();
+            var timer = isIn ? 0f : 1f;
+
+            while (true)
+            {
+                timer += Time.deltaTime* (isIn ? fadeSpeed : -fadeSpeed);
+                
+                fader.alpha = timer;
+                
+                if (timer>=1f)  break;
+              
+                yield return waitFrame;
+            }
+        }
     }
 }

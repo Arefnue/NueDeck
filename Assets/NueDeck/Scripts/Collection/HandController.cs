@@ -132,7 +132,7 @@ namespace NueDeck.Scripts.Collection
                 var cardTransform = card.transform;
 
                 // Set to inactive material if not enough mana required to use card
-                card.SetInactiveMaterialState(GameManager.instance.PersistentGameplayData.CurrentMana < card.CardData.myManaCost, inactiveCardMaterial);
+                card.SetInactiveMaterialState(GameManager.Instance.PersistentGameplayData.CurrentMana < card.CardData.myManaCost, inactiveCardMaterial);
 
                 var noCardHeld = _heldCard == null; // Whether a card is "held" (outside of hand)
                 var onSelectedCard = noCardHeld && _selected == i;
@@ -206,7 +206,7 @@ namespace NueDeck.Scripts.Collection
                 }
 
                 // Get Selected Card
-                if (GameManager.instance.PersistentGameplayData.CanSelectCards)
+                if (GameManager.Instance.PersistentGameplayData.CanSelectCards)
                 {
                     //float d = (p - mouseWorldPos).sqrMagnitude;
                     if (d < sqrDistance)
@@ -257,7 +257,7 @@ namespace NueDeck.Scripts.Collection
                 CombatManager.Instance.HighlightCardTarget(_heldCard.CardData.myTargets);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
-                if (!GameManager.instance.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
+                if (!GameManager.Instance.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
                 {
                     //  || sqrDistance <= 2
                     // Card has gone back into hand
@@ -285,10 +285,10 @@ namespace NueDeck.Scripts.Collection
             CombatManager.Instance.DeactivateCardHighlights();
             bool backToHand = true;
                 
-            if (GameManager.instance.PersistentGameplayData.CanUseCards && GameManager.instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.myManaCost)
+            if (GameManager.Instance.PersistentGameplayData.CanUseCards && GameManager.Instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.myManaCost)
             {
                 RaycastHit hit;
-                var mainRay = GameManager.instance.mainCam.ScreenPointToRay(mousePos);
+                var mainRay = GameManager.Instance.mainCam.ScreenPointToRay(mousePos);
                 
                 if (Physics.Raycast(mainRay, out hit, 1000, targetLayer))
                 {
