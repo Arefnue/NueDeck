@@ -9,8 +9,7 @@ namespace NueDeck.Scripts.Characters.Enemies
 {
     public class EnemyExample : EnemyBase
     {
-        [Header("References")]
-        public SoundProfileData deathSoundProfileData;
+        
         protected override void OnDeath()
         { 
             base.OnDeath();
