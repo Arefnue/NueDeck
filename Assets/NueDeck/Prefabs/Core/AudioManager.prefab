@@ -49,8 +49,18 @@ MonoBehaviour:
   musicSource: {fileID: 7710606986531930512}
   sfxSource: {fileID: 7710606986531930513}
   buttonSource: {fileID: 3673619364212810684}
-  bgMusic: {fileID: 8300000, guid: ad1eb00cf51018a4189216af1d5bda80, type: 3}
-  bossMusic: {fileID: 8300000, guid: b7670817a8b89f941abad9df4e091047, type: 3}
+  soundProfileDataList:
+  - {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+  - {fileID: 11400000, guid: ff6628141ca0c2b47ae1c7ef0636513c, type: 2}
+  - {fileID: 11400000, guid: 2d30565e54caf3e40a21dfdac091b79e, type: 2}
+  - {fileID: 11400000, guid: 9a62c3aa28304334598d169ef4aa0c3c, type: 2}
+  - {fileID: 11400000, guid: 7e15e2a10065ab54c8eaf26154af0156, type: 2}
+  - {fileID: 11400000, guid: 878a9164ecb40de41bc561562f12d2fc, type: 2}
+  - {fileID: 11400000, guid: 5e1ae36013818124e8f86d99922c0cca, type: 2}
+  - {fileID: 11400000, guid: c558e0a45b0633a4d9313997a50bb80a, type: 2}
+  - {fileID: 11400000, guid: 426f246404d64304f9887eb7ac6a418e, type: 2}
+  - {fileID: 11400000, guid: d5d2d36d49f5ed74aa6c42cc8a9e001c, type: 2}
+  - {fileID: 11400000, guid: f13c4636ae58ace48b238e6fa950b779, type: 2}
 --- !u!82 &7710606986531930512
 AudioSource:
   m_ObjectHideFlags: 0

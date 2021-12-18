@@ -20,7 +20,7 @@ MonoBehaviour:
   mySprite: {fileID: 21300000, guid: 8510ca3a47f6c23479e9992c04455698, type: 3}
   actionList:
   - myPlayerActionType: 0
-    value: 100
+    value: 10
   descriptionDataList:
   - useText: 1
     useValue: 0
@@ -52,4 +52,4 @@ MonoBehaviour:
     textColor: {r: 0, g: 0, b: 0, a: 0}
     useModifer: 0
     modiferStatus: 2
-  mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+  audioType: 0

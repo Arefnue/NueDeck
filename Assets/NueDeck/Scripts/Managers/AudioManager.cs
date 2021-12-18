@@ -54,35 +54,37 @@ namespace NueDeck.Scripts.Managers
         public void PlayMusic(AudioActionType type)
         {
             var clip = _audioDict[type].GetRandomClip();
-            PlayMusic(clip);
+            if (clip)
+                PlayMusic(clip);
+            
         }
 
         public void PlayOneShot(AudioActionType type)
         {
             var clip = _audioDict[type].GetRandomClip();
-            PlayOneShot(clip);
+            if (clip)
+                PlayOneShot(clip);
+            
         }
 
         public void PlayOneShotButton(AudioActionType type)
         {
             var clip = _audioDict[type].GetRandomClip();
-            PlayOneShotButton(clip);
+            if (clip)
+                PlayOneShotButton(clip);
+           
         }
 
         public void PlayOneShot(AudioClip clip)
         {
             if (clip)
-            {
                 sfxSource.PlayOneShot(clip);
-            }
         }
         
         public void PlayOneShotButton(AudioClip clip)
         {
             if (clip)
-            {
                 buttonSource.PlayOneShot(clip);
-            }
         }
     }
 }
