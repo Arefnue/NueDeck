@@ -1,5 +1,4 @@
 using System.Collections;
-using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.UI.Reward;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,9 +13,9 @@ namespace NueDeck.Scripts.UI
         public CombatCanvas combatCanvas;
         public InformationCanvas informationCanvas;
         public RewardCanvas rewardCanvas;
+       
         [SerializeField] private CanvasGroup fader;
         [SerializeField] private float fadeSpeed = 1f;
-
         private void Awake()
         {
             if (Instance == null)
