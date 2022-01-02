@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using NueDeck.NueTooltip.CursorSystem;
 using UnityEngine;
 
 namespace NueTooltip.Core
@@ -12,8 +13,8 @@ namespace NueTooltip.Core
         [SerializeField] private TooltipText tooltipTextPrefab;
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private AnimationCurve fadeCurve;
-        
         [SerializeField] private float showDelayTime = 0.5f;
+        [SerializeField] private CursorData cursorData;
         
         private List<TooltipText> _tooltipTextList = new List<TooltipText>();
         private TooltipController TooltipController => tooltipController;
@@ -52,7 +53,7 @@ namespace NueTooltip.Core
                 yield return waitFrame;
             }
         }
-        public void ShowTooltip(string contentText,string headerText ="",Transform tooltipTargetTransform = null)
+        public void ShowTooltip(string contentText="",string headerText ="",Transform tooltipTargetTransform = null,CursorType cursorType = CursorType.Default)
         {
             StartCoroutine(nameof(ShowRoutine));
             _currentShownTooltipCount++;
@@ -64,12 +65,13 @@ namespace NueTooltip.Core
             
             _tooltipTextList[_currentShownTooltipCount-1].gameObject.SetActive(true);
             _tooltipTextList[_currentShownTooltipCount-1].SetText(contentText,headerText);
-            
+            cursorData.SetCursor(cursorType);
             TooltipController.SetFollowPos(tooltipTargetTransform);
         }
 
         public void HideTooltip()
         {
+            cursorData.SetCursor(CursorType.Default);
             StopCoroutine(nameof(ShowRoutine));
             _currentShownTooltipCount = 0;
             foreach (var tooltipText in _tooltipTextList)

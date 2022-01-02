@@ -1,4 +1,5 @@
-﻿using NueTooltip.Core;
+﻿using NueDeck.NueTooltip.CursorSystem;
+using NueTooltip.Core;
 using NueTooltip.Interfaces;
 using UnityEngine;
 
@@ -10,16 +11,16 @@ namespace NueTooltip.Triggers
         [SerializeField] protected string headerText = "";
         [TextArea] [SerializeField] protected string contentText;
         [SerializeField] private Transform tooltipStaticTargetTransform;
-
-
+        [SerializeField] private CursorType cursorType = CursorType.Default;
+        
         protected virtual void ShowTooltipInfo()
         {
-            ShowTooltipInfo(TooltipManager.Instance,contentText,headerText,tooltipStaticTargetTransform);
+            ShowTooltipInfo(TooltipManager.Instance,contentText,headerText,tooltipStaticTargetTransform,cursorType);
         }
 
-        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null)
+        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null,CursorType targetCursor = CursorType.Default)
         {
-            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform);
+            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor);
         }
 
         public virtual void HideTooltipInfo()

@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 4006891679247489647}
   - component: {fileID: 5562358295686923228}
   m_Layer: 0
-  m_Name: TooltipCanvas
+  m_Name: TooltipManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,6 +264,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   showDelayTime: 0.5
+  cursorData: {fileID: 11400000, guid: 8a24fb298ba86dd42b297e2476d93bfb, type: 2}
 --- !u!225 &5562358295686923228
 CanvasGroup:
   m_ObjectHideFlags: 0

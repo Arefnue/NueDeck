@@ -254,6 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headerText: {fileID: 4335837147163881989}
   contentText: {fileID: 4211080046194786897}
+  backgroundImage: {fileID: 6728025615431657323}
   layoutElement: {fileID: 7014973253116927093}
   characterWrapLimit: 50
 --- !u!114 &7014973253116927093

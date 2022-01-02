@@ -479,6 +479,7 @@ MonoBehaviour:
   headerText: 
   contentText: 
   tooltipStaticTargetTransform: {fileID: 0}
+  cursorType: 1
 --- !u!1 &1128704752
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,7 +909,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headerText: Play Button
   contentText: Play game
-  tooltipStaticTargetTransform: {fileID: 1974156815}
+  tooltipStaticTargetTransform: {fileID: 0}
+  cursorType: 0
 --- !u!1001 &1381614659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -973,6 +975,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4066490451749758467, guid: d43d3d835c763474ea9de874c0d33040, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066490451749758467, guid: d43d3d835c763474ea9de874c0d33040, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7900064509742870940, guid: d43d3d835c763474ea9de874c0d33040, type: 3}
       propertyPath: m_Name
       value: TooltipManager

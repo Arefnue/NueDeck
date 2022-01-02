@@ -8,11 +8,12 @@ namespace NueTooltip.Core
     {
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private TextMeshProUGUI contentText;
+        [SerializeField] private Image backgroundImage;
         [SerializeField] private LayoutElement layoutElement;
         [SerializeField] private int characterWrapLimit = 50;
 
 
-        public void SetText(string content,string header ="")
+        public void SetText(string content="",string header ="")
         {
             if (string.IsNullOrEmpty(header))
             {
@@ -24,7 +25,24 @@ namespace NueTooltip.Core
                 headerText.text = header;
             }
 
-            contentText.text = content;
+            if (string.IsNullOrEmpty(content))
+            {
+                contentText.gameObject.SetActive(false);
+            }
+            else
+            {
+                contentText.gameObject.SetActive(true);
+                contentText.text = header;
+            }
+
+            if (contentText.gameObject.activeSelf || headerText.gameObject.activeSelf)
+            {
+                backgroundImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                backgroundImage.gameObject.SetActive(false);
+            }
             
             PrepareLayout();
         }
