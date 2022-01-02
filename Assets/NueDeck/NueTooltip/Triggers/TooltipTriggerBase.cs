@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using NueTooltip.Core;
+using NueTooltip.Interfaces;
+using UnityEngine;
 
-namespace NueDeck.Scripts.TooltipSystem
+namespace NueTooltip.Triggers
 {
     public abstract class TooltipTriggerBase : MonoBehaviour, ITooltipTargetBase
     {

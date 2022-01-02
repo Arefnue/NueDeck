@@ -1,6 +1,6 @@
 ﻿using UnityEngine.EventSystems;
 
-namespace NueDeck.Scripts.TooltipSystem
+namespace NueTooltip.Interfaces
 {
     public interface I2DTooltipTarget :IPointerEnterHandler,IPointerExitHandler,ITooltipTargetBase
     {

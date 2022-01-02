@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using NueTooltip.Core;
+using UnityEngine;
 
-namespace NueDeck.Scripts.TooltipSystem
+namespace NueTooltip.Interfaces
 {
     public interface ITooltipTargetBase
     {

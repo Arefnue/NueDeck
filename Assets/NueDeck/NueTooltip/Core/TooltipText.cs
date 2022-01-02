@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NueDeck.Scripts.TooltipSystem
+namespace NueTooltip.Core
 {
     public class TooltipText : MonoBehaviour
     {

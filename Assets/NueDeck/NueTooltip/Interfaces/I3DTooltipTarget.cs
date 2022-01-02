@@ -1,4 +1,4 @@
-﻿namespace NueDeck.Scripts.TooltipSystem
+﻿namespace NueTooltip.Interfaces
 {
     public interface I3DTooltipTarget : ITooltipTargetBase
     { 

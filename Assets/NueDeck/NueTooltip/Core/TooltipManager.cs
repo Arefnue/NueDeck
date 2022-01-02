@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NueDeck.Scripts.TooltipSystem
+namespace NueTooltip.Core
 {
     public class TooltipManager : MonoBehaviour
     {

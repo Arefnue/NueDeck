@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NueDeck.Scripts.TooltipSystem
+namespace NueTooltip.Core
 {
     public class TooltipController : MonoBehaviour
     {

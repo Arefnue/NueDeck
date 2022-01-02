@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using NueTooltip.Interfaces;
+using UnityEngine.EventSystems;
 
-namespace NueDeck.Scripts.TooltipSystem
+namespace NueTooltip.Triggers
 {
-    public class TooltipTrigger3D : TooltipTriggerBase, I3DTooltipTarget
+    public class TooltipTrigger2D : TooltipTriggerBase,I2DTooltipTarget
     {
         protected override void ShowTooltipInfo()
         {
@@ -14,12 +15,12 @@ namespace NueDeck.Scripts.TooltipSystem
             base.HideTooltipInfo();
         }
 
-        public void OnMouseEnter()
+        public void OnPointerEnter(PointerEventData eventData)
         {
            ShowTooltipInfo();
         }
 
-        public void OnMouseExit()
+        public void OnPointerExit(PointerEventData eventData)
         {
             HideTooltipInfo();
         }
