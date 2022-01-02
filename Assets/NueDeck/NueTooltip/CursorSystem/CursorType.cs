@@ -1,7 +1,8 @@
-﻿namespace NueDeck.NueTooltip.CursorSystem
+﻿namespace NueTooltip.CursorSystem
 {
     public enum CursorType
     {
-        Default
+        Default,
+        DefaultClicked
     }
 }

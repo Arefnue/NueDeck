@@ -1,5 +1,5 @@
-﻿using NueDeck.NueTooltip.CursorSystem;
-using NueTooltip.Core;
+﻿using NueTooltip.Core;
+using NueTooltip.CursorSystem;
 using UnityEngine;
 
 namespace NueTooltip.Interfaces

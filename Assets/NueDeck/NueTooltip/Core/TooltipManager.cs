@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using NueDeck.NueTooltip.CursorSystem;
+using NueTooltip.CursorSystem;
 using UnityEngine;
 
 namespace NueTooltip.Core
@@ -9,15 +9,21 @@ namespace NueTooltip.Core
     {
         public static TooltipManager Instance;
         
+        [Header("References")]
         [SerializeField] private TooltipController tooltipController;
+        [SerializeField] private CursorController cursorController;
         [SerializeField] private TooltipText tooltipTextPrefab;
         [SerializeField] private CanvasGroup canvasGroup;
+        
+        [Header("Settings")]
         [SerializeField] private AnimationCurve fadeCurve;
         [SerializeField] private float showDelayTime = 0.5f;
-        [SerializeField] private CursorData cursorData;
+        [SerializeField] private bool canChangeCursor;
         
+     
         private List<TooltipText> _tooltipTextList = new List<TooltipText>();
         private TooltipController TooltipController => tooltipController;
+        private CursorController CursorController => cursorController;
 
         private int _currentShownTooltipCount;
         private void Awake()
@@ -65,17 +71,26 @@ namespace NueTooltip.Core
             
             _tooltipTextList[_currentShownTooltipCount-1].gameObject.SetActive(true);
             _tooltipTextList[_currentShownTooltipCount-1].SetText(contentText,headerText);
-            cursorData.SetCursor(cursorType);
+            
             TooltipController.SetFollowPos(tooltipTargetTransform);
+            
+            if (canChangeCursor)
+                CursorController.SetActiveCursor(cursorType);
+            
         }
 
         public void HideTooltip()
         {
-            cursorData.SetCursor(CursorType.Default);
             StopCoroutine(nameof(ShowRoutine));
+            
             _currentShownTooltipCount = 0;
+            
             foreach (var tooltipText in _tooltipTextList)
                 tooltipText.gameObject.SetActive(false);
+
+            if (canChangeCursor)
+                CursorController.SetActiveCursor(CursorType.Default);
+           
         }
         
     }

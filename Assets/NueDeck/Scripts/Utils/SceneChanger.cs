@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.UI;
+using NueTooltip.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -75,6 +76,8 @@ namespace NueDeck.Scripts.Utils
                 OpenCombatScene();
             else
                 SceneManager.LoadScene(sceneId);
+            
+            TooltipManager.Instance.HideTooltip();
         }
         
         public void ExitApp()
