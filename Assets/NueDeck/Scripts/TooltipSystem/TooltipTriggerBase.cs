@@ -5,14 +5,19 @@ namespace NueDeck.Scripts.TooltipSystem
     public abstract class TooltipTriggerBase : MonoBehaviour, ITooltipTargetBase
     {
         
-        [SerializeField] protected string header = "";
-        [TextArea] [SerializeField] protected string content;
-        [SerializeField] private Transform tooltipStaticTarget;
-        
-        
-        public virtual void ShowTooltipInfo()
+        [SerializeField] protected string headerText = "";
+        [TextArea] [SerializeField] protected string contentText;
+        [SerializeField] private Transform tooltipStaticTargetTransform;
+
+
+        protected virtual void ShowTooltipInfo()
         {
-            TooltipManager.Instance.ShowTooltip(content,header,tooltipStaticTarget);
+            ShowTooltipInfo(TooltipManager.Instance,contentText,headerText,tooltipStaticTargetTransform);
+        }
+
+        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null)
+        {
+            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform);
         }
 
         public virtual void HideTooltipInfo()

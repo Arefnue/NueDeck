@@ -10,17 +10,35 @@ namespace NueDeck.Scripts.TooltipSystem
         private RectTransform _rectTransform;
         private Vector2 _followPos = Vector2.zero;
         private bool _isFollowEnabled;
+        private Camera _cachedCamera;
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
         }
         
-        public void SetFollowPos(Transform staticTargetTransform = null)
+        public void SetFollowPos(Transform staticTargetTransform = null,Camera cam =null)
         {
             if (staticTargetTransform)
             {
-                _followPos = staticTargetTransform.position;
-               
+                var mainCam = cam;
+                if (mainCam == null)
+                {
+                    if (!_cachedCamera)
+                        _cachedCamera = Camera.main;
+                    
+                    mainCam = _cachedCamera;
+                }
+
+                if (mainCam != null)
+                {
+                    _followPos = mainCam.WorldToScreenPoint(staticTargetTransform.position);
+                }
+                else
+                {
+                    SetFollowPos(); 
+                    return;
+                }
+                
                 _isFollowEnabled = false;
             }
             else

@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 7900064509742870945}
   - component: {fileID: 7900064509742870946}
   - component: {fileID: 4006891679247489647}
+  - component: {fileID: 5562358295686923228}
   m_Layer: 0
   m_Name: TooltipCanvas
   m_TagString: Untagged
@@ -228,3 +229,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipController: {fileID: 5080820122306073196}
   tooltipTextPrefab: {fileID: -5953157669055007759, guid: 7ea7cc55df5c124459f2ce6cf540a43d, type: 3}
+  canvasGroup: {fileID: 5562358295686923228}
+  fadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6
+      value: 0
+      inSlope: -0
+      outSlope: 2.5000002
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2.5000002
+      outSlope: 10.250141
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.7176192
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  showDelayTime: 0.5
+--- !u!225 &5562358295686923228
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900064509742870940}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

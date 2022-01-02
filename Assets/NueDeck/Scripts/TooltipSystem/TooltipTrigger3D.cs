@@ -4,7 +4,7 @@ namespace NueDeck.Scripts.TooltipSystem
 {
     public class TooltipTrigger3D : TooltipTriggerBase, I3DTooltipTarget
     {
-        public override void ShowTooltipInfo()
+        protected override void ShowTooltipInfo()
         {
             base.ShowTooltipInfo();
         }
