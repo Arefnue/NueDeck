@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Card
 {
-    public class CardObject : MonoBehaviour,I2DTooltipTarget
+    public class CardObject : MonoBehaviour,I2DTooltipTarget, IPointerDownHandler, IPointerUpHandler
     {
         [Header("References")]
         [SerializeField] private MeshRenderer cardMeshRenderer;
@@ -25,6 +25,7 @@ namespace NueDeck.Scripts.Card
         [SerializeField] private Image backImage;
         [SerializeField] private Image inactiveImage;
         [SerializeField] private Transform descriptionRoot;
+        [SerializeField] private Canvas canvas;
         
         public CardData CardData { get; private set; }
 
@@ -60,6 +61,7 @@ namespace NueDeck.Scripts.Card
             manaText.text = CardData.myManaCost.ToString();
             frontImage.sprite = CardData.mySprite;
 
+            canvas.worldCamera = CollectionManager.Instance.handController.cam;
         }
         #endregion
         
@@ -181,17 +183,27 @@ namespace NueDeck.Scripts.Card
             {
                 var specialKeyword = tooltipManager.SpecialKeywordData.SpecialKeywordBaseList.Find(x=>x.SpecialKeyword == cardDataSpecialKeyword);
                 if (specialKeyword != null)
-                    ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot);
+                    ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot,CursorType.Default,CollectionManager.Instance.handController.cam);
             }
         }
-        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null, CursorType targetCursor = CursorType.Default)
+        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null, CursorType targetCursor = CursorType.Default,Camera cam = null)
         {
-            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor);
+            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor,cam);
         }
 
         public void HideTooltipInfo(TooltipManager tooltipManager)
         {
             tooltipManager.HideTooltip();
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            HideTooltipInfo(TooltipManager.Instance);
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            ShowTooltipInfo();
         }
     }
 }

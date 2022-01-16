@@ -25,12 +25,12 @@ namespace NueDeck.Scripts.Data.Containers
         
         public string GetHeader(string overrideKeywordHeader = "")
         {
-            return string.IsNullOrEmpty(overrideKeywordHeader) ? overrideKeywordHeader : specialKeyword.ToString();
+            return string.IsNullOrEmpty(overrideKeywordHeader) ? specialKeyword.ToString() : overrideKeywordHeader;
         }
 
         public string GetContent(string overrideContent = "")
         {
-            return string.IsNullOrEmpty(overrideContent) ? overrideContent : contentText;
+            return string.IsNullOrEmpty(overrideContent) ? contentText : overrideContent;
         }
     }
 }

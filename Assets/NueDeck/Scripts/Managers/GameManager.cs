@@ -1,4 +1,5 @@
 using NueDeck.Scripts.Card;
+using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Data.Containers;
 using NueDeck.Scripts.Data.Settings;

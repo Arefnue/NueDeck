@@ -52,4 +52,5 @@ MonoBehaviour:
     textColor: {r: 0, g: 0, b: 0, a: 0}
     useModifer: 0
     modiferStatus: 2
+  specialKeywords: 0000000003000000
   audioType: 0

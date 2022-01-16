@@ -44,11 +44,16 @@ namespace NueTooltip.Core
             
         }
 
-        private IEnumerator ShowRoutine()
+        private IEnumerator ShowRoutine(float delay = 0)
         {
             var waitFrame = new WaitForEndOfFrame();
             var timer = 0f;
+            
+            
             canvasGroup.alpha = 0;
+
+            yield return new WaitForSeconds(delay);
+            
             while (true)
             {
                 timer += Time.deltaTime;
@@ -64,9 +69,9 @@ namespace NueTooltip.Core
                 yield return waitFrame;
             }
         }
-        public void ShowTooltip(string contentText="",string headerText ="",Transform tooltipTargetTransform = null,CursorType cursorType = CursorType.Default)
+        public void ShowTooltip(string contentText="",string headerText ="",Transform tooltipTargetTransform = null,CursorType cursorType = CursorType.Default, Camera cam = null, float delayShow =0)
         {
-            StartCoroutine(nameof(ShowRoutine));
+            StartCoroutine(ShowRoutine(delayShow));
             _currentShownTooltipCount++;
             if (_tooltipTextList.Count<_currentShownTooltipCount)
             {
@@ -77,7 +82,7 @@ namespace NueTooltip.Core
             _tooltipTextList[_currentShownTooltipCount-1].gameObject.SetActive(true);
             _tooltipTextList[_currentShownTooltipCount-1].SetText(contentText,headerText);
             
-            TooltipController.SetFollowPos(tooltipTargetTransform);
+            TooltipController.SetFollowPos(tooltipTargetTransform,cam);
             
             if (canChangeCursor)
                 CursorController.SetActiveCursor(cursorType);

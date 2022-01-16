@@ -18,9 +18,9 @@ namespace NueTooltip.Triggers
             ShowTooltipInfo(TooltipManager.Instance,contentText,headerText,tooltipStaticTargetTransform,cursorType);
         }
 
-        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null,CursorType targetCursor = CursorType.Default)
+        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null,CursorType targetCursor = CursorType.Default,Camera cam = null)
         {
-            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor);
+            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor,cam);
         }
 
         public virtual void HideTooltipInfo(TooltipManager tooltipManager)

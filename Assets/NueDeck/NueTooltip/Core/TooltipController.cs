@@ -11,6 +11,8 @@ namespace NueTooltip.Core
         private Vector2 _followPos = Vector2.zero;
         private bool _isFollowEnabled;
         private Camera _cachedCamera;
+        private Camera _followCam;
+        private Transform _lastStaticTarget;
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
@@ -29,20 +31,22 @@ namespace NueTooltip.Core
                     mainCam = _cachedCamera;
                 }
 
-                if (mainCam != null)
+                if (mainCam == null)
                 {
-                    _followPos = mainCam.WorldToScreenPoint(staticTargetTransform.position);
+                    SetFollowPos();
+                    return;
                 }
                 else
                 {
-                    SetFollowPos(); 
-                    return;
+                    _followCam = mainCam;
                 }
-                
+                _lastStaticTarget = staticTargetTransform;
                 _isFollowEnabled = false;
             }
             else
             {
+                _followCam = null;
+                _lastStaticTarget = null;
                 _isFollowEnabled = true;
             }
         }
@@ -57,7 +61,13 @@ namespace NueTooltip.Core
         {
             if (_isFollowEnabled)
                 _followPos = Input.mousePosition;
-
+            else
+            {
+                if (_followCam && _lastStaticTarget)
+                {
+                    _followPos = _followCam.WorldToScreenPoint(_lastStaticTarget.position);
+                }
+            }
 
             var anchoredPos = _followPos / canvasRectTransform.localScale.x;
             
