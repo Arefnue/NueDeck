@@ -10,9 +10,12 @@ namespace NueDeck.Scripts.UI
         public Image statusImage;
         public TextMeshProUGUI statusValueText;
 
+        public StatusIconData MyStatusIconData { get; private set; } = null;
         public void SetStatus(StatusIconData statusIconData)
         {
+            MyStatusIconData = statusIconData;
             statusImage.sprite = statusIconData.iconSprite;
+            
         }
 
         public void SetStatusValue(int statusValue)

@@ -8,6 +8,6 @@ namespace NueTooltip.Interfaces
     {
         void ShowTooltipInfo(TooltipManager tooltipManager,string content,string header ="",Transform tooltipStaticTransform = null,CursorType targetCursor = CursorType.Default);
 
-        void HideTooltipInfo();
+        void HideTooltipInfo(TooltipManager tooltipManager);
     }
 }

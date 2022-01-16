@@ -3,14 +3,18 @@ using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Managers;
+using NueTooltip.Core;
+using NueTooltip.CursorSystem;
+using NueTooltip.Interfaces;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Card
 {
-    public class CardObject : MonoBehaviour
+    public class CardObject : MonoBehaviour,I2DTooltipTarget
     {
         [Header("References")]
         [SerializeField] private MeshRenderer cardMeshRenderer;
@@ -20,6 +24,7 @@ namespace NueDeck.Scripts.Card
         [SerializeField] private Image frontImage;
         [SerializeField] private Image backImage;
         [SerializeField] private Image inactiveImage;
+        [SerializeField] private Transform descriptionRoot;
         
         public CardData CardData { get; private set; }
 
@@ -56,9 +61,6 @@ namespace NueDeck.Scripts.Card
             frontImage.sprite = CardData.mySprite;
 
         }
-
-       
-
         #endregion
         
         #region Card Methods
@@ -161,6 +163,35 @@ namespace NueDeck.Scripts.Card
         }
 
         #endregion
-        
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            ShowTooltipInfo();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            HideTooltipInfo(TooltipManager.Instance);
+        }
+
+        public void ShowTooltipInfo()
+        {
+            var tooltipManager = TooltipManager.Instance;
+            foreach (var cardDataSpecialKeyword in CardData.specialKeywords)
+            {
+                var specialKeyword = tooltipManager.SpecialKeywordData.SpecialKeywordBaseList.Find(x=>x.SpecialKeyword == cardDataSpecialKeyword);
+                if (specialKeyword != null)
+                    ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot);
+            }
+        }
+        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null, CursorType targetCursor = CursorType.Default)
+        {
+            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor);
+        }
+
+        public void HideTooltipInfo(TooltipManager tooltipManager)
+        {
+            tooltipManager.HideTooltip();
+        }
     }
 }

@@ -19,5 +19,6 @@ namespace NueDeck.Scripts.Data.Containers
     {
         public StatusType iconStatus;
         public Sprite iconSprite;
+        public List<SpecialKeywords> specialKeywords;
     }
 }

@@ -17,9 +17,10 @@ MonoBehaviour:
   usableWithoutTarget: 1
   myManaCost: 2
   myName: Hard Work
-  myDescription: Increase strength by 10
   mySprite: {fileID: 21300000, guid: a0c75614ede963a46af4bc352b3faabd, type: 3}
   actionList:
   - myPlayerActionType: 3
     value: 10
-  mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+  descriptionDataList: []
+  specialKeywords: 01000000
+  audioType: 0

@@ -22,6 +22,7 @@ namespace NueDeck.Scripts.Data.Collection
         public Sprite mySprite;
         public List<CardActionData> actionList;
         public List<DescriptionData> descriptionDataList;
+        public List<SpecialKeywords> specialKeywords;
         public AudioActionType audioType;
         
         public void UpdateDescription()
@@ -62,6 +63,9 @@ namespace NueDeck.Scripts.Data.Collection
         [Header("Modifer")]
         [SerializeField]private bool useModifer;
         [SerializeField]private StatusType modiferStatus;
+        
+        
+        
 
         public string GetDescription()
         {

@@ -23,7 +23,7 @@ namespace NueTooltip.Triggers
             tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor);
         }
 
-        public virtual void HideTooltipInfo()
+        public virtual void HideTooltipInfo(TooltipManager tooltipManager)
         {
             TooltipManager.Instance.HideTooltip();
         }

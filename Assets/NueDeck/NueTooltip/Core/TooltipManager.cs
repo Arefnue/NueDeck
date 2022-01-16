@@ -15,12 +15,14 @@ namespace NueTooltip.Core
         [SerializeField] private CursorController cursorController;
         [SerializeField] private TooltipText tooltipTextPrefab;
         [SerializeField] private CanvasGroup canvasGroup;
-       
+        [SerializeField] private SpecialKeywordData specialKeywordData;
+        
         [Header("Settings")]
         [SerializeField] private AnimationCurve fadeCurve;
         [SerializeField] private float showDelayTime = 0.5f;
         [SerializeField] private bool canChangeCursor;
-        
+
+        public SpecialKeywordData SpecialKeywordData => specialKeywordData;
      
         private List<TooltipText> _tooltipTextList = new List<TooltipText>();
         private TooltipController TooltipController => tooltipController;
@@ -29,14 +31,16 @@ namespace NueTooltip.Core
         private int _currentShownTooltipCount;
         private void Awake()
         {
-            if (Instance)
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
             {
                 Destroy(gameObject);
                 return;
             }
-            
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
             
         }
 
