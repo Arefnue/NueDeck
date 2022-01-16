@@ -1599,6 +1599,7 @@ GameObject:
   - component: {fileID: 3807043289350751684}
   - component: {fileID: 3292207200143848650}
   - component: {fileID: 3016247209875197677}
+  - component: {fileID: 415427405510346288}
   m_Layer: 0
   m_Name: DrawPileBackground
   m_TagString: Untagged
@@ -1664,6 +1665,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &415427405510346288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4482697461171194065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9e0fdc1e8c48d0973b6c0e35b15e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headerText: Draw Pile
+  contentText: 
+  tooltipStaticTargetTransform: {fileID: 0}
+  cursorType: 0
 --- !u!1 &5697494291379818869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,6 +1768,7 @@ GameObject:
   - component: {fileID: 7936265165456413847}
   - component: {fileID: 7504632551906093279}
   - component: {fileID: 4786861508284979956}
+  - component: {fileID: 7672616624168652498}
   m_Layer: 0
   m_Name: ManaBackground
   m_TagString: Untagged
@@ -1816,6 +1834,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7672616624168652498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907147213100813199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9e0fdc1e8c48d0973b6c0e35b15e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headerText: Mana
+  contentText: 
+  tooltipStaticTargetTransform: {fileID: 0}
+  cursorType: 0
 --- !u!1 &6007583274542449347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,7 +1947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4550346563000777829
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2198,6 +2232,7 @@ GameObject:
   - component: {fileID: 119562985521897163}
   - component: {fileID: 1833815375378643751}
   - component: {fileID: 3667157186200137269}
+  - component: {fileID: 187911237769342185}
   m_Layer: 0
   m_Name: DiscardPileBackground
   m_TagString: Untagged
@@ -2263,6 +2298,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &187911237769342185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8226370873412802014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9e0fdc1e8c48d0973b6c0e35b15e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headerText: Discard Pile
+  contentText: 
+  tooltipStaticTargetTransform: {fileID: 0}
+  cursorType: 0
 --- !u!1 &8630211603250925542
 GameObject:
   m_ObjectHideFlags: 0

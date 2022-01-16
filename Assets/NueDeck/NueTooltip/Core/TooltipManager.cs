@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using NueDeck.Scripts.Data.Containers;
 using NueTooltip.CursorSystem;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace NueTooltip.Core
         [SerializeField] private CursorController cursorController;
         [SerializeField] private TooltipText tooltipTextPrefab;
         [SerializeField] private CanvasGroup canvasGroup;
-        
+       
         [Header("Settings")]
         [SerializeField] private AnimationCurve fadeCurve;
         [SerializeField] private float showDelayTime = 0.5f;

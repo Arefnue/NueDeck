@@ -279,6 +279,7 @@ GameObject:
   - component: {fileID: 7831602920538533823}
   - component: {fileID: 7783496576481994516}
   - component: {fileID: 8686100058178527450}
+  - component: {fileID: 9083777817873077652}
   m_Layer: 0
   m_Name: HealthImage
   m_TagString: Untagged
@@ -344,6 +345,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9083777817873077652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2397669055128080995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9e0fdc1e8c48d0973b6c0e35b15e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headerText: Your Health
+  contentText: 
+  tooltipStaticTargetTransform: {fileID: 0}
+  cursorType: 0
 --- !u!1 &2401447454867246692
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,7 +940,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 47.945, y: -6.408}
+  m_AnchoredPosition: {x: 47.944946, y: -6.408001}
   m_SizeDelta: {x: 95.891, y: 12.816}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4764778476628963279
@@ -1061,10 +1078,10 @@ RectTransform:
   m_Father: {fileID: 831016716070213371}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -37.5}
-  m_SizeDelta: {x: 1605, y: 75}
+  m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5428496937178394232
 CanvasRenderer:
@@ -1115,6 +1132,7 @@ GameObject:
   - component: {fileID: 1292414195701795590}
   - component: {fileID: 388844345785321548}
   - component: {fileID: 791571217095524841}
+  - component: {fileID: 5052146099803540338}
   m_Layer: 0
   m_Name: GoldImage
   m_TagString: Untagged
@@ -1180,3 +1198,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5052146099803540338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073530598210953773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9e0fdc1e8c48d0973b6c0e35b15e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headerText: Money
+  contentText: 
+  tooltipStaticTargetTransform: {fileID: 0}
+  cursorType: 0
