@@ -186,9 +186,9 @@ namespace NueDeck.Scripts.Card
                     ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot,CursorType.Default,CollectionManager.Instance.handController.cam);
             }
         }
-        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null, CursorType targetCursor = CursorType.Default,Camera cam = null)
+        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null, CursorType targetCursor = CursorType.Default,Camera cam = null, float delayShow =0)
         {
-            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor,cam);
+            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor,cam,delayShow);
         }
 
         public void HideTooltipInfo(TooltipManager tooltipManager)

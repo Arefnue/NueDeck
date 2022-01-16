@@ -15,12 +15,13 @@ using UnityEngine.UI;
 
 namespace NueDeck.Scripts.Characters
 {
-    public abstract class CharacterCanvas : MonoBehaviour
+    public abstract class CharacterCanvas : MonoBehaviour,I2DTooltipTarget
     {
         [SerializeField] private TextMeshProUGUI currentHealthText;
         [SerializeField] private Transform statusIconRoot;
         [SerializeField] private StatusIconsData statusIconsData;
         [SerializeField] private Transform highlightRoot;
+        [SerializeField] private Image highlightImage;
         [SerializeField] private Transform descriptionRoot;
         
         
@@ -87,6 +88,52 @@ namespace NueDeck.Scripts.Characters
         {
             highlightRoot.gameObject.SetActive(open);
         }
-        
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            ShowTooltipInfo();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            HideTooltipInfo(TooltipManager.Instance);
+        }
+
+        public void ShowTooltipInfo()
+        {
+            var tooltipManager = TooltipManager.Instance;
+            var specialKeywords = new List<SpecialKeywords>();
+            
+            foreach (var statusIcon in _statusDict)
+            {
+                if (statusIcon.Value == null) continue;
+               
+                var statusData = statusIcon.Value.MyStatusIconData;
+                foreach (var statusDataSpecialKeyword in statusData.specialKeywords)
+                {
+                    if (specialKeywords.Contains(statusDataSpecialKeyword)) continue;
+                    specialKeywords.Add(statusDataSpecialKeyword);
+                    
+                }
+            }
+            
+            foreach (var specialKeyword in specialKeywords)
+            {
+                var specialKeywordData =tooltipManager.SpecialKeywordData.SpecialKeywordBaseList.Find(x => x.SpecialKeyword == specialKeyword);
+                if (specialKeywordData != null)
+                    ShowTooltipInfo(tooltipManager,specialKeywordData.GetContent(),specialKeywordData.GetHeader(),descriptionRoot);
+                
+            }
+            
+        }
+        public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null, CursorType targetCursor = CursorType.Default,Camera cam = null, float delayShow =0)
+        {
+            tooltipManager.ShowTooltip(content,header,tooltipStaticTransform,targetCursor,cam,delayShow);
+        }
+
+        public void HideTooltipInfo(TooltipManager tooltipManager)
+        {
+           tooltipManager.HideTooltip();
+        }
     }
 }

@@ -91,10 +91,9 @@ namespace NueTooltip.Core
 
         public void HideTooltip()
         {
-            StopCoroutine(nameof(ShowRoutine));
-            
+            StopAllCoroutines();
             _currentShownTooltipCount = 0;
-            
+            canvasGroup.alpha = 0;
             foreach (var tooltipText in _tooltipTextList)
                 tooltipText.gameObject.SetActive(false);
 

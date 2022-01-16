@@ -1,22 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &8811515210179277285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5572609017615024000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b148fc39f9241a3ad85116d28dbcb49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealthText: {fileID: 5093173911016622206}
-  statusIconRoot: {fileID: 4383464602382946173}
-  statusIconsData: {fileID: 11400000, guid: b03aa86ece2bc1b4a9afba4ab8e5a0d0, type: 2}
-  highlightRoot: {fileID: 8914975654672300189}
-  highlightImage: {fileID: 4658789223333938935}
 --- !u!1001 &2971957499443707859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 523900399423584285, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 584864380361693019, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -155,3 +142,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3349489802833921998 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 523900399423584285, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
+  m_PrefabInstance: {fileID: 2971957499443707859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8811515210179277285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5572609017615024000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b148fc39f9241a3ad85116d28dbcb49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealthText: {fileID: 5093173911016622206}
+  statusIconRoot: {fileID: 4383464602382946173}
+  statusIconsData: {fileID: 11400000, guid: b03aa86ece2bc1b4a9afba4ab8e5a0d0, type: 2}
+  highlightRoot: {fileID: 8914975654672300189}
+  highlightImage: {fileID: 4658789223333938935}
+  descriptionRoot: {fileID: 3349489802833921998}

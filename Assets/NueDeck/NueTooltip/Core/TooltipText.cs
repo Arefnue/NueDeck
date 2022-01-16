@@ -32,7 +32,7 @@ namespace NueTooltip.Core
             else
             {
                 contentText.gameObject.SetActive(true);
-                contentText.text = header;
+                contentText.text = content;
             }
 
             if (contentText.gameObject.activeSelf || headerText.gameObject.activeSelf)
