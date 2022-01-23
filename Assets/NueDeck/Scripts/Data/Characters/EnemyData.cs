@@ -20,7 +20,7 @@ namespace NueDeck.Scripts.Data.Characters
     public class EnemyAbilityData
     {
         public string name;
-        public ActionTargets abilityTarget;
+        public ActionTarget abilityTarget;
         public EnemyIntentionData intention;
         public List<EnemyActionData> actionList;
         public SoundProfileData soundProfile;

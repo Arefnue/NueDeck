@@ -56,10 +56,10 @@ namespace NueDeck.Scripts.Card
             _color2 = _cardMaterial.GetColor("_OutlineColor");
             _dissolveColor = _cardMaterial.GetColor("_DissolveColor");
             
-            nameText.text = CardData.myName;
+            nameText.text = CardData.CardName;
             descText.text = CardData.MyDescription;
-            manaText.text = CardData.myManaCost.ToString();
-            frontImage.sprite = CardData.mySprite;
+            manaText.text = CardData.ManaCost.ToString();
+            frontImage.sprite = CardData.CardSprite;
 
             canvas.worldCamera = CollectionManager.Instance.handController.cam;
         }
@@ -69,11 +69,11 @@ namespace NueDeck.Scripts.Card
 
         public void Use(CharacterBase self,CharacterBase target)
         {
-            SpendMana(CardData.myManaCost);
+            SpendMana(CardData.ManaCost);
             
-            foreach (var playerAction in CardData.actionList)
-                CardActionProcessor.GetAction(playerAction.myPlayerActionType)
-                    .DoAction(new CardActionParameters(playerAction.value,
+            foreach (var playerAction in CardData.CardActionDataList)
+                CardActionProcessor.GetAction(playerAction.MyPlayerActionType)
+                    .DoAction(new CardActionParameters(playerAction.Value,
                         target,self,CardData));
             
             CollectionManager.Instance.OnCardPlayed(this);
@@ -108,9 +108,9 @@ namespace NueDeck.Scripts.Card
         public void UpdateCardText()
         {
             CardData.UpdateDescription();
-            nameText.text = CardData.myName;
+            nameText.text = CardData.CardName;
             descText.text = CardData.MyDescription;
-            manaText.text = CardData.myManaCost.ToString();
+            manaText.text = CardData.ManaCost.ToString();
         }
         
         #endregion
@@ -179,7 +179,7 @@ namespace NueDeck.Scripts.Card
         public void ShowTooltipInfo()
         {
             var tooltipManager = TooltipManager.Instance;
-            foreach (var cardDataSpecialKeyword in CardData.specialKeywords)
+            foreach (var cardDataSpecialKeyword in CardData.KeywordsList)
             {
                 var specialKeyword = tooltipManager.SpecialKeywordData.SpecialKeywordBaseList.Find(x=>x.SpecialKeyword == cardDataSpecialKeyword);
                 if (specialKeyword != null)

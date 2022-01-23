@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Managers;
 using NueExtentions;
@@ -7,74 +8,92 @@ using UnityEngine;
 
 namespace NueDeck.Scripts.Data.Collection
 {
-    [CreateAssetMenu(fileName = "Card Data",menuName = "Data/Collection/Card",order = 0)]
+    [CreateAssetMenu(fileName = "Card Data",menuName = "NueDeck/Data/Collection/Card",order = 0)]
     public class CardData : ScriptableObject
     {
-        [Header("Card Defaults")]
-        public int myID;
-        public ActionTargets myTargets;
-        public bool usableWithoutTarget;
-        public int myManaCost;
-        public string myName;
-
-        public string MyDescription { get; set; }
-
-        public Sprite mySprite;
-        public List<CardActionData> actionList;
-        public List<DescriptionData> descriptionDataList;
-        public List<SpecialKeywords> specialKeywords;
-        public AudioActionType audioType;
+        [Header("Card Profile")] 
+        [SerializeField] private string id;
+        [SerializeField] private string cardName;
+        [SerializeField] private int manaCost;
+        [SerializeField] private Sprite cardSprite;
         
+        [Header("Action Settings")]
+        [SerializeField] private ActionTarget actionTarget;
+        [SerializeField] private bool usableWithoutTarget;
+        [SerializeField] private List<CardActionData> cardActionDataList;
+        
+        [Header("Description")]
+        [SerializeField] private List<CardDescriptionData> cardDescriptionDataList;
+        [SerializeField] private List<SpecialKeywords> specialKeywordsList;
+        
+        [Header("Fx")]
+        [SerializeField] private AudioActionType audioType;
+
+        #region Encapsulation
+        public string Id => id;
+        public bool UsableWithoutTarget => usableWithoutTarget;
+        public int ManaCost => manaCost;
+        public string CardName => cardName;
+        public ActionTarget MyTarget => actionTarget;
+        public Sprite CardSprite => cardSprite;
+        public List<CardActionData> CardActionDataList => cardActionDataList;
+        public List<CardDescriptionData> CardDescriptionDataList => cardDescriptionDataList;
+        public List<SpecialKeywords> KeywordsList => specialKeywordsList;
+        public AudioActionType AudioType1 => audioType;
+        public string MyDescription { get; set; }
+        
+        #endregion
+        
+        #region Methods
         public void UpdateDescription()
         {
-            MyDescription = "";
-
-            foreach (var descriptionData in descriptionDataList)
-            {
-                MyDescription += descriptionData.GetDescription();
-            }
+            var str = new StringBuilder();
+            
+            foreach (var descriptionData in cardDescriptionDataList)
+                str.Append(descriptionData.GetDescription());
+            
+            MyDescription = str.ToString();
         }
-
+        #endregion
     }
 
     [Serializable]
     public class CardActionData
     {
-        public CardActionType myPlayerActionType;
-        public float value;
-        
+        [SerializeField] private CardActionType myPlayerActionType;
+        [SerializeField] private float value;
+        public CardActionType MyPlayerActionType => myPlayerActionType;
+        public float Value => value;
     }
 
     [Serializable]
-    public class DescriptionData
+    public class CardDescriptionData
     {
+        [Header("Text")]
         [SerializeField]private bool useText = true;
-        [SerializeField]private bool useValue = true;
-        [SerializeField]private string text;
-        [SerializeField]private int defaultValue;
+        [SerializeField]private Color textColor;
+        [SerializeField]private bool useTextColor;
+        [SerializeField]private string defaultText;
         
-        [Header("Color")]
+        [Header("Value")]
+        [SerializeField]private bool useValue = true;
         [SerializeField]private bool useValueColor;
         [SerializeField]private Color valueColor;
-        [SerializeField]private bool useTextColor;
-        [SerializeField]private Color textColor;
-        
+        [SerializeField]private int defaultValue;
         
         [Header("Modifer")]
-        [SerializeField]private bool useModifer;
         [SerializeField]private StatusType modiferStatus;
+        [SerializeField]private bool useModifer;
         
-        
-        
-
         public string GetDescription()
         {
-            var str = "";
+            var str = new StringBuilder();
 
             if (useText)
             {
-                str += text;
-                if (useTextColor) str = ColorExtentions.ColorString(str,textColor);
+                str.Append(defaultText);
+                if (useTextColor) 
+                    str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),textColor));
             }
             
             if (useValue)
@@ -82,25 +101,23 @@ namespace NueDeck.Scripts.Data.Collection
                 var value = defaultValue;
                 if (useModifer)
                 {
-                   
                     var player = CombatManager.Instance.currentAllies[0];
                     if (player)
                     {
                         var modifer =player.CharacterStats.StatusDict[modiferStatus].StatusValue;
                         value += modifer;
-                        if (modifer!= 0)
-                        {
-                            str += "*";
-                        }
                         
+                        if (modifer!= 0)
+                            str.Append("*");
                     }
                     
                 }
-                str += value;
-                if (useValueColor) str = ColorExtentions.ColorString(str,valueColor);
+                str.Append(value);
+                if (useValueColor)  
+                    str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),valueColor));
             }
             
-            return str;
+            return str.ToString();
         }
         
      

@@ -18,7 +18,7 @@ namespace NueDeck.Scripts.Card.CardActions
             newTarget.CharacterStats.IncreaseMaxHealth(Mathf.RoundToInt(actionParameters.Value));
             
             FxManager.Instance.PlayFx(newTarget.transform,FxType.Buff);
-            AudioManager.Instance.PlayOneShot(actionParameters.CardData.audioType);
+            AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType1);
         }
     }
 }

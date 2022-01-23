@@ -19,7 +19,7 @@ namespace NueDeck.Scripts.Card.CardActions
             newTarget.CharacterStats.Heal(Mathf.RoundToInt(actionParameters.Value));
             
             FxManager.Instance.PlayFx(newTarget.transform,FxType.Heal);
-            AudioManager.Instance.PlayOneShot(actionParameters.CardData.audioType);
+            AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType1);
         }
     }
 }

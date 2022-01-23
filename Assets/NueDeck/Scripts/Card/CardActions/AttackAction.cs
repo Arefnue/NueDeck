@@ -15,7 +15,7 @@ namespace NueDeck.Scripts.Card.CardActions
                 actionParameters.SelfCharacter.CharacterStats.StatusDict[StatusType.Strength].StatusValue));
             
             FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
-            AudioManager.Instance.PlayOneShot(actionParameters.CardData.audioType);
+            AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType1);
         }
     }
 }

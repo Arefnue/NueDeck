@@ -1,6 +1,6 @@
 ﻿namespace NueDeck.Scripts.Enums
 {
-    public enum ActionTargets
+    public enum ActionTarget
     {
         Enemy,
         Ally,

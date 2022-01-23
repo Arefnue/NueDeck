@@ -132,7 +132,7 @@ namespace NueDeck.Scripts.Collection
                 var cardTransform = card.transform;
 
                 // Set to inactive material if not enough mana required to use card
-                card.SetInactiveMaterialState(GameManager.Instance.PersistentGameplayData.CurrentMana < card.CardData.myManaCost, inactiveCardMaterial);
+                card.SetInactiveMaterialState(GameManager.Instance.PersistentGameplayData.CurrentMana < card.CardData.ManaCost, inactiveCardMaterial);
 
                 var noCardHeld = _heldCard == null; // Whether a card is "held" (outside of hand)
                 var onSelectedCard = noCardHeld && _selected == i;
@@ -254,7 +254,7 @@ namespace NueDeck.Scripts.Collection
                     Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
                 cardTransform.position = cardPos;
 
-                CombatManager.Instance.HighlightCardTarget(_heldCard.CardData.myTargets);
+                CombatManager.Instance.HighlightCardTarget(_heldCard.CardData.MyTarget);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
                 if (!GameManager.Instance.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
@@ -285,7 +285,7 @@ namespace NueDeck.Scripts.Collection
             CombatManager.Instance.DeactivateCardHighlights();
             bool backToHand = true;
                 
-            if (GameManager.Instance.PersistentGameplayData.CanUseCards && GameManager.Instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.myManaCost)
+            if (GameManager.Instance.PersistentGameplayData.CanUseCards && GameManager.Instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.ManaCost)
             {
                 RaycastHit hit;
                 var mainRay = GameManager.Instance.mainCam.ScreenPointToRay(mousePos);
@@ -296,10 +296,10 @@ namespace NueDeck.Scripts.Collection
                     
                     if (character != null)
                     {
-                        if ((_heldCard.CardData.myTargets == ActionTargets.Enemy &&
+                        if ((_heldCard.CardData.MyTarget == ActionTarget.Enemy &&
                              character.GetCharacterBase()
                                  .GetComponent<EnemyBase>()) ||
-                            (_heldCard.CardData.myTargets == ActionTargets.Ally &&
+                            (_heldCard.CardData.MyTarget == ActionTarget.Ally &&
                              character.GetCharacterBase()
                                  .GetComponent<AllyBase>()))
                         {
@@ -312,7 +312,7 @@ namespace NueDeck.Scripts.Collection
                 }
                 else
                 {
-                    if (_heldCard.CardData.usableWithoutTarget)
+                    if (_heldCard.CardData.UsableWithoutTarget)
                     {
                         backToHand = false;
                         _heldCard.Use(CombatManager.Instance.currentAllies[0],null);

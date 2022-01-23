@@ -158,24 +158,24 @@ namespace NueDeck.Scripts.Managers
             UIManager.Instance.combatCanvas.SetPileTexts();
         }
         
-        public void HighlightCardTarget(ActionTargets targetTargets)
+        public void HighlightCardTarget(ActionTarget targetTarget)
         {
-            switch (targetTargets)
+            switch (targetTarget)
             {
-                case ActionTargets.Enemy:
+                case ActionTarget.Enemy:
                     foreach (var currentEnemy in CombatManager.Instance.currentEnemies)
                         currentEnemy.enemyCanvas.SetHighlight(true);
                     break;
-                case ActionTargets.Ally:
+                case ActionTarget.Ally:
                     foreach (var currentAlly in CombatManager.Instance.currentAllies)
                        currentAlly.allyCanvas.SetHighlight(true);
                     break;
-                case ActionTargets.AllEnemies:
+                case ActionTarget.AllEnemies:
                     break;
-                case ActionTargets.AllAllies:
+                case ActionTarget.AllAllies:
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(targetTargets), targetTargets, null);
+                    throw new ArgumentOutOfRangeException(nameof(targetTarget), targetTarget, null);
             }
         }
         

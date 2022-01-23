@@ -853,8 +853,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6913786397352984962}
         m_TargetAssemblyTypeName: NueDeck.Scripts.Utils.SceneChanger, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 3
+        m_MethodName: OpenMapScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1013,8 +1013,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5160966767101886050}
         m_TargetAssemblyTypeName: NueDeck.Scripts.Utils.SceneChanger, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 3
+        m_MethodName: OpenMapScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
