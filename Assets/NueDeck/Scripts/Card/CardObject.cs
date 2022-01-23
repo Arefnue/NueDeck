@@ -18,22 +18,26 @@ namespace NueDeck.Scripts.Card
     {
         [Header("References")]
         [SerializeField] private MeshRenderer cardMeshRenderer;
-        [SerializeField] private TextMeshProUGUI nameText;
-        [SerializeField] private TextMeshProUGUI descText;
-        [SerializeField] private TextMeshProUGUI manaText;
-        [SerializeField] private Image frontImage;
-        [SerializeField] private Image backImage;
-        [SerializeField] private Image inactiveImage;
         [SerializeField] private Transform descriptionRoot;
         [SerializeField] private Canvas canvas;
+        
+        [Header("TextFields")]
+        [SerializeField] private TextMeshProUGUI nameTextField;
+        [SerializeField] private TextMeshProUGUI descTextField;
+        [SerializeField] private TextMeshProUGUI manaTextField;
+        
+        [Header("Images")]
+        [SerializeField] private Image frontImage;
+        [SerializeField] private Image backImage;
+        [SerializeField] private Image inActiveImage;
         
         public CardData CardData { get; private set; }
 
         private readonly Vector2 _dissolveOffset = new Vector2(0.1f, 0);
         private readonly Vector2 _dissolveSpeed = new Vector2(2f, 2f);
         private Color _dissolveColor;
-        private Color _color;
-        private Color _color2;
+        private Color _baseColor;
+        private Color _colorOutline;
         private bool _isInactive;
         private Material _cardMaterial;
         private Transform _transform;
@@ -52,13 +56,13 @@ namespace NueDeck.Scripts.Card
             CardData = targetProfile;
             _cardMaterial = cardMeshRenderer.material;
 
-            _color = _cardMaterial.GetColor("_Color");
-            _color2 = _cardMaterial.GetColor("_OutlineColor");
+            _baseColor = _cardMaterial.GetColor("_Color");
+            _colorOutline = _cardMaterial.GetColor("_OutlineColor");
             _dissolveColor = _cardMaterial.GetColor("_DissolveColor");
             
-            nameText.text = CardData.CardName;
-            descText.text = CardData.MyDescription;
-            manaText.text = CardData.ManaCost.ToString();
+            nameTextField.text = CardData.CardName;
+            descTextField.text = CardData.MyDescription;
+            manaTextField.text = CardData.ManaCost.ToString();
             frontImage.sprite = CardData.CardSprite;
 
             canvas.worldCamera = CollectionManager.Instance.handController.cam;
@@ -102,22 +106,22 @@ namespace NueDeck.Scripts.Card
             _isInactive = isInactive;
             cardMeshRenderer.sharedMaterial = isInactive ? inactiveMaterial : _cardMaterial;
 
-            inactiveImage.gameObject.SetActive(isInactive);
+            inActiveImage.gameObject.SetActive(isInactive);
         }
         
         public void UpdateCardText()
         {
             CardData.UpdateDescription();
-            nameText.text = CardData.CardName;
-            descText.text = CardData.MyDescription;
-            manaText.text = CardData.ManaCost.ToString();
+            nameTextField.text = CardData.CardName;
+            descTextField.text = CardData.MyDescription;
+            manaTextField.text = CardData.ManaCost.ToString();
         }
         
         #endregion
         
         #region Routines
 
-        protected IEnumerator Dissolve() 
+        private IEnumerator Dissolve() 
         {
             Vector2 t = Vector2.zero - _dissolveOffset;
             while (t.x < 1) {
@@ -166,6 +170,8 @@ namespace NueDeck.Scripts.Card
 
         #endregion
 
+        #region Pointer Events
+
         public void OnPointerEnter(PointerEventData eventData)
         {
             ShowTooltipInfo();
@@ -176,6 +182,19 @@ namespace NueDeck.Scripts.Card
             HideTooltipInfo(TooltipManager.Instance);
         }
 
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            HideTooltipInfo(TooltipManager.Instance);
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            ShowTooltipInfo();
+        }
+
+        #endregion
+
+        #region Tooltip
         public void ShowTooltipInfo()
         {
             var tooltipManager = TooltipManager.Instance;
@@ -195,15 +214,8 @@ namespace NueDeck.Scripts.Card
         {
             tooltipManager.HideTooltip();
         }
-
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            HideTooltipInfo(TooltipManager.Instance);
-        }
-
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            ShowTooltipInfo();
-        }
+        
+        #endregion
+       
     }
 }
