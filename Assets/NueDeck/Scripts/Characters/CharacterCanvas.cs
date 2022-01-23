@@ -15,37 +15,39 @@ using UnityEngine.UI;
 
 namespace NueDeck.Scripts.Characters
 {
+    [RequireComponent(typeof(Canvas))]
     public abstract class CharacterCanvas : MonoBehaviour,I2DTooltipTarget
     {
-        [SerializeField] private TextMeshProUGUI currentHealthText;
+        [Header("References")]
         [SerializeField] private Transform statusIconRoot;
-        [SerializeField] private StatusIconsData statusIconsData;
         [SerializeField] private Transform highlightRoot;
-        [SerializeField] private Image highlightImage;
         [SerializeField] private Transform descriptionRoot;
-        
+        [SerializeField] private StatusIconsData statusIconsData;
+        [SerializeField] private TextMeshProUGUI currentHealthText;
+        [SerializeField] private Image highlightImage;
         
         private Dictionary<StatusType, StatusIcon> _statusDict = new Dictionary<StatusType, StatusIcon>();
 
         private Canvas _canvas;
-        
-        private void Awake()
-        {
-            highlightRoot.gameObject.SetActive(false);
-        }
+
+        #region Setup
 
         public void InitCanvas()
         {
+            highlightRoot.gameObject.SetActive(false);
+            
             for (int i = 0; i < Enum.GetNames(typeof(StatusType)).Length; i++)
-            {
                 _statusDict.Add((StatusType) i, null);
-            }
 
             _canvas = GetComponent<Canvas>();
+            
             if (_canvas)
                 _canvas.worldCamera = GameManager.Instance.mainCam;
         }
 
+        #endregion
+        
+        #region Public Methods
         public void ApplyStatus(StatusType targetStatus, int value)
         {
             if (_statusDict[targetStatus] == null)
@@ -71,24 +73,20 @@ namespace NueDeck.Scripts.Characters
            
             _statusDict[targetStatus] = null;
         }
-
+        
         public void UpdateStatusText(StatusType targetStatus, int value)
         {
-            if (_statusDict[targetStatus] == null)  return;
+            if (_statusDict[targetStatus] == null) return;
           
             _statusDict[targetStatus].statusValueText.text = $"{value}";
         }
         
-        public void UpdateHealthText(int currentHealth,int maxHealth)
-        {
-            currentHealthText.text = $"{currentHealth}/{maxHealth}";
-        }
+        public void UpdateHealthText(int currentHealth,int maxHealth) =>  currentHealthText.text = $"{currentHealth}/{maxHealth}";
+        public void SetHighlight(bool open) => highlightRoot.gameObject.SetActive(open);
+       
+        #endregion
 
-        public void SetHighlight(bool open)
-        {
-            highlightRoot.gameObject.SetActive(open);
-        }
-
+        #region Pointer Events
         public void OnPointerEnter(PointerEventData eventData)
         {
             ShowTooltipInfo();
@@ -99,6 +97,9 @@ namespace NueDeck.Scripts.Characters
             HideTooltipInfo(TooltipManager.Instance);
         }
 
+        #endregion
+
+        #region Tooltip
         public void ShowTooltipInfo()
         {
             var tooltipManager = TooltipManager.Instance;
@@ -113,7 +114,6 @@ namespace NueDeck.Scripts.Characters
                 {
                     if (specialKeywords.Contains(statusDataSpecialKeyword)) continue;
                     specialKeywords.Add(statusDataSpecialKeyword);
-                    
                 }
             }
             
@@ -122,7 +122,6 @@ namespace NueDeck.Scripts.Characters
                 var specialKeywordData =tooltipManager.SpecialKeywordData.SpecialKeywordBaseList.Find(x => x.SpecialKeyword == specialKeyword);
                 if (specialKeywordData != null)
                     ShowTooltipInfo(tooltipManager,specialKeywordData.GetContent(),specialKeywordData.GetHeader(),descriptionRoot);
-                
             }
             
         }
@@ -133,7 +132,11 @@ namespace NueDeck.Scripts.Characters
 
         public void HideTooltipInfo(TooltipManager tooltipManager)
         {
-           tooltipManager.HideTooltip();
+            tooltipManager.HideTooltip();
         }
+        
+
+        #endregion
+       
     }
 }

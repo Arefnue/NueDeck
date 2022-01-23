@@ -146,10 +146,10 @@ namespace NueDeck.Scripts.Managers
         public void DeactivateCardHighlights()
         {
             foreach (var currentEnemy in currentEnemies)
-                currentEnemy.enemyCanvas.SetHighlight(false);
+                currentEnemy.EnemyCanvas.SetHighlight(false);
 
             foreach (var currentAlly in currentAllies)
-                currentAlly.allyCanvas.SetHighlight(false);
+                currentAlly.AllyCanvas.SetHighlight(false);
         }
 
         public void IncreaseMana(int target)
@@ -164,11 +164,11 @@ namespace NueDeck.Scripts.Managers
             {
                 case ActionTarget.Enemy:
                     foreach (var currentEnemy in CombatManager.Instance.currentEnemies)
-                        currentEnemy.enemyCanvas.SetHighlight(true);
+                        currentEnemy.EnemyCanvas.SetHighlight(true);
                     break;
                 case ActionTarget.Ally:
                     foreach (var currentAlly in CombatManager.Instance.currentAllies)
-                       currentAlly.allyCanvas.SetHighlight(true);
+                       currentAlly.AllyCanvas.SetHighlight(true);
                     break;
                 case ActionTarget.AllEnemies:
                     break;
@@ -197,8 +197,8 @@ namespace NueDeck.Scripts.Managers
 
             foreach (var currentAlly in currentAllies)
             {
-                GameManager.Instance.PersistentGameplayData.CurrentHealthDict[currentAlly.allyData.characterID] = currentAlly.CharacterStats.CurrentHealth;
-                GameManager.Instance.PersistentGameplayData.MaxHealthDict[currentAlly.allyData.characterID] = currentAlly.CharacterStats.MaxHealth;
+                GameManager.Instance.PersistentGameplayData.CurrentHealthDict[currentAlly.AllyData.characterID] = currentAlly.CharacterStats.CurrentHealth;
+                GameManager.Instance.PersistentGameplayData.MaxHealthDict[currentAlly.AllyData.characterID] = currentAlly.CharacterStats.MaxHealth;
             }
             
             CollectionManager.Instance.discardPile.Clear();

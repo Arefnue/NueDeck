@@ -9,13 +9,10 @@ namespace NueDeck.Scripts.Characters.Enemies
 {
     public class EnemyExample : EnemyBase
     {
-        
         protected override void OnDeath()
         { 
             base.OnDeath();
            
         }
-
-
     }
 }

@@ -6,7 +6,7 @@ namespace NueDeck.Scripts.Interfaces
     {
         public void OnCardTargetHighlight();
         public void OnCardOverHighlight();
-        public void OnCardPlayedForMe();
+        public void OnCardPlayedOnMe();
 
         public CharacterBase GetCharacterBase();
         

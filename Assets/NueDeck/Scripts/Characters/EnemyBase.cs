@@ -17,59 +17,38 @@ namespace NueDeck.Scripts.Characters
     public class EnemyBase : CharacterBase, IEnemy
     {
         [Header("Enemy Base References")]
-        public EnemyData enemyData;
-        public EnemyCanvas enemyCanvas;
-        public SoundProfileData deathSoundProfileData;
+        [SerializeField] protected EnemyData enemyData;
+        [SerializeField] protected EnemyCanvas enemyCanvas;
+        [SerializeField] protected SoundProfileData deathSoundProfileData;
         protected EnemyAbilityData NextAbility;
         
-        #region Setup
+        public EnemyData EnemyData => enemyData;
+        public EnemyCanvas EnemyCanvas => enemyCanvas;
+        public SoundProfileData DeathSoundProfileData => deathSoundProfileData;
 
+        #region Setup
         public override void BuildCharacter()
         {
             base.BuildCharacter();
-            enemyCanvas.InitCanvas();
-            CharacterStats = new CharacterStats(enemyData.maxHealth,enemyCanvas);
+            EnemyCanvas.InitCanvas();
+            CharacterStats = new CharacterStats(EnemyData.maxHealth,EnemyCanvas);
             CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
             CombatManager.Instance.OnAllyTurnStarted += ShowNextAbility;
             CombatManager.Instance.OnEnemyTurnStarted += CharacterStats.TriggerAllStatus;
         }
-
         protected override void OnDeath()
         {
             base.OnDeath();
             CombatManager.Instance.OnAllyTurnStarted -= ShowNextAbility;
             CombatManager.Instance.OnEnemyTurnStarted -= CharacterStats.TriggerAllStatus;
             CombatManager.Instance.OnEnemyDeath(this);
-            AudioManager.Instance.PlayOneShot(deathSoundProfileData.GetRandomClip());
+            AudioManager.Instance.PlayOneShot(DeathSoundProfileData.GetRandomClip());
             Destroy(gameObject);
         }
-
-        #endregion
-
-        #region Other Methods
-
-        private void ShowNextAbility()
-        {
-            NextAbility = enemyData.enemyAbilityList.RandomItem();
-            enemyCanvas.intentionImage.sprite = NextAbility.intention.intentionSprite;
-            
-            if (NextAbility.hideActionValue)
-            {
-                enemyCanvas.nextActionValueText.gameObject.SetActive(false);
-            }
-            else
-            {
-                enemyCanvas.nextActionValueText.gameObject.SetActive(true);
-                enemyCanvas.nextActionValueText.text = NextAbility.actionList[0].value.ToString();
-            }
-            
-            enemyCanvas.intentionImage.gameObject.SetActive(true);
-        }
-
         #endregion
         
-        #region Interface Methods
+        #region Public Methods
 
         public void OnCardTargetHighlight()
         {
@@ -81,7 +60,7 @@ namespace NueDeck.Scripts.Characters
             
         }
 
-        public void OnCardPlayedForMe()
+        public void OnCardPlayedOnMe()
         {
             
         }
@@ -90,11 +69,30 @@ namespace NueDeck.Scripts.Characters
         
         #endregion
         
+        #region Private Methods
+        private void ShowNextAbility()
+        {
+            NextAbility = EnemyData.enemyAbilityList.RandomItem();
+            EnemyCanvas.IntentImage.sprite = NextAbility.intention.intentionSprite;
+            
+            if (NextAbility.hideActionValue)
+            {
+                EnemyCanvas.NextActionValueText.gameObject.SetActive(false);
+            }
+            else
+            {
+                EnemyCanvas.NextActionValueText.gameObject.SetActive(true);
+                EnemyCanvas.NextActionValueText.text = NextAbility.actionList[0].value.ToString();
+            }
+            
+            EnemyCanvas.IntentImage.gameObject.SetActive(true);
+        }
+        #endregion
+        
         #region Action Routines
-
         public virtual IEnumerator ActionRoutine()
         {
-            enemyCanvas.intentionImage.gameObject.SetActive(false);
+            EnemyCanvas.IntentImage.gameObject.SetActive(false);
             if (NextAbility.intention.enemyIntention == EnemyIntentions.Attack || NextAbility.intention.enemyIntention == EnemyIntentions.Debuff)
             {
                 yield return StartCoroutine(AttackRoutine(NextAbility));
@@ -103,14 +101,14 @@ namespace NueDeck.Scripts.Characters
             {
                 yield return StartCoroutine(BuffRoutine(NextAbility));
             }
-            
-           
         }
         
         protected virtual IEnumerator AttackRoutine(EnemyAbilityData targetAbility)
         {
             var waitFrame = new WaitForEndOfFrame();
 
+            if (CombatManager.Instance == null) yield break;
+            
             var target = CombatManager.Instance.currentAllies.RandomItem();
             
             var startPos = transform.position;
@@ -119,13 +117,11 @@ namespace NueDeck.Scripts.Characters
             var startRot = transform.localRotation;
             var endRot = Quaternion.Euler(60, 0, 60);
             
-            
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, startPos, endPos, startRot, endRot, 5));
           
             targetAbility.actionList.ForEach(x=>EnemyActionProcessor.GetAction(x.enemyActionType).DoAction(new EnemyActionParameters(x.value,target,this)));
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, endPos, startPos, endRot, startRot, 5));
-            
         }
         
         protected virtual IEnumerator BuffRoutine(EnemyAbilityData targetAbility)
@@ -144,11 +140,9 @@ namespace NueDeck.Scripts.Characters
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, endPos, startPos, endRot, startRot, 5));
         }
-
         #endregion
         
         #region Other Routines
-
         private IEnumerator MoveToTargetRoutine(WaitForEndOfFrame waitFrame,Vector3 startPos, Vector3 endPos, Quaternion startRot, Quaternion endRot, float speed)
         {
             var timer = 0f;
@@ -168,8 +162,5 @@ namespace NueDeck.Scripts.Characters
         }
 
         #endregion
-        
-       
-        
     }
 }

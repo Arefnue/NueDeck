@@ -8,9 +8,9 @@ namespace NueDeck.Scripts.Card
 {
     public class Choice : MonoBehaviour,IPointerEnterHandler,IPointerDownHandler,IPointerExitHandler,IPointerUpHandler
     {
+        [SerializeField] private float showScaleRate = 1.15f;
         private CardObject _cardObject;
         private Vector3 _initalScale;
-        [SerializeField] private float showScaleRate = 1.15f;
 
         private void Awake()
         {
@@ -27,9 +27,11 @@ namespace NueDeck.Scripts.Card
 
         private void OnChoice()
         {
-            GameManager.Instance.PersistentGameplayData.CurrentCardsList.Add(_cardObject.CardData);
-            
-            UIManager.Instance.rewardCanvas.choicePanel.DisablePanel();
+            if (GameManager.Instance != null)
+                GameManager.Instance.PersistentGameplayData.CurrentCardsList.Add(_cardObject.CardData);
+
+            if (UIManager.Instance != null)
+                UIManager.Instance.rewardCanvas.choicePanel.DisablePanel();
         }
 
         public void OnPointerEnter(PointerEventData eventData)

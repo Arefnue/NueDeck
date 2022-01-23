@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NueDeck.Scripts.Data.Characters;
 using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
@@ -8,9 +9,11 @@ namespace NueDeck.Scripts.Characters
 {
     public abstract class AllyBase : CharacterBase,IAlly
     {
-        public AllyCanvas allyCanvas;
-        public AllyData allyData;
-       
+        [SerializeField] private AllyCanvas allyCanvas;
+        [SerializeField] private AllyData allyData;
+        public AllyCanvas AllyCanvas => allyCanvas;
+        public AllyData AllyData => allyData;
+
         public override void Awake()
         {
             base.Awake();
@@ -22,6 +25,9 @@ namespace NueDeck.Scripts.Characters
             allyCanvas.InitCanvas();
             CharacterStats = new CharacterStats(allyData.maxHealth,allyCanvas);
 
+            if (!GameManager.Instance)
+                throw new Exception("There is no GameManager");
+            
             if (GameManager.Instance.PersistentGameplayData.CurrentHealthDict.ContainsKey(allyData.characterID))
             {
                 CharacterStats.CurrentHealth = GameManager.Instance.PersistentGameplayData.CurrentHealthDict[allyData.characterID];
@@ -35,15 +41,20 @@ namespace NueDeck.Scripts.Characters
             
             CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
-            CombatManager.Instance.OnAllyTurnStarted += CharacterStats.TriggerAllStatus;
-
+            
+            if (CombatManager.Instance != null)
+                CombatManager.Instance.OnAllyTurnStarted += CharacterStats.TriggerAllStatus;
         }
         
         protected override void OnDeath()
         {
             base.OnDeath();
-            CombatManager.Instance.OnAllyTurnStarted -= CharacterStats.TriggerAllStatus;
-            CombatManager.Instance.OnAllyDeath(this);
+            if (CombatManager.Instance != null)
+            {
+                CombatManager.Instance.OnAllyTurnStarted -= CharacterStats.TriggerAllStatus;
+                CombatManager.Instance.OnAllyDeath(this);
+            }
+
             Destroy(gameObject);
         }
 
@@ -57,7 +68,7 @@ namespace NueDeck.Scripts.Characters
             
         }
 
-        public void OnCardPlayedForMe()
+        public void OnCardPlayedOnMe()
         {
             
         }
