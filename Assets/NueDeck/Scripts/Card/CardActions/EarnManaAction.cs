@@ -9,9 +9,16 @@ namespace NueDeck.Scripts.Card.CardActions
         public override CardActionType ActionType => CardActionType.EarnMana;
         public override void DoAction(CardActionParameters actionParameters)
         {
-            CombatManager.Instance.IncreaseMana(Mathf.RoundToInt(actionParameters.Value));
-            FxManager.Instance.PlayFx(actionParameters.SelfCharacter.transform,FxType.Buff);
-            AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType1);
+            if (CombatManager.Instance != null)
+                CombatManager.Instance.IncreaseMana(Mathf.RoundToInt(actionParameters.Value));
+            else
+                Debug.LogError("There is no CombatManager");
+
+            if (FxManager.Instance != null)
+                FxManager.Instance.PlayFx(actionParameters.SelfCharacter.transform, FxType.Buff);
+            
+            if (AudioManager.Instance != null) 
+                AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType);
         }
     }
 }

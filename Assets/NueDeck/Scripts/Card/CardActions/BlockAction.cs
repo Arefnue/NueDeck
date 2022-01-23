@@ -12,16 +12,18 @@ namespace NueDeck.Scripts.Card.CardActions
             var newTarget = actionParameters.TargetCharacter
                 ? actionParameters.TargetCharacter
                 : actionParameters.SelfCharacter;
-
             
             if (!newTarget) return;
             
             newTarget.CharacterStats.ApplyStatus(StatusType.Block,
                 Mathf.RoundToInt(actionParameters.Value + actionParameters.SelfCharacter.CharacterStats
                     .StatusDict[StatusType.Dexterity].StatusValue));
+
+            if (FxManager.Instance != null) 
+                FxManager.Instance.PlayFx(newTarget.transform, FxType.Block);
             
-            FxManager.Instance.PlayFx(newTarget.transform,FxType.Block);
-            AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType1);
+            if (AudioManager.Instance != null) 
+                AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType);
         }
     }
 }

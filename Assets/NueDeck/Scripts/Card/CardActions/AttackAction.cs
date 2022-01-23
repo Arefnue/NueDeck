@@ -1,4 +1,5 @@
-﻿using NueDeck.Scripts.Enums;
+﻿using System;
+using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Managers;
 using UnityEngine;
 
@@ -13,9 +14,12 @@ namespace NueDeck.Scripts.Card.CardActions
             
             actionParameters.TargetCharacter.CharacterStats.Damage(Mathf.RoundToInt(actionParameters.Value +
                 actionParameters.SelfCharacter.CharacterStats.StatusDict[StatusType.Strength].StatusValue));
-            
-            FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
-            AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType1);
+
+            if (FxManager.Instance != null)
+                FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
+           
+            if (AudioManager.Instance != null) 
+                AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType);
         }
     }
 }

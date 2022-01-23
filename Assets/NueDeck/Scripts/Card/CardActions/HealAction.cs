@@ -17,9 +17,12 @@ namespace NueDeck.Scripts.Card.CardActions
             if (!newTarget) return;
             
             newTarget.CharacterStats.Heal(Mathf.RoundToInt(actionParameters.Value));
+
+            if (FxManager.Instance != null) 
+                FxManager.Instance.PlayFx(newTarget.transform, FxType.Heal);
             
-            FxManager.Instance.PlayFx(newTarget.transform,FxType.Heal);
-            AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType1);
+            if (AudioManager.Instance != null) 
+                AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType);
         }
     }
 }

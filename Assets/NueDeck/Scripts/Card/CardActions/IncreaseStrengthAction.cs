@@ -16,9 +16,12 @@ namespace NueDeck.Scripts.Card.CardActions
             if (!newTarget) return;
             
             newTarget.CharacterStats.ApplyStatus(StatusType.Strength,Mathf.RoundToInt(actionParameters.Value));
-            FxManager.Instance.PlayFx(newTarget.transform,FxType.Str);
             
-            AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType1);
+            if (FxManager.Instance != null) 
+                FxManager.Instance.PlayFx(newTarget.transform, FxType.Str);
+
+            if (AudioManager.Instance != null) 
+                AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType);
         }
     }
 }

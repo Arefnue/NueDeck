@@ -39,7 +39,7 @@ namespace NueDeck.Scripts.Data.Collection
         public List<CardActionData> CardActionDataList => cardActionDataList;
         public List<CardDescriptionData> CardDescriptionDataList => cardDescriptionDataList;
         public List<SpecialKeywords> KeywordsList => specialKeywordsList;
-        public AudioActionType AudioType1 => audioType;
+        public AudioActionType AudioType => audioType;
         public string MyDescription { get; set; }
         
         #endregion

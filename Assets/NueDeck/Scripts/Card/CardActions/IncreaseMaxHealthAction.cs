@@ -16,9 +16,12 @@ namespace NueDeck.Scripts.Card.CardActions
             if (!newTarget) return;
             
             newTarget.CharacterStats.IncreaseMaxHealth(Mathf.RoundToInt(actionParameters.Value));
+
+            if (FxManager.Instance != null) 
+                FxManager.Instance.PlayFx(newTarget.transform, FxType.Buff);
             
-            FxManager.Instance.PlayFx(newTarget.transform,FxType.Buff);
-            AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType1);
+            if (AudioManager.Instance != null) 
+                AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType);
         }
     }
 }
