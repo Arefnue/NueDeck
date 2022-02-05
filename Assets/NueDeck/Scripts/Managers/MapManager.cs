@@ -8,20 +8,20 @@ namespace NueDeck.Scripts.Managers
 {
     public class MapManager : MonoBehaviour
     {
-        public List<EncounterButton> encounterButtonList;
+        [SerializeField] private List<EncounterButton> encounterButtonList;
 
-
+        public List<EncounterButton> EncounterButtonList => encounterButtonList;
+        
         private void Start()
         {
             PrepareEncounters();
         }
-
-
+        
         private void PrepareEncounters()
         {
-            for (int i = 0; i < encounterButtonList.Count; i++)
+            for (int i = 0; i < EncounterButtonList.Count; i++)
             {
-                var btn = encounterButtonList[i];
+                var btn = EncounterButtonList[i];
                 if (GameManager.Instance.PersistentGameplayData.CurrentEncounterId == i)
                     btn.SetStatus(EncounterButtonStatus.Active);
                 else if (GameManager.Instance.PersistentGameplayData.CurrentEncounterId > i)

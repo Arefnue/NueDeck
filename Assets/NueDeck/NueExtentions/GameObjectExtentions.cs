@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NueExtentions
+namespace NueDeck.NueExtentions
 {
     public static class GameObjectExtentions
     {

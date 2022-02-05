@@ -42,7 +42,7 @@ namespace NueDeck.Scripts.Characters
             _canvas = GetComponent<Canvas>();
             
             if (_canvas)
-                _canvas.worldCamera = GameManager.Instance.mainCam;
+                _canvas.worldCamera = GameManager.Instance.MainCam;
         }
 
         #endregion

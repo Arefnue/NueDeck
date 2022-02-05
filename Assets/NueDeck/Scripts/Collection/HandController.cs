@@ -288,7 +288,7 @@ namespace NueDeck.Scripts.Collection
             if (GameManager.Instance.PersistentGameplayData.CanUseCards && GameManager.Instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.ManaCost)
             {
                 RaycastHit hit;
-                var mainRay = GameManager.Instance.mainCam.ScreenPointToRay(mousePos);
+                var mainRay = GameManager.Instance.MainCam.ScreenPointToRay(mousePos);
                 
                 if (Physics.Raycast(mainRay, out hit, 1000, targetLayer))
                 {
