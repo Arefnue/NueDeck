@@ -101,7 +101,7 @@ namespace NueDeck.Scripts.Data.Collection
                 var value = defaultValue;
                 if (useModifer)
                 {
-                    var player = CombatManager.Instance.currentAllies[0];
+                    var player = CombatManager.Instance.CurrentAlliesList[0];
                     if (player)
                     {
                         var modifer =player.CharacterStats.StatusDict[modiferStatus].StatusValue;

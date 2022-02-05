@@ -304,7 +304,7 @@ namespace NueDeck.Scripts.Collection
                                  .GetComponent<AllyBase>()))
                         {
                             backToHand = false;
-                            _heldCard.Use(CombatManager.Instance.currentAllies[0],character.GetCharacterBase());
+                            _heldCard.Use(CombatManager.Instance.CurrentAlliesList[0],character.GetCharacterBase());
                         }
                         
                     }
@@ -315,7 +315,7 @@ namespace NueDeck.Scripts.Collection
                     if (_heldCard.CardData.UsableWithoutTarget)
                     {
                         backToHand = false;
-                        _heldCard.Use(CombatManager.Instance.currentAllies[0],null);
+                        _heldCard.Use(CombatManager.Instance.CurrentAlliesList[0],null);
                     }
                 }
                 

@@ -6,8 +6,9 @@ namespace NueDeck.Scripts.Characters
 {
     public class EnemyCanvas : CharacterCanvas
     {
-        public Image intentImage;
-        public TextMeshProUGUI nextActionValueText;
+        [Header("Enemy Canvas Settings")]
+        [SerializeField] private Image intentImage;
+        [SerializeField] private TextMeshProUGUI nextActionValueText;
         public Image IntentImage => intentImage;
         public TextMeshProUGUI NextActionValueText => nextActionValueText;
     }

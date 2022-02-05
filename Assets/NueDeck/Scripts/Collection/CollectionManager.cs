@@ -11,18 +11,19 @@ namespace NueDeck.Scripts.Collection
 {
     public class CollectionManager : MonoBehaviour
     {
-        public static CollectionManager Instance;
+        public CollectionManager(){}
+      
+        public static CollectionManager Instance { get; private set; }
 
         [Header("Controllers")] 
-        public HandController handController;
+        [SerializeField] private HandController handController;
         
-        
-        [HideInInspector] public List<CardData> drawPile = new List<CardData>();
-        [HideInInspector] public List<CardData> handPile = new List<CardData>();
-        [HideInInspector] public List<CardData> discardPile = new List<CardData>();
+        public List<CardData> DrawPile { get; private set; } = new List<CardData>();
+        public List<CardData> HandPile { get; private set; } = new List<CardData>();
+        public List<CardData> DiscardPile { get; private set; } = new List<CardData>();
+        public HandController HandController => handController;
 
         #region Setup
-
         private void Awake()
         {
             if (Instance)
@@ -30,75 +31,75 @@ namespace NueDeck.Scripts.Collection
                 Destroy(gameObject);
                 return;
             }
-            Instance = this;
+            else
+            {
+                Instance = this;
+            }
         }
 
         #endregion
 
         #region Public Methods
-
         public void DrawCards(int targetDrawCount)
         {
             var currentDrawCount = 0;
 
             for (var i = 0; i < targetDrawCount; i++)
             {
-                if (GameManager.Instance.GameplayData.maxCardOnHand<=handPile.Count)
+                if (GameManager.Instance.GameplayData.maxCardOnHand<=HandPile.Count)
                     return;
                 
-                if (drawPile.Count <= 0)
+                if (DrawPile.Count <= 0)
                 {
                     var nDrawCount = targetDrawCount - currentDrawCount;
                     
-                    if (nDrawCount >= discardPile.Count) 
-                        nDrawCount = discardPile.Count;
+                    if (nDrawCount >= DiscardPile.Count) 
+                        nDrawCount = DiscardPile.Count;
                     
                     ReshuffleDiscardPile();
                     DrawCards(nDrawCount);
                     break;
                 }
 
-                var randomCard = drawPile[Random.Range(0, drawPile.Count)];
-                var clone = GameManager.Instance.BuildAndGetCard(randomCard, handController.drawTransform);
-                handController.AddCardToHand(clone);
-                handPile.Add(randomCard);
-                drawPile.Remove(randomCard);
+                var randomCard = DrawPile[Random.Range(0, DrawPile.Count)];
+                var clone = GameManager.Instance.BuildAndGetCard(randomCard, HandController.drawTransform);
+                HandController.AddCardToHand(clone);
+                HandPile.Add(randomCard);
+                DrawPile.Remove(randomCard);
                 currentDrawCount++;
                 UIManager.Instance.combatCanvas.SetPileTexts();
             }
             
-            foreach (var cardObject in handController.hand)
+            foreach (var cardObject in HandController.hand)
                 cardObject.UpdateCardText();
         }
-
         public void DiscardHand()
         {
-            foreach (var cardBase in handController.hand) 
+            foreach (var cardBase in HandController.hand) 
                 cardBase.Discard();
             
-            handController.hand.Clear();
+            HandController.hand.Clear();
         }
-
         public void ExhaustRandomCard()
         {
             CardData targetCard = null;
-            if (drawPile.Count > 0)
+            if (DrawPile.Count > 0)
             {
-                targetCard = drawPile[Random.Range(0, drawPile.Count)];
-                StartCoroutine(ExhaustCardRoutine(targetCard, handController.drawTransform,
-                    CombatManager.Instance.currentEnemies[0].transform));
+                targetCard = DrawPile[Random.Range(0, DrawPile.Count)];
+                StartCoroutine(ExhaustCardRoutine(targetCard, HandController.drawTransform,
+                    CombatManager.Instance.CurrentEnemiesList[0].transform));
             }
-            else if (discardPile.Count > 0)
+            else if (DiscardPile.Count > 0)
             {
-                targetCard = discardPile[Random.Range(0, discardPile.Count)];
-                StartCoroutine(ExhaustCardRoutine(targetCard, handController.discardTransform,
-                    CombatManager.Instance.currentEnemies[0].transform));
+                targetCard = DiscardPile[Random.Range(0, DiscardPile.Count)];
+                StartCoroutine(ExhaustCardRoutine(targetCard, HandController.discardTransform,
+                    CombatManager.Instance.CurrentEnemiesList[0].transform));
             }
-            else if (Instance.handPile.Count > 0)
+            else if (Instance.HandPile.Count > 0)
             {
-                targetCard = handPile[Random.Range(0, handPile.Count)];
-                var tCard = handController.hand[0];
-                foreach (var cardBase in handController.hand)
+                targetCard = HandPile[Random.Range(0, HandPile.Count)];
+                var tCard = HandController.hand[0];
+                foreach (var cardBase in HandController.hand)
                     if (cardBase.CardData == targetCard)
                     {
                         tCard = cardBase;
@@ -106,8 +107,8 @@ namespace NueDeck.Scripts.Collection
                     }
 
                 StartCoroutine(ExhaustCardRoutine(targetCard, tCard.transform,
-                    CombatManager.Instance.currentEnemies[0].transform));
-                handController.hand?.Remove(tCard);
+                    CombatManager.Instance.CurrentEnemiesList[0].transform));
+                HandController.hand?.Remove(tCard);
                 Destroy(tCard.gameObject);
             }
             else
@@ -115,54 +116,47 @@ namespace NueDeck.Scripts.Collection
                 //LevelManager.instance.LoseGame();
             }
 
-            drawPile?.Remove(targetCard);
-            handPile?.Remove(targetCard);
-            discardPile?.Remove(targetCard);
+            DrawPile?.Remove(targetCard);
+            HandPile?.Remove(targetCard);
+            DiscardPile?.Remove(targetCard);
             UIManager.Instance.combatCanvas.SetPileTexts();
         }
-
         public void OnCardDiscarded(CardObject targetCard)
         {
-            handPile.Remove(targetCard.CardData);
-            discardPile.Add(targetCard.CardData);
+            HandPile.Remove(targetCard.CardData);
+            DiscardPile.Add(targetCard.CardData);
             UIManager.Instance.combatCanvas.SetPileTexts();
         }
-
         public void OnCardPlayed(CardObject targetCard)
         {
-            handPile.Remove(targetCard.CardData);
-            discardPile.Add(targetCard.CardData);
+            HandPile.Remove(targetCard.CardData);
+            DiscardPile.Add(targetCard.CardData);
             UIManager.Instance.combatCanvas.SetPileTexts();
-            foreach (var cardObject in handController.hand)
+            foreach (var cardObject in HandController.hand)
                 cardObject.UpdateCardText();
         }
-
         public void SetGameDeck()
         {
             foreach (var i in GameManager.Instance.PersistentGameplayData.CurrentCardsList) 
-                drawPile.Add(i);
+                DrawPile.Add(i);
         }
-
         #endregion
 
         #region Private Methods
-        
         private void ReshuffleDiscardPile()
         {
-            foreach (var i in discardPile) 
-                drawPile.Add(i);
+            foreach (var i in DiscardPile) 
+                DrawPile.Add(i);
             
-            discardPile.Clear();
+            DiscardPile.Clear();
         }
-
         private void ReshuffleDrawPile()
         {
-            foreach (var i in drawPile) 
-                discardPile.Add(i);
+            foreach (var i in DrawPile) 
+                DiscardPile.Add(i);
             
-            drawPile.Clear();
+            DrawPile.Clear();
         }
-
         #endregion
 
         #region Routines

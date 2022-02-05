@@ -19,16 +19,16 @@ namespace NueDeck.Scripts.Characters
     public abstract class CharacterCanvas : MonoBehaviour,I2DTooltipTarget
     {
         [Header("References")]
-        [SerializeField] private Transform statusIconRoot;
-        [SerializeField] private Transform highlightRoot;
-        [SerializeField] private Transform descriptionRoot;
-        [SerializeField] private StatusIconsData statusIconsData;
-        [SerializeField] private TextMeshProUGUI currentHealthText;
-        [SerializeField] private Image highlightImage;
+        [SerializeField] protected Transform statusIconRoot;
+        [SerializeField] protected Transform highlightRoot;
+        [SerializeField] protected Transform descriptionRoot;
+        [SerializeField] protected StatusIconsData statusIconsData;
+        [SerializeField] protected TextMeshProUGUI currentHealthText;
+        [SerializeField] protected Image highlightImage;
         
-        private Dictionary<StatusType, StatusIcon> _statusDict = new Dictionary<StatusType, StatusIcon>();
+        protected Dictionary<StatusType, StatusIcon> _statusDict = new Dictionary<StatusType, StatusIcon>();
 
-        private Canvas _canvas;
+        protected Canvas _canvas;
 
         #region Setup
 

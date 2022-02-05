@@ -65,7 +65,7 @@ namespace NueDeck.Scripts.Card
             manaTextField.text = CardData.ManaCost.ToString();
             frontImage.sprite = CardData.CardSprite;
 
-            canvas.worldCamera = CollectionManager.Instance.handController.cam;
+            canvas.worldCamera = CollectionManager.Instance.HandController.cam;
         }
         #endregion
         
@@ -141,7 +141,7 @@ namespace NueDeck.Scripts.Card
            
             var timer = 0f;
             
-            transform.SetParent(CollectionManager.Instance.handController.discardTransform);
+            transform.SetParent(CollectionManager.Instance.HandController.discardTransform);
             
             var startPos = _transform.localPosition;
             var endPos = Vector3.zero;
@@ -202,7 +202,7 @@ namespace NueDeck.Scripts.Card
             {
                 var specialKeyword = tooltipManager.SpecialKeywordData.SpecialKeywordBaseList.Find(x=>x.SpecialKeyword == cardDataSpecialKeyword);
                 if (specialKeyword != null)
-                    ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot,CursorType.Default,CollectionManager.Instance.handController.cam);
+                    ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot,CursorType.Default,CollectionManager.Instance.HandController.cam);
             }
         }
         public void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null, CursorType targetCursor = CursorType.Default,Camera cam = null, float delayShow =0)

@@ -8,14 +8,15 @@ namespace NueDeck.Scripts.Managers
 {
     public class FxManager : MonoBehaviour
     {
-        public static FxManager Instance;
+        public FxManager(){}
+        public static FxManager Instance { get; private set; }
     
-        [Header("Fx")] 
-        public List<FxBundle> fxList;
+        [Header("References")] 
+        [SerializeField] private List<FxBundle> fxList;
+        public Dictionary<FxType, GameObject> FXDict { get; private set; }= new Dictionary<FxType, GameObject>();
+        public List<FxBundle> FXList => fxList;
 
-
-        public Dictionary<FxType, GameObject> fxDict = new Dictionary<FxType, GameObject>();
-        
+        #region Setup
         private void Awake()
         {
             if (Instance)
@@ -23,25 +24,31 @@ namespace NueDeck.Scripts.Managers
                 Destroy(gameObject);
                 return;
             }
-            Instance = this;
-            
-            for (int i = 0; i < Enum.GetValues(typeof(FxType)).Length; i++)
+            else
             {
-                fxDict.Add((FxType)i,fxList.FirstOrDefault(x=>x.myType == (FxType)i)?.myObject);
+                Instance = this;
+            
+                for (int i = 0; i < Enum.GetValues(typeof(FxType)).Length; i++)
+                    FXDict.Add((FxType)i,FXList.FirstOrDefault(x=>x.FxType == (FxType)i)?.FxPrefab);
             }
         }
+        #endregion
 
+        #region Public Methods
         public void PlayFx(Transform targetTransform, FxType targetFx)
         {
-            Instantiate(fxDict[targetFx], targetTransform);
+            Instantiate(FXDict[targetFx], targetTransform);
         }
+        #endregion
         
     }
 
     [Serializable]
     public class FxBundle
     {
-        public FxType myType;
-        public GameObject myObject;
+        [SerializeField] private FxType fxType;
+        [SerializeField] private GameObject fxPrefab;
+        public FxType FxType => fxType;
+        public GameObject FxPrefab => fxPrefab;
     }
 }

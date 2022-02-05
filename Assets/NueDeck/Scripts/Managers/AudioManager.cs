@@ -9,7 +9,8 @@ namespace NueDeck.Scripts.Managers
 {
     public class AudioManager : MonoBehaviour
     {
-        public static AudioManager Instance;
+        private AudioManager(){}
+        public static AudioManager Instance { get; private set; }
 
         [SerializeField]private AudioSource musicSource;
         [SerializeField]private AudioSource sfxSource;
@@ -18,37 +19,35 @@ namespace NueDeck.Scripts.Managers
         [SerializeField] private List<SoundProfileData> soundProfileDataList;
         
         private Dictionary<AudioActionType, SoundProfileData> _audioDict = new Dictionary<AudioActionType, SoundProfileData>();
-
         
+        #region Setup
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-
-                DontDestroyOnLoad(gameObject);
-            }
-            else
+            if (Instance != null)
             {
                 Destroy(gameObject);
                 return;
             }
-            
-            for (int i = 0; i < Enum.GetValues(typeof(AudioActionType)).Length; i++)
+            else
             {
-                _audioDict.Add((AudioActionType)i,soundProfileDataList.FirstOrDefault(x=>x.audioType == (AudioActionType)i));
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+                
+                for (int i = 0; i < Enum.GetValues(typeof(AudioActionType)).Length; i++)
+                    _audioDict.Add((AudioActionType)i,soundProfileDataList.FirstOrDefault(x=>x.audioType == (AudioActionType)i));
             }
-
         }
 
+        #endregion
+        
+        #region Public Methods
 
         public void PlayMusic(AudioClip clip)
         {
-            if (clip)
-            {
-                musicSource.clip = clip;
-                musicSource.Play();
-            }
+            if (!clip) return;
+            
+            musicSource.clip = clip;
+            musicSource.Play();
         }
 
         public void PlayMusic(AudioActionType type)
@@ -56,7 +55,6 @@ namespace NueDeck.Scripts.Managers
             var clip = _audioDict[type].GetRandomClip();
             if (clip)
                 PlayMusic(clip);
-            
         }
 
         public void PlayOneShot(AudioActionType type)
@@ -64,15 +62,13 @@ namespace NueDeck.Scripts.Managers
             var clip = _audioDict[type].GetRandomClip();
             if (clip)
                 PlayOneShot(clip);
-            
         }
-
+        
         public void PlayOneShotButton(AudioActionType type)
         {
             var clip = _audioDict[type].GetRandomClip();
             if (clip)
                 PlayOneShotButton(clip);
-           
         }
 
         public void PlayOneShot(AudioClip clip)
@@ -86,5 +82,7 @@ namespace NueDeck.Scripts.Managers
             if (clip)
                 buttonSource.PlayOneShot(clip);
         }
+
+        #endregion
     }
 }

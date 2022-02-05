@@ -109,7 +109,7 @@ namespace NueDeck.Scripts.Characters
 
             if (CombatManager.Instance == null) yield break;
             
-            var target = CombatManager.Instance.currentAllies.RandomItem();
+            var target = CombatManager.Instance.CurrentAlliesList.RandomItem();
             
             var startPos = transform.position;
             var endPos = target.transform.position;

@@ -7,6 +7,7 @@ namespace NueDeck.Scripts.Characters
 {
     public abstract class CharacterBase : MonoBehaviour
     {
+        
         public CharacterStats CharacterStats { get; protected set; }
         
         public virtual void Awake()

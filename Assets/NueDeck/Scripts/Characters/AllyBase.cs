@@ -9,6 +9,7 @@ namespace NueDeck.Scripts.Characters
 {
     public abstract class AllyBase : CharacterBase,IAlly
     {
+        [Header("Ally Base Settings")]
         [SerializeField] private AllyCanvas allyCanvas;
         [SerializeField] private AllyData allyData;
         public AllyCanvas AllyCanvas => allyCanvas;
