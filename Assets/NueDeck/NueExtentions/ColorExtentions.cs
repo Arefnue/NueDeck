@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Text;
+using UnityEngine;
 
 namespace NueExtentions
 {
@@ -6,7 +7,10 @@ namespace NueExtentions
     {
         public static string ColorString(string text, Color color)
         {
-            return "<color=#" + ColorUtility.ToHtmlStringRGBA(color) + ">" + text + "</color>";
+            var str = new StringBuilder();
+            str.Append("<color=#").Append(ColorUtility.ToHtmlStringRGBA(color)).Append(">").Append(text)
+                .Append("</color>");
+            return str.ToString();
         }
        
     }

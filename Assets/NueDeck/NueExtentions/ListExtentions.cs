@@ -52,9 +52,7 @@ namespace NueExtentions
                 var rdn = Random.Range(0, n - i);
 
                 //swap positions
-                var curVal = list[i];
-                list[i] = list[i + rdn];
-                list[i + rdn] = curVal;
+                (list[i], list[i + rdn]) = (list[i + rdn], list[i]);
             }
         }
 
