@@ -12,6 +12,7 @@ namespace NueDeck.Scripts.UI.Reward
 {
     public class RewardCanvas : CanvasBase
     {
+        [Header("References")]
         [SerializeField] private RewardData rewardData;
         [SerializeField] private Transform rewardRoot;
         [SerializeField] private RewardContainer rewardContainerPrefab;
@@ -19,12 +20,16 @@ namespace NueDeck.Scripts.UI.Reward
         [Header("Choice")]
         [SerializeField] private List<Transform> choiceCardSpawnTransformList;
         [SerializeField] private Choice choicePrefab;
-        public ChoicePanel choicePanel;
+        [SerializeField] private ChoicePanel choicePanel;
         
         private readonly List<RewardContainer> _currentRewardsList = new List<RewardContainer>();
         private readonly List<Choice> _spawnedChoiceList = new List<Choice>();
         private readonly List<CardData> _cardRewardList = new List<CardData>();
-       
+
+        public ChoicePanel ChoicePanel => choicePanel;
+        
+        #region Public Methods
+
         public void BuildReward(RewardType rewardType)
         {
             var rewardClone = Instantiate(rewardContainerPrefab, rewardRoot);
@@ -35,11 +40,11 @@ namespace NueDeck.Scripts.UI.Reward
                 case RewardType.Gold:
                     var rewardGold = rewardData.GetRandomGoldReward();
                     rewardClone.BuildReward(rewardData.goldReward.rewardSprite,rewardData.goldReward.rewardDescription);
-                    rewardClone.rewardButton.onClick.AddListener(()=>GetGoldReward(rewardClone,rewardGold));
+                    rewardClone.RewardButton.onClick.AddListener(()=>GetGoldReward(rewardClone,rewardGold));
                     break;
                 case RewardType.Card:
                     rewardClone.BuildReward(rewardData.cardReward.rewardSprite,rewardData.cardReward.rewardDescription);
-                    rewardClone.rewardButton.onClick.AddListener(()=>GetCardReward(rewardClone,3));
+                    rewardClone.RewardButton.onClick.AddListener(()=>GetCardReward(rewardClone,3));
                     break;
                 case RewardType.Relic:
                     break;
@@ -47,8 +52,26 @@ namespace NueDeck.Scripts.UI.Reward
                     throw new ArgumentOutOfRangeException(nameof(rewardType), rewardType, null);
             }
         }
+        
+        public override void ResetCanvas()
+        {
+            foreach (var rewardContainer in _currentRewardsList)
+            {
+                Destroy(rewardContainer.gameObject);
+            }
 
+            foreach (var choice in _spawnedChoiceList)
+            {
+                Destroy(choice.gameObject);
+            }
+            ChoicePanel.DisablePanel();
+            _spawnedChoiceList?.Clear();
+            _currentRewardsList?.Clear();
+        }
 
+        #endregion
+        
+        #region Private Methods
         private void GetGoldReward(RewardContainer rewardContainer,int amount)
         {
             GameManager.Instance.PersistentGameplayData.CurrentGold += amount;
@@ -58,12 +81,10 @@ namespace NueDeck.Scripts.UI.Reward
 
         private void GetCardReward(RewardContainer rewardContainer,int amount = 3)
         {
-            choicePanel.gameObject.SetActive(true);
+            ChoicePanel.gameObject.SetActive(true);
 
             foreach (var cardData in rewardData.cardReward.rewardCardList)
-            {
                 _cardRewardList.Add(cardData);
-            }
             
             for (int i = 0; i < amount; i++)
             {
@@ -78,21 +99,7 @@ namespace NueDeck.Scripts.UI.Reward
             
             Destroy(rewardContainer.gameObject);
         }
-
-        public override void ResetCanvas()
-        {
-            foreach (var rewardContainer in _currentRewardsList)
-            {
-                Destroy(rewardContainer.gameObject);
-            }
-
-            foreach (var choice in _spawnedChoiceList)
-            {
-                Destroy(choice.gameObject);
-            }
-            choicePanel.DisablePanel();
-            _spawnedChoiceList?.Clear();
-            _currentRewardsList?.Clear();
-        }
+        #endregion
+        
     }
 }

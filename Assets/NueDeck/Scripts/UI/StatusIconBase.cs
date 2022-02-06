@@ -5,22 +5,27 @@ using UnityEngine.UI;
 
 namespace NueDeck.Scripts.UI
 {
-    public class StatusIcon : MonoBehaviour
+    public class StatusIconBase : MonoBehaviour
     {
-        public Image statusImage;
-        public TextMeshProUGUI statusValueText;
+        [SerializeField] private Image statusImage;
+        [SerializeField] private TextMeshProUGUI statusValueText;
 
         public StatusIconData MyStatusIconData { get; private set; } = null;
+
+        public Image StatusImage => statusImage;
+
+        public TextMeshProUGUI StatusValueText => statusValueText;
+
         public void SetStatus(StatusIconData statusIconData)
         {
             MyStatusIconData = statusIconData;
-            statusImage.sprite = statusIconData.iconSprite;
+            StatusImage.sprite = statusIconData.iconSprite;
             
         }
 
         public void SetStatusValue(int statusValue)
         {
-            statusValueText.text = statusValue.ToString();
+            StatusValueText.text = statusValue.ToString();
         }
     }
 }

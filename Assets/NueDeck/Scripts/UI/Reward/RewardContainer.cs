@@ -6,10 +6,11 @@ namespace NueDeck.Scripts.UI.Reward
 {
     public class RewardContainer : MonoBehaviour
     {
-
-        public Button rewardButton;
+        [SerializeField] private Button rewardButton;
         [SerializeField] private Image rewardImage;
         [SerializeField] private TextMeshProUGUI rewardText;
+
+        public Button RewardButton => rewardButton;
 
         public void BuildReward(Sprite rewardSprite,string rewardDescription)
         {

@@ -8,16 +8,9 @@ namespace NueDeck.Scripts.Utils
 {
     public class PlaySound : MonoBehaviour
     {
-        public SoundProfileData myProfileData;
-
-        public void PlaySfx()
-        {
-            AudioManager.Instance.PlayOneShot(myProfileData.GetRandomClip());
-        }
-
-        public void PlayButton()
-        {
-            AudioManager.Instance.PlayOneShotButton(myProfileData.GetRandomClip());
-        }
+        [SerializeField] private SoundProfileData soundProfileData;
+        private SoundProfileData SoundProfileData => soundProfileData;
+        public void PlaySfx() => AudioManager.Instance.PlayOneShot(SoundProfileData.GetRandomClip());
+        public void PlayButton() => AudioManager.Instance.PlayOneShotButton(SoundProfileData.GetRandomClip());
     }
 }

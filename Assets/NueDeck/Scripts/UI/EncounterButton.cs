@@ -8,6 +8,7 @@ namespace NueDeck.Scripts.UI
 {
     public class EncounterButton : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField] private Button button;
         [SerializeField] private Image completedImage;
         [SerializeField] private bool isFinal;
@@ -16,12 +17,9 @@ namespace NueDeck.Scripts.UI
         {
             completedImage.gameObject.SetActive(false);
         }
-
-
+        
         public void SetStatus(EncounterButtonStatus targetStatus)
         {
-            
-            
             switch (targetStatus)
             {
                 case EncounterButtonStatus.Active:

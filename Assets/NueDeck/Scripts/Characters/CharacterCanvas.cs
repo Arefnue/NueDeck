@@ -26,7 +26,7 @@ namespace NueDeck.Scripts.Characters
         [SerializeField] protected TextMeshProUGUI currentHealthText;
         [SerializeField] protected Image highlightImage;
         
-        protected Dictionary<StatusType, StatusIcon> _statusDict = new Dictionary<StatusType, StatusIcon>();
+        protected Dictionary<StatusType, StatusIconBase> _statusDict = new Dictionary<StatusType, StatusIconBase>();
 
         protected Canvas _canvas;
 
@@ -56,7 +56,7 @@ namespace NueDeck.Scripts.Characters
                 
                 if (targetData == null) return;
                 
-                var clone = Instantiate(statusIconsData.statusIconPrefab, statusIconRoot);
+                var clone = Instantiate(statusIconsData.statusIconBasePrefab, statusIconRoot);
                 clone.SetStatus(targetData);
                 _statusDict[targetStatus] = clone;
             }
@@ -78,7 +78,7 @@ namespace NueDeck.Scripts.Characters
         {
             if (_statusDict[targetStatus] == null) return;
           
-            _statusDict[targetStatus].statusValueText.text = $"{value}";
+            _statusDict[targetStatus].StatusValueText.text = $"{value}";
         }
         
         public void UpdateHealthText(int currentHealth,int maxHealth) =>  currentHealthText.text = $"{currentHealth}/{maxHealth}";

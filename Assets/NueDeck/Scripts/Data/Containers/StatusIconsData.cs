@@ -9,7 +9,7 @@ namespace NueDeck.Scripts.Data.Containers
     [CreateAssetMenu(fileName = "Status Icons", menuName = "Data/Containers/StatusIcons", order = 2)]
     public class StatusIconsData : ScriptableObject
     {
-        public StatusIcon statusIconPrefab;
+        public StatusIconBase statusIconBasePrefab;
         public List<StatusIconData> statusIconList;
     }
 

@@ -8,14 +8,23 @@ namespace NueDeck.Scripts.UI
     [DefaultExecutionOrder(-4)]
     public class UIManager : MonoBehaviour
     {
-        public static UIManager Instance;
-        
-        public CombatCanvas combatCanvas;
-        public InformationCanvas informationCanvas;
-        public RewardCanvas rewardCanvas;
+        public UIManager() {}
+        public static UIManager Instance { get; private set; }
+
+        [Header("Canvases")]
+        [SerializeField] private CombatCanvas combatCanvas;
+        [SerializeField] private InformationCanvas informationCanvas;
+        [SerializeField] private RewardCanvas rewardCanvas;
        
+        [Header("Fader")]
         [SerializeField] private CanvasGroup fader;
         [SerializeField] private float fadeSpeed = 1f;
+        
+        public CombatCanvas CombatCanvas => combatCanvas;
+        public InformationCanvas InformationCanvas => informationCanvas;
+        public RewardCanvas RewardCanvas => rewardCanvas;
+
+        #region Setup
         private void Awake()
         {
             if (Instance == null)
@@ -29,7 +38,9 @@ namespace NueDeck.Scripts.UI
             }
            
         }
-        
+        #endregion
+
+        #region Public Methods
         public void SetCanvas(CanvasBase targetCanvas,bool open,bool reset = false)
         {
             if (reset)
@@ -40,12 +51,13 @@ namespace NueDeck.Scripts.UI
             else
                 targetCanvas.CloseCanvas();
         }
-        
         public void ChangeScene(int index)
         {
             StartCoroutine(ChangeSceneRoutine(index));
         }
-
+        #endregion
+        
+        #region Routines
         private IEnumerator ChangeSceneRoutine(int index)
         {
             SceneManager.LoadScene(index);
@@ -68,5 +80,8 @@ namespace NueDeck.Scripts.UI
                 yield return waitFrame;
             }
         }
+
+        #endregion
+       
     }
 }

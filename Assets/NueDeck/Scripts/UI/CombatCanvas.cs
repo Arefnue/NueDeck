@@ -10,39 +10,49 @@ namespace NueDeck.Scripts.UI
 {
     public class CombatCanvas : CanvasBase
     {
-        public TextMeshProUGUI drawPileText;
-        public TextMeshProUGUI discardPileText;
-        public TextMeshProUGUI manaText;
-        public GameObject combatWinPanel;
-        public GameObject combatLosePanel;
+        [Header("Texts")]
+        [SerializeField] private TextMeshProUGUI drawPileTextField;
+        [SerializeField] private TextMeshProUGUI discardPileTextField;
+        [SerializeField] private TextMeshProUGUI manaTextTextField;
+        
+        [Header("Panels")]
+        [SerializeField] private GameObject combatWinPanel;
+        [SerializeField] private GameObject combatLosePanel;
 
+        public TextMeshProUGUI DrawPileTextField => drawPileTextField;
+        public TextMeshProUGUI DiscardPileTextField => discardPileTextField;
+        public TextMeshProUGUI ManaTextTextField => manaTextTextField;
+        public GameObject CombatWinPanel => combatWinPanel;
+        public GameObject CombatLosePanel => combatLosePanel;
+
+        #region Setup
         private void Awake()
         {
-            combatWinPanel.SetActive(false);
-            combatLosePanel.SetActive(false);
+            CombatWinPanel.SetActive(false);
+            CombatLosePanel.SetActive(false);
         }
-        
+        #endregion
+
+        #region Public Methods
         public void SetPileTexts()
         {
-            drawPileText.text = $"{CollectionManager.Instance.DrawPile.Count.ToString()}";
-            discardPileText.text = $"{CollectionManager.Instance.DiscardPile.Count.ToString()}";
-            manaText.text = $"{GameManager.Instance.PersistentGameplayData.CurrentMana.ToString()}/{GameManager.Instance.PersistentGameplayData.MAXMana}";
+            DrawPileTextField.text = $"{CollectionManager.Instance.DrawPile.Count.ToString()}";
+            DiscardPileTextField.text = $"{CollectionManager.Instance.DiscardPile.Count.ToString()}";
+            ManaTextTextField.text = $"{GameManager.Instance.PersistentGameplayData.CurrentMana.ToString()}/{GameManager.Instance.PersistentGameplayData.MAXMana}";
         }
 
         public override void ResetCanvas()
         {
             base.ResetCanvas();
-            combatWinPanel.SetActive(false);
-            combatLosePanel.SetActive(false);
+            CombatWinPanel.SetActive(false);
+            CombatLosePanel.SetActive(false);
         }
 
         public void EndTurn()
         {
             if (CombatManager.Instance.CurrentCombatState == CombatState.AllyTurn)
-            {
                 CombatManager.Instance.EndTurn();
-            }
-
         }
+        #endregion
     }
 }

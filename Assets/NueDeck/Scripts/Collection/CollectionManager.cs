@@ -67,7 +67,7 @@ namespace NueDeck.Scripts.Collection
                 HandPile.Add(randomCard);
                 DrawPile.Remove(randomCard);
                 currentDrawCount++;
-                UIManager.Instance.combatCanvas.SetPileTexts();
+                UIManager.Instance.CombatCanvas.SetPileTexts();
             }
             
             foreach (var cardObject in HandController.hand)
@@ -119,19 +119,19 @@ namespace NueDeck.Scripts.Collection
             DrawPile?.Remove(targetCard);
             HandPile?.Remove(targetCard);
             DiscardPile?.Remove(targetCard);
-            UIManager.Instance.combatCanvas.SetPileTexts();
+            UIManager.Instance.CombatCanvas.SetPileTexts();
         }
         public void OnCardDiscarded(CardObject targetCard)
         {
             HandPile.Remove(targetCard.CardData);
             DiscardPile.Add(targetCard.CardData);
-            UIManager.Instance.combatCanvas.SetPileTexts();
+            UIManager.Instance.CombatCanvas.SetPileTexts();
         }
         public void OnCardPlayed(CardObject targetCard)
         {
             HandPile.Remove(targetCard.CardData);
             DiscardPile.Add(targetCard.CardData);
-            UIManager.Instance.combatCanvas.SetPileTexts();
+            UIManager.Instance.CombatCanvas.SetPileTexts();
             foreach (var cardObject in HandController.hand)
                 cardObject.UpdateCardText();
         }
