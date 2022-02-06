@@ -214,6 +214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InformationCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6334593025835562393, guid: 701d4c09c8f0880498fb64626727d7bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 701d4c09c8f0880498fb64626727d7bc, type: 3}
 --- !u!224 &279775570707090529 stripped
@@ -326,6 +330,10 @@ PrefabInstance:
     - target: {fileID: 9173700988199943096, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
       propertyPath: m_Name
       value: RewardCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173700988199943096, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd67f0562e69264b8c1b92677886e9f, type: 3}

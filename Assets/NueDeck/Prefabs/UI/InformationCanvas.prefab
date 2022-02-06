@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 999/999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
-  m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -199,10 +199,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jack
+  m_text: Nue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
-  m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -361,6 +361,7 @@ MonoBehaviour:
   contentText: 
   tooltipStaticTargetTransform: {fileID: 0}
   cursorType: 0
+  delayShowDuration: 0
 --- !u!1 &2401447454867246692
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,8 +429,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Room 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
-  m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -529,7 +530,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 41.26, y: 0}
+  m_AnchoredPosition: {x: 48.3, y: 0}
   m_SizeDelta: {x: -16.079, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6951823097088618158
@@ -560,10 +561,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
-  m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -594,7 +595,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -648,7 +649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &831016716070213371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -681,11 +682,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3df0112d3fb450e8fc0a3662d053b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomizedDeck: {fileID: 7710481754293286358}
-  roomText: {fileID: 2627394894104042102}
-  goldText: {fileID: 518337495935948590}
-  nameText: {fileID: 5293955611471582949}
-  healthText: {fileID: 1706101381463657962}
+  randomizedDeckObject: {fileID: 7710481754293286358}
+  roomTextField: {fileID: 2627394894104042102}
+  goldTextField: {fileID: 518337495935948590}
+  nameTextField: {fileID: 5293955611471582949}
+  healthTextField: {fileID: 1706101381463657962}
 --- !u!223 &6619236169260507774
 Canvas:
   m_ObjectHideFlags: 0
@@ -762,7 +763,7 @@ GameObject:
   - component: {fileID: 420347503122436816}
   - component: {fileID: 2340710150756601082}
   m_Layer: 0
-  m_Name: MainMenu
+  m_Name: MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -871,8 +872,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2340710150756601082}
         m_TargetAssemblyTypeName: NueDeck.Scripts.Utils.SceneChanger, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 3
+        m_MethodName: OpenMainMenuScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -893,7 +894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb50ee18843aca43923ca3c8ff18d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myProfileData: {fileID: 0}
+  soundProfileData: {fileID: 11400000, guid: 2d30565e54caf3e40a21dfdac091b79e, type: 2}
 --- !u!114 &2340710150756601082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,7 +941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 47.944946, y: -6.408001}
+  m_AnchoredPosition: {x: 47.945, y: -11.3}
   m_SizeDelta: {x: 95.891, y: 12.816}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4764778476628963279
@@ -973,8 +974,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Randomized Deck
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
-  m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1214,3 +1215,4 @@ MonoBehaviour:
   contentText: 
   tooltipStaticTargetTransform: {fileID: 0}
   cursorType: 0
+  delayShowDuration: 0
