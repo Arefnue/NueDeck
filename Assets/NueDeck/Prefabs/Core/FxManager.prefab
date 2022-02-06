@@ -44,15 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fxList:
-  - myType: 0
-    myObject: {fileID: 4931249800145279701, guid: dceaed87f54c54143aea01eb53e65e50, type: 3}
-  - myType: 1
-    myObject: {fileID: 7224451661305855618, guid: a1d31c6911c7d4840b472c3489c4f5b8, type: 3}
-  - myType: 2
-    myObject: {fileID: 6943322307554864327, guid: c3f955d1f6395f845b55a325f00b7d8c, type: 3}
-  - myType: 3
-    myObject: {fileID: 6582740879243116295, guid: 8073c6148b9eaf44995acf9a22331f15, type: 3}
-  - myType: 4
-    myObject: {fileID: 306904137279546315, guid: a966665c25c808a4fa9a24cbbd6bbb67, type: 3}
-  - myType: 5
-    myObject: {fileID: 4399970628791159158, guid: 11a5c265e67f20144a9ec55a3e948415, type: 3}
+  - fxType: 0
+    fxPrefab: {fileID: 4931249800145279701, guid: dceaed87f54c54143aea01eb53e65e50, type: 3}
+  - fxType: 1
+    fxPrefab: {fileID: 7224451661305855618, guid: a1d31c6911c7d4840b472c3489c4f5b8, type: 3}
+  - fxType: 2
+    fxPrefab: {fileID: 6943322307554864327, guid: c3f955d1f6395f845b55a325f00b7d8c, type: 3}
+  - fxType: 3
+    fxPrefab: {fileID: 6582740879243116295, guid: 8073c6148b9eaf44995acf9a22331f15, type: 3}
+  - fxType: 4
+    fxPrefab: {fileID: 306904137279546315, guid: a966665c25c808a4fa9a24cbbd6bbb67, type: 3}
+  - fxType: 5
+    fxPrefab: {fileID: 4399970628791159158, guid: 11a5c265e67f20144a9ec55a3e948415, type: 3}

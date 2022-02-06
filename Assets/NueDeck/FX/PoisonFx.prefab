@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6943322307554864321}
   - component: {fileID: 6943322307554864326}
   m_Layer: 0
-  m_Name: PosionFx
+  m_Name: PoisonFx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
