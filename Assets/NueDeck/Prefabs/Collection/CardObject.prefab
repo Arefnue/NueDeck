@@ -263,8 +263,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
-  m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -452,14 +452,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardMeshRenderer: {fileID: 3644388676854649612}
-  nameText: {fileID: 1768136776442562566}
-  descText: {fileID: 3085244622617530667}
-  manaText: {fileID: 3660415334001918324}
-  frontImage: {fileID: 8603284245693264279}
-  backImage: {fileID: 8593444577226125877}
-  inactiveImage: {fileID: 4226111873430526866}
   descriptionRoot: {fileID: 8136691123716273335}
   canvas: {fileID: 3367497252874219826}
+  nameTextField: {fileID: 1768136776442562566}
+  descTextField: {fileID: 3085244622617530667}
+  manaTextField: {fileID: 3660415334001918324}
+  frontImage: {fileID: 8603284245693264279}
+  backImage: {fileID: 8593444577226125877}
+  deactiveImage: {fileID: 4226111873430526866}
 --- !u!1 &3314280452125903245
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,8 +708,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 9
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
-  m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -733,7 +733,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.45
+  m_fontSize: 13.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -842,8 +842,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
-  m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

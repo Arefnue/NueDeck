@@ -29,7 +29,7 @@ namespace NueDeck.Scripts.Card
         [Header("Images")]
         [SerializeField] private Image frontImage;
         [SerializeField] private Image backImage;
-        [SerializeField] private Image inActiveImage;
+        [SerializeField] private Image deactiveImage;
         
         public CardData CardData { get; private set; }
 
@@ -106,7 +106,7 @@ namespace NueDeck.Scripts.Card
             _isInactive = isInactive;
             cardMeshRenderer.sharedMaterial = isInactive ? inactiveMaterial : _cardMaterial;
 
-            inActiveImage.gameObject.SetActive(isInactive);
+            deactiveImage.gameObject.SetActive(isInactive);
         }
         
         public void UpdateCardText()

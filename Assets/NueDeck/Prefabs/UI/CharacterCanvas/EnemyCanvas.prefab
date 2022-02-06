@@ -143,8 +143,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
-  m_sharedMaterial: {fileID: 204756702410651482, guid: 06458e15bb52a3d4888584ee47db86af, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -397,6 +397,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8038948658416760749, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8038948658416760749, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8075278134763003534, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
@@ -470,11 +478,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8f2ad586dc4790a30dee7b27e7eb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealthText: {fileID: 6775776604672554816}
   statusIconRoot: {fileID: 2626658061549236291}
-  statusIconsData: {fileID: 11400000, guid: b03aa86ece2bc1b4a9afba4ab8e5a0d0, type: 2}
   highlightRoot: {fileID: 7142332272639297443}
-  highlightImage: {fileID: 6341537072825432521}
   descriptionRoot: {fileID: 3953374843238594800}
-  intentionImage: {fileID: 8576760959144301459}
+  statusIconsData: {fileID: 11400000, guid: b03aa86ece2bc1b4a9afba4ab8e5a0d0, type: 2}
+  currentHealthText: {fileID: 6775776604672554816}
+  highlightImage: {fileID: 6341537072825432521}
+  intentImage: {fileID: 8576760959144301459}
   nextActionValueText: {fileID: 2911335580396430737}

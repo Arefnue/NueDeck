@@ -99,9 +99,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllyCanvas Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8038948658416760749, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8038948658416760749, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8075278134763003534, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
@@ -159,9 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b148fc39f9241a3ad85116d28dbcb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealthText: {fileID: 5093173911016622206}
   statusIconRoot: {fileID: 4383464602382946173}
-  statusIconsData: {fileID: 11400000, guid: b03aa86ece2bc1b4a9afba4ab8e5a0d0, type: 2}
   highlightRoot: {fileID: 8914975654672300189}
-  highlightImage: {fileID: 4658789223333938935}
   descriptionRoot: {fileID: 3349489802833921998}
+  statusIconsData: {fileID: 11400000, guid: b03aa86ece2bc1b4a9afba4ab8e5a0d0, type: 2}
+  currentHealthText: {fileID: 5093173911016622206}
+  highlightImage: {fileID: 4658789223333938935}

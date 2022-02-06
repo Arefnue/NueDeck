@@ -192,9 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5449959a6647058155931d88dd8ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionRoot: {fileID: 6157671411913646570}
   allyCanvas: {fileID: 7581544537521552487}
-  allyData: {fileID: 11400000, guid: fc1a85bb53bd2694ea1143c9b9a6baf3, type: 2}
+  allyCharacterData: {fileID: 11400000, guid: fc1a85bb53bd2694ea1143c9b9a6baf3, type: 2}
 --- !u!65 &1757283783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -357,6 +356,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 5093173911016622206, guid: 06cd4b0ebbcba2f4896b474ce827c4bc, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 5093173911016622206, guid: 06cd4b0ebbcba2f4896b474ce827c4bc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5572609017615024000, guid: 06cd4b0ebbcba2f4896b474ce827c4bc, type: 3}
       propertyPath: m_Name
       value: AllyCanvas Variant

@@ -49,8 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ba82d88df94f47bdd0998ffa0a43f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionRoot: {fileID: 6022288085979307805}
-  enemyData: {fileID: 11400000, guid: b1d13a4519e7f5e449ada40af494fdc9, type: 2}
+  enemyCharacterData: {fileID: 11400000, guid: b1d13a4519e7f5e449ada40af494fdc9, type: 2}
   enemyCanvas: {fileID: 7422249267346903092}
   deathSoundProfileData: {fileID: 11400000, guid: 7e15e2a10065ab54c8eaf26154af0156, type: 2}
 --- !u!54 &735061151
@@ -274,6 +273,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 2911335580396430737, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2911335580396430737, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 4144906860905666486, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -374,6 +381,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 6775776604672554816, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 6775776604672554816, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 7717519892667723655, guid: 4a531535fdf794e4893297aa72798b93, type: 3}
       propertyPath: m_Layer
       value: 11
