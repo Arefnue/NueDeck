@@ -76,6 +76,7 @@ namespace NueDeck.Scripts.UI.Reward
         {
             GameManager.Instance.PersistentGameplayData.CurrentGold += amount;
             _currentRewardsList.Remove(rewardContainer);
+            UIManager.Instance.InformationCanvas.SetGoldText(GameManager.Instance.PersistentGameplayData.CurrentGold);
             Destroy(rewardContainer.gameObject);
         }
 

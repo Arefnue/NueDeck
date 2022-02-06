@@ -43,6 +43,7 @@ namespace NueDeck.Scripts.UI
             SetHealthText(GameManager.Instance.PersistentGameplayData.AllyList[0].AllyCharacterData.MaxHealth,GameManager.Instance.PersistentGameplayData.AllyList[0].AllyCharacterData.MaxHealth);
             SetNameText(GameManager.Instance.GameplayData.DefaultName);
             SetRoomText(GameManager.Instance.PersistentGameplayData.CurrentEncounterId+1,GameManager.Instance.GameplayData.UseStageSystem,GameManager.Instance.PersistentGameplayData.CurrentStageId+1);
+            UIManager.Instance.InformationCanvas.SetGoldText(GameManager.Instance.PersistentGameplayData.CurrentGold);
         }
         #endregion
         

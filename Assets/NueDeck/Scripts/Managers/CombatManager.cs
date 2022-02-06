@@ -82,7 +82,7 @@ namespace NueDeck.Scripts.Managers
 
                     OnAllyTurnStarted?.Invoke();
                     
-                    GameManager.Instance.PersistentGameplayData.CurrentMana = GameManager.Instance.PersistentGameplayData.MAXMana;
+                    GameManager.Instance.PersistentGameplayData.CurrentMana = GameManager.Instance.PersistentGameplayData.MaxMana;
                     
                     CollectionManager.Instance.DrawCards(GameManager.Instance.PersistentGameplayData.DrawCount);
                     
