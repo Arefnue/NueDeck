@@ -10,24 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
-  m_Name: 11-Attack_LifeSteal
+  m_Name: 9-Attack_LifeSteal
   m_EditorClassIdentifier: 
-  id: 11_attack_lifeSteal
+  id: 9_attack_lifeSteal
   cardName: Life Steal
   manaCost: 2
   cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   actionTarget: 0
   usableWithoutTarget: 0
   cardActionDataList:
-  - myPlayerActionType: 0
-    value: 8
-  - myPlayerActionType: 1
+  - myPlayerActionType: 7
     value: 8
   cardDescriptionDataList:
   - useText: 1
     useTextColor: 0
     textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: Deal
+    defaultText: 'Deal '
     useValue: 0
     useValueColor: 0
     valueColor: {r: 0, g: 0, b: 0, a: 0}
@@ -47,7 +45,7 @@ MonoBehaviour:
   - useText: 1
     useTextColor: 0
     textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: ' heal'
+    defaultText: ' heal '
     useValue: 0
     useValueColor: 0
     valueColor: {r: 0.8, g: 0, b: 0.012076187, a: 1}
@@ -62,7 +60,7 @@ MonoBehaviour:
     useValueColor: 1
     valueColor: {r: 0, g: 0.8, b: 0.041337203, a: 1}
     defaultValue: 8
-    useModifer: 0
+    useModifer: 1
     modiferStatus: 2
   specialKeywordsList: 
   audioType: 5

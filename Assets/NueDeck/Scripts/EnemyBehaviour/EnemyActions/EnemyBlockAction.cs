@@ -22,7 +22,7 @@ namespace NueDeck.Scripts.EnemyBehaviour.EnemyActions
                     .StatusDict[StatusType.Dexterity].StatusValue));
             
             if (FxManager.Instance != null)
-                FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Block);
+                FxManager.Instance.PlayFx(newTarget.transform,FxType.Block);
 
             if (AudioManager.Instance != null)
                 AudioManager.Instance.PlayOneShot(AudioActionType.Block);

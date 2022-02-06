@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3_block_basic
   cardName: Basic block
-  manaCost: 5
+  manaCost: 1
   cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   actionTarget: 1
   usableWithoutTarget: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
   - useText: 1
     useTextColor: 0
     textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: Block
+    defaultText: 'Block '
     useValue: 0
     useValueColor: 0
     valueColor: {r: 0, g: 0, b: 0, a: 0}
@@ -41,11 +41,11 @@ MonoBehaviour:
     valueColor: {r: 0, g: 0.07908745, b: 0.8, a: 1}
     defaultValue: 5
     useModifer: 1
-    modiferStatus: 0
+    modiferStatus: 3
   - useText: 1
     useTextColor: 0
     textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: damage
+    defaultText: ' damage'
     useValue: 0
     useValueColor: 0
     valueColor: {r: 0, g: 0, b: 0, a: 0}

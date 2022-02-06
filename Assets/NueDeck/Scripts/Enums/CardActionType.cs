@@ -9,7 +9,6 @@
         IncreaseMaxHealth,
         Draw,
         EarnMana,
-        ConvertPoisonToHeal,
-        ConvertPoisonToDamage
+        LifeSteal
     }
 }

@@ -25,7 +25,7 @@ MonoBehaviour:
   - useText: 1
     useTextColor: 0
     textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: Deal
+    defaultText: 'Deal '
     useValue: 0
     useValueColor: 0
     valueColor: {r: 0, g: 0, b: 0, a: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   - useText: 1
     useTextColor: 0
     textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: damage
+    defaultText: ' damage'
     useValue: 0
     useValueColor: 0
     valueColor: {r: 0, g: 0, b: 0, a: 0}

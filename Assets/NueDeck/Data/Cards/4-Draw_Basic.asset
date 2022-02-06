@@ -25,27 +25,7 @@ MonoBehaviour:
   - useText: 1
     useTextColor: 0
     textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: Draw
-    useValue: 0
-    useValueColor: 0
-    valueColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultValue: 0
-    useModifer: 0
-    modiferStatus: 0
-  - useText: 0
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: 
-    useValue: 1
-    useValueColor: 1
-    valueColor: {r: 0.8, g: 0, b: 0.74762726, a: 1}
-    defaultValue: 2
-    useModifer: 0
-    modiferStatus: 0
-  - useText: 1
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: cards
+    defaultText: Draw 2 cards
     useValue: 0
     useValueColor: 0
     valueColor: {r: 0, g: 0, b: 0, a: 0}
