@@ -26,6 +26,7 @@ namespace NueDeck.Scripts.Managers
             }
             else
             {
+                transform.parent = null;
                 Instance = this;
             
                 for (int i = 0; i < Enum.GetValues(typeof(FxType)).Length; i++)

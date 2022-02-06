@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using NueDeck.Scripts.Card;
-using NueDeck.Scripts.Data;
+using NueDeck.Scripts.Collection;
 using NueDeck.Scripts.Data.Collection;
-using NueDeck.Scripts.Managers;
-using NueDeck.Scripts.UI;
 using UnityEngine;
 
-namespace NueDeck.Scripts.Collection
+namespace NueDeck.Scripts.Managers
 {
     public class CollectionManager : MonoBehaviour
     {

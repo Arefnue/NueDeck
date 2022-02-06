@@ -1,9 +1,10 @@
 using System.Collections;
+using NueDeck.Scripts.UI;
 using NueDeck.Scripts.UI.Reward;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace NueDeck.Scripts.UI
+namespace NueDeck.Scripts.Managers
 {
     [DefaultExecutionOrder(-4)]
     public class UIManager : MonoBehaviour
@@ -29,6 +30,7 @@ namespace NueDeck.Scripts.UI
         {
             if (Instance == null)
             {
+                transform.parent = null;
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }

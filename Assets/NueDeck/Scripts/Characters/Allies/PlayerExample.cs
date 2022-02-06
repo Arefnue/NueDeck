@@ -1,4 +1,5 @@
 ﻿
+using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.UI;
 
 namespace NueDeck.Scripts.Characters.Allies

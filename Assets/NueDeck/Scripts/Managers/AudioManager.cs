@@ -30,6 +30,7 @@ namespace NueDeck.Scripts.Managers
             }
             else
             {
+                transform.parent = null;
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
                 
