@@ -10,6 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8f29259e87442338a016acd10256ddc, type: 3}
-  m_Name: HealProfile
+  m_Name: ButtonSoundProfile
   m_EditorClassIdentifier: 
+  audioType: 3
   randomClipList: []

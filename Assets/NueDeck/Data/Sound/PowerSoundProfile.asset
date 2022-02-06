@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8f29259e87442338a016acd10256ddc, type: 3}
-  m_Name: ButtonProfile
+  m_Name: PowerSoundProfile
   m_EditorClassIdentifier: 
-  randomClipList:
-  - {fileID: 8300000, guid: 68064d3951a58df489da75f89596e84f, type: 3}
+  audioType: 9
+  randomClipList: []

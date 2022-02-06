@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4cc2cb8eaf4444790bf3249beca9ed4, type: 3}
   m_Name: InitalDeck
   m_EditorClassIdentifier: 
-  cards:
+  deckId: deck_default
+  cardList:
   - {fileID: 11400000, guid: 1e43cdb39f5836b44942f367125cadde, type: 2}
   - {fileID: 11400000, guid: 1e43cdb39f5836b44942f367125cadde, type: 2}
   - {fileID: 11400000, guid: 1e43cdb39f5836b44942f367125cadde, type: 2}
   - {fileID: 11400000, guid: 1e43cdb39f5836b44942f367125cadde, type: 2}
+  - {fileID: 11400000, guid: e1783ca46b526944c969405b4c0a29ec, type: 2}
+  - {fileID: 11400000, guid: e1783ca46b526944c969405b4c0a29ec, type: 2}
+  - {fileID: 11400000, guid: e1783ca46b526944c969405b4c0a29ec, type: 2}
+  - {fileID: 11400000, guid: e1783ca46b526944c969405b4c0a29ec, type: 2}
   - {fileID: 11400000, guid: 1e43cdb39f5836b44942f367125cadde, type: 2}
   - {fileID: 11400000, guid: 1e5671bf6b0f90b428df809497a2f125, type: 2}

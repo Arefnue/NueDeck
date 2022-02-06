@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2612027158f847538279f7d8f10dff91, type: 3}
   m_Name: EnemyExample
   m_EditorClassIdentifier: 
-  characterID: 0
+  characterID: enemy_example
   characterName: Enemy Example
   characterDescription: Enemy Description
   maxHealth: 150
@@ -20,32 +20,32 @@ MonoBehaviour:
   - name: Attack Single
     abilityTarget: 1
     intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
-    actionList:
-    - enemyActionType: 0
-      value: 15
     soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
     hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 6
   - name: Heal
     abilityTarget: 0
     intention: {fileID: 11400000, guid: d8b91adf93b4e21419f64f9a68fc3c70, type: 2}
-    actionList:
-    - enemyActionType: 1
-      value: 15
     soundProfile: {fileID: 11400000, guid: 5e1ae36013818124e8f86d99922c0cca, type: 2}
     hideActionValue: 1
+    actionList:
+    - actionType: 1
+      actionValue: 4
   - name: Block
     abilityTarget: 0
     intention: {fileID: 11400000, guid: b0b1e7f2f78bb444eb1666e4accf22ee, type: 2}
-    actionList:
-    - enemyActionType: 3
-      value: 10
     soundProfile: {fileID: 11400000, guid: ff6628141ca0c2b47ae1c7ef0636513c, type: 2}
     hideActionValue: 1
+    actionList:
+    - actionType: 3
+      actionValue: 5
   - name: Poison
     abilityTarget: 1
     intention: {fileID: 11400000, guid: e7deaaa3f01f8f54ab8c29a0ce3c8f31, type: 2}
-    actionList:
-    - enemyActionType: 2
-      value: 10
     soundProfile: {fileID: 11400000, guid: c558e0a45b0633a4d9313997a50bb80a, type: 2}
     hideActionValue: 0
+    actionList:
+    - actionType: 2
+      actionValue: 4

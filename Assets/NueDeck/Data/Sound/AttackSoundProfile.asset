@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8f29259e87442338a016acd10256ddc, type: 3}
-  m_Name: SpaceAttackProfile
+  m_Name: AttackSoundProfile
   m_EditorClassIdentifier: 
-  randomClipList:
-  - {fileID: 8300000, guid: 42c003e7f26ca034f9c40089b30ed50d, type: 3}
+  audioType: 0
+  randomClipList: []

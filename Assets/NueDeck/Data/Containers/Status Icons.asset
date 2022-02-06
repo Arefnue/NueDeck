@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f964cc6b134ac99d71c4559321fc49, type: 3}
   m_Name: Status Icons
   m_EditorClassIdentifier: 
-  statusIconPrefab: {fileID: 6777904196308813527, guid: f4e76bc2e67da6241b52b8d7c6034e01, type: 3}
+  statusIconBasePrefab: {fileID: 6777904196308813527, guid: f4e76bc2e67da6241b52b8d7c6034e01, type: 3}
   statusIconList:
   - iconStatus: 0
-    iconSprite: {fileID: -1513487178384027574, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
+    iconSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     specialKeywords: 00000000
   - iconStatus: 1
-    iconSprite: {fileID: -214828719786938277, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
+    iconSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     specialKeywords: 03000000
   - iconStatus: 2
-    iconSprite: {fileID: 8414397559482299720, guid: a707003c96586cc41b22ae32a9cdb636, type: 3}
+    iconSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     specialKeywords: 01000000
+  - iconStatus: 3
+    iconSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    specialKeywords: 02000000

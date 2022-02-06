@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8f29259e87442338a016acd10256ddc, type: 3}
-  m_Name: FinalProfile
+  m_Name: EnemyDeathSoundProfile
   m_EditorClassIdentifier: 
-  randomClipList:
-  - {fileID: 0}
+  audioType: 6
+  randomClipList: []
