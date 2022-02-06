@@ -33,6 +33,7 @@ namespace NueTooltip.Core
         {
             if (Instance == null)
             {
+                transform.parent = null;
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
