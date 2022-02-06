@@ -71,8 +71,8 @@ namespace NueDeck.Scripts.Data.Collection
     {
         [Header("Text")]
         [SerializeField] private bool useText = true;
-        [SerializeField] private Color textColor = Color.black;
         [SerializeField] private bool useTextColor;
+        [SerializeField] private Color textColor = Color.black;
         [SerializeField] private string defaultText;
         
         [Header("Value")]

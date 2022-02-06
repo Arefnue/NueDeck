@@ -12,11 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
   m_Name: 10-Skill_EarnMana
   m_EditorClassIdentifier: 
-  myID: 8
-  myTargets: 1
-  myManaCost: 0
-  myName: Water Bottle
-  myDescription: Increase your mana by 2
-  mySprite: {fileID: 21300000, guid: c0629e7c358247d4291114d4e9521ddd, type: 3}
-  actionList: []
-  mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+  id: 10_skill_earnMana
+  cardName: Earn mana
+  manaCost: 0
+  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  actionTarget: 1
+  usableWithoutTarget: 1
+  cardActionDataList:
+  - myPlayerActionType: 6
+    value: 2
+  cardDescriptionDataList:
+  - useText: 1
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: Earn 2 mana
+    useValue: 0
+    useValueColor: 0
+    valueColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultValue: 0
+    useModifer: 0
+    modiferStatus: 0
+  specialKeywordsList: 
+  audioType: 9

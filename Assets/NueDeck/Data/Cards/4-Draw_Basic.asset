@@ -12,11 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
   m_Name: 4-Draw_Basic
   m_EditorClassIdentifier: 
-  myID: 3
-  myTargets: 1
-  myManaCost: 0
-  myName: Backup
-  myDescription: Draw 2 card
-  mySprite: {fileID: 21300000, guid: 6d79f0e0e016ca64592cdb3293bf37da, type: 3}
-  actionList: []
-  mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+  id: 4_draw_basic
+  cardName: Basic draw
+  manaCost: 0
+  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  actionTarget: 1
+  usableWithoutTarget: 1
+  cardActionDataList:
+  - myPlayerActionType: 5
+    value: 2
+  cardDescriptionDataList:
+  - useText: 1
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: Draw
+    useValue: 0
+    useValueColor: 0
+    valueColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultValue: 0
+    useModifer: 0
+    modiferStatus: 0
+  - useText: 0
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: 
+    useValue: 1
+    useValueColor: 1
+    valueColor: {r: 0.8, g: 0, b: 0.74762726, a: 1}
+    defaultValue: 2
+    useModifer: 0
+    modiferStatus: 0
+  - useText: 1
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: cards
+    useValue: 0
+    useValueColor: 0
+    valueColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultValue: 0
+    useModifer: 0
+    modiferStatus: 0
+  specialKeywordsList: 
+  audioType: 4

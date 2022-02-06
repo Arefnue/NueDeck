@@ -12,15 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
   m_Name: 7-Power_Strength
   m_EditorClassIdentifier: 
-  myID: 4
-  myTargets: 1
+  id: 7_power_strength
+  cardName: Increase strength
+  manaCost: 2
+  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  actionTarget: 1
   usableWithoutTarget: 1
-  myManaCost: 2
-  myName: Hard Work
-  mySprite: {fileID: 21300000, guid: a0c75614ede963a46af4bc352b3faabd, type: 3}
-  actionList:
+  cardActionDataList:
   - myPlayerActionType: 3
     value: 10
-  descriptionDataList: []
-  specialKeywords: 01000000
-  audioType: 0
+  cardDescriptionDataList:
+  - useText: 1
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: Increase strength by
+    useValue: 0
+    useValueColor: 0
+    valueColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultValue: 0
+    useModifer: 0
+    modiferStatus: 0
+  - useText: 0
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: 
+    useValue: 1
+    useValueColor: 1
+    valueColor: {r: 0.8, g: 0, b: 0.74762726, a: 1}
+    defaultValue: 10
+    useModifer: 0
+    modiferStatus: 0
+  specialKeywordsList: 01000000
+  audioType: 9

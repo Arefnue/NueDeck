@@ -10,22 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
-  m_Name: 5-Heal_Basic
+  m_Name: 11-Attack_LifeSteal
   m_EditorClassIdentifier: 
-  id: 5_heal_basic
-  cardName: Basic heal
-  manaCost: 1
+  id: 11_attack_lifeSteal
+  cardName: Life Steal
+  manaCost: 2
   cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  actionTarget: 1
-  usableWithoutTarget: 1
+  actionTarget: 0
+  usableWithoutTarget: 0
   cardActionDataList:
+  - myPlayerActionType: 0
+    value: 8
   - myPlayerActionType: 1
-    value: 4
+    value: 8
   cardDescriptionDataList:
   - useText: 1
     useTextColor: 0
     textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: Heal
+    defaultText: Deal
     useValue: 0
     useValueColor: 0
     valueColor: {r: 0, g: 0, b: 0, a: 0}
@@ -38,9 +40,29 @@ MonoBehaviour:
     defaultText: 
     useValue: 1
     useValueColor: 1
-    valueColor: {r: 0, g: 0.8, b: 0.041337203, a: 1}
-    defaultValue: 4
+    valueColor: {r: 0.8, g: 0, b: 0.012076187, a: 1}
+    defaultValue: 8
+    useModifer: 1
+    modiferStatus: 2
+  - useText: 1
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: ' heal'
+    useValue: 0
+    useValueColor: 0
+    valueColor: {r: 0.8, g: 0, b: 0.012076187, a: 1}
+    defaultValue: 8
     useModifer: 0
-    modiferStatus: 0
+    modiferStatus: 2
+  - useText: 0
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: ' heal'
+    useValue: 1
+    useValueColor: 1
+    valueColor: {r: 0, g: 0.8, b: 0.041337203, a: 1}
+    defaultValue: 8
+    useModifer: 0
+    modiferStatus: 2
   specialKeywordsList: 
-  audioType: 7
+  audioType: 5

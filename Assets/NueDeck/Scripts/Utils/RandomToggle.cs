@@ -8,7 +8,7 @@ namespace NueDeck.Scripts.Utils
     {
         [SerializeField] private Toggle toggle;
 
-
+        
         public void CheckToggle()
         {
             GameManager.Instance.PersistentGameplayData.IsRandomHand = toggle.isOn;

@@ -12,14 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
   m_Name: 3-Block_Basic
   m_EditorClassIdentifier: 
-  myID: 1
-  myTargets: 1
+  id: 3_block_basic
+  cardName: Basic block
+  manaCost: 5
+  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  actionTarget: 1
   usableWithoutTarget: 1
-  myManaCost: 1
-  myName: Guard
-  myDescription: Block 8 damage
-  mySprite: {fileID: 21300000, guid: 0a60e9c983046544091ff0f23327da5a, type: 3}
-  actionList:
+  cardActionDataList:
   - myPlayerActionType: 2
-    value: 10
-  mySoundProfileData: {fileID: 11400000, guid: ff6628141ca0c2b47ae1c7ef0636513c, type: 2}
+    value: 5
+  cardDescriptionDataList:
+  - useText: 1
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: Block
+    useValue: 0
+    useValueColor: 0
+    valueColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultValue: 0
+    useModifer: 0
+    modiferStatus: 0
+  - useText: 0
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: 
+    useValue: 1
+    useValueColor: 1
+    valueColor: {r: 0, g: 0.07908745, b: 0.8, a: 1}
+    defaultValue: 5
+    useModifer: 1
+    modiferStatus: 0
+  - useText: 1
+    useTextColor: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultText: damage
+    useValue: 0
+    useValueColor: 0
+    valueColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultValue: 0
+    useModifer: 0
+    modiferStatus: 0
+  specialKeywordsList: 00000000
+  audioType: 2
