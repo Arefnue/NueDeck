@@ -10,47 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
-  m_Name: 0-BasicAttack
+  m_Name: 1-Attack_Basic
   m_EditorClassIdentifier: 
-  myID: 0
-  myTargets: 0
+  id: 1_Attack_Basic
+  cardName: Basic Attack
+  manaCost: 1
+  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  actionTarget: 0
   usableWithoutTarget: 0
-  myManaCost: 1
-  myName: Hook
-  mySprite: {fileID: 21300000, guid: 8510ca3a47f6c23479e9992c04455698, type: 3}
-  actionList:
+  cardActionDataList:
   - myPlayerActionType: 0
-    value: 10
-  descriptionDataList:
+    value: 6
+  cardDescriptionDataList:
   - useText: 1
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    useTextColor: 0
+    defaultText: Deal
     useValue: 0
-    text: 'Deal '
-    defaultValue: 0
     useValueColor: 0
     valueColor: {r: 0, g: 0, b: 0, a: 0}
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultValue: 0
     useModifer: 0
     modiferStatus: 0
   - useText: 0
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    useTextColor: 0
+    defaultText: 
     useValue: 1
-    text: 'Deal '
-    defaultValue: 10
     useValueColor: 1
     valueColor: {r: 1, g: 0, b: 0, a: 1}
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
+    defaultValue: 0
     useModifer: 1
     modiferStatus: 2
   - useText: 1
-    useValue: 0
-    text: ' Damage'
-    defaultValue: 10
-    useValueColor: 0
-    valueColor: {r: 0, g: 0, b: 0, a: 0}
-    useTextColor: 0
     textColor: {r: 0, g: 0, b: 0, a: 0}
-    useModifer: 0
+    useTextColor: 0
+    defaultText: damage
+    useValue: 0
+    useValueColor: 0
+    valueColor: {r: 0, g: 0, b: 0, a: 1}
+    defaultValue: 0
+    useModifer: 1
     modiferStatus: 2
-  specialKeywords: 0000000003000000
+  specialKeywordsList: 
   audioType: 0

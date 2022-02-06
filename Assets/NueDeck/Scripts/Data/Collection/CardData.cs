@@ -71,19 +71,19 @@ namespace NueDeck.Scripts.Data.Collection
     {
         [Header("Text")]
         [SerializeField] private bool useText = true;
-        [SerializeField] private Color textColor;
+        [SerializeField] private Color textColor = Color.black;
         [SerializeField] private bool useTextColor;
         [SerializeField] private string defaultText;
         
         [Header("Value")]
         [SerializeField] private bool useValue = true;
         [SerializeField] private bool useValueColor;
-        [SerializeField] private Color valueColor;
+        [SerializeField] private Color valueColor = Color.black;
         [SerializeField] private int defaultValue;
         
         [Header("Modifer")]
-        [SerializeField] private StatusType modiferStatus;
         [SerializeField] private bool useModifer;
+        [SerializeField] private StatusType modiferStatus;
         
         public string GetDescription()
         {

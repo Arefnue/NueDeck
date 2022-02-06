@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
-  m_Name: 8-IncreaseMana2
+  m_Name: 5-Heal_Basic
   m_EditorClassIdentifier: 
-  myID: 8
+  myID: 2
   myTargets: 1
-  myManaCost: 0
-  myName: Water Bottle
-  myDescription: Increase your mana by 2
-  mySprite: {fileID: 21300000, guid: c0629e7c358247d4291114d4e9521ddd, type: 3}
-  actionList: []
+  usableWithoutTarget: 1
+  myManaCost: 1
+  myName: Heal
+  myDescription: Restore 5 health
+  mySprite: {fileID: 21300000, guid: f071ce71140638f469d6a10acc1a1b67, type: 3}
+  actionList:
+  - myPlayerActionType: 1
+    value: 10
   mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}

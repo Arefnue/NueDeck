@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
-  m_Name: 9-StealMaxHealth
+  m_Name: 10-Skill_EarnMana
   m_EditorClassIdentifier: 
-  myID: 9
-  myTargets: 0
-  myManaCost: 2
-  myName: Yours is Mine
-  myDescription: Steal 20 max health from target
-  mySprite: {fileID: 21300000, guid: 04684b85c9246b945a48b41d9ec2f4be, type: 3}
+  myID: 8
+  myTargets: 1
+  myManaCost: 0
+  myName: Water Bottle
+  myDescription: Increase your mana by 2
+  mySprite: {fileID: 21300000, guid: c0629e7c358247d4291114d4e9521ddd, type: 3}
   actionList: []
   mySoundProfileData: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
