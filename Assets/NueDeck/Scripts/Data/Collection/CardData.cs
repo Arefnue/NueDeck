@@ -70,20 +70,20 @@ namespace NueDeck.Scripts.Data.Collection
     public class CardDescriptionData
     {
         [Header("Text")]
-        [SerializeField]private bool useText = true;
-        [SerializeField]private Color textColor;
-        [SerializeField]private bool useTextColor;
-        [SerializeField]private string defaultText;
+        [SerializeField] private bool useText = true;
+        [SerializeField] private Color textColor;
+        [SerializeField] private bool useTextColor;
+        [SerializeField] private string defaultText;
         
         [Header("Value")]
-        [SerializeField]private bool useValue = true;
-        [SerializeField]private bool useValueColor;
-        [SerializeField]private Color valueColor;
-        [SerializeField]private int defaultValue;
+        [SerializeField] private bool useValue = true;
+        [SerializeField] private bool useValueColor;
+        [SerializeField] private Color valueColor;
+        [SerializeField] private int defaultValue;
         
         [Header("Modifer")]
-        [SerializeField]private StatusType modiferStatus;
-        [SerializeField]private bool useModifer;
+        [SerializeField] private StatusType modiferStatus;
+        [SerializeField] private bool useModifer;
         
         public string GetDescription()
         {

@@ -40,7 +40,7 @@ namespace NueDeck.Scripts.UI
         public override void ResetCanvas()
         {
             RandomizedDeckObject.SetActive(GameManager.Instance.PersistentGameplayData.IsRandomHand);
-            SetHealthText(GameManager.Instance.PersistentGameplayData.AllyList[0].AllyData.maxHealth,GameManager.Instance.PersistentGameplayData.AllyList[0].AllyData.maxHealth);
+            SetHealthText(GameManager.Instance.PersistentGameplayData.AllyList[0].AllyCharacterData.MaxHealth,GameManager.Instance.PersistentGameplayData.AllyList[0].AllyCharacterData.MaxHealth);
             SetNameText(GameManager.Instance.GameplayData.defaultName);
             SetRoomText(GameManager.Instance.PersistentGameplayData.CurrentEncounterId+1,GameManager.Instance.GameplayData.useStageSystem,GameManager.Instance.PersistentGameplayData.CurrentStageId+1);
         }

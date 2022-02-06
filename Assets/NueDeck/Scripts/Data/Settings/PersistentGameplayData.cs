@@ -23,8 +23,8 @@ namespace NueDeck.Scripts.Data.Settings
         public bool IsFinalEncounter { get; set; }
         public List<CardData> CurrentCardsList{ get; set; }
 
-        public Dictionary<int, int> CurrentHealthDict { get; set; } = new Dictionary<int, int>();
-        public Dictionary<int, int> MaxHealthDict { get; set; } = new Dictionary<int, int>();
+        public Dictionary<string, int> CurrentHealthDict { get; set; } = new Dictionary<string, int>();
+        public Dictionary<string, int> MaxHealthDict { get; set; } = new Dictionary<string, int>();
 
         public int CurrentGold
         {

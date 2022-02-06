@@ -200,8 +200,8 @@ namespace NueDeck.Scripts.Managers
 
             foreach (var currentAlly in CurrentAlliesList)
             {
-                GameManager.Instance.PersistentGameplayData.CurrentHealthDict[currentAlly.AllyData.characterID] = currentAlly.CharacterStats.CurrentHealth;
-                GameManager.Instance.PersistentGameplayData.MaxHealthDict[currentAlly.AllyData.characterID] = currentAlly.CharacterStats.MaxHealth;
+                GameManager.Instance.PersistentGameplayData.CurrentHealthDict[currentAlly.AllyCharacterData.CharacterID] = currentAlly.CharacterStats.CurrentHealth;
+                GameManager.Instance.PersistentGameplayData.MaxHealthDict[currentAlly.AllyCharacterData.CharacterID] = currentAlly.CharacterStats.MaxHealth;
             }
             
             CollectionManager.Instance.DiscardPile.Clear();

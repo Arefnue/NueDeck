@@ -17,12 +17,12 @@ namespace NueDeck.Scripts.Characters
     public class EnemyBase : CharacterBase, IEnemy
     {
         [Header("Enemy Base References")]
-        [SerializeField] protected EnemyData enemyData;
+        [SerializeField] protected EnemyCharacterData enemyCharacterData;
         [SerializeField] protected EnemyCanvas enemyCanvas;
         [SerializeField] protected SoundProfileData deathSoundProfileData;
         protected EnemyAbilityData NextAbility;
         
-        public EnemyData EnemyData => enemyData;
+        public EnemyCharacterData EnemyCharacterData => enemyCharacterData;
         public EnemyCanvas EnemyCanvas => enemyCanvas;
         public SoundProfileData DeathSoundProfileData => deathSoundProfileData;
 
@@ -31,7 +31,7 @@ namespace NueDeck.Scripts.Characters
         {
             base.BuildCharacter();
             EnemyCanvas.InitCanvas();
-            CharacterStats = new CharacterStats(EnemyData.maxHealth,EnemyCanvas);
+            CharacterStats = new CharacterStats(EnemyCharacterData.MaxHealth,EnemyCanvas);
             CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
             CombatManager.Instance.OnAllyTurnStarted += ShowNextAbility;
@@ -72,17 +72,17 @@ namespace NueDeck.Scripts.Characters
         #region Private Methods
         private void ShowNextAbility()
         {
-            NextAbility = EnemyData.enemyAbilityList.RandomItem();
-            EnemyCanvas.IntentImage.sprite = NextAbility.intention.intentionSprite;
+            NextAbility = EnemyCharacterData.EnemyAbilityList.RandomItem();
+            EnemyCanvas.IntentImage.sprite = NextAbility.Intention.intentionSprite;
             
-            if (NextAbility.hideActionValue)
+            if (NextAbility.HideActionValue)
             {
                 EnemyCanvas.NextActionValueText.gameObject.SetActive(false);
             }
             else
             {
                 EnemyCanvas.NextActionValueText.gameObject.SetActive(true);
-                EnemyCanvas.NextActionValueText.text = NextAbility.actionList[0].value.ToString();
+                EnemyCanvas.NextActionValueText.text = NextAbility.ActionList[0].ActionValue.ToString();
             }
             
             EnemyCanvas.IntentImage.gameObject.SetActive(true);
@@ -93,7 +93,7 @@ namespace NueDeck.Scripts.Characters
         public virtual IEnumerator ActionRoutine()
         {
             EnemyCanvas.IntentImage.gameObject.SetActive(false);
-            if (NextAbility.intention.enemyIntention == EnemyIntentions.Attack || NextAbility.intention.enemyIntention == EnemyIntentions.Debuff)
+            if (NextAbility.Intention.enemyIntention == EnemyIntentions.Attack || NextAbility.Intention.enemyIntention == EnemyIntentions.Debuff)
             {
                 yield return StartCoroutine(AttackRoutine(NextAbility));
             }
@@ -119,7 +119,7 @@ namespace NueDeck.Scripts.Characters
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, startPos, endPos, startRot, endRot, 5));
           
-            targetAbility.actionList.ForEach(x=>EnemyActionProcessor.GetAction(x.enemyActionType).DoAction(new EnemyActionParameters(x.value,target,this)));
+            targetAbility.ActionList.ForEach(x=>EnemyActionProcessor.GetAction(x.ActionType).DoAction(new EnemyActionParameters(x.ActionValue,target,this)));
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, endPos, startPos, endRot, startRot, 5));
         }
@@ -136,7 +136,7 @@ namespace NueDeck.Scripts.Characters
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, startPos, endPos, startRot, endRot, 5));
             
-            targetAbility.actionList.ForEach(x=>EnemyActionProcessor.GetAction(x.enemyActionType).DoAction(new EnemyActionParameters(x.value,null,this)));
+            targetAbility.ActionList.ForEach(x=>EnemyActionProcessor.GetAction(x.ActionType).DoAction(new EnemyActionParameters(x.ActionValue,null,this)));
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, endPos, startPos, endRot, startRot, 5));
         }

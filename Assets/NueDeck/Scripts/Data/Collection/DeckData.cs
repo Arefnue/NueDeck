@@ -6,6 +6,11 @@ namespace NueDeck.Scripts.Data.Collection
     [CreateAssetMenu(fileName = "Deck Data", menuName = "Data/Collection/Deck", order = 1)]
     public class DeckData : ScriptableObject
     {
-        public List<CardData> cards;
+        [SerializeField] private string deckId;
+        
+        [SerializeField] private List<CardData> cardList;
+        public List<CardData> CardList => cardList;
+
+        public string DeckId => deckId;
     }
 }

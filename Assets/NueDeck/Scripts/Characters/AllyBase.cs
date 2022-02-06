@@ -11,9 +11,9 @@ namespace NueDeck.Scripts.Characters
     {
         [Header("Ally Base Settings")]
         [SerializeField] private AllyCanvas allyCanvas;
-        [SerializeField] private AllyData allyData;
+        [SerializeField] private AllyCharacterData allyCharacterData;
         public AllyCanvas AllyCanvas => allyCanvas;
-        public AllyData AllyData => allyData;
+        public AllyCharacterData AllyCharacterData => allyCharacterData;
 
         public override void Awake()
         {
@@ -24,20 +24,20 @@ namespace NueDeck.Scripts.Characters
         {
             base.BuildCharacter();
             allyCanvas.InitCanvas();
-            CharacterStats = new CharacterStats(allyData.maxHealth,allyCanvas);
+            CharacterStats = new CharacterStats(allyCharacterData.MaxHealth,allyCanvas);
 
             if (!GameManager.Instance)
                 throw new Exception("There is no GameManager");
             
-            if (GameManager.Instance.PersistentGameplayData.CurrentHealthDict.ContainsKey(allyData.characterID))
+            if (GameManager.Instance.PersistentGameplayData.CurrentHealthDict.ContainsKey(allyCharacterData.CharacterID))
             {
-                CharacterStats.CurrentHealth = GameManager.Instance.PersistentGameplayData.CurrentHealthDict[allyData.characterID];
-                CharacterStats.MaxHealth = GameManager.Instance.PersistentGameplayData.MaxHealthDict[allyData.characterID];
+                CharacterStats.CurrentHealth = GameManager.Instance.PersistentGameplayData.CurrentHealthDict[allyCharacterData.CharacterID];
+                CharacterStats.MaxHealth = GameManager.Instance.PersistentGameplayData.MaxHealthDict[allyCharacterData.CharacterID];
             }
             else
             {
-                GameManager.Instance.PersistentGameplayData.CurrentHealthDict.Add(allyData.characterID,CharacterStats.CurrentHealth);
-                GameManager.Instance.PersistentGameplayData.MaxHealthDict.Add(allyData.characterID,CharacterStats.MaxHealth);
+                GameManager.Instance.PersistentGameplayData.CurrentHealthDict.Add(allyCharacterData.CharacterID,CharacterStats.CurrentHealth);
+                GameManager.Instance.PersistentGameplayData.MaxHealthDict.Add(allyCharacterData.CharacterID,CharacterStats.MaxHealth);
             }
             
             CharacterStats.OnDeath += OnDeath;

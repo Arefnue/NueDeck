@@ -66,7 +66,7 @@ namespace NueDeck.Scripts.Managers
                 for (var i = 0; i < GameplayData.randomCardCount; i++)
                     PersistentGameplayData.CurrentCardsList.Add(GameplayData.allCardsList.RandomItem());
             else
-                foreach (var cardData in GameplayData.initalDeck.cards)
+                foreach (var cardData in GameplayData.initalDeck.CardList)
                     PersistentGameplayData.CurrentCardsList.Add(cardData);
         }
         public void NextEncounter()
