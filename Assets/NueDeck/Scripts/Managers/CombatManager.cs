@@ -198,11 +198,8 @@ namespace NueDeck.Scripts.Managers
         {
             CurrentCombatState = CombatState.EndCombat;
 
-            foreach (var currentAlly in CurrentAlliesList)
-            {
-                GameManager.Instance.PersistentGameplayData.CurrentHealthDict[currentAlly.AllyCharacterData.CharacterID] = currentAlly.CharacterStats.CurrentHealth;
-                GameManager.Instance.PersistentGameplayData.MaxHealthDict[currentAlly.AllyCharacterData.CharacterID] = currentAlly.CharacterStats.MaxHealth;
-            }
+            GameManager.Instance.PersistentGameplayData.SetPlayerCurrentHealth(CurrentAlliesList[0].CharacterStats.CurrentHealth);
+            GameManager.Instance.PersistentGameplayData.SetPlayerMaxHealth(CurrentAlliesList[0].CharacterStats.MaxHealth);
             
             CollectionManager.Instance.DiscardPile.Clear();
             CollectionManager.Instance.DrawPile.Clear();

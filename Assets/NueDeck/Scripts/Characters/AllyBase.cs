@@ -29,15 +29,15 @@ namespace NueDeck.Scripts.Characters
             if (!GameManager.Instance)
                 throw new Exception("There is no GameManager");
             
-            if (GameManager.Instance.PersistentGameplayData.CurrentHealthDict.ContainsKey(allyCharacterData.CharacterID))
+            if (GameManager.Instance.PersistentGameplayData.PlayerCurrentHealth != -1)
             {
-                CharacterStats.CurrentHealth = GameManager.Instance.PersistentGameplayData.CurrentHealthDict[allyCharacterData.CharacterID];
-                CharacterStats.MaxHealth = GameManager.Instance.PersistentGameplayData.MaxHealthDict[allyCharacterData.CharacterID];
+                CharacterStats.CurrentHealth = GameManager.Instance.PersistentGameplayData.PlayerCurrentHealth;
+                CharacterStats.MaxHealth = GameManager.Instance.PersistentGameplayData.PlayerMaxHealth;
             }
             else
             {
-                GameManager.Instance.PersistentGameplayData.CurrentHealthDict.Add(allyCharacterData.CharacterID,CharacterStats.CurrentHealth);
-                GameManager.Instance.PersistentGameplayData.MaxHealthDict.Add(allyCharacterData.CharacterID,CharacterStats.MaxHealth);
+                GameManager.Instance.PersistentGameplayData.SetPlayerCurrentHealth(CharacterStats.CurrentHealth); 
+                GameManager.Instance.PersistentGameplayData.SetPlayerMaxHealth(CharacterStats.MaxHealth);
             }
             
             CharacterStats.OnDeath += OnDeath;

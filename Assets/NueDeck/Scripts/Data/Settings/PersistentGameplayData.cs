@@ -77,16 +77,16 @@ namespace NueDeck.Scripts.Data.Settings
             set => currentCardsList = value;
         }
 
-        public Dictionary<string, int> CurrentHealthDict
+        public int PlayerCurrentHealth
         {
-            get => currentHealthDict;
-            set => currentHealthDict = value;
+            get => playerCurrentHealth;
+            set => playerCurrentHealth = value;
         }
 
-        public Dictionary<string, int> MaxHealthDict
+        public int PlayerMaxHealth
         {
-            get => maxHealthDict;
-            set => maxHealthDict = value;
+            get => playerMaxHealth;
+            set => playerMaxHealth = value;
         }
 
         public int CurrentGold
@@ -102,6 +102,9 @@ namespace NueDeck.Scripts.Data.Settings
         }
 
 
+        public void SetPlayerCurrentHealth(int newValue) => playerCurrentHealth = newValue;
+        public void SetPlayerMaxHealth(int newValue) => playerMaxHealth = newValue;
+        
         private readonly GameplayData _gameplayData;
         
         [SerializeField] private int currentGold;
@@ -116,9 +119,8 @@ namespace NueDeck.Scripts.Data.Settings
         [SerializeField] private int currentEncounterId;
         [SerializeField] private bool isFinalEncounter;
         [SerializeField] private List<CardData> currentCardsList;
-
-        [SerializeField] private Dictionary<string, int> currentHealthDict;
-        [SerializeField] private Dictionary<string, int> maxHealthDict;
+        [SerializeField] private int playerCurrentHealth;
+        [SerializeField] private int playerMaxHealth;
 
         public PersistentGameplayData(GameplayData gameplayData)
         {
@@ -141,8 +143,8 @@ namespace NueDeck.Scripts.Data.Settings
             CurrentGold = 0;
             CurrentCardsList = new List<CardData>();
             IsFinalEncounter = false;
-            CurrentHealthDict?.Clear();
-            MaxHealthDict?.Clear();
+            PlayerCurrentHealth = -1;
+            PlayerMaxHealth = -1;
         }
     }
 }
