@@ -11,18 +11,21 @@ namespace NueDeck.Scripts.Data.Containers
     [CreateAssetMenu(fileName = "Encounter Data", menuName = "Data/Containers/EncounterData", order = 4)]
     public class EncounterData : ScriptableObject
     {
-        [Header("Settings")]
-        public bool encounterRandomlyAtStage; 
-        public List<EnemyEncounterStage> enemyEncounterList;
+        [Header("Settings")] 
+        [SerializeField] private bool encounterRandomlyAtStage;
+        [SerializeField] private List<EnemyEncounterStage> enemyEncounterList;
+
+        public bool EncounterRandomlyAtStage => encounterRandomlyAtStage;
+        public List<EnemyEncounterStage> EnemyEncounterList => enemyEncounterList;
 
         public EnemyEncounter GetEnemyEncounter(int stageId = 0,int encounterId =0,bool isFinal = false)
         {
-            var selectedStage = enemyEncounterList.First(x => x.stageId == stageId);
-            if (isFinal) return selectedStage.bossEncounterList.RandomItem();
+            var selectedStage = EnemyEncounterList.First(x => x.StageId == stageId);
+            if (isFinal) return selectedStage.BossEncounterList.RandomItem();
            
-            return encounterRandomlyAtStage
-                ? selectedStage.enemyEncounterList.RandomItem()
-                : selectedStage.enemyEncounterList[encounterId] ?? selectedStage.enemyEncounterList.RandomItem();
+            return EncounterRandomlyAtStage
+                ? selectedStage.EnemyEncounterList.RandomItem()
+                : selectedStage.EnemyEncounterList[encounterId] ?? selectedStage.EnemyEncounterList.RandomItem();
         }
         
     }
@@ -31,16 +34,21 @@ namespace NueDeck.Scripts.Data.Containers
     [Serializable]
     public class EnemyEncounterStage
     {
-        public string name;
-        public int stageId;
-        public List<EnemyEncounter> bossEncounterList;
-        public List<EnemyEncounter> enemyEncounterList;
+        [SerializeField] private string name;
+        [SerializeField] private int stageId;
+        [SerializeField] private List<EnemyEncounter> bossEncounterList;
+        [SerializeField] private List<EnemyEncounter> enemyEncounterList;
+        public string Name => name;
+        public int StageId => stageId;
+        public List<EnemyEncounter> BossEncounterList => bossEncounterList;
+        public List<EnemyEncounter> EnemyEncounterList => enemyEncounterList;
     }
     
     
     [Serializable]
     public class EnemyEncounter
     {
-        public List<EnemyBase> enemyList;
+        [SerializeField] private List<EnemyBase> enemyList;
+        public List<EnemyBase> EnemyList => enemyList;
     }
 }

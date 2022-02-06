@@ -11,24 +11,40 @@ namespace NueDeck.Scripts.Data.Settings
     public class GameplayData : ScriptableObject
     {
         [Header("Gameplay Settings")] 
-        public int drawCount = 4;
-        public int maxMana = 3;
-        public bool canUseCards = true;
-        public bool canSelectCards = true;
-        public bool isRandomHand = false;
-        public List<AllyBase> allyList;
+        [SerializeField] private int drawCount = 4;
+        [SerializeField] private int maxMana = 3;
+        [SerializeField] private bool canUseCards = true;
+        [SerializeField] private bool canSelectCards = true;
+        [SerializeField] private bool isRandomHand = false;
+        [SerializeField] private List<AllyBase> allyList;
         
         [Header("Decks")] 
-        public DeckData initalDeck;
-        public int randomCardCount;
-        public int maxCardOnHand;
+        [SerializeField] private DeckData initalDeck;
+        [SerializeField] private int randomCardCount;
+        [SerializeField] private int maxCardOnHand;
         
         [Header("Card Settings")] 
-        public List<CardData> allCardsList;
-        public CardObject cardPrefab;
+        [SerializeField] private List<CardData> allCardsList;
+        [SerializeField] private CardObject cardPrefab;
 
-        [Header("Customization Settings")]
-        public string defaultName = "Nue";
-        public bool useStageSystem;
+        [Header("Customization Settings")] 
+        [SerializeField] private string defaultName = "Nue";
+        [SerializeField] private bool useStageSystem;
+        
+        #region Encapsulation
+        public int DrawCount => drawCount;
+        public int MaxMana => maxMana;
+        public bool CanUseCards => canUseCards;
+        public bool CanSelectCards => canSelectCards;
+        public bool IsRandomHand => isRandomHand;
+        public List<AllyBase> AllyList => allyList;
+        public DeckData InitalDeck => initalDeck;
+        public int RandomCardCount => randomCardCount;
+        public int MaxCardOnHand => maxCardOnHand;
+        public List<CardData> AllCardsList => allCardsList;
+        public CardObject CardPrefab => cardPrefab;
+        public string DefaultName => defaultName;
+        public bool UseStageSystem => useStageSystem;
+        #endregion
     }
 }

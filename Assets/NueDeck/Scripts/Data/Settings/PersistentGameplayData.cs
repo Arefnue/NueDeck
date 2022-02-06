@@ -53,13 +53,13 @@ namespace NueDeck.Scripts.Data.Settings
 
         private void InitData()
         {
-            DrawCount = _gameplayData.drawCount;
-            MAXMana = _gameplayData.maxMana;
+            DrawCount = _gameplayData.DrawCount;
+            MAXMana = _gameplayData.MaxMana;
             CurrentMana = MAXMana;
-            CanUseCards = _gameplayData.canUseCards;
-            CanSelectCards = _gameplayData.canSelectCards;
-            IsRandomHand = _gameplayData.isRandomHand;
-            AllyList = _gameplayData.allyList;
+            CanUseCards = _gameplayData.CanUseCards;
+            CanSelectCards = _gameplayData.CanSelectCards;
+            IsRandomHand = _gameplayData.IsRandomHand;
+            AllyList = _gameplayData.AllyList;
             CurrentEncounterId = 0;
             CurrentStageId = 0;
             CurrentGold = 0;

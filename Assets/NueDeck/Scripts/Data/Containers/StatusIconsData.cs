@@ -9,16 +9,22 @@ namespace NueDeck.Scripts.Data.Containers
     [CreateAssetMenu(fileName = "Status Icons", menuName = "Data/Containers/StatusIcons", order = 2)]
     public class StatusIconsData : ScriptableObject
     {
-        public StatusIconBase statusIconBasePrefab;
-        public List<StatusIconData> statusIconList;
+        [SerializeField] private StatusIconBase statusIconBasePrefab;
+        [SerializeField] private List<StatusIconData> statusIconList;
+
+        public StatusIconBase StatusIconBasePrefab => statusIconBasePrefab;
+        public List<StatusIconData> StatusIconList => statusIconList;
     }
 
 
     [Serializable]
     public class StatusIconData
     {
-        public StatusType iconStatus;
-        public Sprite iconSprite;
-        public List<SpecialKeywords> specialKeywords;
+        [SerializeField] private StatusType iconStatus;
+        [SerializeField] private Sprite iconSprite;
+        [SerializeField] private List<SpecialKeywords> specialKeywords;
+        public StatusType IconStatus => iconStatus;
+        public Sprite IconSprite => iconSprite;
+        public List<SpecialKeywords> SpecialKeywords => specialKeywords;
     }
 }

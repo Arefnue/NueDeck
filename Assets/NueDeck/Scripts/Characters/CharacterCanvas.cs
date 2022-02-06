@@ -52,11 +52,11 @@ namespace NueDeck.Scripts.Characters
         {
             if (_statusDict[targetStatus] == null)
             {
-                var targetData = statusIconsData.statusIconList.FirstOrDefault(x => x.iconStatus == targetStatus);
+                var targetData = statusIconsData.StatusIconList.FirstOrDefault(x => x.IconStatus == targetStatus);
                 
                 if (targetData == null) return;
                 
-                var clone = Instantiate(statusIconsData.statusIconBasePrefab, statusIconRoot);
+                var clone = Instantiate(statusIconsData.StatusIconBasePrefab, statusIconRoot);
                 clone.SetStatus(targetData);
                 _statusDict[targetStatus] = clone;
             }
@@ -110,7 +110,7 @@ namespace NueDeck.Scripts.Characters
                 if (statusIcon.Value == null) continue;
                
                 var statusData = statusIcon.Value.MyStatusIconData;
-                foreach (var statusDataSpecialKeyword in statusData.specialKeywords)
+                foreach (var statusDataSpecialKeyword in statusData.SpecialKeywords)
                 {
                     if (specialKeywords.Contains(statusDataSpecialKeyword)) continue;
                     specialKeywords.Add(statusDataSpecialKeyword);

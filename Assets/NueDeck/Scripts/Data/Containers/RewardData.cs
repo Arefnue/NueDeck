@@ -11,40 +11,38 @@ namespace NueDeck.Scripts.Data.Containers
     [CreateAssetMenu(fileName = "Reward Container", menuName = "Data/Containers/Reward", order = 4)]
     public class RewardData : ScriptableObject
     {
-        public CardReward cardReward;
-        public GoldReward goldReward;
-        
-
-        public CardData GetRandomCardReward()
-        {
-            return cardReward.rewardCardList.RandomItem();
-        }
-
-        public int GetRandomGoldReward()
-        {
-            return Random.Range(goldReward.minGold, goldReward.maxGold);
-        }
+        [SerializeField] private CardReward cardReward;
+        [SerializeField] private GoldReward goldReward;
+        public CardReward CardReward => cardReward;
+        public GoldReward GoldReward => goldReward;
+        public CardData GetRandomCardReward() => CardReward.RewardCardList.RandomItem();
+        public int GetRandomGoldReward() => Random.Range(GoldReward.MinGold, GoldReward.MaxGold);
+       
     }
 
     [Serializable]
     public class RewardBase
     {
-        public Sprite rewardSprite;
-        [TextArea]
-        public string rewardDescription;
+        [SerializeField] private Sprite rewardSprite;
+        [TextArea] [SerializeField] private string rewardDescription;
+        public Sprite RewardSprite => rewardSprite;
+        public string RewardDescription => rewardDescription;
     }
     
     [Serializable]
     public class CardReward : RewardBase
     {
-        public List<CardData> rewardCardList;
+        [SerializeField] private List<CardData> rewardCardList;
+        public List<CardData> RewardCardList => rewardCardList;
     }
     
     [Serializable]
     public class GoldReward : RewardBase
     {
-        public int minGold;
-        public int maxGold;
+        [SerializeField] private int minGold;
+        [SerializeField] private int maxGold;
+        public int MinGold => minGold;
+        public int MaxGold => maxGold;
     }
     
 }

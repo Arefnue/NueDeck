@@ -39,11 +39,11 @@ namespace NueDeck.Scripts.UI.Reward
             {
                 case RewardType.Gold:
                     var rewardGold = rewardData.GetRandomGoldReward();
-                    rewardClone.BuildReward(rewardData.goldReward.rewardSprite,rewardData.goldReward.rewardDescription);
+                    rewardClone.BuildReward(rewardData.GoldReward.RewardSprite,rewardData.GoldReward.RewardDescription);
                     rewardClone.RewardButton.onClick.AddListener(()=>GetGoldReward(rewardClone,rewardGold));
                     break;
                 case RewardType.Card:
-                    rewardClone.BuildReward(rewardData.cardReward.rewardSprite,rewardData.cardReward.rewardDescription);
+                    rewardClone.BuildReward(rewardData.CardReward.RewardSprite,rewardData.CardReward.RewardDescription);
                     rewardClone.RewardButton.onClick.AddListener(()=>GetCardReward(rewardClone,3));
                     break;
                 case RewardType.Relic:
@@ -83,7 +83,7 @@ namespace NueDeck.Scripts.UI.Reward
         {
             ChoicePanel.gameObject.SetActive(true);
 
-            foreach (var cardData in rewardData.cardReward.rewardCardList)
+            foreach (var cardData in rewardData.CardReward.RewardCardList)
                 _cardRewardList.Add(cardData);
             
             for (int i = 0; i < amount; i++)

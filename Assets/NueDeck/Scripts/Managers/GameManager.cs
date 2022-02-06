@@ -54,7 +54,7 @@ namespace NueDeck.Scripts.Managers
         public void InitGameplayData() => PersistentGameplayData = new PersistentGameplayData(gameplayData);
         public CardObject BuildAndGetCard(CardData targetData, Transform parent)
         {
-            var clone = Instantiate(GameplayData.cardPrefab, parent);
+            var clone = Instantiate(GameplayData.CardPrefab, parent);
             clone.SetCard(targetData);
             return clone;
         }
@@ -63,19 +63,19 @@ namespace NueDeck.Scripts.Managers
             PersistentGameplayData.CurrentCardsList.Clear();
             
             if (PersistentGameplayData.IsRandomHand)
-                for (var i = 0; i < GameplayData.randomCardCount; i++)
-                    PersistentGameplayData.CurrentCardsList.Add(GameplayData.allCardsList.RandomItem());
+                for (var i = 0; i < GameplayData.RandomCardCount; i++)
+                    PersistentGameplayData.CurrentCardsList.Add(GameplayData.AllCardsList.RandomItem());
             else
-                foreach (var cardData in GameplayData.initalDeck.CardList)
+                foreach (var cardData in GameplayData.InitalDeck.CardList)
                     PersistentGameplayData.CurrentCardsList.Add(cardData);
         }
         public void NextEncounter()
         {
             PersistentGameplayData.CurrentEncounterId++;
-            if (PersistentGameplayData.CurrentEncounterId>=EncounterData.enemyEncounterList[PersistentGameplayData.CurrentStageId].enemyEncounterList.Count)
+            if (PersistentGameplayData.CurrentEncounterId>=EncounterData.EnemyEncounterList[PersistentGameplayData.CurrentStageId].EnemyEncounterList.Count)
             {
                 PersistentGameplayData.CurrentEncounterId = Random.Range(0,
-                    EncounterData.enemyEncounterList[PersistentGameplayData.CurrentStageId].enemyEncounterList.Count);
+                    EncounterData.EnemyEncounterList[PersistentGameplayData.CurrentStageId].EnemyEncounterList.Count);
             }
         }
         public void OnExitApp()

@@ -19,7 +19,7 @@ namespace NueDeck.Scripts.UI
         public void SetStatus(StatusIconData statusIconData)
         {
             MyStatusIconData = statusIconData;
-            StatusImage.sprite = statusIconData.iconSprite;
+            StatusImage.sprite = statusIconData.IconSprite;
             
         }
 

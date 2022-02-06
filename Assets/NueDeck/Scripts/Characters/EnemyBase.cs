@@ -73,7 +73,7 @@ namespace NueDeck.Scripts.Characters
         private void ShowNextAbility()
         {
             NextAbility = EnemyCharacterData.EnemyAbilityList.RandomItem();
-            EnemyCanvas.IntentImage.sprite = NextAbility.Intention.intentionSprite;
+            EnemyCanvas.IntentImage.sprite = NextAbility.Intention.IntentionSprite;
             
             if (NextAbility.HideActionValue)
             {
@@ -93,7 +93,7 @@ namespace NueDeck.Scripts.Characters
         public virtual IEnumerator ActionRoutine()
         {
             EnemyCanvas.IntentImage.gameObject.SetActive(false);
-            if (NextAbility.Intention.enemyIntention == EnemyIntentions.Attack || NextAbility.Intention.enemyIntention == EnemyIntentions.Debuff)
+            if (NextAbility.Intention.EnemyIntention == EnemyIntentions.Attack || NextAbility.Intention.EnemyIntention == EnemyIntentions.Debuff)
             {
                 yield return StartCoroutine(AttackRoutine(NextAbility));
             }

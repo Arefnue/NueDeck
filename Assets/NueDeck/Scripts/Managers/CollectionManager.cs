@@ -44,7 +44,7 @@ namespace NueDeck.Scripts.Managers
 
             for (var i = 0; i < targetDrawCount; i++)
             {
-                if (GameManager.Instance.GameplayData.maxCardOnHand<=HandPile.Count)
+                if (GameManager.Instance.GameplayData.MaxCardOnHand<=HandPile.Count)
                     return;
                 
                 if (DrawPile.Count <= 0)

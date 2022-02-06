@@ -166,7 +166,7 @@ namespace NueDeck.Scripts.Managers
         #region Private Methods
         private void BuildEnemies()
         {
-            var encounter = GameManager.Instance.EncounterData.GetEnemyEncounter(GameManager.Instance.PersistentGameplayData.CurrentStageId,GameManager.Instance.PersistentGameplayData.CurrentEncounterId,GameManager.Instance.PersistentGameplayData.IsFinalEncounter).enemyList;
+            var encounter = GameManager.Instance.EncounterData.GetEnemyEncounter(GameManager.Instance.PersistentGameplayData.CurrentStageId,GameManager.Instance.PersistentGameplayData.CurrentEncounterId,GameManager.Instance.PersistentGameplayData.IsFinalEncounter).EnemyList;
             for (var i = 0; i < encounter.Count; i++)
             {
                 var clone = Instantiate(encounter[i], EnemyPosList.Count >= i ? EnemyPosList[i] : EnemyPosList[0]);
