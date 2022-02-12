@@ -254,7 +254,7 @@ namespace NueDeck.Scripts.Collection
                     Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
                 cardTransform.position = cardPos;
 
-                CombatManager.Instance.HighlightCardTarget(_heldCard.CardData.MyTarget);
+                CombatManager.Instance.HighlightCardTarget(_heldCard.CardData.CardActionDataList[0].MyTarget);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
                 if (!GameManager.Instance.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
@@ -296,13 +296,15 @@ namespace NueDeck.Scripts.Collection
                     
                     if (character != null)
                     {
-                        if ((_heldCard.CardData.MyTarget == ActionTarget.Enemy &&
-                             character.GetCharacterType() == CharacterType.Enemy) ||
-                            (_heldCard.CardData.MyTarget == ActionTarget.Ally &&
-                             character.GetCharacterType() == CharacterType.Ally))
+                        var checkEnemy = (_heldCard.CardData.CardActionDataList[0].MyTarget == ActionTarget.Enemy &&
+                                          character.GetCharacterType() == CharacterType.Enemy);
+                        var checkAlly = (_heldCard.CardData.CardActionDataList[0].MyTarget == ActionTarget.Ally &&
+                                         character.GetCharacterType() == CharacterType.Ally);
+                        
+                        if (checkEnemy || checkAlly)
                         {
                             backToHand = false;
-                            _heldCard.Use(CombatManager.Instance.CurrentAlliesList[0],character.GetCharacterBase());
+                            _heldCard.Use(CombatManager.Instance.CurrentMainAlly,character.GetCharacterBase());
                         }
                     }
                 }
@@ -311,7 +313,7 @@ namespace NueDeck.Scripts.Collection
                     if (_heldCard.CardData.UsableWithoutTarget)
                     {
                         backToHand = false;
-                        _heldCard.Use(CombatManager.Instance.CurrentAlliesList[0],null);
+                        _heldCard.Use(CombatManager.Instance.CurrentMainAlly,null);
                     }
                 }
                 

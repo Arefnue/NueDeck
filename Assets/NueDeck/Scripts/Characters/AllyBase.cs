@@ -29,15 +29,17 @@ namespace NueDeck.Scripts.Characters
             if (!GameManager.Instance)
                 throw new Exception("There is no GameManager");
             
-            if (GameManager.Instance.PersistentGameplayData.PlayerCurrentHealth != -1)
+            var data = GameManager.Instance.PersistentGameplayData.AllyHealthDataList.Find(x =>
+                x.CharacterId == AllyCharacterData.CharacterID);
+            
+            if (data != null)
             {
-                CharacterStats.CurrentHealth = GameManager.Instance.PersistentGameplayData.PlayerCurrentHealth;
-                CharacterStats.MaxHealth = GameManager.Instance.PersistentGameplayData.PlayerMaxHealth;
+                CharacterStats.CurrentHealth = data.CurrentHealth;
+                CharacterStats.MaxHealth = data.MaxHealth;
             }
             else
             {
-                GameManager.Instance.PersistentGameplayData.SetPlayerCurrentHealth(CharacterStats.CurrentHealth); 
-                GameManager.Instance.PersistentGameplayData.SetPlayerMaxHealth(CharacterStats.MaxHealth);
+                GameManager.Instance.PersistentGameplayData.SetAllyHealthData(AllyCharacterData.CharacterID,CharacterStats.CurrentHealth,CharacterStats.MaxHealth);
             }
             
             CharacterStats.OnDeath += OnDeath;
@@ -57,6 +59,32 @@ namespace NueDeck.Scripts.Characters
             }
 
             Destroy(gameObject);
+        }
+    }
+
+    [Serializable]
+    public class AllyHealthData
+    {
+        [SerializeField] private string characterId;
+        [SerializeField] private int maxHealth;
+        [SerializeField] private int currentHealth;
+        
+        public int MaxHealth
+        {
+            get => maxHealth;
+            set => maxHealth = value;
+        }
+
+        public int CurrentHealth
+        {
+            get => currentHealth;
+            set => currentHealth = value;
+        }
+
+        public string CharacterId
+        {
+            get => characterId;
+            set => characterId = value;
         }
     }
 }

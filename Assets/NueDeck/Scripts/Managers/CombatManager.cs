@@ -27,6 +27,8 @@ namespace NueDeck.Scripts.Managers
         public List<Transform> EnemyPosList => enemyPosList;
 
         public List<Transform> AllyPosList => allyPosList;
+
+        public AllyBase CurrentMainAlly => CurrentAlliesList.Count>0 ? CurrentAlliesList[0] : null;
         
         public CombatState CurrentCombatState
         {
@@ -118,7 +120,12 @@ namespace NueDeck.Scripts.Managers
         }
         public void OnAllyDeath(AllyBase targetAlly)
         {
+            var targetAllyData = GameManager.Instance.PersistentGameplayData.AllyList.Find(x =>
+                x.AllyCharacterData.CharacterID == targetAlly.AllyCharacterData.CharacterID);
+            if (GameManager.Instance.PersistentGameplayData.AllyList.Count>1)
+                GameManager.Instance.PersistentGameplayData.AllyList.Remove(targetAllyData);
             CurrentAlliesList.Remove(targetAlly);
+            UIManager.Instance.InformationCanvas.ResetCanvas();
             if (CurrentAlliesList.Count<=0)
                 LoseCombat();
         }
@@ -197,10 +204,12 @@ namespace NueDeck.Scripts.Managers
         private void WinCombat()
         {
             CurrentCombatState = CombatState.EndCombat;
-
-            GameManager.Instance.PersistentGameplayData.SetPlayerCurrentHealth(CurrentAlliesList[0].CharacterStats.CurrentHealth);
-            GameManager.Instance.PersistentGameplayData.SetPlayerMaxHealth(CurrentAlliesList[0].CharacterStats.MaxHealth);
             
+            foreach (var allyBase in CurrentAlliesList)
+            {
+                GameManager.Instance.PersistentGameplayData.SetAllyHealthData(allyBase.AllyCharacterData.CharacterID,
+                    allyBase.CharacterStats.CurrentHealth, allyBase.CharacterStats.MaxHealth);
+            }
             CollectionManager.Instance.DiscardPile.Clear();
             CollectionManager.Instance.DrawPile.Clear();
             CollectionManager.Instance.HandPile.Clear();

@@ -18,7 +18,7 @@ namespace NueDeck.Scripts.Data.Collection
         [SerializeField] private Sprite cardSprite;
         
         [Header("Action Settings")]
-        [SerializeField] private ActionTarget actionTarget;
+      
         [SerializeField] private bool usableWithoutTarget;
         [SerializeField] private List<CardActionData> cardActionDataList;
         
@@ -34,7 +34,7 @@ namespace NueDeck.Scripts.Data.Collection
         public bool UsableWithoutTarget => usableWithoutTarget;
         public int ManaCost => manaCost;
         public string CardName => cardName;
-        public ActionTarget MyTarget => actionTarget;
+       
         public Sprite CardSprite => cardSprite;
         public List<CardActionData> CardActionDataList => cardActionDataList;
         public List<CardDescriptionData> CardDescriptionDataList => cardDescriptionDataList;
@@ -62,6 +62,8 @@ namespace NueDeck.Scripts.Data.Collection
     {
         [SerializeField] private CardActionType myPlayerActionType;
         [SerializeField] private float value;
+        [SerializeField] private ActionTarget actionTarget;
+        public ActionTarget MyTarget => actionTarget;
         public CardActionType MyPlayerActionType => myPlayerActionType;
         public float Value => value;
     }
@@ -101,7 +103,7 @@ namespace NueDeck.Scripts.Data.Collection
                 var value = defaultValue;
                 if (useModifer)
                 {
-                    var player = CombatManager.Instance.CurrentAlliesList[0];
+                    var player = CombatManager.Instance.CurrentMainAlly;
                     if (player)
                     {
                         var modifer =player.CharacterStats.StatusDict[modiferStatus].StatusValue;

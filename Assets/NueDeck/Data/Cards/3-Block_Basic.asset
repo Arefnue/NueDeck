@@ -16,11 +16,11 @@ MonoBehaviour:
   cardName: Basic block
   manaCost: 1
   cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  actionTarget: 1
   usableWithoutTarget: 1
   cardActionDataList:
   - myPlayerActionType: 2
     value: 5
+    actionTarget: 1
   cardDescriptionDataList:
   - useText: 1
     useTextColor: 0

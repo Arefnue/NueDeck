@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Data.Collection;
-using NueDeck.Scripts.Managers;
-using NueDeck.Scripts.UI;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Data.Settings
@@ -11,6 +9,65 @@ namespace NueDeck.Scripts.Data.Settings
     [Serializable]
     public class PersistentGameplayData
     {
+        private readonly GameplayData _gameplayData;
+        
+        [SerializeField] private int currentGold;
+        [SerializeField] private int drawCount;
+        [SerializeField] private int maxMana;
+        [SerializeField] private int currentMana;
+        [SerializeField] private bool canUseCards;
+        [SerializeField] private bool canSelectCards;
+        [SerializeField] private bool isRandomHand;
+        [SerializeField] private List<AllyBase> allyList;
+        [SerializeField] private int currentStageId;
+        [SerializeField] private int currentEncounterId;
+        [SerializeField] private bool isFinalEncounter;
+        [SerializeField] private List<CardData> currentCardsList;
+        [SerializeField] private List<AllyHealthData> allyHealthDataDataList;
+
+        public PersistentGameplayData(GameplayData gameplayData)
+        {
+            _gameplayData = gameplayData;
+
+            InitData();
+        }
+        
+        public void SetAllyHealthData(string id,int newCurrentHealth, int newMaxHealth)
+        {
+            var data = allyHealthDataDataList.Find(x => x.CharacterId == id);
+            var newData = new AllyHealthData();
+            newData.CharacterId = id;
+            newData.CurrentHealth = newCurrentHealth;
+            newData.MaxHealth = newMaxHealth;
+            if (data != null)
+            {
+                allyHealthDataDataList.Remove(data);
+                allyHealthDataDataList.Add(newData);
+            }
+            else
+            {
+                allyHealthDataDataList.Add(newData);
+            }
+        } 
+        private void InitData()
+        {
+            DrawCount = _gameplayData.DrawCount;
+            MaxMana = _gameplayData.MaxMana;
+            CurrentMana = MaxMana;
+            CanUseCards = _gameplayData.CanUseCards;
+            CanSelectCards = _gameplayData.CanSelectCards;
+            IsRandomHand = _gameplayData.IsRandomHand;
+            AllyList = new List<AllyBase>(_gameplayData.AllyList);
+            CurrentEncounterId = 0;
+            CurrentStageId = 0;
+            CurrentGold = 0;
+            CurrentCardsList = new List<CardData>();
+            IsFinalEncounter = false;
+            allyHealthDataDataList = new List<AllyHealthData>();
+        }
+
+        #region Encapsulation
+
         public int DrawCount
         {
             get => drawCount;
@@ -77,74 +134,17 @@ namespace NueDeck.Scripts.Data.Settings
             set => currentCardsList = value;
         }
 
-        public int PlayerCurrentHealth
+        public List<AllyHealthData> AllyHealthDataList
         {
-            get => playerCurrentHealth;
-            set => playerCurrentHealth = value;
+            get => allyHealthDataDataList;
+            set => allyHealthDataDataList = value;
         }
-
-        public int PlayerMaxHealth
-        {
-            get => playerMaxHealth;
-            set => playerMaxHealth = value;
-        }
-
         public int CurrentGold
         {
-            get
-            {
-                return currentGold;
-            }
-            set
-            {
-                currentGold = value;
-            }
+            get => currentGold;
+            set => currentGold = value;
         }
-
-
-        public void SetPlayerCurrentHealth(int newValue) => playerCurrentHealth = newValue;
-        public void SetPlayerMaxHealth(int newValue) => playerMaxHealth = newValue;
         
-        private readonly GameplayData _gameplayData;
-        
-        [SerializeField] private int currentGold;
-        [SerializeField] private int drawCount;
-        [SerializeField] private int maxMana;
-        [SerializeField] private int currentMana;
-        [SerializeField] private bool canUseCards;
-        [SerializeField] private bool canSelectCards;
-        [SerializeField] private bool isRandomHand;
-        [SerializeField] private List<AllyBase> allyList;
-        [SerializeField] private int currentStageId;
-        [SerializeField] private int currentEncounterId;
-        [SerializeField] private bool isFinalEncounter;
-        [SerializeField] private List<CardData> currentCardsList;
-        [SerializeField] private int playerCurrentHealth;
-        [SerializeField] private int playerMaxHealth;
-
-        public PersistentGameplayData(GameplayData gameplayData)
-        {
-            _gameplayData = gameplayData;
-
-            InitData();
-        }
-
-        private void InitData()
-        {
-            DrawCount = _gameplayData.DrawCount;
-            MaxMana = _gameplayData.MaxMana;
-            CurrentMana = MaxMana;
-            CanUseCards = _gameplayData.CanUseCards;
-            CanSelectCards = _gameplayData.CanSelectCards;
-            IsRandomHand = _gameplayData.IsRandomHand;
-            AllyList = _gameplayData.AllyList;
-            CurrentEncounterId = 0;
-            CurrentStageId = 0;
-            CurrentGold = 0;
-            CurrentCardsList = new List<CardData>();
-            IsFinalEncounter = false;
-            PlayerCurrentHealth = -1;
-            PlayerMaxHealth = -1;
-        }
+        #endregion
     }
 }
