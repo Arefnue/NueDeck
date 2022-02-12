@@ -297,18 +297,14 @@ namespace NueDeck.Scripts.Collection
                     if (character != null)
                     {
                         if ((_heldCard.CardData.MyTarget == ActionTarget.Enemy &&
-                             character.GetCharacterBase()
-                                 .GetComponent<EnemyBase>()) ||
+                             character.GetCharacterType() == CharacterType.Enemy) ||
                             (_heldCard.CardData.MyTarget == ActionTarget.Ally &&
-                             character.GetCharacterBase()
-                                 .GetComponent<AllyBase>()))
+                             character.GetCharacterType() == CharacterType.Ally))
                         {
                             backToHand = false;
                             _heldCard.Use(CombatManager.Instance.CurrentAlliesList[0],character.GetCharacterBase());
                         }
-                        
                     }
-                    
                 }
                 else
                 {

@@ -1,4 +1,5 @@
 ﻿using NueDeck.Scripts.Characters;
+using NueDeck.Scripts.Enums;
 
 namespace NueDeck.Scripts.Interfaces
 {
@@ -9,6 +10,7 @@ namespace NueDeck.Scripts.Interfaces
         public void OnCardPlayedOnMe();
 
         public CharacterBase GetCharacterBase();
-        
+        public CharacterType GetCharacterType();
+
     }
 }

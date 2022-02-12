@@ -48,27 +48,6 @@ namespace NueDeck.Scripts.Characters
         }
         #endregion
         
-        #region Public Methods
-
-        public void OnCardTargetHighlight()
-        {
-            
-        }
-
-        public void OnCardOverHighlight()
-        {
-            
-        }
-
-        public void OnCardPlayedOnMe()
-        {
-            
-        }
-
-        public CharacterBase GetCharacterBase() => this;
-        
-        #endregion
-        
         #region Private Methods
         private void ShowNextAbility()
         {

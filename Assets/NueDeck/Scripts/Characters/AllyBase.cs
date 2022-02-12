@@ -58,23 +58,5 @@ namespace NueDeck.Scripts.Characters
 
             Destroy(gameObject);
         }
-
-        public void OnCardTargetHighlight()
-        {
-            
-        }
-
-        public void OnCardOverHighlight()
-        {
-            
-        }
-
-        public void OnCardPlayedOnMe()
-        {
-            
-        }
-
-        public CharacterBase GetCharacterBase() => this;
-
     }
 }
