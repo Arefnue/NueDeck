@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
   m_Name: 1-Attack_Basic
   m_EditorClassIdentifier: 
-  id: 1_attack_basic
-  cardName: 'Basic '
+  id: 1_attack_basics
+  cardName: Basica asda
   manaCost: 1
   cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   usableWithoutTarget: 0

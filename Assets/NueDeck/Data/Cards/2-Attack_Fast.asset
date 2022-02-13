@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
   m_Name: 2-Attack_Fast
   m_EditorClassIdentifier: 
-  id: 2_attack
+  id: 2_attack_aa
   cardName: Fast attack
   manaCost: 0
   cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
