@@ -18,7 +18,6 @@ namespace NueDeck.Scripts.Data.Collection
         [SerializeField] private Sprite cardSprite;
         
         [Header("Action Settings")]
-      
         [SerializeField] private bool usableWithoutTarget;
         [SerializeField] private List<CardActionData> cardActionDataList;
         
@@ -55,6 +54,25 @@ namespace NueDeck.Scripts.Data.Collection
             MyDescription = str.ToString();
         }
         #endregion
+
+        #region Editor Methods
+#if UNITY_EDITOR
+        public void EditCardName(string newName) => cardName = newName;
+        public void EditId(string newId) => id = newId;
+        public void EditManaCost(int newCost) => manaCost = newCost;
+        public void EditCardSprite(Sprite newSprite) => cardSprite = newSprite;
+        public void EditUsableWithoutTarget(bool newStatus) => usableWithoutTarget = newStatus;
+        public void EditCardActionDataList(List<CardActionData> newCardActionDataList) =>
+            cardActionDataList = newCardActionDataList;
+        public void EditCardDescriptionDataList(List<CardDescriptionData> newCardDescriptionDataList) =>
+            cardDescriptionDataList = newCardDescriptionDataList;
+        public void EditSpecialKeywordsList(List<SpecialKeywords> newSpecialKeywordsList) =>
+            specialKeywordsList = newSpecialKeywordsList;
+        public void EditAudioType(AudioActionType newAudioActionType) => audioType = newAudioActionType;
+#endif
+
+        #endregion
+
     }
 
     [Serializable]
