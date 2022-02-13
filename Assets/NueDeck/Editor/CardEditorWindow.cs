@@ -150,6 +150,7 @@ namespace NueDeck.Editor
             ChangeCardName();
             ChangeManaCost();
             ChangeCardSprite();
+            ChangeUsableWithoutTarget();
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndHorizontal();
             
@@ -190,6 +191,11 @@ namespace NueDeck.Editor
             CardSprite = (Sprite)EditorGUILayout.ObjectField("Card Sprite:", CardSprite,typeof(Sprite));
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
+        }
+
+        private void ChangeUsableWithoutTarget()
+        {
+            UsableWithoutTarget = EditorGUILayout.Toggle("Usable Without Target:", UsableWithoutTarget);
         }
         
         private void SaveCardData()
