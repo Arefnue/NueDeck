@@ -15,7 +15,8 @@ namespace NueDeck.Editor
     {
         private static CardEditorWindow CurrentWindow { get; set; }
         private SerializedObject _serializedObject;
-        
+        private Vector2 _scrollPos;
+       
         #region Cache Card Data
         private static CardData CachedCardData { get; set; }
         private List<CardData> AllCardDataList { get; set; }
@@ -69,6 +70,10 @@ namespace NueDeck.Editor
         
         private void OnEnable()
         {
+            
+            AllCardDataList?.Clear();
+            AllCardDataList = ListExtentions.GetAllInstances<CardData>().ToList();
+            
             if (CachedCardData)
             {
                 SelectedCardData = CachedCardData;
@@ -76,9 +81,6 @@ namespace NueDeck.Editor
                 CacheCardData();
             }
             
-            AllCardDataList?.Clear();
-            AllCardDataList = ListExtentions.GetAllInstances<CardData>().ToList();
-
             Selection.selectionChanged += Repaint;
         }
 
@@ -107,8 +109,21 @@ namespace NueDeck.Editor
         #region Layout Methods
         private void DrawAllCardButtons()
         {
+            _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, GUILayout.Width(150), GUILayout.ExpandHeight(true));
             EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
             
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Cards",EditorStyles.boldLabel);
+            
+            var oldColor = GUI.backgroundColor;
+            GUI.backgroundColor = Color.blue;
+            if (GUILayout.Button("Refresh",GUILayout.Width(75),GUILayout.Height(20)))
+                RefreshCardData();
+            GUI.backgroundColor = oldColor;
+            
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Separator();
+
             foreach (var data in AllCardDataList)
                 if (GUILayout.Button(data.CardName))
                 {
@@ -118,27 +133,37 @@ namespace NueDeck.Editor
                 }
             
             EditorGUILayout.EndVertical();
+            EditorGUILayout.EndScrollView();
         }
         private void DrawSelectedCard()
         {
             EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
             if (!SelectedCardData)
             {
-                EditorGUILayout.LabelField("Select item");
+                EditorGUILayout.LabelField("Select card");
                 return;
             }
             GUILayout.Space(10);
-            GUILayout.BeginHorizontal();
-            GUILayout.BeginVertical();
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.BeginVertical();
             ChangeId();
             ChangeCardName();
             ChangeManaCost();
-            GUILayout.EndVertical();
-            GUILayout.EndHorizontal();
+            ChangeCardSprite();
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndHorizontal();
             
-            if (GUILayout.Button("Save",EditorStyles.miniButton))
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            
+            var oldColor = GUI.backgroundColor;
+            GUI.backgroundColor = Color.green;
+            if (GUILayout.Button("Save",GUILayout.Width(100),GUILayout.Height(30)))
                 SaveCardData();
             
+            GUI.backgroundColor = oldColor;
+            EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndVertical();
         }
         
@@ -147,28 +172,24 @@ namespace NueDeck.Editor
         #region Card Data Methods
         private void ChangeId()
         {
-            GUILayout.BeginHorizontal();
-            CardId = CardName = EditorGUILayout.TextField("Card Id:", CardName);
-            GUILayout.EndHorizontal();
+            CardId = EditorGUILayout.TextField("Card Id:", CardId);
         }
         private void ChangeCardName()
         {
-            GUILayout.BeginHorizontal();
             CardName = EditorGUILayout.TextField("Card Name:", CardName);
-            GUILayout.EndHorizontal();
         }
         
         private void ChangeManaCost()
         {
-            GUILayout.BeginHorizontal();
             ManaCost = EditorGUILayout.IntField("Mana Cost:", ManaCost);
-            GUILayout.EndHorizontal();
         }
 
         private void ChangeCardSprite()
         {
-            GUILayout.BeginHorizontal();
-            GUILayout.EndHorizontal();
+            EditorGUILayout.BeginHorizontal();
+            CardSprite = (Sprite)EditorGUILayout.ObjectField("Card Sprite:", CardSprite,typeof(Sprite));
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.EndHorizontal();
         }
         
         private void SaveCardData()
@@ -178,11 +199,16 @@ namespace NueDeck.Editor
             SelectedCardData.EditId(CardId);
             SelectedCardData.EditCardName(CardName);
             SelectedCardData.EditManaCost(ManaCost);
-            
+            SelectedCardData.EditCardSprite(CardSprite);
             EditorUtility.SetDirty(SelectedCardData);
             AssetDatabase.SaveAssets();
         }
 
+        private void RefreshCardData()
+        {
+            AllCardDataList?.Clear();
+            AllCardDataList = ListExtentions.GetAllInstances<CardData>().ToList();
+        }
       
         #endregion
     }
