@@ -76,8 +76,8 @@ namespace NueDeck.Scripts.Card
             SpendMana(CardData.ManaCost);
             
             foreach (var playerAction in CardData.CardActionDataList)
-                CardActionProcessor.GetAction(playerAction.MyPlayerActionType)
-                    .DoAction(new CardActionParameters(playerAction.Value,
+                CardActionProcessor.GetAction(playerAction.CardActionType)
+                    .DoAction(new CardActionParameters(playerAction.ActionValue,
                         target,self,CardData));
             
             CollectionManager.Instance.OnCardPlayed(this);

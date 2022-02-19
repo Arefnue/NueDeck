@@ -15,7 +15,7 @@ namespace NueDeck.Editor
     {
         private static CardEditorWindow CurrentWindow { get; set; }
         private SerializedObject _serializedObject;
-        private Vector2 _scrollPos;
+       
        
         #region Cache Card Data
         private static CardData CachedCardData { get; set; }
@@ -100,6 +100,7 @@ namespace NueDeck.Editor
             EditorGUILayout.BeginHorizontal();
             
             DrawAllCardButtons();
+            EditorGUILayout.Space();
             DrawSelectedCard();
             
             EditorGUILayout.EndHorizontal();
@@ -107,9 +108,10 @@ namespace NueDeck.Editor
         #endregion
         
         #region Layout Methods
+        private Vector2 _allCardButtonsScrollPos;
         private void DrawAllCardButtons()
         {
-            _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, GUILayout.Width(150), GUILayout.ExpandHeight(true));
+            _allCardButtonsScrollPos = EditorGUILayout.BeginScrollView(_allCardButtonsScrollPos, GUILayout.MinWidth(150), GUILayout.ExpandHeight(true));
             EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
             
             EditorGUILayout.BeginHorizontal();
@@ -125,13 +127,12 @@ namespace NueDeck.Editor
             EditorGUILayout.Separator();
 
             foreach (var data in AllCardDataList)
-                if (GUILayout.Button(data.CardName))
+                if (GUILayout.Button(data.CardName,GUILayout.MaxWidth(150)))
                 {
                     SelectedCardData = data;
                     _serializedObject = new SerializedObject(SelectedCardData);
                     CacheCardData();
                 }
-            
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
         }
@@ -151,6 +152,7 @@ namespace NueDeck.Editor
             ChangeManaCost();
             ChangeCardSprite();
             ChangeUsableWithoutTarget();
+            ChangeCardActionDataList();
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndHorizontal();
             
@@ -196,6 +198,47 @@ namespace NueDeck.Editor
         private void ChangeUsableWithoutTarget()
         {
             UsableWithoutTarget = EditorGUILayout.Toggle("Usable Without Target:", UsableWithoutTarget);
+        }
+
+        private bool _isCardActionDataListFolded;
+        private Vector2 _cardActionScrollPos;
+        private void ChangeCardActionDataList()
+        {
+            _isCardActionDataListFolded =EditorGUILayout.BeginFoldoutHeaderGroup(_isCardActionDataListFolded, "Card Actions");
+            if (_isCardActionDataListFolded)
+            {
+                _cardActionScrollPos = EditorGUILayout.BeginScrollView(_cardActionScrollPos,GUILayout.ExpandWidth(true));
+                EditorGUILayout.BeginHorizontal();
+                List<CardActionData> _removedList = new List<CardActionData>();
+                foreach (var cardActionData in CardActionDataList)
+                {
+                    EditorGUILayout.BeginVertical("box", GUILayout.Width(150), GUILayout.MaxHeight(50));
+                    EditorGUILayout.BeginHorizontal();
+                    var newActionType = (CardActionType)EditorGUILayout.EnumFlagsField(cardActionData.CardActionType);
+                    var newActionTarget = (ActionTarget)EditorGUILayout.EnumFlagsField(cardActionData.ActionTarget);
+                    if (GUILayout.Button("X",GUILayout.MaxWidth(25),GUILayout.MaxHeight(25)))
+                        _removedList.Add(cardActionData);
+                    
+                    EditorGUILayout.EndHorizontal();
+                    var newActionValue = EditorGUILayout.FloatField(cardActionData.ActionValue);
+                    cardActionData.EditActionType(newActionType);
+                    cardActionData.EditActionValue(newActionValue);
+                    cardActionData.EditActionTarget(newActionTarget);
+                    EditorGUILayout.EndVertical();
+                }
+
+                foreach (var cardActionData in _removedList)
+                    CardActionDataList.Remove(cardActionData);
+
+                if (GUILayout.Button("+",GUILayout.Width(50),GUILayout.Height(50)))
+                {
+                   CardActionDataList.Add(new CardActionData());
+                }
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.EndScrollView();
+            }
+            
+            EditorGUILayout.EndFoldoutHeaderGroup();
         }
         
         private void SaveCardData()

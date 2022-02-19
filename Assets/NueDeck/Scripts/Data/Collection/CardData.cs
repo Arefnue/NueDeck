@@ -78,12 +78,24 @@ namespace NueDeck.Scripts.Data.Collection
     [Serializable]
     public class CardActionData
     {
-        [SerializeField] private CardActionType myPlayerActionType;
-        [SerializeField] private float value;
+        [SerializeField] private CardActionType cardActionType;
+        [SerializeField] private float actionValue;
         [SerializeField] private ActionTarget actionTarget;
-        public ActionTarget MyTarget => actionTarget;
-        public CardActionType MyPlayerActionType => myPlayerActionType;
-        public float Value => value;
+        public ActionTarget ActionTarget => actionTarget;
+        public CardActionType CardActionType => cardActionType;
+        public float ActionValue => actionValue;
+
+        #region Editor
+
+#if UNITY_EDITOR
+        public void EditActionType(CardActionType newType) =>  cardActionType = newType;
+        public void EditActionValue(float newValue) => actionValue = newValue;
+        public void EditActionTarget(ActionTarget newTarget) => actionTarget = newTarget;
+
+#endif
+
+
+        #endregion
     }
 
     [Serializable]

@@ -254,7 +254,7 @@ namespace NueDeck.Scripts.Collection
                     Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
                 cardTransform.position = cardPos;
 
-                CombatManager.Instance.HighlightCardTarget(_heldCard.CardData.CardActionDataList[0].MyTarget);
+                CombatManager.Instance.HighlightCardTarget(_heldCard.CardData.CardActionDataList[0].ActionTarget);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
                 if (!GameManager.Instance.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
@@ -296,9 +296,9 @@ namespace NueDeck.Scripts.Collection
                     
                     if (character != null)
                     {
-                        var checkEnemy = (_heldCard.CardData.CardActionDataList[0].MyTarget == ActionTarget.Enemy &&
+                        var checkEnemy = (_heldCard.CardData.CardActionDataList[0].ActionTarget == ActionTarget.Enemy &&
                                           character.GetCharacterType() == CharacterType.Enemy);
-                        var checkAlly = (_heldCard.CardData.CardActionDataList[0].MyTarget == ActionTarget.Ally &&
+                        var checkAlly = (_heldCard.CardData.CardActionDataList[0].ActionTarget == ActionTarget.Ally &&
                                          character.GetCharacterType() == CharacterType.Ally);
                         
                         if (checkEnemy || checkAlly)
