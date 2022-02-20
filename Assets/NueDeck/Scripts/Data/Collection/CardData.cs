@@ -33,7 +33,6 @@ namespace NueDeck.Scripts.Data.Collection
         public bool UsableWithoutTarget => usableWithoutTarget;
         public int ManaCost => manaCost;
         public string CardName => cardName;
-       
         public Sprite CardSprite => cardSprite;
         public List<CardActionData> CardActionDataList => cardActionDataList;
         public List<CardDescriptionData> CardDescriptionDataList => cardDescriptionDataList;
@@ -47,9 +46,13 @@ namespace NueDeck.Scripts.Data.Collection
         public void UpdateDescription()
         {
             var str = new StringBuilder();
-            
+
             foreach (var descriptionData in cardDescriptionDataList)
-                str.Append(descriptionData.GetDescription());
+            {
+                str.Append(descriptionData.UseModifier
+                    ? descriptionData.GetModifiedValue(this)
+                    : descriptionData.GetDescription());
+            }
             
             MyDescription = str.ToString();
         }
@@ -102,56 +105,77 @@ namespace NueDeck.Scripts.Data.Collection
     public class CardDescriptionData
     {
         [Header("Text")]
-        [SerializeField] private bool useText = true;
-        [SerializeField] private bool useTextColor;
-        [SerializeField] private Color textColor = Color.black;
-        [SerializeField] private string defaultText;
-        
-        [Header("Value")]
-        [SerializeField] private bool useValue = true;
-        [SerializeField] private bool useValueColor;
-        [SerializeField] private Color valueColor = Color.black;
-        [SerializeField] private int defaultValue;
-        
+        [SerializeField] private string descriptionText;
+        [SerializeField] private bool enableOverrideColor;
+        [SerializeField] private Color overrideColor = Color.black;
+       
         [Header("Modifer")]
-        [SerializeField] private bool useModifer;
-        [SerializeField] private StatusType modiferStatus;
+        [SerializeField] private bool useModifier;
+        [SerializeField] private int modifiedActionValueIndex;
+        [SerializeField] private StatusType modiferStats;
+        
+        public string DescriptionText => descriptionText;
+        public bool EnableOverrideColor => enableOverrideColor;
+        public Color OverrideColor => overrideColor;
+        public bool UseModifier => useModifier;
+        public int ModifiedActionValueIndex => modifiedActionValueIndex;
+        public StatusType ModiferStats => modiferStats;
         
         public string GetDescription()
         {
             var str = new StringBuilder();
-
-            if (useText)
-            {
-                str.Append(defaultText);
-                if (useTextColor) 
-                    str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),textColor));
-            }
             
-            if (useValue)
-            {
-                var value = defaultValue;
-                if (useModifer)
-                {
-                    var player = CombatManager.Instance.CurrentMainAlly;
-                    if (player)
-                    {
-                        var modifer =player.CharacterStats.StatusDict[modiferStatus].StatusValue;
-                        value += modifer;
-                        
-                        if (modifer!= 0)
-                            str.Append("*");
-                    }
-                    
-                }
-                str.Append(value);
-                if (useValueColor)  
-                    str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),valueColor));
-            }
+            str.Append(DescriptionText);
+            
+            if (EnableOverrideColor && !string.IsNullOrEmpty(str.ToString())) 
+                str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),OverrideColor));
             
             return str.ToString();
         }
-        
-     
+
+        public string GetModifiedValue(CardData cardData)
+        {
+            if (cardData.CardActionDataList.Count <= 0) return "";
+            
+            if (ModifiedActionValueIndex>=cardData.CardActionDataList.Count)
+                modifiedActionValueIndex = cardData.CardActionDataList.Count - 1;
+
+            if (ModifiedActionValueIndex<0)
+                modifiedActionValueIndex = 0;
+            
+            var str = new StringBuilder();
+            var value = cardData.CardActionDataList[ModifiedActionValueIndex].ActionValue;
+            if (CombatManager.Instance)
+            {
+                var player = CombatManager.Instance.CurrentMainAlly;
+                if (player)
+                {
+                    var modifer =player.CharacterStats.StatusDict[ModiferStats].StatusValue;
+                    value += modifer;
+                
+                    if (modifer!= 0)
+                        str.Append("*");
+                }
+            }
+           
+            str.Append(value);
+            
+            if (EnableOverrideColor) 
+                str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),OverrideColor));
+            
+            return str.ToString();
+        }
+
+        #region Editor
+#if UNITY_EDITOR
+        public void EditDescriptionText(string newText) => descriptionText = newText;
+        public void EditEnableOverrideColor(bool newStatus) => enableOverrideColor = newStatus;
+        public void EditOverrideColor(Color newColor) => overrideColor = newColor;
+        public void EditUseModifier(bool newStatus) => useModifier = newStatus;
+        public void EditModifiedActionValueIndex(int newIndex) => modifiedActionValueIndex = newIndex;
+        public void EditModiferStats(StatusType newStatusType) => modiferStats = newStatusType;
+
+#endif
+        #endregion
     }
 }
