@@ -314,11 +314,17 @@ namespace NueDeck.Editor
                 foreach (var cardDescriptionData in CardDescriptionDataList)
                 {
                     str.Append(cardDescriptionData.UseModifier
-                        ? cardDescriptionData.GetModifiedValue(SelectedCardData)
-                        : cardDescriptionData.GetDescription());
+                        ? cardDescriptionData.GetModifiedValueEditor(SelectedCardData)
+                        : cardDescriptionData.GetDescriptionEditor());
                 }
-                
+                GUIStyle headStyle = new GUIStyle();
+                headStyle.fontStyle = FontStyle.Bold;
+                headStyle.normal.textColor = Color.white;
+                EditorGUILayout.BeginVertical();
+                EditorGUILayout.LabelField("Description Preview",headStyle);
+                EditorGUILayout.Separator();
                 EditorGUILayout.LabelField(str.ToString());
+                EditorGUILayout.EndVertical();
                 EditorGUILayout.EndHorizontal();
             }
             

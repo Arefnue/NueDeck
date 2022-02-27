@@ -168,6 +168,52 @@ namespace NueDeck.Scripts.Data.Collection
 
         #region Editor
 #if UNITY_EDITOR
+        
+        public string GetDescriptionEditor()
+        {
+            var str = new StringBuilder();
+            
+            str.Append(DescriptionText);
+            
+            // if (EnableOverrideColor && !string.IsNullOrEmpty(str.ToString())) 
+            //     str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),OverrideColor));
+            
+            return str.ToString();
+        }
+
+        public string GetModifiedValueEditor(CardData cardData)
+        {
+            if (cardData.CardActionDataList.Count <= 0) return "";
+            
+            if (ModifiedActionValueIndex>=cardData.CardActionDataList.Count)
+                modifiedActionValueIndex = cardData.CardActionDataList.Count - 1;
+
+            if (ModifiedActionValueIndex<0)
+                modifiedActionValueIndex = 0;
+            
+            var str = new StringBuilder();
+            var value = cardData.CardActionDataList[ModifiedActionValueIndex].ActionValue;
+            if (CombatManager.Instance)
+            {
+                var player = CombatManager.Instance.CurrentMainAlly;
+                if (player)
+                {
+                    var modifer =player.CharacterStats.StatusDict[ModiferStats].StatusValue;
+                    value += modifer;
+                
+                    if (modifer!= 0)
+                        str.Append("*");
+                }
+            }
+           
+            str.Append(value);
+            
+            // if (EnableOverrideColor) 
+            //     str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),OverrideColor));
+            
+            return str.ToString();
+        }
+        
         public void EditDescriptionText(string newText) => descriptionText = newText;
         public void EditEnableOverrideColor(bool newStatus) => enableOverrideColor = newStatus;
         public void EditOverrideColor(Color newColor) => overrideColor = newColor;
