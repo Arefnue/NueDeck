@@ -14,7 +14,8 @@ namespace NueDeck.Editor
     {
         private static CardEditorWindow CurrentWindow { get; set; }
         private SerializedObject _serializedObject;
-       
+
+        private const string CardDataDefaultPath = "Assets/NueDeck/Data/Cards/";
        
         #region Cache Card Data
         private static CardData CachedCardData { get; set; }
@@ -37,9 +38,9 @@ namespace NueDeck.Editor
             ManaCost = SelectedCardData.ManaCost;
             CardSprite = SelectedCardData.CardSprite;
             UsableWithoutTarget = SelectedCardData.UsableWithoutTarget;
-            CardActionDataList = new List<CardActionData>(SelectedCardData.CardActionDataList);
-            CardDescriptionDataList = new List<CardDescriptionData>(SelectedCardData.CardDescriptionDataList);
-            SpecialKeywordsList = new List<SpecialKeywords>(SelectedCardData.KeywordsList);
+            CardActionDataList = SelectedCardData.CardActionDataList.Count>0 ? new List<CardActionData>(SelectedCardData.CardActionDataList) : new List<CardActionData>();
+            CardDescriptionDataList = SelectedCardData.CardDescriptionDataList.Count>0 ? new List<CardDescriptionData>(SelectedCardData.CardDescriptionDataList) : new List<CardDescriptionData>();
+            SpecialKeywordsList = SelectedCardData.KeywordsList.Count>0 ? new List<SpecialKeywords>(SelectedCardData.KeywordsList) : new List<SpecialKeywords>();
             AudioType = SelectedCardData.AudioType;
 
         }
@@ -88,8 +89,6 @@ namespace NueDeck.Editor
             CachedCardData = null;
             SelectedCardData = null;
         }
-
-      
         #endregion
 
         #region Process
@@ -132,9 +131,36 @@ namespace NueDeck.Editor
                     _serializedObject = new SerializedObject(SelectedCardData);
                     CacheCardData();
                 }
+
+            if (GUILayout.Button("+",GUILayout.MaxWidth(150)))
+            {
+                CreateNewCard();
+            }
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
         }
+
+        private void CreateNewCard()
+        {
+            var clone = CreateInstance<CardData>();
+            var str = new StringBuilder();
+            var count = AllCardDataList.Count;
+
+            str.Append(count + 1).Append("_").Append("new_card_name");
+            clone.EditId(str.ToString());
+            clone.EditCardName(str.ToString());
+            clone.EditCardActionDataList(new List<CardActionData>());
+            clone.EditCardDescriptionDataList(new List<CardDescriptionData>());
+            clone.EditSpecialKeywordsList(new List<SpecialKeywords>());
+            var path = str.Insert(0, CardDataDefaultPath).Append(".asset").ToString();
+            var uniquePath = AssetDatabase.GenerateUniqueAssetPath(path);
+            AssetDatabase.CreateAsset(clone, uniquePath);
+            AssetDatabase.SaveAssets();
+            RefreshCardData();
+            SelectedCardData = AllCardDataList.Find(x => x.Id == clone.Id);
+            CacheCardData();
+        }
+
         private void DrawSelectedCard()
         {
             EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
@@ -171,7 +197,6 @@ namespace NueDeck.Editor
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndVertical();
         }
-        
         #endregion
 
         #region Card Data Methods
@@ -377,7 +402,6 @@ namespace NueDeck.Editor
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndFoldoutHeaderGroup();
         }
-
         private void ChangeAudioActionType()
         {
             AudioType = (AudioActionType)EditorGUILayout.EnumPopup("Audio Type:",AudioType);
@@ -404,7 +428,6 @@ namespace NueDeck.Editor
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndFoldoutHeaderGroup();
         }
-        
         private void SaveCardData()
         {
             if (!SelectedCardData) return;
@@ -423,6 +446,7 @@ namespace NueDeck.Editor
         }
         private void RefreshCardData()
         {
+            ClearCachedCardData();
             AllCardDataList?.Clear();
             AllCardDataList = ListExtentions.GetAllInstances<CardData>().ToList();
         }
