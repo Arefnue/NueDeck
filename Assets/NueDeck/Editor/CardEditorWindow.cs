@@ -446,6 +446,7 @@ namespace NueDeck.Editor
         }
         private void RefreshCardData()
         {
+            SelectedCardData = null;
             ClearCachedCardData();
             AllCardDataList?.Clear();
             AllCardDataList = ListExtentions.GetAllInstances<CardData>().ToList();
