@@ -4,7 +4,6 @@
     {
         Block,
         Strength,
-        Dexterity,
         Poison,
         Exhaust
     }

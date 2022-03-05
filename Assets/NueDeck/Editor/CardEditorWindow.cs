@@ -6,7 +6,6 @@ using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Enums;
 using NueExtentions;
 using UnityEditor;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 namespace NueDeck.Editor
@@ -317,21 +316,52 @@ namespace NueDeck.Editor
                         ? cardDescriptionData.GetModifiedValueEditor(SelectedCardData)
                         : cardDescriptionData.GetDescriptionEditor());
                 }
+                
                 GUIStyle headStyle = new GUIStyle();
                 headStyle.fontStyle = FontStyle.Bold;
                 headStyle.normal.textColor = Color.white;
                 EditorGUILayout.BeginVertical();
+                
                 EditorGUILayout.LabelField("Description Preview",headStyle);
                 EditorGUILayout.Separator();
                 EditorGUILayout.LabelField(str.ToString());
+                EditorGUILayout.Separator();
+
+                ChangeSpecialKeywords();
+
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndHorizontal();
             }
             
             EditorGUILayout.EndFoldoutHeaderGroup();
         }
-        
-        
+
+        private void ChangeSpecialKeywords()
+        {
+            EditorGUILayout.BeginHorizontal();
+            var specialKeyCount = Enum.GetNames(typeof(SpecialKeywords));
+
+            for (var i = 0; i < specialKeyCount.Length; i++)
+            {
+                var hasKey = SpecialKeywordsList.Contains((SpecialKeywords)i);
+                var newValue = EditorGUILayout.Toggle(((SpecialKeywords)i).ToString(),hasKey);
+                if (newValue)
+                {
+                    if (!SpecialKeywordsList.Contains((SpecialKeywords)i))
+                        SpecialKeywordsList.Add((SpecialKeywords)i);
+                }
+                else
+                {
+                    if (SpecialKeywordsList.Contains((SpecialKeywords)i))
+                        SpecialKeywordsList.Remove((SpecialKeywords)i);
+                }
+            }
+
+            EditorGUILayout.EndHorizontal();
+        }
+
+        private SpecialKeywords _specialKeywordsFlags;
+
         private void SaveCardData()
         {
             if (!SelectedCardData) return;
@@ -340,6 +370,10 @@ namespace NueDeck.Editor
             SelectedCardData.EditCardName(CardName);
             SelectedCardData.EditManaCost(ManaCost);
             SelectedCardData.EditCardSprite(CardSprite);
+            SelectedCardData.EditUsableWithoutTarget(UsableWithoutTarget);
+            SelectedCardData.EditCardActionDataList(CardActionDataList);
+            SelectedCardData.EditCardDescriptionDataList(CardDescriptionDataList);
+            SelectedCardData.EditSpecialKeywordsList(SpecialKeywordsList);
             EditorUtility.SetDirty(SelectedCardData);
             AssetDatabase.SaveAssets();
         }
