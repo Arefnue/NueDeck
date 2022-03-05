@@ -153,6 +153,7 @@ namespace NueDeck.Editor
             ChangeUsableWithoutTarget();
             ChangeCardActionDataList();
             ChangeCardDescriptionDataList();
+            ChangeSpecialKeywords();
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndHorizontal();
             
@@ -327,7 +328,7 @@ namespace NueDeck.Editor
                 EditorGUILayout.LabelField(str.ToString());
                 EditorGUILayout.Separator();
 
-                ChangeSpecialKeywords();
+               
 
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndHorizontal();
@@ -336,15 +337,24 @@ namespace NueDeck.Editor
             EditorGUILayout.EndFoldoutHeaderGroup();
         }
 
+        private Vector2 _specialKeywordScrool;
+        private bool _isSpecialKeywordsFolded;
         private void ChangeSpecialKeywords()
         {
+            _isSpecialKeywordsFolded =EditorGUILayout.BeginFoldoutHeaderGroup(_isSpecialKeywordsFolded, "Special Keywords");
+            if (!_isSpecialKeywordsFolded) return;
+           
+            EditorGUILayout.BeginVertical("box");
+            _specialKeywordScrool = EditorGUILayout.BeginScrollView(_specialKeywordScrool);
             EditorGUILayout.BeginHorizontal();
             var specialKeyCount = Enum.GetNames(typeof(SpecialKeywords));
 
             for (var i = 0; i < specialKeyCount.Length; i++)
             {
+                EditorGUILayout.BeginVertical(GUILayout.Width(100));
                 var hasKey = SpecialKeywordsList.Contains((SpecialKeywords)i);
-                var newValue = EditorGUILayout.Toggle(((SpecialKeywords)i).ToString(),hasKey);
+                EditorGUILayout.LabelField(((SpecialKeywords)i).ToString());
+                var newValue = EditorGUILayout.Toggle(hasKey);
                 if (newValue)
                 {
                     if (!SpecialKeywordsList.Contains((SpecialKeywords)i))
@@ -355,13 +365,13 @@ namespace NueDeck.Editor
                     if (SpecialKeywordsList.Contains((SpecialKeywords)i))
                         SpecialKeywordsList.Remove((SpecialKeywords)i);
                 }
+                EditorGUILayout.EndVertical();
             }
-
             EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndScrollView();
+            EditorGUILayout.EndVertical();
         }
-
-        private SpecialKeywords _specialKeywordsFlags;
-
+        
         private void SaveCardData()
         {
             if (!SelectedCardData) return;
