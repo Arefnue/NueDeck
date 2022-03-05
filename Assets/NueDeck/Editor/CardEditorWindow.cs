@@ -148,12 +148,13 @@ namespace NueDeck.Editor
             EditorGUILayout.BeginVertical();
             ChangeId();
             ChangeCardName();
-            ChangeManaCost();
-            ChangeCardSprite();
-            ChangeUsableWithoutTarget();
+            
+            ChangeGeneralSettings();
+           
             ChangeCardActionDataList();
             ChangeCardDescriptionDataList();
             ChangeSpecialKeywords();
+            
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndHorizontal();
             
@@ -342,7 +343,11 @@ namespace NueDeck.Editor
         private void ChangeSpecialKeywords()
         {
             _isSpecialKeywordsFolded =EditorGUILayout.BeginFoldoutHeaderGroup(_isSpecialKeywordsFolded, "Special Keywords");
-            if (!_isSpecialKeywordsFolded) return;
+            if (!_isSpecialKeywordsFolded)
+            {
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                return;
+            }
            
             EditorGUILayout.BeginVertical("box");
             _specialKeywordScrool = EditorGUILayout.BeginScrollView(_specialKeywordScrool);
@@ -370,6 +375,34 @@ namespace NueDeck.Editor
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
+            EditorGUILayout.EndFoldoutHeaderGroup();
+        }
+
+        private void ChangeAudioActionType()
+        {
+            AudioType = (AudioActionType)EditorGUILayout.EnumPopup("Audio Type:",AudioType);
+        }
+
+        private bool _isGeneralSettingsFolded;
+        private void ChangeGeneralSettings()
+        {
+            _isGeneralSettingsFolded =EditorGUILayout.BeginFoldoutHeaderGroup(_isGeneralSettingsFolded, "General Settings");
+            if (!_isGeneralSettingsFolded)
+            {
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                return;
+            }
+            
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.BeginVertical();
+            ChangeManaCost();
+            ChangeUsableWithoutTarget();
+            ChangeAudioActionType();
+            EditorGUILayout.EndVertical();
+            GUILayout.Space(100);
+            ChangeCardSprite();
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndFoldoutHeaderGroup();
         }
         
         private void SaveCardData()
@@ -384,6 +417,7 @@ namespace NueDeck.Editor
             SelectedCardData.EditCardActionDataList(CardActionDataList);
             SelectedCardData.EditCardDescriptionDataList(CardDescriptionDataList);
             SelectedCardData.EditSpecialKeywordsList(SpecialKeywordsList);
+            SelectedCardData.EditAudioType(AudioType);
             EditorUtility.SetDirty(SelectedCardData);
             AssetDatabase.SaveAssets();
         }
