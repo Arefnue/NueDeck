@@ -54,18 +54,26 @@ namespace NueDeck.Scripts.Card
         public void SetCard(CardData targetProfile)
         {
             CardData = targetProfile;
-            _cardMaterial = cardMeshRenderer.material;
+            if (cardMeshRenderer)
+            {
+                _cardMaterial = cardMeshRenderer.material;
+                _baseColor = _cardMaterial.GetColor("_Color");
+                _colorOutline = _cardMaterial.GetColor("_OutlineColor");
+                _dissolveColor = _cardMaterial.GetColor("_DissolveColor");
+            }
+          
 
-            _baseColor = _cardMaterial.GetColor("_Color");
-            _colorOutline = _cardMaterial.GetColor("_OutlineColor");
-            _dissolveColor = _cardMaterial.GetColor("_DissolveColor");
+           
+            
             
             nameTextField.text = CardData.CardName;
             descTextField.text = CardData.MyDescription;
             manaTextField.text = CardData.ManaCost.ToString();
             frontImage.sprite = CardData.CardSprite;
 
-            canvas.worldCamera = CollectionManager.Instance.HandController.cam;
+            if (canvas)
+                canvas.worldCamera = CollectionManager.Instance.HandController.cam;
+           
         }
         #endregion
         
@@ -104,7 +112,9 @@ namespace NueDeck.Scripts.Card
             if (isInactive == this._isInactive) return; 
             
             _isInactive = isInactive;
-            cardMeshRenderer.sharedMaterial = isInactive ? inactiveMaterial : _cardMaterial;
+            if (cardMeshRenderer)
+                cardMeshRenderer.sharedMaterial = isInactive ? inactiveMaterial : _cardMaterial;
+            
 
             deactiveImage.gameObject.SetActive(isInactive);
         }
@@ -129,8 +139,12 @@ namespace NueDeck.Scripts.Card
                 if (t.y < 1) {
                     t.y = (t.y + Time.deltaTime * _dissolveSpeed.y);
                 }
-                _cardMaterial.SetVector("_Dissolve", t);
-                _cardMaterial.SetColor("_DissolveColor", _dissolveColor * 4 * t.y);
+
+                if (cardMeshRenderer)
+                {
+                    _cardMaterial.SetVector("_Dissolve", t);
+                    _cardMaterial.SetColor("_DissolveColor", _dissolveColor * 4 * t.y);
+                }
                 yield return _waitFrame;
             }
             Destroy(gameObject);
@@ -197,6 +211,8 @@ namespace NueDeck.Scripts.Card
         #region Tooltip
         public void ShowTooltipInfo()
         {
+            if (!descriptionRoot) return;
+            
             var tooltipManager = TooltipManager.Instance;
             foreach (var cardDataSpecialKeyword in CardData.KeywordsList)
             {
