@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace NueDeck.Scripts.Card
 {
-    public class Choice : MonoBehaviour,IPointerEnterHandler,IPointerDownHandler,IPointerExitHandler,IPointerUpHandler
+    public class ChoiceCard : MonoBehaviour,IPointerEnterHandler,IPointerDownHandler,IPointerExitHandler,IPointerUpHandler
     {
         [SerializeField] private float showScaleRate = 1.15f;
         private CardBase _cardBase;

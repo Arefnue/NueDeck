@@ -24,4 +24,4 @@ MonoBehaviour:
     hideActionValue: 0
     actionList:
     - actionType: 0
-      actionValue: 50
+      actionValue: 10

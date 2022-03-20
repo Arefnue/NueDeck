@@ -17,19 +17,20 @@ namespace NueDeck.Scripts.UI.Reward
         [SerializeField] private Transform rewardRoot;
         [SerializeField] private RewardContainer rewardContainerPrefab;
 
-        [Header("Choice")]
+        [Header("Choice")] 
+        [SerializeField] private bool use3DCard;
         [SerializeField] private List<Transform> choiceCardSpawnTransformList;
-        [SerializeField] private Choice choicePrefab;
+        [SerializeField] private Transform choice2DCardSpawnRoot;
+        [SerializeField] private ChoiceCard choiceCardPrefab;
         [SerializeField] private ChoicePanel choicePanel;
         
         private readonly List<RewardContainer> _currentRewardsList = new List<RewardContainer>();
-        private readonly List<Choice> _spawnedChoiceList = new List<Choice>();
+        private readonly List<ChoiceCard> _spawnedChoiceList = new List<ChoiceCard>();
         private readonly List<CardData> _cardRewardList = new List<CardData>();
 
         public ChoicePanel ChoicePanel => choicePanel;
         
         #region Public Methods
-
         public void BuildReward(RewardType rewardType)
         {
             var rewardClone = Instantiate(rewardContainerPrefab, rewardRoot);
@@ -89,13 +90,19 @@ namespace NueDeck.Scripts.UI.Reward
             
             for (int i = 0; i < amount; i++)
             {
-                var choice = Instantiate(choicePrefab, choiceCardSpawnTransformList[i]);
+                Transform spawnTransform = use3DCard ? choiceCardSpawnTransformList[i] : choice2DCardSpawnRoot;
+              
+                var choice = Instantiate(choiceCardPrefab, spawnTransform);
+                
                 var reward = _cardRewardList.RandomItem();
                 choice.BuildReward(reward);
+                
                 _cardRewardList.Remove(reward);
-                choice.transform.localPosition = Vector3.zero;
                 _spawnedChoiceList.Add(choice);
                 _currentRewardsList.Remove(rewardContainer);
+                
+                if (use3DCard)
+                    choice.transform.localPosition = Vector3.zero;
             }
             
             Destroy(rewardContainer.gameObject);

@@ -43,7 +43,6 @@ namespace NueDeck.Scripts.Card
             descTextField.text = CardData.MyDescription;
             manaTextField.text = CardData.ManaCost.ToString();
             cardImage.sprite = CardData.CardSprite;
-            
         }
         
         #endregion
@@ -82,9 +81,6 @@ namespace NueDeck.Scripts.Card
             if (isInactive == this.IsInactive) return; 
             
             IsInactive = isInactive;
-            
-            
-
             passiveImage.gameObject.SetActive(isInactive);
         }
         

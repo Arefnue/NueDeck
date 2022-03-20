@@ -12,45 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6903f06e96c43789549f142f8956d64, type: 3}
   m_Name: 1-Attack_Basic
   m_EditorClassIdentifier: 
-  id: 1_attack_basics
-  cardName: Basica asda
+  id: 1_attack_basic
+  cardName: Basic Attack
   manaCost: 1
-  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  cardSprite: {fileID: 21300000, guid: 8510ca3a47f6c23479e9992c04455698, type: 3}
   usableWithoutTarget: 0
   cardActionDataList:
-  - myPlayerActionType: 0
-    value: 100
+  - cardActionType: 0
+    actionValue: 50
+    actionTarget: 0
+  - cardActionType: 0
+    actionValue: 50
     actionTarget: 0
   cardDescriptionDataList:
-  - useText: 1
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: 'Deal '
-    useValue: 0
-    useValueColor: 0
-    valueColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultValue: 0
-    useModifer: 0
-    modiferStatus: 0
-  - useText: 0
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: 
-    useValue: 1
-    useValueColor: 1
-    valueColor: {r: 0.8, g: 0, b: 0.012076187, a: 1}
-    defaultValue: 6
-    useModifer: 1
-    modiferStatus: 2
-  - useText: 1
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: ' damage'
-    useValue: 0
-    useValueColor: 0
-    valueColor: {r: 0, g: 0, b: 0, a: 1}
-    defaultValue: 0
-    useModifer: 1
-    modiferStatus: 2
+  - descriptionText: 'Deal '
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+  - descriptionText: 
+    enableOverrideColor: 1
+    overrideColor: {r: 1, g: 0, b: 0, a: 1}
+    useModifier: 1
+    modifiedActionValueIndex: 0
+    modiferStats: 2
+  - descriptionText: damage
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
   specialKeywordsList: 
   audioType: 0

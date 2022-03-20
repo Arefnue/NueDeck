@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NueDeck.Scripts.Card;
 using NueDeck.Scripts.Characters;
@@ -49,8 +50,15 @@ namespace NueDeck.Scripts.Collection
         
         private bool updateHierarchyOrder = false;
         private bool showDebugGizmos = true;
+        
+        private Camera _mainCam;
 
         #region Setup
+
+        private void Awake()
+        {
+            _mainCam = Camera.main;
+        }
 
         private void Start()
         {
@@ -274,6 +282,7 @@ namespace NueDeck.Scripts.Collection
                 PlayCard(mousePos);
             }
         }
+
         
         private void PlayCard(Vector2 mousePos)
         {
@@ -288,7 +297,7 @@ namespace NueDeck.Scripts.Collection
             if (GameManager.Instance.PersistentGameplayData.CanUseCards && GameManager.Instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.ManaCost)
             {
                 RaycastHit hit;
-                var mainRay = GameManager.Instance.MainCam.ScreenPointToRay(mousePos);
+                var mainRay = _mainCam.ScreenPointToRay(mousePos);
                 
                 if (Physics.Raycast(mainRay, out hit, 1000, targetLayer))
                 {

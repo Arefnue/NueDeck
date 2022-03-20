@@ -163,12 +163,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2195740174929342428}
   m_Layer: 0
-  m_Name: ChoiceRoot
+  m_Name: ChoiceCard3DRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2195740174929342428
 Transform:
   m_ObjectHideFlags: 0
@@ -273,6 +273,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6748cae7ad739cd419d12eb4f1dde65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4310519463442379022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4296046879590768356}
+  - component: {fileID: 2327438224718272983}
+  m_Layer: 5
+  m_Name: ChoiceCardUIRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4296046879590768356
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310519463442379022}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4493403123119822679}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2327438224718272983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310519463442379022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 300, y: 500}
+  m_Spacing: {x: 100, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &4451725545424774419
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +469,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4296046879590768356}
   m_Father: {fileID: 4493403121877227092}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1372,11 +1433,13 @@ MonoBehaviour:
   rewardData: {fileID: 11400000, guid: 576255f7c5abd6d44800bc419cf6fbf8, type: 2}
   rewardRoot: {fileID: 8356462358083751223}
   rewardContainerPrefab: {fileID: 4144854971553763347, guid: 7728fa9ef774a574fa112e56a3a8c0ef, type: 3}
+  use3DCard: 1
   choiceCardSpawnTransformList:
   - {fileID: 2540505997890386865}
   - {fileID: 6790989744174962215}
   - {fileID: 5592596103052455727}
-  choicePrefab: {fileID: 7257024235002004488, guid: 026170fff350f3f43b7856af2f85ab6a, type: 3}
+  choice2DCardSpawnRoot: {fileID: 4296046879590768356}
+  choiceCardPrefab: {fileID: 7396816322469541255, guid: 064f09601e0b46348b1488f9cc7fd9e6, type: 3}
   choicePanel: {fileID: 3729220889032712400}
 --- !u!223 &7733704880889306847
 Canvas:

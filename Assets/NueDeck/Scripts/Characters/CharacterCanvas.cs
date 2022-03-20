@@ -40,9 +40,9 @@ namespace NueDeck.Scripts.Characters
                 _statusDict.Add((StatusType) i, null);
 
             _canvas = GetComponent<Canvas>();
-            
+
             if (_canvas)
-                _canvas.worldCamera = GameManager.Instance.MainCam;
+                _canvas.worldCamera = Camera.main;
         }
 
         #endregion

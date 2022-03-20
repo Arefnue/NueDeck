@@ -16,8 +16,7 @@ namespace NueDeck.Scripts.Managers
         public GameManager(){}
         public static GameManager Instance { get; private set; }
         
-        [Header("Settings")] 
-        [SerializeField] private Camera mainCam;
+        [Header("Settings")]
         [SerializeField] private GameplayData gameplayData;
         [SerializeField] private EncounterData encounterData;
         [SerializeField] private SceneData sceneData;
@@ -26,8 +25,7 @@ namespace NueDeck.Scripts.Managers
         public EncounterData EncounterData => encounterData;
         public GameplayData GameplayData => gameplayData;
         public PersistentGameplayData PersistentGameplayData { get; private set; }
-        public Camera MainCam => mainCam;
-        
+
         #region Setup
         private void Awake()
         {
