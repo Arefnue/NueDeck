@@ -27,7 +27,7 @@ namespace NueDeck.Scripts.Collection
         public LayerMask selectableLayer;
         public LayerMask targetLayer;
         public Camera cam = null;
-        public List<CardObject> hand; // Cards currently in hand
+        public List<CardBase> hand; // Cards currently in hand
         [SerializeField] private Material inactiveCardMaterial = null;
 
         
@@ -36,7 +36,7 @@ namespace NueDeck.Scripts.Collection
        
         private int _selected = -1; // Card index that is nearest to mouse
         private int _dragged = -1; // Card index that is held by mouse (inside of hand)
-        private CardObject _heldCard; // Card that is held by mouse (when outside of hand)
+        private CardBase _heldCard; // Card that is held by mouse (when outside of hand)
         private Vector3 _heldCardOffset;
         private Vector2 _heldCardTilt;
         private Vector2 _force;
@@ -443,7 +443,7 @@ namespace NueDeck.Scripts.Collection
         public void MoveCardToIndex(int currentIndex, int toIndex)
         {
             if (currentIndex == toIndex) return; // Same index, do nothing
-            CardObject card = hand[currentIndex];
+            CardBase card = hand[currentIndex];
             hand.RemoveAt(currentIndex);
             hand.Insert(toIndex, card);
 
@@ -456,7 +456,7 @@ namespace NueDeck.Scripts.Collection
         /// <summary>
         /// Adds a card to the hand. Optional param to insert it at a given index.
         /// </summary>
-        public void AddCardToHand(CardObject card, int index = -1)
+        public void AddCardToHand(CardBase card, int index = -1)
         {
             if (index < 0)
             {
@@ -484,7 +484,7 @@ namespace NueDeck.Scripts.Collection
         {
             if (updateHierarchyOrder)
             {
-                CardObject card = hand[index];
+                CardBase card = hand[index];
                 card.transform.SetParent(transform.parent);
                 card.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
             }

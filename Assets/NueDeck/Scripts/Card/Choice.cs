@@ -9,26 +9,26 @@ namespace NueDeck.Scripts.Card
     public class Choice : MonoBehaviour,IPointerEnterHandler,IPointerDownHandler,IPointerExitHandler,IPointerUpHandler
     {
         [SerializeField] private float showScaleRate = 1.15f;
-        private CardObject _cardObject;
+        private CardBase _cardBase;
         private Vector3 _initalScale;
 
         private void Awake()
         {
-            _cardObject = GetComponent<CardObject>();
+            _cardBase = GetComponent<CardBase>();
             _initalScale = transform.localScale;
         }
 
         public void BuildReward(CardData cardData)
         {
-            _cardObject.SetCard(cardData);
-            _cardObject.UpdateCardText();
+            _cardBase.SetCard(cardData);
+            _cardBase.UpdateCardText();
         }
 
 
         private void OnChoice()
         {
             if (GameManager.Instance != null)
-                GameManager.Instance.PersistentGameplayData.CurrentCardsList.Add(_cardObject.CardData);
+                GameManager.Instance.PersistentGameplayData.CurrentCardsList.Add(_cardBase.CardData);
 
             if (UIManager.Instance != null)
                 UIManager.Instance.RewardCanvas.ChoicePanel.DisablePanel();

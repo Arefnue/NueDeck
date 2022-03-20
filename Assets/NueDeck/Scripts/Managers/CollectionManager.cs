@@ -119,13 +119,13 @@ namespace NueDeck.Scripts.Managers
             DiscardPile?.Remove(targetCard);
             UIManager.Instance.CombatCanvas.SetPileTexts();
         }
-        public void OnCardDiscarded(CardObject targetCard)
+        public void OnCardDiscarded(CardBase targetCard)
         {
             HandPile.Remove(targetCard.CardData);
             DiscardPile.Add(targetCard.CardData);
             UIManager.Instance.CombatCanvas.SetPileTexts();
         }
-        public void OnCardPlayed(CardObject targetCard)
+        public void OnCardPlayed(CardBase targetCard)
         {
             HandPile.Remove(targetCard.CardData);
             DiscardPile.Add(targetCard.CardData);

@@ -25,7 +25,7 @@ namespace NueDeck.Scripts.Data.Settings
         
         [Header("Card Settings")] 
         [SerializeField] private List<CardData> allCardsList;
-        [SerializeField] private CardObject cardPrefab;
+        [SerializeField] private CardBase cardPrefab;
 
         [Header("Customization Settings")] 
         [SerializeField] private string defaultName = "Nue";
@@ -42,7 +42,7 @@ namespace NueDeck.Scripts.Data.Settings
         public int RandomCardCount => randomCardCount;
         public int MaxCardOnHand => maxCardOnHand;
         public List<CardData> AllCardsList => allCardsList;
-        public CardObject CardPrefab => cardPrefab;
+        public CardBase CardPrefab => cardPrefab;
         public string DefaultName => defaultName;
         public bool UseStageSystem => useStageSystem;
         #endregion

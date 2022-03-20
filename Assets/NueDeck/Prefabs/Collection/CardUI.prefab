@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8876905202521797724}
   - component: {fileID: 7326535452892495232}
   m_Layer: 5
-  m_Name: CardObjectUI
+  m_Name: CardUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,6 +169,7 @@ RectTransform:
   - {fileID: 9010572976229091430}
   - {fileID: 6632584690436933652}
   - {fileID: 7403465324286304931}
+  - {fileID: 4173267314593439615}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -194,18 +195,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1988565951423258524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f14e233234845678af96ebfd2f45fbe, type: 3}
+  m_Script: {fileID: 11500000, guid: fbfc4a4991894cd8b9c9ac8522122e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardMeshRenderer: {fileID: 0}
-  descriptionRoot: {fileID: 0}
-  canvas: {fileID: 0}
+  descriptionRoot: {fileID: 4173267314593439615}
+  cardImage: {fileID: 3725308678605598420}
+  passiveImage: {fileID: 9111309445074683089}
   nameTextField: {fileID: 6655857315106543429}
   descTextField: {fileID: 7928314818714979944}
   manaTextField: {fileID: 8510569279771794999}
-  frontImage: {fileID: 3725308678605598420}
-  backImage: {fileID: 3717151537787858294}
-  deactiveImage: {fileID: 9111309445074683089}
 --- !u!114 &7326535452892495232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +322,7 @@ GameObject:
   - component: {fileID: 2072976169588057024}
   - component: {fileID: 3725308678605598420}
   m_Layer: 5
-  m_Name: FrontImage
+  m_Name: CardImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -775,7 +773,7 @@ GameObject:
   - component: {fileID: 3882535119211770857}
   - component: {fileID: 9111309445074683089}
   m_Layer: 5
-  m_Name: DeactiveSprite
+  m_Name: PassiveImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -914,6 +912,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8529621275574157061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4173267314593439615}
+  m_Layer: 5
+  m_Name: DescriptionRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4173267314593439615
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8529621275574157061}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3696409281679987286}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 59.6, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8882743499116462445
 GameObject:
   m_ObjectHideFlags: 0
