@@ -161,8 +161,20 @@ namespace NueDeck.Scripts.Managers
                         currentAlly.AllyCanvas.SetHighlight(true);
                     break;
                 case ActionTargetType.AllEnemies:
+                    foreach (var currentEnemy in CurrentEnemiesList)
+                        currentEnemy.EnemyCanvas.SetHighlight(true);
                     break;
                 case ActionTargetType.AllAllies:
+                    foreach (var currentAlly in CurrentAlliesList)
+                        currentAlly.AllyCanvas.SetHighlight(true);
+                    break;
+                case ActionTargetType.RandomEnemy:
+                    foreach (var currentEnemy in CurrentEnemiesList)
+                        currentEnemy.EnemyCanvas.SetHighlight(true);
+                    break;
+                case ActionTargetType.RandomAlly:
+                    foreach (var currentAlly in CurrentAlliesList)
+                        currentAlly.AllyCanvas.SetHighlight(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(targetTypeTargetType), targetTypeTargetType, null);

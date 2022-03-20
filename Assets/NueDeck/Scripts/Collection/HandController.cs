@@ -5,6 +5,7 @@ using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Interfaces;
 using NueDeck.Scripts.Managers;
+using NueExtentions;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Collection
@@ -299,33 +300,51 @@ namespace NueDeck.Scripts.Collection
                 RaycastHit hit;
                 var mainRay = _mainCam.ScreenPointToRay(mousePos);
                 
-                if (Physics.Raycast(mainRay, out hit, 1000, targetLayer))
+                CharacterBase selfCharacter = CombatManager.Instance.CurrentMainAlly;
+                List<CharacterBase> targetCharacters = new List<CharacterBase>();
+                bool _canUse = false;
+                bool _hasMultipleTarget = false;
+                
+                if (_heldCard.CardData.UsableWithoutTarget)
                 {
-                    var character = hit.collider.gameObject.GetComponent<ICharacter>();
-                    
-                    if (character != null)
+                    _canUse = true;
+                    selfCharacter = CombatManager.Instance.CurrentMainAlly;
+                    switch (_heldCard.CardData.CardActionDataList[0].ActionTargetType)
                     {
-                        var checkEnemy = (_heldCard.CardData.CardActionDataList[0].ActionTargetType == ActionTargetType.Enemy &&
-                                          character.GetCharacterType() == CharacterType.Enemy);
-                        var checkAlly = (_heldCard.CardData.CardActionDataList[0].ActionTargetType == ActionTargetType.Ally &&
-                                         character.GetCharacterType() == CharacterType.Ally);
-                        
-                        if (checkEnemy || checkAlly)
-                        {
-                            backToHand = false;
-                            _heldCard.Use(CombatManager.Instance.CurrentMainAlly,character.GetCharacterBase());
-                        }
+                        case ActionTargetType.Enemy:
+                            targetCharacters = null;
+                            break;
+                        case ActionTargetType.Ally:
+                            targetCharacters = null;
+                            break;
+                        case ActionTargetType.AllEnemies:
+                            foreach (var character in CombatManager.Instance.CurrentEnemiesList)
+                                targetCharacters.Add(character);
+                            break;
+                        case ActionTargetType.AllAllies:
+                            foreach (var character in CombatManager.Instance.CurrentAlliesList)
+                                targetCharacters.Add(character);
+                            break;
+                        case ActionTargetType.RandomEnemy:
+                            targetCharacters.Add(CombatManager.Instance.CurrentEnemiesList.RandomItem());
+                            break;
+                        case ActionTargetType.RandomAlly:
+                            targetCharacters.Add(CombatManager.Instance.CurrentAlliesList.RandomItem());
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
                 }
                 else
                 {
-                    if (_heldCard.CardData.UsableWithoutTarget)
-                    {
-                        backToHand = false;
-                        _heldCard.Use(CombatManager.Instance.CurrentMainAlly,null);
-                    }
+                    _canUse = CheckPlayOnCharacter(mainRay, _canUse, ref selfCharacter, ref targetCharacters);
                 }
-                
+
+                if (_canUse)
+                {
+                    backToHand = false;
+                    _heldCard.Use(selfCharacter,targetCharacters);
+                }
             }
 
             if (backToHand) // Cannot use card / Not enough mana! Return card to hand!
@@ -333,7 +352,34 @@ namespace NueDeck.Scripts.Collection
 
             _heldCard = null;
         }
-        
+
+        private bool CheckPlayOnCharacter(Ray mainRay, bool _canUse, ref CharacterBase selfCharacter,
+            ref List<CharacterBase> targetCharacter)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(mainRay, out hit, 1000, targetLayer))
+            {
+                var character = hit.collider.gameObject.GetComponent<ICharacter>();
+
+                if (character != null)
+                {
+                    var checkEnemy = (_heldCard.CardData.CardActionDataList[0].ActionTargetType == ActionTargetType.Enemy &&
+                                      character.GetCharacterType() == CharacterType.Enemy);
+                    var checkAlly = (_heldCard.CardData.CardActionDataList[0].ActionTargetType == ActionTargetType.Ally &&
+                                     character.GetCharacterType() == CharacterType.Ally);
+
+                    if (checkEnemy || checkAlly)
+                    {
+                        _canUse = true;
+                        selfCharacter = CombatManager.Instance.CurrentMainAlly;
+                        targetCharacter.Add(character.GetCharacterBase());
+                    }
+                }
+            }
+
+            return _canUse;
+        }
+
         private void HandleDraggedCardInsideHand(bool mouseButton, int count)
         {
             if (!mouseButton)

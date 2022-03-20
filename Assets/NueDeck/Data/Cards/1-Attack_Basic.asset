@@ -16,14 +16,14 @@ MonoBehaviour:
   cardName: Basic Attack
   manaCost: 1
   cardSprite: {fileID: 21300000, guid: 8510ca3a47f6c23479e9992c04455698, type: 3}
-  usableWithoutTarget: 0
+  usableWithoutTarget: 1
   cardActionDataList:
   - cardActionType: 0
     actionValue: 50
-    actionTargetType: 0
+    actionTargetType: 2
   - cardActionType: 0
     actionValue: 50
-    actionTargetType: 0
+    actionTargetType: 4
   cardDescriptionDataList:
   - descriptionText: 'Deal '
     enableOverrideColor: 0
@@ -31,17 +31,26 @@ MonoBehaviour:
     useModifier: 0
     modifiedActionValueIndex: 0
     modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
   - descriptionText: 
-    enableOverrideColor: 1
+    enableOverrideColor: 0
     overrideColor: {r: 1, g: 0, b: 0, a: 1}
     useModifier: 1
     modifiedActionValueIndex: 0
     modiferStats: 3
-  - descriptionText: ' damage'
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  - descriptionText: ' damage, twice.'
     enableOverrideColor: 0
     overrideColor: {r: 0, g: 0, b: 0, a: 1}
     useModifier: 0
     modifiedActionValueIndex: 0
     modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
   specialKeywordsList: 
   audioType: 0

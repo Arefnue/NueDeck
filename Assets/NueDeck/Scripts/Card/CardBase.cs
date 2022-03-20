@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Managers;
@@ -61,6 +62,24 @@ namespace NueDeck.Scripts.Card
             
             StartCoroutine(nameof(DiscardRoutine));
         }
+        
+        public virtual void Use(CharacterBase self,List<CharacterBase> targetList)
+        {
+            SpendMana(CardData.ManaCost);
+
+            foreach (var target in targetList)
+            {
+                foreach (var playerAction in CardData.CardActionDataList)
+                    CardActionProcessor.GetAction(playerAction.CardActionType)
+                        .DoAction(new CardActionParameters(playerAction.ActionValue,
+                            target,self,CardData));
+            }
+            
+            CollectionManager.Instance.OnCardPlayed(this);
+            
+            StartCoroutine(nameof(DiscardRoutine));
+        }
+        
         public virtual void Discard()
         {
             CollectionManager.Instance.OnCardDiscarded(this);
