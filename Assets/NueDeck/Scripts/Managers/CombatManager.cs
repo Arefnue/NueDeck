@@ -192,7 +192,10 @@ namespace NueDeck.Scripts.Managers
         }
         private void LoseCombat()
         {
+            if (CurrentCombatState == CombatState.EndCombat) return;
+            
             CurrentCombatState = CombatState.EndCombat;
+            
             CollectionManager.Instance.DiscardHand();
             CollectionManager.Instance.DiscardPile.Clear();
             CollectionManager.Instance.DrawPile.Clear();
@@ -203,8 +206,10 @@ namespace NueDeck.Scripts.Managers
         }
         private void WinCombat()
         {
+            if (CurrentCombatState == CombatState.EndCombat) return;
+          
             CurrentCombatState = CombatState.EndCombat;
-            Debug.Log("Win");
+           
             foreach (var allyBase in CurrentAlliesList)
             {
                 GameManager.Instance.PersistentGameplayData.SetAllyHealthData(allyBase.AllyCharacterData.CharacterID,

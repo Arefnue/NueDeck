@@ -14,6 +14,8 @@ namespace NueDeck.Scripts.Characters
         public bool CanNegativeStack { get; set; }
         public bool ClearAtNextTurn { get; set; }
         
+       
+        
         public Action OnTriggerAction;
         public StatusStats(StatusType statusType,int statusValue,bool decreaseOverTurn = false, bool isPermanent = false,bool isActive = false,bool canNegativeStack = false,bool clearAtNextTurn = false)
         {
@@ -30,6 +32,8 @@ namespace NueDeck.Scripts.Characters
     { 
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
+        
+        public bool IsDeath { get; private set; }
        
         public Action OnDeath;
         public Action<int, int> OnHealthChanged;
@@ -104,6 +108,8 @@ namespace NueDeck.Scripts.Characters
         
         public void Damage(int value, bool canPierceArmor = false)
         {
+            if (IsDeath) return;
+            
             var remainingDamage = value;
             
             if (!canPierceArmor)
@@ -127,6 +133,7 @@ namespace NueDeck.Scripts.Characters
             {
                 CurrentHealth = 0;
                 OnDeath?.Invoke();
+                IsDeath = true;
             }
             OnHealthChanged?.Invoke(CurrentHealth,MaxHealth);
         }

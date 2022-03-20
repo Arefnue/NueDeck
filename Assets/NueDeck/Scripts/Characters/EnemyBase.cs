@@ -42,6 +42,7 @@ namespace NueDeck.Scripts.Characters
             base.OnDeath();
             CombatManager.Instance.OnAllyTurnStarted -= ShowNextAbility;
             CombatManager.Instance.OnEnemyTurnStarted -= CharacterStats.TriggerAllStatus;
+           
             CombatManager.Instance.OnEnemyDeath(this);
             AudioManager.Instance.PlayOneShot(DeathSoundProfileData.GetRandomClip());
             Destroy(gameObject);
