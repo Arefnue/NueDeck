@@ -56,18 +56,30 @@ namespace NueDeck.Scripts.UI.Reward
         
         public override void ResetCanvas()
         {
+            ResetRewards();
+
+            ResetChoice();
+        }
+
+        private void ResetRewards()
+        {
             foreach (var rewardContainer in _currentRewardsList)
             {
                 Destroy(rewardContainer.gameObject);
             }
 
+            _currentRewardsList?.Clear();
+        }
+
+        private void ResetChoice()
+        {
             foreach (var choice in _spawnedChoiceList)
             {
                 Destroy(choice.gameObject);
             }
-            ChoicePanel.DisablePanel();
+
             _spawnedChoiceList?.Clear();
-            _currentRewardsList?.Clear();
+            ChoicePanel.DisablePanel();
         }
 
         #endregion
@@ -96,6 +108,7 @@ namespace NueDeck.Scripts.UI.Reward
                 
                 var reward = _cardRewardList.RandomItem();
                 choice.BuildReward(reward);
+                choice.OnCardChose += ResetChoice;
                 
                 _cardRewardList.Remove(reward);
                 _spawnedChoiceList.Add(choice);

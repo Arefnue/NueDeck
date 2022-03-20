@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Card
 {
-    public abstract class CardBase : MonoBehaviour,I2DTooltipTarget, IPointerDownHandler, IPointerUpHandler
+    public class CardBase : MonoBehaviour,I2DTooltipTarget, IPointerDownHandler, IPointerUpHandler
     {
         [Header("Base References")]
         [SerializeField] protected Transform descriptionRoot;

@@ -204,7 +204,7 @@ namespace NueDeck.Scripts.Managers
         private void WinCombat()
         {
             CurrentCombatState = CombatState.EndCombat;
-            
+            Debug.Log("Win");
             foreach (var allyBase in CurrentAlliesList)
             {
                 GameManager.Instance.PersistentGameplayData.SetAllyHealthData(allyBase.AllyCharacterData.CharacterID,

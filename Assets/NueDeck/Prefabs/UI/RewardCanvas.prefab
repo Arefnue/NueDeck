@@ -1433,7 +1433,7 @@ MonoBehaviour:
   rewardData: {fileID: 11400000, guid: 576255f7c5abd6d44800bc419cf6fbf8, type: 2}
   rewardRoot: {fileID: 8356462358083751223}
   rewardContainerPrefab: {fileID: 4144854971553763347, guid: 7728fa9ef774a574fa112e56a3a8c0ef, type: 3}
-  use3DCard: 1
+  use3DCard: 0
   choiceCardSpawnTransformList:
   - {fileID: 2540505997890386865}
   - {fileID: 6790989744174962215}

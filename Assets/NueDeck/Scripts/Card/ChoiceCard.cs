@@ -1,3 +1,4 @@
+using System;
 using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.Managers;
 using NueDeck.Scripts.UI;
@@ -11,15 +12,12 @@ namespace NueDeck.Scripts.Card
         [SerializeField] private float showScaleRate = 1.15f;
         private CardBase _cardBase;
         private Vector3 _initalScale;
-
-        private void Awake()
+        public Action OnCardChose;
+        
+        public void BuildReward(CardData cardData)
         {
             _cardBase = GetComponent<CardBase>();
             _initalScale = transform.localScale;
-        }
-
-        public void BuildReward(CardData cardData)
-        {
             _cardBase.SetCard(cardData);
             _cardBase.UpdateCardText();
         }
@@ -32,6 +30,7 @@ namespace NueDeck.Scripts.Card
 
             if (UIManager.Instance != null)
                 UIManager.Instance.RewardCanvas.ChoicePanel.DisablePanel();
+            OnCardChose?.Invoke();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -52,6 +51,7 @@ namespace NueDeck.Scripts.Card
         public void OnPointerUp(PointerEventData eventData)
         {
             OnChoice();
+            
         }
     }
 }
