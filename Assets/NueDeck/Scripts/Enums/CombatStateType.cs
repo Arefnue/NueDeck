@@ -1,6 +1,6 @@
 ﻿namespace NueDeck.Scripts.Enums
 {
-    public enum CombatState
+    public enum CombatStateType
     {
         PrepareCombat,
         AllyTurn,

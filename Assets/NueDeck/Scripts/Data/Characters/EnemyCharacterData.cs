@@ -20,13 +20,13 @@ namespace NueDeck.Scripts.Data.Characters
     {
         [Header("Settings")]
         [SerializeField] private string name;
-        [SerializeField] private ActionTarget abilityTarget;
+        [SerializeField] private ActionTargetType abilityTargetType;
         [SerializeField] private EnemyIntentionData intention;
         [SerializeField] private SoundProfileData soundProfile;
         [SerializeField] private bool hideActionValue;
         [SerializeField] private List<EnemyActionData> actionList;
         public string Name => name;
-        public ActionTarget AbilityTarget => abilityTarget;
+        public ActionTargetType AbilityTargetType => abilityTargetType;
         public EnemyIntentionData Intention => intention;
         public List<EnemyActionData> ActionList => actionList;
         public SoundProfileData SoundProfile => soundProfile;

@@ -73,7 +73,7 @@ namespace NueDeck.Scripts.Characters
         public virtual IEnumerator ActionRoutine()
         {
             EnemyCanvas.IntentImage.gameObject.SetActive(false);
-            if (NextAbility.Intention.EnemyIntention == EnemyIntentions.Attack || NextAbility.Intention.EnemyIntention == EnemyIntentions.Debuff)
+            if (NextAbility.Intention.EnemyIntentionType == EnemyIntentionType.Attack || NextAbility.Intention.EnemyIntentionType == EnemyIntentionType.Debuff)
             {
                 yield return StartCoroutine(AttackRoutine(NextAbility));
             }

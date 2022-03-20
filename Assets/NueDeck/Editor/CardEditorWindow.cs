@@ -241,7 +241,7 @@ namespace NueDeck.Editor
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField($"{i}.",GUILayout.Width(25),GUILayout.Height(10));
                     var newActionType = (CardActionType)EditorGUILayout.EnumPopup(cardActionData.CardActionType);
-                    var newActionTarget = (ActionTarget)EditorGUILayout.EnumPopup(cardActionData.ActionTarget);
+                    var newActionTarget = (ActionTargetType)EditorGUILayout.EnumPopup(cardActionData.ActionTargetType);
                     if (GUILayout.Button("X", GUILayout.MaxWidth(25), GUILayout.MaxHeight(25)))
                         _removedList.Add(cardActionData);
 
@@ -292,12 +292,17 @@ namespace NueDeck.Editor
                     
                     descriptionData.EditEnableOverrideColor(EditorGUILayout.ToggleLeft("Override Color", descriptionData.EnableOverrideColor,
                         GUILayout.Width(125), GUILayout.Height(25)));
+                    
                     EditorGUILayout.Space(5);
 
                     if (descriptionData.EnableOverrideColor)
                     {
                         EditorGUILayout.BeginHorizontal();
+                        EditorGUILayout.BeginVertical();
                         descriptionData.EditOverrideColor(EditorGUILayout.ColorField(descriptionData.OverrideColor));
+                        descriptionData.EditOverrideColorOnValueScaled(EditorGUILayout.ToggleLeft("Is on scale", descriptionData.OverrideColorOnValueScaled,
+                            GUILayout.Width(125), GUILayout.Height(25)));
+                        EditorGUILayout.EndVertical();
                         EditorGUILayout.EndHorizontal();
                         EditorGUILayout.Space(5);
                     }
@@ -306,12 +311,19 @@ namespace NueDeck.Editor
                     if (descriptionData.UseModifier)
                     {
                         EditorGUILayout.BeginVertical();
+                        
                         var clampedIndex = Mathf.Clamp(descriptionData.ModifiedActionValueIndex, 0,
                             CardActionDataList.Count - 1);
                         descriptionData.EditModifiedActionValueIndex(
                             EditorGUILayout.IntField("Action Index:",clampedIndex));
                        
-                        descriptionData.EditModiferStats((StatusType)EditorGUILayout.EnumPopup("Modifier Type:",descriptionData.ModiferStats));
+                        descriptionData.EditModiferStats((StatusType)EditorGUILayout.EnumPopup("Scale Type:",descriptionData.ModiferStats));
+                        descriptionData.EditUsePrefixOnModifiedValues(EditorGUILayout.ToggleLeft("Use prefix", descriptionData.UsePrefixOnModifiedValue,
+                            GUILayout.Width(125), GUILayout.Height(25)));
+                        if (descriptionData.UsePrefixOnModifiedValue)
+                            descriptionData.EditPrefixOnModifiedValues(
+                                EditorGUILayout.TextField("Prefix:",descriptionData.ModifiedValuePrefix));
+                        
                         EditorGUILayout.EndVertical();
                     }
                     else

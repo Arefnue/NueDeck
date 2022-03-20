@@ -1,10 +1,12 @@
 ﻿namespace NueDeck.Scripts.Enums
 {
-    public enum ActionTarget
+    public enum ActionTargetType
     {
         Enemy,
         Ally,
         AllEnemies,
-        AllAllies
+        AllAllies,
+        RandomEnemy,
+        RandomAlly
     }
 }

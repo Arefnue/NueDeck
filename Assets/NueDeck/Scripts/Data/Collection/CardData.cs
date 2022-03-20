@@ -83,8 +83,8 @@ namespace NueDeck.Scripts.Data.Collection
     {
         [SerializeField] private CardActionType cardActionType;
         [SerializeField] private float actionValue;
-        [SerializeField] private ActionTarget actionTarget;
-        public ActionTarget ActionTarget => actionTarget;
+        [SerializeField] private ActionTargetType actionTargetType;
+        public ActionTargetType ActionTargetType => actionTargetType;
         public CardActionType CardActionType => cardActionType;
         public float ActionValue => actionValue;
 
@@ -93,7 +93,7 @@ namespace NueDeck.Scripts.Data.Collection
 #if UNITY_EDITOR
         public void EditActionType(CardActionType newType) =>  cardActionType = newType;
         public void EditActionValue(float newValue) => actionValue = newValue;
-        public void EditActionTarget(ActionTarget newTarget) => actionTarget = newTarget;
+        public void EditActionTarget(ActionTargetType newTargetType) => actionTargetType = newTargetType;
 
 #endif
 
@@ -113,14 +113,20 @@ namespace NueDeck.Scripts.Data.Collection
         [SerializeField] private bool useModifier;
         [SerializeField] private int modifiedActionValueIndex;
         [SerializeField] private StatusType modiferStats;
-        
+        [SerializeField] private bool usePrefixOnModifiedValue;
+        [SerializeField] private string modifiedValuePrefix = "*";
+        [SerializeField] private bool overrideColorOnValueScaled;
+
         public string DescriptionText => descriptionText;
         public bool EnableOverrideColor => enableOverrideColor;
         public Color OverrideColor => overrideColor;
         public bool UseModifier => useModifier;
         public int ModifiedActionValueIndex => modifiedActionValueIndex;
         public StatusType ModiferStats => modiferStats;
-        
+        public bool UsePrefixOnModifiedValue => usePrefixOnModifiedValue;
+        public string ModifiedValuePrefix => modifiedValuePrefix;
+        public bool OverrideColorOnValueScaled => overrideColorOnValueScaled;
+
         public string GetDescription()
         {
             var str = new StringBuilder();
@@ -145,23 +151,39 @@ namespace NueDeck.Scripts.Data.Collection
             
             var str = new StringBuilder();
             var value = cardData.CardActionDataList[ModifiedActionValueIndex].ActionValue;
+            var modifer = 0;
             if (CombatManager.Instance)
             {
                 var player = CombatManager.Instance.CurrentMainAlly;
+               
                 if (player)
                 {
-                    var modifer =player.CharacterStats.StatusDict[ModiferStats].StatusValue;
+                    modifer = player.CharacterStats.StatusDict[ModiferStats].StatusValue;
                     value += modifer;
-                
-                    if (modifer!= 0)
-                        str.Append("*");
+
+                    if (modifer != 0)
+                    {
+                        if (usePrefixOnModifiedValue)
+                            str.Append(modifiedValuePrefix);
+                    }
                 }
             }
            
             str.Append(value);
-            
-            if (EnableOverrideColor) 
-                str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),OverrideColor));
+
+            if (EnableOverrideColor)
+            {
+                if (OverrideColorOnValueScaled)
+                {
+                    if (modifer != 0)
+                        str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),OverrideColor));
+                }
+                else
+                {
+                    str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),OverrideColor));
+                }
+               
+            }
             
             return str.ToString();
         }
@@ -174,9 +196,6 @@ namespace NueDeck.Scripts.Data.Collection
             var str = new StringBuilder();
             
             str.Append(DescriptionText);
-            
-            // if (EnableOverrideColor && !string.IsNullOrEmpty(str.ToString())) 
-            //     str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),OverrideColor));
             
             return str.ToString();
         }
@@ -207,10 +226,7 @@ namespace NueDeck.Scripts.Data.Collection
             }
            
             str.Append(value);
-            
-            // if (EnableOverrideColor) 
-            //     str.Replace(str.ToString(),ColorExtentions.ColorString(str.ToString(),OverrideColor));
-            
+          
             return str.ToString();
         }
         
@@ -220,6 +236,9 @@ namespace NueDeck.Scripts.Data.Collection
         public void EditUseModifier(bool newStatus) => useModifier = newStatus;
         public void EditModifiedActionValueIndex(int newIndex) => modifiedActionValueIndex = newIndex;
         public void EditModiferStats(StatusType newStatusType) => modiferStats = newStatusType;
+        public void EditUsePrefixOnModifiedValues(bool newStatus) => usePrefixOnModifiedValue = newStatus;
+        public void EditPrefixOnModifiedValues(string newText) => modifiedValuePrefix = newText;
+        public void EditOverrideColorOnValueScaled(bool newStatus) => overrideColorOnValueScaled = newStatus;
 
 #endif
         #endregion

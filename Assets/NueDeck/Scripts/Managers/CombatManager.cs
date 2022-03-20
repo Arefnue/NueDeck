@@ -30,17 +30,17 @@ namespace NueDeck.Scripts.Managers
 
         public AllyBase CurrentMainAlly => CurrentAlliesList.Count>0 ? CurrentAlliesList[0] : null;
         
-        public CombatState CurrentCombatState
+        public CombatStateType CurrentCombatStateType
         {
-            get => _currentCombatState;
+            get => _currentCombatStateType;
             private set
             {
                 ExecuteCombatState(value);
-                _currentCombatState = value;
+                _currentCombatStateType = value;
             }
         }
         
-        private CombatState _currentCombatState;
+        private CombatStateType _currentCombatStateType;
         
         #region Setup
         private void Awake()
@@ -53,7 +53,7 @@ namespace NueDeck.Scripts.Managers
             else
             {
                 Instance = this;
-                CurrentCombatState = CombatState.PrepareCombat;
+                CurrentCombatStateType = CombatStateType.PrepareCombat;
             }
         }
 
@@ -71,16 +71,16 @@ namespace NueDeck.Scripts.Managers
            
             UIManager.Instance.CombatCanvas.gameObject.SetActive(true);
             UIManager.Instance.InformationCanvas.gameObject.SetActive(true);
-            CurrentCombatState = CombatState.AllyTurn;
+            CurrentCombatStateType = CombatStateType.AllyTurn;
         }
         
-        private void ExecuteCombatState(CombatState targetState)
+        private void ExecuteCombatState(CombatStateType targetStateType)
         {
-            switch (targetState)
+            switch (targetStateType)
             {
-                case CombatState.PrepareCombat:
+                case CombatStateType.PrepareCombat:
                     break;
-                case CombatState.AllyTurn:
+                case CombatStateType.AllyTurn:
 
                     OnAllyTurnStarted?.Invoke();
                     
@@ -91,7 +91,7 @@ namespace NueDeck.Scripts.Managers
                     GameManager.Instance.PersistentGameplayData.CanSelectCards = true;
                     
                     break;
-                case CombatState.EnemyTurn:
+                case CombatStateType.EnemyTurn:
 
                     OnEnemyTurnStarted?.Invoke();
                     
@@ -102,13 +102,13 @@ namespace NueDeck.Scripts.Managers
                     GameManager.Instance.PersistentGameplayData.CanSelectCards = false;
                     
                     break;
-                case CombatState.EndCombat:
+                case CombatStateType.EndCombat:
                     
                     GameManager.Instance.PersistentGameplayData.CanSelectCards = false;
                     
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(targetState), targetState, null);
+                    throw new ArgumentOutOfRangeException(nameof(targetStateType), targetStateType, null);
             }
         }
         #endregion
@@ -116,7 +116,7 @@ namespace NueDeck.Scripts.Managers
         #region Public Methods
         public void EndTurn()
         {
-            CurrentCombatState = CombatState.EnemyTurn;
+            CurrentCombatStateType = CombatStateType.EnemyTurn;
         }
         public void OnAllyDeath(AllyBase targetAlly)
         {
@@ -148,24 +148,24 @@ namespace NueDeck.Scripts.Managers
             GameManager.Instance.PersistentGameplayData.CurrentMana += target;
             UIManager.Instance.CombatCanvas.SetPileTexts();
         }
-        public void HighlightCardTarget(ActionTarget targetTarget)
+        public void HighlightCardTarget(ActionTargetType targetTypeTargetType)
         {
-            switch (targetTarget)
+            switch (targetTypeTargetType)
             {
-                case ActionTarget.Enemy:
+                case ActionTargetType.Enemy:
                     foreach (var currentEnemy in CurrentEnemiesList)
                         currentEnemy.EnemyCanvas.SetHighlight(true);
                     break;
-                case ActionTarget.Ally:
+                case ActionTargetType.Ally:
                     foreach (var currentAlly in CurrentAlliesList)
                         currentAlly.AllyCanvas.SetHighlight(true);
                     break;
-                case ActionTarget.AllEnemies:
+                case ActionTargetType.AllEnemies:
                     break;
-                case ActionTarget.AllAllies:
+                case ActionTargetType.AllAllies:
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(targetTarget), targetTarget, null);
+                    throw new ArgumentOutOfRangeException(nameof(targetTypeTargetType), targetTypeTargetType, null);
             }
         }
         #endregion
@@ -192,9 +192,9 @@ namespace NueDeck.Scripts.Managers
         }
         private void LoseCombat()
         {
-            if (CurrentCombatState == CombatState.EndCombat) return;
+            if (CurrentCombatStateType == CombatStateType.EndCombat) return;
             
-            CurrentCombatState = CombatState.EndCombat;
+            CurrentCombatStateType = CombatStateType.EndCombat;
             
             CollectionManager.Instance.DiscardHand();
             CollectionManager.Instance.DiscardPile.Clear();
@@ -206,9 +206,9 @@ namespace NueDeck.Scripts.Managers
         }
         private void WinCombat()
         {
-            if (CurrentCombatState == CombatState.EndCombat) return;
+            if (CurrentCombatStateType == CombatStateType.EndCombat) return;
           
-            CurrentCombatState = CombatState.EndCombat;
+            CurrentCombatStateType = CombatStateType.EndCombat;
            
             foreach (var allyBase in CurrentAlliesList)
             {
@@ -248,8 +248,8 @@ namespace NueDeck.Scripts.Managers
                 yield return waitDelay;
             }
 
-            if (CurrentCombatState != CombatState.EndCombat)
-                CurrentCombatState = CombatState.AllyTurn;
+            if (CurrentCombatStateType != CombatStateType.EndCombat)
+                CurrentCombatStateType = CombatStateType.AllyTurn;
         }
         #endregion
     }

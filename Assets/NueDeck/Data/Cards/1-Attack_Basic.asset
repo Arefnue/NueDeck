@@ -20,10 +20,10 @@ MonoBehaviour:
   cardActionDataList:
   - cardActionType: 0
     actionValue: 50
-    actionTarget: 0
+    actionTargetType: 0
   - cardActionType: 0
     actionValue: 50
-    actionTarget: 0
+    actionTargetType: 0
   cardDescriptionDataList:
   - descriptionText: 'Deal '
     enableOverrideColor: 0
@@ -36,8 +36,8 @@ MonoBehaviour:
     overrideColor: {r: 1, g: 0, b: 0, a: 1}
     useModifier: 1
     modifiedActionValueIndex: 0
-    modiferStats: 2
-  - descriptionText: damage
+    modiferStats: 3
+  - descriptionText: ' damage'
     enableOverrideColor: 0
     overrideColor: {r: 0, g: 0, b: 0, a: 1}
     useModifier: 0

@@ -1,6 +1,6 @@
 ﻿namespace NueDeck.Scripts.Enums
 {
-    public enum EnemyIntentions
+    public enum EnemyIntentionType
     {
         Attack,
         Defend,
