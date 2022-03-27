@@ -299,51 +299,16 @@ namespace NueDeck.Scripts.Collection
             {
                 RaycastHit hit;
                 var mainRay = _mainCam.ScreenPointToRay(mousePos);
-                
+                var _canUse = false;
                 CharacterBase selfCharacter = CombatManager.Instance.CurrentMainAlly;
-                List<CharacterBase> targetCharacters = new List<CharacterBase>();
-                bool _canUse = false;
-                bool _hasMultipleTarget = false;
-                
-                if (_heldCard.CardData.UsableWithoutTarget)
-                {
-                    _canUse = true;
-                    selfCharacter = CombatManager.Instance.CurrentMainAlly;
-                    switch (_heldCard.CardData.CardActionDataList[0].ActionTargetType)
-                    {
-                        case ActionTargetType.Enemy:
-                            targetCharacters = null;
-                            break;
-                        case ActionTargetType.Ally:
-                            targetCharacters = null;
-                            break;
-                        case ActionTargetType.AllEnemies:
-                            foreach (var character in CombatManager.Instance.CurrentEnemiesList)
-                                targetCharacters.Add(character);
-                            break;
-                        case ActionTargetType.AllAllies:
-                            foreach (var character in CombatManager.Instance.CurrentAlliesList)
-                                targetCharacters.Add(character);
-                            break;
-                        case ActionTargetType.RandomEnemy:
-                            targetCharacters.Add(CombatManager.Instance.CurrentEnemiesList.RandomItem());
-                            break;
-                        case ActionTargetType.RandomAlly:
-                            targetCharacters.Add(CombatManager.Instance.CurrentAlliesList.RandomItem());
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                }
-                else
-                {
-                    _canUse = CheckPlayOnCharacter(mainRay, _canUse, ref selfCharacter, ref targetCharacters);
-                }
+                CharacterBase targetCharacter = null;
 
+                _canUse = _heldCard.CardData.UsableWithoutTarget || CheckPlayOnCharacter(mainRay, _canUse, ref selfCharacter, ref targetCharacter);
+                
                 if (_canUse)
                 {
                     backToHand = false;
-                    _heldCard.Use(selfCharacter,targetCharacters);
+                    _heldCard.Use(selfCharacter,targetCharacter,CombatManager.Instance.CurrentEnemiesList,CombatManager.Instance.CurrentAlliesList);
                 }
             }
 
@@ -354,7 +319,7 @@ namespace NueDeck.Scripts.Collection
         }
 
         private bool CheckPlayOnCharacter(Ray mainRay, bool _canUse, ref CharacterBase selfCharacter,
-            ref List<CharacterBase> targetCharacter)
+            ref CharacterBase targetCharacter)
         {
             RaycastHit hit;
             if (Physics.Raycast(mainRay, out hit, 1000, targetLayer))
@@ -372,7 +337,7 @@ namespace NueDeck.Scripts.Collection
                     {
                         _canUse = true;
                         selfCharacter = CombatManager.Instance.CurrentMainAlly;
-                        targetCharacter.Add(character.GetCharacterBase());
+                        targetCharacter = character.GetCharacterBase();
                     }
                 }
             }

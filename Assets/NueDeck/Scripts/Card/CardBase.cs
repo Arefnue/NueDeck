@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using NueDeck.Scripts.Characters;
 using NueDeck.Scripts.Data.Collection;
+using NueDeck.Scripts.Enums;
 using NueDeck.Scripts.Managers;
+using NueExtentions;
 using NueTooltip.Core;
 using NueTooltip.CursorSystem;
 using NueTooltip.Interfaces;
@@ -49,27 +52,15 @@ namespace NueDeck.Scripts.Card
         #endregion
         
         #region Card Methods
-        public virtual void Use(CharacterBase self,CharacterBase target)
-        {
-            SpendMana(CardData.ManaCost);
-            
-            foreach (var playerAction in CardData.CardActionDataList)
-                CardActionProcessor.GetAction(playerAction.CardActionType)
-                    .DoAction(new CardActionParameters(playerAction.ActionValue,
-                        target,self,CardData));
-            
-            CollectionManager.Instance.OnCardPlayed(this);
-            
-            StartCoroutine(nameof(DiscardRoutine));
-        }
-        
-        public virtual void Use(CharacterBase self,List<CharacterBase> targetList)
+        public virtual void Use(CharacterBase self,CharacterBase targetCharacter, List<EnemyBase> allEnemies, List<AllyBase> allAllies)
         {
             SpendMana(CardData.ManaCost);
 
-            foreach (var target in targetList)
+            foreach (var playerAction in CardData.CardActionDataList)
             {
-                foreach (var playerAction in CardData.CardActionDataList)
+                var targetList = DetermineTargets(targetCharacter, allEnemies, allAllies, playerAction);
+
+                foreach (var target in targetList)
                     CardActionProcessor.GetAction(playerAction.CardActionType)
                         .DoAction(new CardActionParameters(playerAction.ActionValue,
                             target,self,CardData));
@@ -78,6 +69,39 @@ namespace NueDeck.Scripts.Card
             CollectionManager.Instance.OnCardPlayed(this);
             
             StartCoroutine(nameof(DiscardRoutine));
+        }
+
+        private static List<CharacterBase> DetermineTargets(CharacterBase targetCharacter, List<EnemyBase> allEnemies, List<AllyBase> allAllies,
+            CardActionData playerAction)
+        {
+            List<CharacterBase> targetList = new List<CharacterBase>();
+            switch (playerAction.ActionTargetType)
+            {
+                case ActionTargetType.Enemy:
+                    targetList.Add(targetCharacter);
+                    break;
+                case ActionTargetType.Ally:
+                    targetList.Add(targetCharacter);
+                    break;
+                case ActionTargetType.AllEnemies:
+                    foreach (var enemyBase in allEnemies)
+                        targetList.Add(enemyBase);
+                    break;
+                case ActionTargetType.AllAllies:
+                    foreach (var allyBase in allAllies)
+                        targetList.Add(allyBase);
+                    break;
+                case ActionTargetType.RandomEnemy:
+                    targetList.Add(allEnemies.RandomItem());
+                    break;
+                case ActionTargetType.RandomAlly:
+                    targetList.Add(allAllies.RandomItem());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return targetList;
         }
         
         public virtual void Discard()
