@@ -238,15 +238,28 @@ namespace NueDeck.Editor
                 {
                     var cardActionData = CardActionDataList[i];
                     EditorGUILayout.BeginVertical("box", GUILayout.Width(150), GUILayout.MaxHeight(50));
+                
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField($"{i}.",GUILayout.Width(25),GUILayout.Height(10));
-                    var newActionType = (CardActionType)EditorGUILayout.EnumPopup(cardActionData.CardActionType);
-                    var newActionTarget = (ActionTargetType)EditorGUILayout.EnumPopup(cardActionData.ActionTargetType);
+                    GUIStyle idStyle = new GUIStyle();
+                    idStyle.fontSize = 16;
+                    idStyle.fixedWidth = 25;
+                    idStyle.fixedHeight = 25;
+                    idStyle.fontStyle = FontStyle.Bold;
+                    idStyle.normal.textColor = Color.white;
+                    EditorGUILayout.LabelField($"Action Index: {i}",idStyle);
+                    
+                    GUILayout.FlexibleSpace();
+                    
                     if (GUILayout.Button("X", GUILayout.MaxWidth(25), GUILayout.MaxHeight(25)))
                         _removedList.Add(cardActionData);
-
+                    
                     EditorGUILayout.EndHorizontal();
-                    var newActionValue = EditorGUILayout.FloatField(cardActionData.ActionValue);
+                    EditorGUILayout.Separator();
+                    var newActionType = (CardActionType)EditorGUILayout.EnumPopup("Action Type",cardActionData.CardActionType,GUILayout.Width(250));
+                    var newActionTarget = (ActionTargetType)EditorGUILayout.EnumPopup("Target Type",cardActionData.ActionTargetType,GUILayout.Width(250));
+                   
+                   
+                    var newActionValue = EditorGUILayout.FloatField("Value: ",cardActionData.ActionValue);
                     cardActionData.EditActionType(newActionType);
                     cardActionData.EditActionValue(newActionValue);
                     cardActionData.EditActionTarget(newActionTarget);
@@ -299,8 +312,9 @@ namespace NueDeck.Editor
                     {
                         EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.BeginVertical();
+                        EditorGUILayout.Separator();
                         descriptionData.EditOverrideColor(EditorGUILayout.ColorField(descriptionData.OverrideColor));
-                        descriptionData.EditOverrideColorOnValueScaled(EditorGUILayout.ToggleLeft("Is on scale", descriptionData.OverrideColorOnValueScaled,
+                        descriptionData.EditOverrideColorOnValueScaled(EditorGUILayout.ToggleLeft("Color on scale", descriptionData.OverrideColorOnValueScaled,
                             GUILayout.Width(125), GUILayout.Height(25)));
                         EditorGUILayout.EndVertical();
                         EditorGUILayout.EndHorizontal();
@@ -318,7 +332,7 @@ namespace NueDeck.Editor
                             EditorGUILayout.IntField("Action Index:",clampedIndex));
                        
                         descriptionData.EditModiferStats((StatusType)EditorGUILayout.EnumPopup("Scale Type:",descriptionData.ModiferStats));
-                        descriptionData.EditUsePrefixOnModifiedValues(EditorGUILayout.ToggleLeft("Use prefix", descriptionData.UsePrefixOnModifiedValue,
+                        descriptionData.EditUsePrefixOnModifiedValues(EditorGUILayout.ToggleLeft("Use prefix on scale", descriptionData.UsePrefixOnModifiedValue,
                             GUILayout.Width(125), GUILayout.Height(25)));
                         if (descriptionData.UsePrefixOnModifiedValue)
                             descriptionData.EditPrefixOnModifiedValues(
