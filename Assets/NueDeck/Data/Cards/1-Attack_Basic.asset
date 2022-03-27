@@ -19,11 +19,29 @@ MonoBehaviour:
   usableWithoutTarget: 0
   cardActionDataList:
   - cardActionType: 0
-    actionValue: 50
     actionTargetType: 0
-  - cardActionType: 0
     actionValue: 50
+    actionDelay: 0
+  - cardActionType: 0
     actionTargetType: 4
+    actionValue: 50
+    actionDelay: 0.2
+  - cardActionType: 0
+    actionTargetType: 4
+    actionValue: 5
+    actionDelay: 0.01
+  - cardActionType: 0
+    actionTargetType: 4
+    actionValue: 5
+    actionDelay: 0.01
+  - cardActionType: 0
+    actionTargetType: 4
+    actionValue: 5
+    actionDelay: 0.01
+  - cardActionType: 0
+    actionTargetType: 4
+    actionValue: 25
+    actionDelay: 0.2
   cardDescriptionDataList:
   - descriptionText: 'Deal '
     enableOverrideColor: 0

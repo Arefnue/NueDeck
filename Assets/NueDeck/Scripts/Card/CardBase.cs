@@ -54,10 +54,18 @@ namespace NueDeck.Scripts.Card
         #region Card Methods
         public virtual void Use(CharacterBase self,CharacterBase targetCharacter, List<EnemyBase> allEnemies, List<AllyBase> allAllies)
         {
-            SpendMana(CardData.ManaCost);
+            StartCoroutine(CardUseRoutine(self, targetCharacter, allEnemies, allAllies));
+        }
 
+        private IEnumerator CardUseRoutine(CharacterBase self,CharacterBase targetCharacter, List<EnemyBase> allEnemies, List<AllyBase> allAllies)
+        {
+            SpendMana(CardData.ManaCost);
+            CollectionManager.Instance.OnCardPlayed(this);
+           
+            
             foreach (var playerAction in CardData.CardActionDataList)
             {
+                yield return new WaitForSeconds(playerAction.ActionDelay);
                 var targetList = DetermineTargets(targetCharacter, allEnemies, allAllies, playerAction);
 
                 foreach (var target in targetList)
@@ -65,10 +73,7 @@ namespace NueDeck.Scripts.Card
                         .DoAction(new CardActionParameters(playerAction.ActionValue,
                             target,self,CardData));
             }
-            
-            CollectionManager.Instance.OnCardPlayed(this);
-            
-            StartCoroutine(nameof(DiscardRoutine));
+            StartCoroutine(DiscardRoutine());
         }
 
         private static List<CharacterBase> DetermineTargets(CharacterBase targetCharacter, List<EnemyBase> allEnemies, List<AllyBase> allAllies,
@@ -138,7 +143,7 @@ namespace NueDeck.Scripts.Card
         #endregion
         
         #region Routines
-        protected virtual IEnumerator DiscardRoutine()
+        protected virtual IEnumerator DiscardRoutine(bool destroy = true)
         {
             var timer = 0f;
             transform.SetParent(CollectionManager.Instance.HandController.discardTransform);
@@ -164,8 +169,10 @@ namespace NueDeck.Scripts.Card
                 
                 yield return CachedWaitFrame;
             }
-            
-            Destroy(gameObject);
+
+            if (destroy)
+                Destroy(gameObject);
+           
         }
 
         #endregion

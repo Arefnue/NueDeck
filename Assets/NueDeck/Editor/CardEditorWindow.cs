@@ -224,6 +224,30 @@ namespace NueDeck.Editor
             UsableWithoutTarget = EditorGUILayout.Toggle("Usable Without Target:", UsableWithoutTarget);
         }
         
+        private bool _isGeneralSettingsFolded;
+        private Vector2 _generalSettingsScrollPos;
+        private void ChangeGeneralSettings()
+        {
+            _isGeneralSettingsFolded =EditorGUILayout.BeginFoldoutHeaderGroup(_isGeneralSettingsFolded, "General Settings");
+            if (!_isGeneralSettingsFolded)
+            {
+                EditorGUILayout.EndFoldoutHeaderGroup();
+                return;
+            }
+            _generalSettingsScrollPos = EditorGUILayout.BeginScrollView(_generalSettingsScrollPos,GUILayout.ExpandWidth(true));
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.BeginVertical();
+            ChangeManaCost();
+            ChangeUsableWithoutTarget();
+            ChangeAudioActionType();
+            EditorGUILayout.EndVertical();
+            GUILayout.Space(100);
+            ChangeCardSprite();
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndScrollView();
+            EditorGUILayout.EndFoldoutHeaderGroup();
+        }
+        
         private bool _isCardActionDataListFolded;
         private Vector2 _cardActionScrollPos;
         private void ChangeCardActionDataList()
@@ -259,10 +283,12 @@ namespace NueDeck.Editor
                     var newActionTarget = (ActionTargetType)EditorGUILayout.EnumPopup("Target Type",cardActionData.ActionTargetType,GUILayout.Width(250));
                    
                    
-                    var newActionValue = EditorGUILayout.FloatField("Value: ",cardActionData.ActionValue);
+                    var newActionValue = EditorGUILayout.FloatField("Action Value: ",cardActionData.ActionValue);
+                    var newActionDelay = EditorGUILayout.FloatField("Action Delay: ",cardActionData.ActionDelay);
                     cardActionData.EditActionType(newActionType);
                     cardActionData.EditActionValue(newActionValue);
                     cardActionData.EditActionTarget(newActionTarget);
+                    cardActionData.EditActionDelay(newActionDelay);
                     EditorGUILayout.EndVertical();
                 }
 
@@ -433,27 +459,7 @@ namespace NueDeck.Editor
             AudioType = (AudioActionType)EditorGUILayout.EnumPopup("Audio Type:",AudioType);
         }
 
-        private bool _isGeneralSettingsFolded;
-        private void ChangeGeneralSettings()
-        {
-            _isGeneralSettingsFolded =EditorGUILayout.BeginFoldoutHeaderGroup(_isGeneralSettingsFolded, "General Settings");
-            if (!_isGeneralSettingsFolded)
-            {
-                EditorGUILayout.EndFoldoutHeaderGroup();
-                return;
-            }
-            
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.BeginVertical();
-            ChangeManaCost();
-            ChangeUsableWithoutTarget();
-            ChangeAudioActionType();
-            EditorGUILayout.EndVertical();
-            GUILayout.Space(100);
-            ChangeCardSprite();
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.EndFoldoutHeaderGroup();
-        }
+       
         private void SaveCardData()
         {
             if (!SelectedCardData) return;
