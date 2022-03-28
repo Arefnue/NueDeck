@@ -203,7 +203,8 @@ namespace NueDeck.Scripts.Card
         protected virtual void ShowTooltipInfo()
         {
             if (!descriptionRoot) return;
-            
+            if (CardData.KeywordsList.Count<=0) return;
+           
             var tooltipManager = TooltipManager.Instance;
             foreach (var cardDataSpecialKeyword in CardData.KeywordsList)
             {

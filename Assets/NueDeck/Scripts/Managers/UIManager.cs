@@ -16,7 +16,9 @@ namespace NueDeck.Scripts.Managers
         [SerializeField] private CombatCanvas combatCanvas;
         [SerializeField] private InformationCanvas informationCanvas;
         [SerializeField] private RewardCanvas rewardCanvas;
-       
+        [SerializeField] private InventoryCanvas inventoryCanvas;
+        
+
         [Header("Fader")]
         [SerializeField] private CanvasGroup fader;
         [SerializeField] private float fadeSpeed = 1f;
@@ -24,6 +26,7 @@ namespace NueDeck.Scripts.Managers
         public CombatCanvas CombatCanvas => combatCanvas;
         public InformationCanvas InformationCanvas => informationCanvas;
         public RewardCanvas RewardCanvas => rewardCanvas;
+        public InventoryCanvas InventoryCanvas => inventoryCanvas;
 
         #region Setup
         private void Awake()

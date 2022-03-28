@@ -22,6 +22,7 @@ namespace NueDeck.Scripts.Utils
         }
         private IEnumerator DelaySceneChange(SceneType type)
         {
+            UIManager.Instance.SetCanvas(UIManager.Instance.InventoryCanvas,false,true);
             yield return StartCoroutine(UIManager.Instance.Fade(true));
 
             switch (type)
@@ -31,6 +32,7 @@ namespace NueDeck.Scripts.Utils
                     UIManager.Instance.SetCanvas(UIManager.Instance.CombatCanvas,false,true);
                     UIManager.Instance.SetCanvas(UIManager.Instance.InformationCanvas,false,true);
                     UIManager.Instance.SetCanvas(UIManager.Instance.RewardCanvas,false,true);
+                   
                     GameManager.Instance.InitGameplayData();
                     GameManager.Instance.SetInitalHand();
                     break;
@@ -39,12 +41,14 @@ namespace NueDeck.Scripts.Utils
                     UIManager.Instance.SetCanvas(UIManager.Instance.CombatCanvas,false,true);
                     UIManager.Instance.SetCanvas(UIManager.Instance.InformationCanvas,true,false);
                     UIManager.Instance.SetCanvas(UIManager.Instance.RewardCanvas,false,true);
+                   
                     break;
                 case SceneType.Combat:
                     UIManager.Instance.ChangeScene(GameManager.Instance.SceneData.combatSceneIndex);
                     UIManager.Instance.SetCanvas(UIManager.Instance.CombatCanvas,false,true);
                     UIManager.Instance.SetCanvas(UIManager.Instance.InformationCanvas,true,false);
                     UIManager.Instance.SetCanvas(UIManager.Instance.RewardCanvas,false,true);
+                    
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
