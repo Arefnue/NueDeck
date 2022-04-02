@@ -64,8 +64,6 @@ namespace NueDeck.Scripts.Card
         private IEnumerator CardUseRoutine(CharacterBase self,CharacterBase targetCharacter, List<EnemyBase> allEnemies, List<AllyBase> allAllies)
         {
             SpendMana(CardData.ManaCost);
-            CollectionManager.Instance.OnCardPlayed(this);
-           
             
             foreach (var playerAction in CardData.CardActionDataList)
             {
@@ -77,6 +75,7 @@ namespace NueDeck.Scripts.Card
                         .DoAction(new CardActionParameters(playerAction.ActionValue,
                             target,self,CardData));
             }
+            CollectionManager.Instance.OnCardPlayed(this);
             StartCoroutine(DiscardRoutine());
         }
 
