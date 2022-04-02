@@ -2,43 +2,71 @@ using System;
 using System.Collections.Generic;
 using NueDeck.Scripts.Card;
 using NueDeck.Scripts.Data.Collection;
+using NueDeck.Scripts.Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace NueDeck.Scripts.UI
 {
     public class InventoryCanvas : CanvasBase
     {
         [SerializeField] private TextMeshProUGUI titleTextField;
-        [SerializeField] private Transform cardSpawnRoot;
+        [SerializeField] private LayoutGroup cardSpawnRoot;
         [SerializeField] private CardBase cardUIPrefab;
-        [SerializeField] private DeckData deckData;
-        
 
         public TextMeshProUGUI TitleTextField => titleTextField;
 
-        public Transform CardSpawnRoot => cardSpawnRoot;
+        public LayoutGroup CardSpawnRoot => cardSpawnRoot;
 
+        private List<CardBase> _spawnedCardList = new List<CardBase>();
 
         public void ChangeTitle(string newTitle) => TitleTextField.text = newTitle;
-
-
+        
         public void SetCards(List<CardData> cardDataList)
         {
-            foreach (var cardData in cardDataList)
+            var count = 0;
+            for (int i = 0; i < _spawnedCardList.Count; i++)
             {
-                var cardBase =Instantiate(cardUIPrefab, CardSpawnRoot);
-                cardBase.SetCard(cardData);
+                count++;
+                if (i>=cardDataList.Count)
+                {
+                    _spawnedCardList[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    _spawnedCardList[i].SetCard(cardDataList[i],false);
+                    _spawnedCardList[i].gameObject.SetActive(true);
+                }
+                
             }
+            
+            var cal = cardDataList.Count - count;
+            if (cal>0)
+            {
+                for (var i = 0; i < cal; i++)
+                {
+                    var cardData = cardDataList[count+i];
+                    var cardBase = Instantiate(cardUIPrefab, CardSpawnRoot.transform);
+                    cardBase.SetCard(cardData, false);
+                    _spawnedCardList.Add(cardBase);
+                }
+            }
+            
+           
         }
 
-        // private void Update()
-        // {
-        //     if (Input.GetKeyDown(KeyCode.A))
-        //     {
-        //         ChangeTitle(deckData.DeckName);
-        //         SetCards(deckData.CardList);
-        //     }
-        // }
+        public override void CloseCanvas()
+        {
+            base.CloseCanvas();
+           
+        }
+
+        public override void ResetCanvas()
+        {
+            base.ResetCanvas();
+          
+        }
     }
 }

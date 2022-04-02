@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using NueDeck.Scripts.Data.Collection;
 using NueDeck.Scripts.UI;
 using NueDeck.Scripts.UI.Reward;
 using UnityEngine;
@@ -46,6 +48,13 @@ namespace NueDeck.Scripts.Managers
         #endregion
 
         #region Public Methods
+
+        public void OpenInventory(List<CardData> cardList,string title)
+        {
+           SetCanvas(InventoryCanvas,true,true);
+           InventoryCanvas.ChangeTitle(title);
+           InventoryCanvas.SetCards(cardList);
+        }
         public void SetCanvas(CanvasBase targetCanvas,bool open,bool reset = false)
         {
             if (reset)

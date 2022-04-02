@@ -19,9 +19,9 @@ namespace NueDeck.Scripts.Card
         private readonly Vector2 _dissolveSpeed = new Vector2(2f, 2f);
 
         
-        public override void SetCard(CardData targetProfile)
+        public override void SetCard(CardData targetProfile,bool isPlayable)
         {
-            base.SetCard(targetProfile);
+            base.SetCard(targetProfile,isPlayable);
             if (cardMeshRenderer)
             {
                 _cardMaterial = cardMeshRenderer.material;

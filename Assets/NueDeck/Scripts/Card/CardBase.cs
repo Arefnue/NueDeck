@@ -31,6 +31,8 @@ namespace NueDeck.Scripts.Card
         public bool IsInactive { get; protected set; }
         protected Transform CachedTransform { get; set; }
         protected WaitForEndOfFrame CachedWaitFrame { get; set; }
+
+        public bool IsPlayable { get; protected set; } = true;
         
         #region Setup
         protected virtual void Awake()
@@ -39,10 +41,10 @@ namespace NueDeck.Scripts.Card
             CachedWaitFrame = new WaitForEndOfFrame();
         }
 
-        public virtual void SetCard(CardData targetProfile)
+        public virtual void SetCard(CardData targetProfile,bool isPlayable = true)
         {
             CardData = targetProfile;
-            
+            IsPlayable = isPlayable;
             nameTextField.text = CardData.CardName;
             descTextField.text = CardData.MyDescription;
             manaTextField.text = CardData.ManaCost.ToString();
@@ -54,6 +56,8 @@ namespace NueDeck.Scripts.Card
         #region Card Methods
         public virtual void Use(CharacterBase self,CharacterBase targetCharacter, List<EnemyBase> allEnemies, List<AllyBase> allAllies)
         {
+            if (!IsPlayable) return;
+         
             StartCoroutine(CardUseRoutine(self, targetCharacter, allEnemies, allAllies));
         }
 
@@ -114,21 +118,25 @@ namespace NueDeck.Scripts.Card
         
         public virtual void Discard()
         {
+            if (!IsPlayable) return;
             CollectionManager.Instance.OnCardDiscarded(this);
             StartCoroutine(DiscardRoutine());
         }
         public virtual void Exhaust()
         {
+            if (!IsPlayable) return;
             //StartCoroutine(nameof(Dissolve));
         }
 
         protected virtual void SpendMana(int value)
         {
+            if (!IsPlayable) return;
             GameManager.Instance.PersistentGameplayData.CurrentMana -= value;
         }
         
         public virtual void SetInactiveMaterialState(bool isInactive, Material inactiveMaterial = null) 
         {
+            if (!IsPlayable) return;
             if (isInactive == this.IsInactive) return; 
             
             IsInactive = isInactive;
