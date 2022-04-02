@@ -49,7 +49,11 @@ namespace NueDeck.Scripts.Managers
         #endregion
         
         #region Public Methods
-        public void InitGameplayData() => PersistentGameplayData = new PersistentGameplayData(gameplayData);
+        public void InitGameplayData()
+        { 
+            PersistentGameplayData = new PersistentGameplayData(gameplayData);
+            UIManager.Instance.InformationCanvas.ResetCanvas();
+        } 
         public CardBase BuildAndGetCard(CardData targetData, Transform parent)
         {
             var clone = Instantiate(GameplayData.CardPrefab, parent);
