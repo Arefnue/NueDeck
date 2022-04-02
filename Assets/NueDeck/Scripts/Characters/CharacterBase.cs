@@ -8,10 +8,13 @@ namespace NueDeck.Scripts.Characters
     {
         [Header("Base settings")]
         [SerializeField] private CharacterType characterType;
-        
+
+        [SerializeField] private Transform textSpawnRoot;
         public CharacterStats CharacterStats { get; protected set; }
 
         public CharacterType CharacterType => characterType;
+
+        public Transform TextSpawnRoot => textSpawnRoot;
 
         public virtual void Awake()
         {

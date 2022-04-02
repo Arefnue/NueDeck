@@ -21,6 +21,7 @@ namespace NueDeck.Scripts.Card.CardActions
             {
                 FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
                 FxManager.Instance.PlayFx(actionParameters.SelfCharacter.transform,FxType.Heal);
+                FxManager.Instance.SpawnFloatingText(actionParameters.TargetCharacter.TextSpawnRoot,value.ToString());
             }
            
             if (AudioManager.Instance != null) 

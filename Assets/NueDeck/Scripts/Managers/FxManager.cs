@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using NueDeck.Scripts.Enums;
+using NueDeck.Scripts.Utils;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace NueDeck.Scripts.Managers
 {
@@ -13,6 +15,11 @@ namespace NueDeck.Scripts.Managers
     
         [Header("References")] 
         [SerializeField] private List<FxBundle> fxList;
+
+        [Header("Floating Text")]
+        [SerializeField] private FloatingText floatingTextPrefab;
+        
+
         public Dictionary<FxType, GameObject> FXDict { get; private set; }= new Dictionary<FxType, GameObject>();
         public List<FxBundle> FXList => fxList;
 
@@ -28,7 +35,7 @@ namespace NueDeck.Scripts.Managers
             {
                 transform.parent = null;
                 Instance = this;
-            
+                DontDestroyOnLoad(gameObject);
                 for (int i = 0; i < Enum.GetValues(typeof(FxType)).Length; i++)
                     FXDict.Add((FxType)i,FXList.FirstOrDefault(x=>x.FxType == (FxType)i)?.FxPrefab);
             }
@@ -36,6 +43,15 @@ namespace NueDeck.Scripts.Managers
         #endregion
 
         #region Public Methods
+
+        public void SpawnFloatingText(Transform targetTransform,string text, int xDir =0, int yDir =-1)
+        {
+            var cloneText =Instantiate(floatingTextPrefab, targetTransform.position, Quaternion.identity);
+            Debug.Log(cloneText + text);
+            if (xDir == 0)
+                xDir = Random.value>=0.5f ? 1 : -1;
+            cloneText.PlayText(text,xDir,yDir);
+        }
         public void PlayFx(Transform targetTransform, FxType targetFx)
         {
             Instantiate(FXDict[targetFx], targetTransform);
