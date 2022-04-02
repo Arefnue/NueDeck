@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7048625805859230003}
   - component: {fileID: 7048625805859230004}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: CollectionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,9 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handController: {fileID: 7048625806080352387}
-  drawPile: []
-  handPile: []
-  discardPile: []
 --- !u!1001 &968554621512985320
 PrefabInstance:
   m_ObjectHideFlags: 0

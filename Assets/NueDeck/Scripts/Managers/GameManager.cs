@@ -52,7 +52,9 @@ namespace NueDeck.Scripts.Managers
         public void InitGameplayData()
         { 
             PersistentGameplayData = new PersistentGameplayData(gameplayData);
-            UIManager.Instance.InformationCanvas.ResetCanvas();
+            if (UIManager.Instance)
+                UIManager.Instance.InformationCanvas.ResetCanvas();
+           
         } 
         public CardBase BuildAndGetCard(CardData targetData, Transform parent)
         {

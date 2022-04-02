@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4396466161833877839}
   - component: {fileID: 2569162203329883452}
   - component: {fileID: 7928314818714979944}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 7326535452892495232}
   - component: {fileID: 4113537915249967527}
   - component: {fileID: 4769151058534202417}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: CardUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 5980539289909022141}
   - component: {fileID: 541581264030576027}
   - component: {fileID: 6566062210225960029}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Mana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 615591995990200064}
   - component: {fileID: 2072976169588057024}
   - component: {fileID: 3725308678605598420}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: CardImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 9010572976229091430}
   - component: {fileID: 4336753579361358508}
   - component: {fileID: 6419786257618255238}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: BackImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 7149474878041384844}
   - component: {fileID: 3717151537787858294}
   - component: {fileID: 6520181255368789923}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 1223267526049572344}
   - component: {fileID: 3337250580200065272}
   - component: {fileID: 8923623931829526436}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 3817079651583674677}
   - component: {fileID: 2417300129600577360}
   - component: {fileID: 6655857315106543429}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 7403465324286304931}
   - component: {fileID: 3882535119211770857}
   - component: {fileID: 9111309445074683089}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: PassiveImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,7 +887,7 @@ GameObject:
   - component: {fileID: 6632584690436933652}
   - component: {fileID: 608172955803469982}
   - component: {fileID: 8837449215094390841}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -961,7 +961,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4173267314593439615}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: TooltipRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -998,7 +998,7 @@ GameObject:
   - component: {fileID: 6519316903956495543}
   - component: {fileID: 51406572503602623}
   - component: {fileID: 8510569279771794999}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ManaText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
