@@ -97,10 +97,13 @@ namespace NueDeck.Scripts.Card
                         targetList.Add(allyBase);
                     break;
                 case ActionTargetType.RandomEnemy:
-                    targetList.Add(allEnemies.RandomItem());
+                    if (allEnemies.Count>0)
+                        targetList.Add(allEnemies.RandomItem());
+                    
                     break;
                 case ActionTargetType.RandomAlly:
-                    targetList.Add(allAllies.RandomItem());
+                    if (allAllies.Count>0)
+                        targetList.Add(allAllies.RandomItem());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -112,7 +115,7 @@ namespace NueDeck.Scripts.Card
         public virtual void Discard()
         {
             CollectionManager.Instance.OnCardDiscarded(this);
-            StartCoroutine(nameof(DiscardRoutine));
+            StartCoroutine(DiscardRoutine());
         }
         public virtual void Exhaust()
         {
@@ -210,7 +213,7 @@ namespace NueDeck.Scripts.Card
             {
                 var specialKeyword = tooltipManager.SpecialKeywordData.SpecialKeywordBaseList.Find(x=>x.SpecialKeyword == cardDataSpecialKeyword);
                 if (specialKeyword != null)
-                    ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot,CursorType.Default,CollectionManager.Instance.HandController.cam);
+                    ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot,CursorType.Default,CollectionManager.Instance ? CollectionManager.Instance.HandController.cam : Camera.main);
             }
         }
         public virtual void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null, CursorType targetCursor = CursorType.Default,Camera cam = null, float delayShow =0)

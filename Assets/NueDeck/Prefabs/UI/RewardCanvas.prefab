@@ -168,7 +168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2195740174929342428
 Transform:
   m_ObjectHideFlags: 0
@@ -1439,7 +1439,8 @@ MonoBehaviour:
   - {fileID: 6790989744174962215}
   - {fileID: 5592596103052455727}
   choice2DCardSpawnRoot: {fileID: 4296046879590768356}
-  choiceCardPrefab: {fileID: 7396816322469541255, guid: 064f09601e0b46348b1488f9cc7fd9e6, type: 3}
+  choiceCardPrefab: {fileID: 7257024235002004488, guid: 026170fff350f3f43b7856af2f85ab6a, type: 3}
+  choiceCardUIPrefab: {fileID: 4977405248093799515, guid: 064f09601e0b46348b1488f9cc7fd9e6, type: 3}
   choicePanel: {fileID: 3729220889032712400}
 --- !u!223 &7733704880889306847
 Canvas:

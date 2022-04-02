@@ -16,21 +16,21 @@ MonoBehaviour:
   cardName: Earn mana
   manaCost: 0
   cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  actionTarget: 1
   usableWithoutTarget: 1
   cardActionDataList:
-  - myPlayerActionType: 6
-    value: 2
+  - cardActionType: 0
+    actionTargetType: 0
+    actionValue: 0
+    actionDelay: 0
   cardDescriptionDataList:
-  - useText: 1
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: Earn 2 mana
-    useValue: 0
-    useValueColor: 0
-    valueColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultValue: 0
-    useModifer: 0
-    modiferStatus: 0
-  specialKeywordsList: 
+  - descriptionText: 
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  specialKeywordsList: 0000000003000000
   audioType: 9

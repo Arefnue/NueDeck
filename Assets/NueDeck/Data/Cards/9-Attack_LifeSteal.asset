@@ -16,51 +16,48 @@ MonoBehaviour:
   cardName: Life Steal
   manaCost: 2
   cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  actionTarget: 0
   usableWithoutTarget: 0
   cardActionDataList:
-  - myPlayerActionType: 7
-    value: 8
+  - cardActionType: 0
+    actionTargetType: 0
+    actionValue: 0
+    actionDelay: 0
   cardDescriptionDataList:
-  - useText: 1
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: 'Deal '
-    useValue: 0
-    useValueColor: 0
-    valueColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultValue: 0
-    useModifer: 0
-    modiferStatus: 0
-  - useText: 0
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: 
-    useValue: 1
-    useValueColor: 1
-    valueColor: {r: 0.8, g: 0, b: 0.012076187, a: 1}
-    defaultValue: 8
-    useModifer: 1
-    modiferStatus: 2
-  - useText: 1
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: ' heal '
-    useValue: 0
-    useValueColor: 0
-    valueColor: {r: 0.8, g: 0, b: 0.012076187, a: 1}
-    defaultValue: 8
-    useModifer: 0
-    modiferStatus: 2
-  - useText: 0
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: ' heal'
-    useValue: 1
-    useValueColor: 1
-    valueColor: {r: 0, g: 0.8, b: 0.041337203, a: 1}
-    defaultValue: 8
-    useModifer: 1
-    modiferStatus: 2
-  specialKeywordsList: 
+  - descriptionText: 
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  - descriptionText: 
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  - descriptionText: 
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  - descriptionText: 
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  specialKeywordsList: 01000000
   audioType: 5

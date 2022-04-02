@@ -22,6 +22,7 @@ namespace NueDeck.Scripts.UI.Reward
         [SerializeField] private List<Transform> choiceCardSpawnTransformList;
         [SerializeField] private Transform choice2DCardSpawnRoot;
         [SerializeField] private ChoiceCard choiceCardPrefab;
+        [SerializeField] private ChoiceCard choiceCardUIPrefab;
         [SerializeField] private ChoicePanel choicePanel;
         
         private readonly List<RewardContainer> _currentRewardsList = new List<RewardContainer>();
@@ -104,7 +105,7 @@ namespace NueDeck.Scripts.UI.Reward
             {
                 Transform spawnTransform = use3DCard ? choiceCardSpawnTransformList[i] : choice2DCardSpawnRoot;
               
-                var choice = Instantiate(choiceCardPrefab, spawnTransform);
+                var choice = Instantiate(use3DCard ?choiceCardPrefab : choiceCardUIPrefab, spawnTransform);
                 
                 var reward = _cardRewardList.RandomItem();
                 choice.BuildReward(reward);

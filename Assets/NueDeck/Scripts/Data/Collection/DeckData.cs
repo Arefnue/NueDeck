@@ -7,10 +7,13 @@ namespace NueDeck.Scripts.Data.Collection
     public class DeckData : ScriptableObject
     {
         [SerializeField] private string deckId;
-        
+        [SerializeField] private string deckName;
+
         [SerializeField] private List<CardData> cardList;
         public List<CardData> CardList => cardList;
 
         public string DeckId => deckId;
+
+        public string DeckName => deckName;
     }
 }
