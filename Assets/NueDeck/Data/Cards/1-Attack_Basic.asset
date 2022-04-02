@@ -40,7 +40,7 @@ MonoBehaviour:
     modiferStats: 3
     usePrefixOnModifiedValue: 1
     modifiedValuePrefix: '*'
-    overrideColorOnValueScaled: 0
+    overrideColorOnValueScaled: 1
   - descriptionText: ' damage'
     enableOverrideColor: 0
     overrideColor: {r: 0, g: 0, b: 0, a: 1}

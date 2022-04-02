@@ -142,7 +142,21 @@ namespace NueDeck.Scripts.Characters
         {
             MaxHealth += value;
             OnHealthChanged?.Invoke(CurrentHealth,MaxHealth);
-        } 
+        }
+
+        public void ClearAllStatus()
+        {
+            foreach (var status in StatusDict)
+                ClearStatus(status.Key);
+        }
+           
+        public void ClearStatus(StatusType targetStatus)
+        {
+            StatusDict[targetStatus].IsActive = false;
+            StatusDict[targetStatus].StatusValue = 0;
+            OnStatusCleared?.Invoke(targetStatus);
+        }
+
         #endregion
 
         #region Private Methods
@@ -181,13 +195,7 @@ namespace NueDeck.Scripts.Characters
             OnStatusChanged?.Invoke(targetStatus, StatusDict[targetStatus].StatusValue);
         }
         
-        private void ClearStatus(StatusType targetStatus)
-        {
-            StatusDict[targetStatus].IsActive = false;
-            StatusDict[targetStatus].StatusValue = 0;
-            OnStatusCleared?.Invoke(targetStatus);
-        }
-        
+     
         private void DamagePoison()
         {
             if (StatusDict[StatusType.Poison].StatusValue<=0) return;

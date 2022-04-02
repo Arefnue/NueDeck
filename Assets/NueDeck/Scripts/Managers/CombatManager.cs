@@ -239,6 +239,7 @@ namespace NueDeck.Scripts.Managers
             }
             else
             {
+                CurrentMainAlly.CharacterStats.ClearAllStatus();
                 GameManager.Instance.PersistentGameplayData.CurrentEncounterId++;
                 UIManager.Instance.CombatCanvas.gameObject.SetActive(false);
                 UIManager.Instance.RewardCanvas.gameObject.SetActive(true);
