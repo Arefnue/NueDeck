@@ -15,15 +15,15 @@ MonoBehaviour:
   id: 4_draw_basic
   cardName: Basic draw
   manaCost: 0
-  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  cardSprite: {fileID: 21300000, guid: 6d79f0e0e016ca64592cdb3293bf37da, type: 3}
   usableWithoutTarget: 1
   cardActionDataList:
-  - cardActionType: 0
-    actionTargetType: 0
-    actionValue: 0
+  - cardActionType: 5
+    actionTargetType: 1
+    actionValue: 2
     actionDelay: 0
   cardDescriptionDataList:
-  - descriptionText: 
+  - descriptionText: 'Draw '
     enableOverrideColor: 0
     overrideColor: {r: 0, g: 0, b: 0, a: 1}
     useModifier: 0
@@ -32,5 +32,23 @@ MonoBehaviour:
     usePrefixOnModifiedValue: 0
     modifiedValuePrefix: '*'
     overrideColorOnValueScaled: 0
-  specialKeywordsList: 01000000
+  - descriptionText: 
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 1
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  - descriptionText: ' cards'
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  specialKeywordsList: 
   audioType: 4

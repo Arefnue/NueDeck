@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using NueDeck.Scripts.Card;
 using NueDeck.Scripts.Data.Collection;
-using NueDeck.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 namespace NueDeck.Scripts.UI
 {
@@ -17,7 +14,6 @@ namespace NueDeck.Scripts.UI
         [SerializeField] private CardBase cardUIPrefab;
 
         public TextMeshProUGUI TitleTextField => titleTextField;
-
         public LayoutGroup CardSpawnRoot => cardSpawnRoot;
 
         private List<CardBase> _spawnedCardList = new List<CardBase>();
@@ -66,7 +62,6 @@ namespace NueDeck.Scripts.UI
         public override void ResetCanvas()
         {
             base.ResetCanvas();
-          
         }
     }
 }

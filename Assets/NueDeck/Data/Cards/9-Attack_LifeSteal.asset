@@ -15,15 +15,15 @@ MonoBehaviour:
   id: 9_attack_lifeSteal
   cardName: Life Steal
   manaCost: 2
-  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  cardSprite: {fileID: 21300000, guid: 04684b85c9246b945a48b41d9ec2f4be, type: 3}
   usableWithoutTarget: 0
   cardActionDataList:
-  - cardActionType: 0
+  - cardActionType: 7
     actionTargetType: 0
-    actionValue: 0
+    actionValue: 5
     actionDelay: 0
   cardDescriptionDataList:
-  - descriptionText: 
+  - descriptionText: 'Deal '
     enableOverrideColor: 0
     overrideColor: {r: 0, g: 0, b: 0, a: 1}
     useModifier: 0
@@ -33,6 +33,24 @@ MonoBehaviour:
     modifiedValuePrefix: '*'
     overrideColorOnValueScaled: 0
   - descriptionText: 
+    enableOverrideColor: 1
+    overrideColor: {r: 0.7686275, g: 0.14117648, b: 0.18823531, a: 1}
+    useModifier: 1
+    modifiedActionValueIndex: 0
+    modiferStats: 3
+    usePrefixOnModifiedValue: 1
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 1
+  - descriptionText: ' damage.'
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  - descriptionText: ' Heal '
     enableOverrideColor: 0
     overrideColor: {r: 0, g: 0, b: 0, a: 1}
     useModifier: 0
@@ -42,22 +60,13 @@ MonoBehaviour:
     modifiedValuePrefix: '*'
     overrideColorOnValueScaled: 0
   - descriptionText: 
-    enableOverrideColor: 0
-    overrideColor: {r: 0, g: 0, b: 0, a: 1}
-    useModifier: 0
+    enableOverrideColor: 1
+    overrideColor: {r: 0.3529412, g: 0.7725491, b: 0.30980393, a: 1}
+    useModifier: 1
     modifiedActionValueIndex: 0
-    modiferStats: 0
-    usePrefixOnModifiedValue: 0
+    modiferStats: 3
+    usePrefixOnModifiedValue: 1
     modifiedValuePrefix: '*'
-    overrideColorOnValueScaled: 0
-  - descriptionText: 
-    enableOverrideColor: 0
-    overrideColor: {r: 0, g: 0, b: 0, a: 1}
-    useModifier: 0
-    modifiedActionValueIndex: 0
-    modiferStats: 0
-    usePrefixOnModifiedValue: 0
-    modifiedValuePrefix: '*'
-    overrideColorOnValueScaled: 0
-  specialKeywordsList: 01000000
+    overrideColorOnValueScaled: 1
+  specialKeywordsList: 
   audioType: 5

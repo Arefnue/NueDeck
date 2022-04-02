@@ -15,24 +15,31 @@ MonoBehaviour:
   id: 7_power_strength
   cardName: Increase strength
   manaCost: 2
-  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  cardSprite: {fileID: 21300000, guid: a0c75614ede963a46af4bc352b3faabd, type: 3}
   usableWithoutTarget: 1
   cardActionDataList:
   - cardActionType: 3
-    actionValue: 1
-    actionTargetType: 0
+    actionTargetType: 1
+    actionValue: 4
+    actionDelay: 0
   cardDescriptionDataList:
-  - descriptionText: Increase your strength by
+  - descriptionText: 'Increase your strength by '
     enableOverrideColor: 0
     overrideColor: {r: 0, g: 0, b: 0, a: 1}
     useModifier: 0
     modifiedActionValueIndex: 0
     modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
   - descriptionText: 
-    enableOverrideColor: 1
+    enableOverrideColor: 0
     overrideColor: {r: 0.9245283, g: 0.5322869, b: 0.06541473, a: 1}
     useModifier: 1
     modifiedActionValueIndex: 0
     modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
   specialKeywordsList: 01000000
   audioType: 9

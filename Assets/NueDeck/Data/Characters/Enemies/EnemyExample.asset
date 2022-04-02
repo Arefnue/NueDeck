@@ -15,10 +15,10 @@ MonoBehaviour:
   characterID: enemy_example
   characterName: Enemy Example
   characterDescription: Enemy Description
-  maxHealth: 150
+  maxHealth: 10
   enemyAbilityList:
   - name: Attack Single
-    abilityTarget: 1
+    abilityTargetType: 0
     intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
     soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
     hideActionValue: 0

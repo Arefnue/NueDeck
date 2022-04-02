@@ -20,28 +20,8 @@ MonoBehaviour:
   cardActionDataList:
   - cardActionType: 0
     actionTargetType: 0
-    actionValue: 50
+    actionValue: 6
     actionDelay: 0
-  - cardActionType: 0
-    actionTargetType: 4
-    actionValue: 50
-    actionDelay: 0.2
-  - cardActionType: 0
-    actionTargetType: 4
-    actionValue: 5
-    actionDelay: 0.01
-  - cardActionType: 0
-    actionTargetType: 4
-    actionValue: 5
-    actionDelay: 0.01
-  - cardActionType: 0
-    actionTargetType: 4
-    actionValue: 5
-    actionDelay: 0.01
-  - cardActionType: 0
-    actionTargetType: 4
-    actionValue: 25
-    actionDelay: 0.2
   cardDescriptionDataList:
   - descriptionText: 'Deal '
     enableOverrideColor: 0
@@ -53,15 +33,15 @@ MonoBehaviour:
     modifiedValuePrefix: '*'
     overrideColorOnValueScaled: 0
   - descriptionText: 
-    enableOverrideColor: 0
-    overrideColor: {r: 1, g: 0, b: 0, a: 1}
+    enableOverrideColor: 1
+    overrideColor: {r: 0.7686275, g: 0.14117648, b: 0.18823531, a: 1}
     useModifier: 1
     modifiedActionValueIndex: 0
     modiferStats: 3
-    usePrefixOnModifiedValue: 0
+    usePrefixOnModifiedValue: 1
     modifiedValuePrefix: '*'
     overrideColorOnValueScaled: 0
-  - descriptionText: ' damage, twice.'
+  - descriptionText: ' damage'
     enableOverrideColor: 0
     overrideColor: {r: 0, g: 0, b: 0, a: 1}
     useModifier: 0

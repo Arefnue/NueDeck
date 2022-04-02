@@ -15,32 +15,31 @@ MonoBehaviour:
   id: 5_heal_basic
   cardName: Basic heal
   manaCost: 1
-  cardSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  actionTarget: 1
+  cardSprite: {fileID: 21300000, guid: f071ce71140638f469d6a10acc1a1b67, type: 3}
   usableWithoutTarget: 1
   cardActionDataList:
-  - myPlayerActionType: 1
-    value: 4
+  - cardActionType: 1
+    actionTargetType: 1
+    actionValue: 3
+    actionDelay: 0
   cardDescriptionDataList:
-  - useText: 1
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: 'Heal '
-    useValue: 0
-    useValueColor: 0
-    valueColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultValue: 0
-    useModifer: 0
-    modiferStatus: 0
-  - useText: 0
-    useTextColor: 0
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    defaultText: 
-    useValue: 1
-    useValueColor: 1
-    valueColor: {r: 0, g: 0.8, b: 0.041337203, a: 1}
-    defaultValue: 4
-    useModifer: 0
-    modiferStatus: 0
+  - descriptionText: 'Heal '
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 0
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
+  - descriptionText: 
+    enableOverrideColor: 0
+    overrideColor: {r: 0, g: 0, b: 0, a: 1}
+    useModifier: 1
+    modifiedActionValueIndex: 0
+    modiferStats: 0
+    usePrefixOnModifiedValue: 0
+    modifiedValuePrefix: '*'
+    overrideColorOnValueScaled: 0
   specialKeywordsList: 
   audioType: 7
