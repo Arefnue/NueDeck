@@ -50,9 +50,11 @@ namespace NueDeck.Scripts.Characters
         #endregion
         
         #region Private Methods
+
+        private int _usedAbilityCount;
         private void ShowNextAbility()
         {
-            NextAbility = EnemyCharacterData.EnemyAbilityList.RandomItem();
+            NextAbility = EnemyCharacterData.GetAbility(_usedAbilityCount);
             EnemyCanvas.IntentImage.sprite = NextAbility.Intention.IntentionSprite;
             
             if (NextAbility.HideActionValue)
@@ -64,7 +66,8 @@ namespace NueDeck.Scripts.Characters
                 EnemyCanvas.NextActionValueText.gameObject.SetActive(true);
                 EnemyCanvas.NextActionValueText.text = NextAbility.ActionList[0].ActionValue.ToString();
             }
-            
+
+            _usedAbilityCount++;
             EnemyCanvas.IntentImage.gameObject.SetActive(true);
         }
         #endregion
@@ -108,6 +111,8 @@ namespace NueDeck.Scripts.Characters
         {
             var waitFrame = new WaitForEndOfFrame();
             
+            var target = CombatManager.Instance.CurrentEnemiesList.RandomItem();
+            
             var startPos = transform.position;
             var endPos = startPos+new Vector3(0,0.2f,0);
             
@@ -116,7 +121,7 @@ namespace NueDeck.Scripts.Characters
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, startPos, endPos, startRot, endRot, 5));
             
-            targetAbility.ActionList.ForEach(x=>EnemyActionProcessor.GetAction(x.ActionType).DoAction(new EnemyActionParameters(x.ActionValue,null,this)));
+            targetAbility.ActionList.ForEach(x=>EnemyActionProcessor.GetAction(x.ActionType).DoAction(new EnemyActionParameters(x.ActionValue,target,this)));
             
             yield return StartCoroutine(MoveToTargetRoutine(waitFrame, endPos, startPos, endRot, startRot, 5));
         }

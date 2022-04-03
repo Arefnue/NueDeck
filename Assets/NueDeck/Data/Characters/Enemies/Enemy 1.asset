@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2612027158f847538279f7d8f10dff91, type: 3}
+  m_Name: Enemy 1
+  m_EditorClassIdentifier: 
+  characterID: enemy_1
+  characterName: Enemy 1
+  characterDescription: Enemy Description
+  maxHealth: 50
+  followAbilityPattern: 1
+  enemyAbilityList:
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 10
+  - name: Block
+    abilityTargetType: 0
+    intention: {fileID: 11400000, guid: b0b1e7f2f78bb444eb1666e4accf22ee, type: 2}
+    soundProfile: {fileID: 11400000, guid: ff6628141ca0c2b47ae1c7ef0636513c, type: 2}
+    hideActionValue: 1
+    actionList:
+    - actionType: 3
+      actionValue: 10

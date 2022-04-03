@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NueDeck.Scripts.Data.Containers;
 using NueDeck.Scripts.Data.Settings;
 using NueDeck.Scripts.Enums;
+using NueExtentions;
 using UnityEngine;
 
 namespace NueDeck.Scripts.Data.Characters
@@ -11,8 +12,26 @@ namespace NueDeck.Scripts.Data.Characters
     public class EnemyCharacterData : CharacterDataBase
     {
         [Header("Enemy Defaults")] 
+        [SerializeField] private bool followAbilityPattern;
         [SerializeField] private List<EnemyAbilityData> enemyAbilityList;
+
         public List<EnemyAbilityData> EnemyAbilityList => enemyAbilityList;
+
+        public EnemyAbilityData GetAbility()
+        {
+            return EnemyAbilityList.RandomItem();
+        }
+        
+        public EnemyAbilityData GetAbility(int usedAbilityCount)
+        {
+            if (followAbilityPattern)
+            {
+                var index = usedAbilityCount % EnemyAbilityList.Count;
+                return EnemyAbilityList[index];
+            }
+
+            return GetAbility();
+        }
     }
     
     [Serializable]

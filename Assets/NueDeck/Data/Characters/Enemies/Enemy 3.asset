@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2612027158f847538279f7d8f10dff91, type: 3}
+  m_Name: Enemy 3
+  m_EditorClassIdentifier: 
+  characterID: enemy_3
+  characterName: Enemy 3
+  characterDescription: Enemy Description
+  maxHealth: 100
+  followAbilityPattern: 1
+  enemyAbilityList:
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 3
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 6
+  - name: Heal
+    abilityTargetType: 0
+    intention: {fileID: 11400000, guid: d8b91adf93b4e21419f64f9a68fc3c70, type: 2}
+    soundProfile: {fileID: 11400000, guid: 5e1ae36013818124e8f86d99922c0cca, type: 2}
+    hideActionValue: 1
+    actionList:
+    - actionType: 1
+      actionValue: 10
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 9
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 12
+  - name: Heal
+    abilityTargetType: 0
+    intention: {fileID: 11400000, guid: d8b91adf93b4e21419f64f9a68fc3c70, type: 2}
+    soundProfile: {fileID: 11400000, guid: 5e1ae36013818124e8f86d99922c0cca, type: 2}
+    hideActionValue: 1
+    actionList:
+    - actionType: 1
+      actionValue: 20
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 15
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 18
+  - name: Heal
+    abilityTargetType: 0
+    intention: {fileID: 11400000, guid: d8b91adf93b4e21419f64f9a68fc3c70, type: 2}
+    soundProfile: {fileID: 11400000, guid: 5e1ae36013818124e8f86d99922c0cca, type: 2}
+    hideActionValue: 1
+    actionList:
+    - actionType: 1
+      actionValue: 30
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 21
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 24
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 30
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 30
+  - name: Attack Single
+    abilityTargetType: 1
+    intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
+    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
+    hideActionValue: 0
+    actionList:
+    - actionType: 0
+      actionValue: 30

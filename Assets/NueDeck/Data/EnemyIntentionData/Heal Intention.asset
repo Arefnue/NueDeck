@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad084001f184a46bfe95bcf171cf34d, type: 3}
   m_Name: Heal Intention
   m_EditorClassIdentifier: 
-  enemyIntention: 2
-  intentionSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  enemyIntentionType: 2
+  intentionSprite: {fileID: -8321888655734980390, guid: 1fb0c0cb02c616d49815abb7a9a0fc0f, type: 3}
