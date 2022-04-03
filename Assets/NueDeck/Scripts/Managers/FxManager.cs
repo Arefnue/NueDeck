@@ -47,7 +47,7 @@ namespace NueDeck.Scripts.Managers
         public void SpawnFloatingText(Transform targetTransform,string text, int xDir =0, int yDir =-1)
         {
             var cloneText =Instantiate(floatingTextPrefab, targetTransform.position, Quaternion.identity);
-            Debug.Log(cloneText + text);
+            
             if (xDir == 0)
                 xDir = Random.value>=0.5f ? 1 : -1;
             cloneText.PlayText(text,xDir,yDir);
