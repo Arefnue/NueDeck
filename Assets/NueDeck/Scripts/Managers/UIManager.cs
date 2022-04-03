@@ -55,6 +55,7 @@ namespace NueDeck.Scripts.Managers
            InventoryCanvas.ChangeTitle(title);
            InventoryCanvas.SetCards(cardList);
         }
+        
         public void SetCanvas(CanvasBase targetCanvas,bool open,bool reset = false)
         {
             if (reset)

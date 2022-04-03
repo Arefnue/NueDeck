@@ -54,6 +54,8 @@ namespace NueDeck.Scripts.Collection
         
         private Camera _mainCam;
 
+        public bool IsDraggingActive { get; private set; } = true;
+
         #region Setup
 
         private void Awake()
@@ -85,6 +87,8 @@ namespace NueDeck.Scripts.Collection
             // HANDLE MOUSE & RAYCAST POSITION
             // --------------------------------------------------------
 
+            if (!IsDraggingActive) return;
+           
             var mousePos = HandleMouseInput(out var count, out var sqrDistance, out var mouseButton);
 
             // --------------------------------------------------------
@@ -109,6 +113,9 @@ namespace NueDeck.Scripts.Collection
         }
 
         #region Methods
+
+        public void EnableDragging() => IsDraggingActive = true;
+        public void DisableDragging() => IsDraggingActive = false;
 
         private Vector2 HandleMouseInput(out int count, out float sqrDistance, out bool mouseButton)
         {
