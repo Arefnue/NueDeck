@@ -5,6 +5,7 @@
         Block,
         Strength,
         Poison,
-        Exhaust
+        Exhaust,
+        Dexterity
     }
 }

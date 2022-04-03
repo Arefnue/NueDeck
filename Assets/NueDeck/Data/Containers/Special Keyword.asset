@@ -17,10 +17,10 @@ MonoBehaviour:
     contentText: Block damages
   - specialKeyword: 1
     contentText: Increase your attack damage
-  - specialKeyword: 2
-    contentText: Increase your block amount
-  - specialKeyword: 3
-    contentText: Damage per round. Ignores <color=blue>block</color>.
   - specialKeyword: 4
+    contentText: Increase your block amount
+  - specialKeyword: 2
+    contentText: Damage per round. Ignores <color=blue>block</color>.
+  - specialKeyword: 3
     contentText: After using <color=yellow>Exhaust</color>, remove it from your deck
       for this combat
