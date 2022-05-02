@@ -60,7 +60,7 @@ namespace NueGames.NueDeck.Editor
         #endregion
         
         #region Setup
-        [MenuItem("NueDeck/CardEditor")]
+        [MenuItem("NueDeck/Card Editor")]
         public static void OpenCardEditor() =>  CurrentWindow = GetWindow<CardEditorWindow>("Card Editor");
         public static void OpenCardEditor(CardData targetData)
         {
