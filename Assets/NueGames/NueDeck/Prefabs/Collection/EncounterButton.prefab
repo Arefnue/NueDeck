@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 3059767922682780413}
   - component: {fileID: 408137259432828989}
   m_Layer: 5
-  m_Name: Encounter
+  m_Name: EncounterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

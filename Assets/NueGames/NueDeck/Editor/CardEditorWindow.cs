@@ -8,7 +8,7 @@ using NueGames.NueDeck.Scripts.NueExtentions;
 using UnityEditor;
 using UnityEngine;
 
-namespace NueDeck.Editor
+namespace NueGames.NueDeck.Editor
 {
     public class CardEditorWindow : ExtendedEditorWindow
     {

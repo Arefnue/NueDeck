@@ -1,15 +1,15 @@
 ﻿using NueGames.NueDeck.Scripts.Utils;
+using UnityEditor;
 
-namespace NueDeck.Editor
+namespace NueGames.NueDeck.Editor
 {
-    using UnityEditor;
-    public class AutoLayerEditor : Editor
+    public class AutoLayerEditor : UnityEditor.Editor
     {
         [MenuItem("NueDeck/Set Layers")]
         public static void OpenCardEditor()
         {
-            new Layers().AddNewLayer("Card");
             new Layers().AddNewLayer("Character");
+            new Layers().AddNewLayer("Card");
         }
     }
 }

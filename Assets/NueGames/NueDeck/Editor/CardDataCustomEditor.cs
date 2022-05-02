@@ -1,9 +1,9 @@
 ﻿using NueGames.NueDeck.Scripts.Data.Collection;
-using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
+using UnityEngine;
 
-namespace NueDeck.Editor
+namespace NueGames.NueDeck.Editor
 {
     public class CardDataAssetHandler
     {

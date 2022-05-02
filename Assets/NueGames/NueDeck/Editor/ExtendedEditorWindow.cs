@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace NueDeck.Editor
+namespace NueGames.NueDeck.Editor
 {
     public class ExtendedEditorWindow : EditorWindow
     {
