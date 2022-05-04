@@ -172,8 +172,7 @@ namespace NueGames.NueDeck.Editor
             GUILayout.Space(10);
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.BeginVertical();
-            ChangeId();
-            ChangeCardName();
+           
             
             ChangeGeneralSettings();
            
@@ -234,6 +233,8 @@ namespace NueGames.NueDeck.Editor
                 EditorGUILayout.EndFoldoutHeaderGroup();
                 return;
             }
+            ChangeId();
+            ChangeCardName();
             _generalSettingsScrollPos = EditorGUILayout.BeginScrollView(_generalSettingsScrollPos,GUILayout.ExpandWidth(true));
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.BeginVertical();
