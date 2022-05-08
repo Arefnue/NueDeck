@@ -25,6 +25,8 @@ namespace NueGames.NueDeck.Scripts.NueExtentions
             var randomIndex = Random.Range(0, list.Count);
             return list[randomIndex];
         }
+
+#if UNITY_EDITOR
         
         public static T[] GetAllInstances<T>() where T : ScriptableObject
         {
@@ -39,6 +41,7 @@ namespace NueGames.NueDeck.Scripts.NueExtentions
             return a;
  
         }
+#endif
 
         /// <summary>
         ///     Returns and Remove a random item from inside the

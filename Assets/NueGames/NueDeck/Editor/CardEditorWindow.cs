@@ -12,6 +12,9 @@ namespace NueGames.NueDeck.Editor
 {
     public class CardEditorWindow : ExtendedEditorWindow
     {
+#if UNITY_EDITOR
+        
+
         private static CardEditorWindow CurrentWindow { get; set; }
         private SerializedObject _serializedObject;
 
@@ -485,5 +488,6 @@ namespace NueGames.NueDeck.Editor
             AllCardDataList = ListExtentions.GetAllInstances<CardData>().ToList();
         }
         #endregion
+#endif
     }
 }

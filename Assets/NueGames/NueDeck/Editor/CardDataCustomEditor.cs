@@ -7,6 +7,9 @@ namespace NueGames.NueDeck.Editor
 {
     public class CardDataAssetHandler
     {
+#if UNITY_EDITOR
+        
+
         [OnOpenAsset]
         public static bool OpenEditor(int instanceId, int line)
         {
@@ -18,11 +21,15 @@ namespace NueGames.NueDeck.Editor
             }
             return false;
         }
+#endif
     }
     
     [CustomEditor(typeof(CardData))]
     public class CardDataCustomEditor : UnityEditor.Editor
     {
+#if UNITY_EDITOR
+        
+
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -31,5 +38,6 @@ namespace NueGames.NueDeck.Editor
                 CardEditorWindow.OpenCardEditor((CardData)target);
             }
         }
+#endif
     }
 }
