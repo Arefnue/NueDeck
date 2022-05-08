@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a73dcf31c5247158ca807d305cac9ba, type: 3}
   m_Name: Encounter Data
   m_EditorClassIdentifier: 
-  encounterRandomlyAtStage: 1
+  encounterRandomlyAtStage: 0
   enemyEncounterList:
   - name: Stage 1
     stageId: 0

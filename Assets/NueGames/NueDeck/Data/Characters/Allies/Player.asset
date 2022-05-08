@@ -15,4 +15,4 @@ MonoBehaviour:
   characterID: player_example
   characterName: Player
   characterDescription: Player Description
-  maxHealth: 100
+  maxHealth: 150
