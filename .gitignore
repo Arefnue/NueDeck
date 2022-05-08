@@ -62,10 +62,4 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-.idea
-.idea
-.idea/.idea.HausMeister/.idea/contentModel.xml
-*.mp4
-Recordings
-*.aab
-Assets/PolygonStarter
+Assets/AssetStoreTools
