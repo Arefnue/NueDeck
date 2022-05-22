@@ -11,6 +11,9 @@
 
 **Discord:** https://discord.com/invite/5FkXvHChUr
 
+# Contributing
+
+If you want to contribute this project with your scripts or assets, you can create merge request on Github repository or reach me via Discord, E-mail or Linkedin. 
 
 # Features
 - Easy to use card editor and create new contents
