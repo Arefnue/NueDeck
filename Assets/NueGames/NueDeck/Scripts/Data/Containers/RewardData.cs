@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace NueGames.NueDeck.Scripts.Data.Containers
 {
-    [CreateAssetMenu(fileName = "Reward Container", menuName = "Data/Containers/Reward", order = 4)]
+    [CreateAssetMenu(fileName = "Reward Container", menuName = "NueDeck/Containers/Reward", order = 4)]
     public class RewardData : ScriptableObject
     {
         [SerializeField] private CardReward cardReward;

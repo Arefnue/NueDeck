@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NueGames.NueDeck.Scripts.Data.Containers
 {
-    [CreateAssetMenu(fileName = "Special Keyword", menuName = "Data/Containers/Special Keyword Data", order = 0)]
+    [CreateAssetMenu(fileName = "Special Keyword", menuName = "NueDeck/Containers/Special Keyword Data", order = 0)]
     public class SpecialKeywordData : ScriptableObject
     {
         [SerializeField] private List<SpecialKeywordBase> specialKeywordBaseList;

@@ -2,7 +2,7 @@
 
 namespace NueGames.NueDeck.Scripts.Data.Settings
 {
-    [CreateAssetMenu(fileName = "Scene Data", menuName = "Data/Settings/Scene", order = 2)]
+    [CreateAssetMenu(fileName = "Scene Data", menuName = "NueDeck/Settings/Scene", order = 2)]
     public class SceneData : ScriptableObject
     {
         public int coreSceneIndex = 0;
