@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NueGames.NueDeck.Scripts.Data.Containers
 {
-    [CreateAssetMenu(fileName = "Enemy Intention", menuName = "Data/Containers/EnemyIntention", order = 0)]
+    [CreateAssetMenu(fileName = "Enemy Intention", menuName = "NueDeck/Containers/EnemyIntention", order = 0)]
     public class EnemyIntentionData : ScriptableObject
     {
         [SerializeField] private EnemyIntentionType enemyIntentionType;

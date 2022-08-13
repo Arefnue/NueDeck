@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace NueGames.NueDeck.Scripts.Data.Settings
 {
-    [CreateAssetMenu(fileName = "Gameplay Data", menuName = "Data/Settings/GameplayData", order = 0)]
+    [CreateAssetMenu(fileName = "Gameplay Data", menuName = "NueDeck/Settings/GameplayData", order = 0)]
     public class GameplayData : ScriptableObject
     {
         [Header("Gameplay Settings")] 

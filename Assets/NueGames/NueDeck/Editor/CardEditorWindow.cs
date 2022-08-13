@@ -18,7 +18,7 @@ namespace NueGames.NueDeck.Editor
         private static CardEditorWindow CurrentWindow { get; set; }
         private SerializedObject _serializedObject;
 
-        private const string CardDataDefaultPath = "Assets/NueDeck/Data/Cards/";
+        private const string CardDataDefaultPath = "Assets/NueGames/NueDeck/Data/Cards/";
        
         #region Cache Card Data
         private static CardData CachedCardData { get; set; }
@@ -63,7 +63,7 @@ namespace NueGames.NueDeck.Editor
         #endregion
         
         #region Setup
-        [MenuItem("NueDeck/Card Editor")]
+        [MenuItem("Tools/NueDeck/Card Editor")]
         public static void OpenCardEditor() =>  CurrentWindow = GetWindow<CardEditorWindow>("Card Editor");
         public static void OpenCardEditor(CardData targetData)
         {

@@ -8,7 +8,7 @@ namespace NueGames.NueDeck.Editor
 #if UNITY_EDITOR
         
 
-        [MenuItem("NueDeck/Set Layers")]
+        [MenuItem("Tools/NueDeck/Set Layers")]
         public static void OpenCardEditor()
         {
             new Layers().AddNewLayer("Character");

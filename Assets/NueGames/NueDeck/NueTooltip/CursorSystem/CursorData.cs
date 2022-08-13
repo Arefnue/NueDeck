@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NueGames.NueDeck.ThirdParty.NueTooltip.CursorSystem
 {
-    [CreateAssetMenu(fileName = "Cursor Data", menuName = "Data/Containers/CursorData", order = 0)]
+    [CreateAssetMenu(fileName = "Cursor Data", menuName = "NueDeck/Containers/CursorData", order = 0)]
     public class CursorData : ScriptableObject
     {
         [SerializeField] private List<CursorProfile> cursorProfileList;

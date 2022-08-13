@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace NueGames.NueDeck.Scripts.Data.Containers
 {
-    [CreateAssetMenu(fileName = "Status Icons", menuName = "Data/Containers/StatusIcons", order = 2)]
+    [CreateAssetMenu(fileName = "Status Icons", menuName = "NueDeck/Containers/StatusIcons", order = 2)]
     public class StatusIconsData : ScriptableObject
     {
         [SerializeField] private StatusIconBase statusIconBasePrefab;

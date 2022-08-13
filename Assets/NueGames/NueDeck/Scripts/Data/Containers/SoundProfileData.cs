@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NueGames.NueDeck.Scripts.Data.Containers
 {
-    [CreateAssetMenu(fileName = "Sound Profile", menuName = "Data/Containers/SoundProfile", order = 1)]
+    [CreateAssetMenu(fileName = "Sound Profile", menuName = "NueDeck/Containers/SoundProfile", order = 1)]
     public class SoundProfileData : ScriptableObject
     {
         [SerializeField] private AudioActionType audioType;

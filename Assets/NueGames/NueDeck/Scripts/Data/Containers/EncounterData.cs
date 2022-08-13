@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace NueGames.NueDeck.Scripts.Data.Containers
 {
-    [CreateAssetMenu(fileName = "Encounter Data", menuName = "Data/Containers/EncounterData", order = 4)]
+    [CreateAssetMenu(fileName = "Encounter Data", menuName = "NueDeck/Containers/EncounterData", order = 4)]
     public class EncounterData : ScriptableObject
     {
         [Header("Settings")] 

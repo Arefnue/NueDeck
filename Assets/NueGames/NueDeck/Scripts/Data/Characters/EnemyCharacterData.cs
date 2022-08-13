@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace NueGames.NueDeck.Scripts.Data.Characters
 {
-    [CreateAssetMenu(fileName = "Enemy Character Data",menuName = "Data/Characters/Enemy",order = 1)]
+    [CreateAssetMenu(fileName = "Enemy Character Data",menuName = "NueDeck/Characters/Enemy",order = 1)]
     public class EnemyCharacterData : CharacterDataBase
     {
         [Header("Enemy Defaults")] 

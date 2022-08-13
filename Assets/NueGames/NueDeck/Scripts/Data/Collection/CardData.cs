@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace NueGames.NueDeck.Scripts.Data.Collection
 {
-    [CreateAssetMenu(fileName = "Card Data",menuName = "NueDeck/Data/Collection/Card",order = 0)]
+    [CreateAssetMenu(fileName = "Card Data",menuName = "NueDeck/Collection/Card",order = 0)]
     public class CardData : ScriptableObject
     {
         [Header("Card Profile")] 
