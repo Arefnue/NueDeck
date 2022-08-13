@@ -6,6 +6,7 @@
         Block,
         Poison,
         Strength,
-        Dexterity
+        Dexterity,
+        Stun
     }
 }

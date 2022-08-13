@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NueGames.NueDeck.Scripts.Enums;
 
 namespace NueGames.NueDeck.Scripts.Characters
@@ -8,8 +9,8 @@ namespace NueGames.NueDeck.Scripts.Characters
     { 
         public StatusType StatusType { get; set; }
         public int StatusValue { get; set; }
-        public bool DecreaseOverTurn { get; set; }
-        public bool IsPermanent { get; set; }
+        public bool DecreaseOverTurn { get; set; } // If true, decrease on turn end
+        public bool IsPermanent { get; set; } // If true, status can not be cleared during combat
         public bool IsActive { get; set; }
         public bool CanNegativeStack { get; set; }
         public bool ClearAtNextTurn { get; set; }
@@ -30,7 +31,7 @@ namespace NueGames.NueDeck.Scripts.Characters
     { 
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
-        
+        public bool IsStunned { get;  set; }
         public bool IsDeath { get; private set; }
        
         public Action OnDeath;
@@ -38,6 +39,9 @@ namespace NueGames.NueDeck.Scripts.Characters
         private readonly Action<StatusType,int> OnStatusChanged;
         private readonly Action<StatusType, int> OnStatusApplied;
         private readonly Action<StatusType> OnStatusCleared;
+        public Action OnHealAction;
+        public Action OnTakeDamageAction;
+        public Action OnShieldGained;
         
         public readonly Dictionary<StatusType, StatusStats> StatusDict = new Dictionary<StatusType, StatusStats>();
         
@@ -66,6 +70,10 @@ namespace NueGames.NueDeck.Scripts.Characters
 
             StatusDict[StatusType.Strength].CanNegativeStack = true;
             StatusDict[StatusType.Dexterity].CanNegativeStack = true;
+            
+            StatusDict[StatusType.Stun].DecreaseOverTurn = true;
+            StatusDict[StatusType.Stun].OnTriggerAction += CheckStunStatus;
+            
         }
         #endregion
         
@@ -80,7 +88,7 @@ namespace NueGames.NueDeck.Scripts.Characters
             }
             else
             {
-                StatusDict[targetStatus].StatusValue += value;
+                StatusDict[targetStatus].StatusValue = value;
                 StatusDict[targetStatus].IsActive = true;
                 OnStatusApplied?.Invoke(targetStatus, StatusDict[targetStatus].StatusValue);
             }
@@ -107,7 +115,7 @@ namespace NueGames.NueDeck.Scripts.Characters
         public void Damage(int value, bool canPierceArmor = false)
         {
             if (IsDeath) return;
-            
+            OnTakeDamageAction?.Invoke();
             var remainingDamage = value;
             
             if (!canPierceArmor)
@@ -162,6 +170,7 @@ namespace NueGames.NueDeck.Scripts.Characters
         {
             StatusDict[targetStatus].OnTriggerAction?.Invoke();
             
+            //One turn only statuses
             if (StatusDict[targetStatus].ClearAtNextTurn)
             {
                 ClearStatus(targetStatus);
@@ -169,6 +178,7 @@ namespace NueGames.NueDeck.Scripts.Characters
                 return;
             }
             
+            //Check status
             if (StatusDict[targetStatus].StatusValue <= 0)
             {
                 if (StatusDict[targetStatus].CanNegativeStack)
@@ -199,6 +209,18 @@ namespace NueGames.NueDeck.Scripts.Characters
             if (StatusDict[StatusType.Poison].StatusValue<=0) return;
             Damage(StatusDict[StatusType.Poison].StatusValue,true);
         }
+        
+        public void CheckStunStatus()
+        {
+            if (StatusDict[StatusType.Stun].StatusValue <= 0)
+            {
+                IsStunned = false;
+                return;
+            }
+            
+            IsStunned = true;
+        }
+        
         #endregion
     }
 }

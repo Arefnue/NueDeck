@@ -82,8 +82,14 @@ namespace NueGames.NueDeck.Scripts.Managers
 
                     OnAllyTurnStarted?.Invoke();
                     
-                    GameManager.Instance.PersistentGameplayData.CurrentMana = GameManager.Instance.PersistentGameplayData.MaxMana;
+                    if (CurrentMainAlly.CharacterStats.IsStunned)
+                    {
+                        EndTurn();
+                        return;
+                    }
                     
+                    GameManager.Instance.PersistentGameplayData.CurrentMana = GameManager.Instance.PersistentGameplayData.MaxMana;
+                   
                     CollectionManager.Instance.DrawCards(GameManager.Instance.PersistentGameplayData.DrawCount);
                     
                     GameManager.Instance.PersistentGameplayData.CanSelectCards = true;

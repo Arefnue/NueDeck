@@ -71,6 +71,9 @@ namespace NueGames.NueDeck.Scripts.Characters
         #region Action Routines
         public virtual IEnumerator ActionRoutine()
         {
+            if (CharacterStats.IsStunned)
+                yield break;
+            
             EnemyCanvas.IntentImage.gameObject.SetActive(false);
             if (NextAbility.Intention.EnemyIntentionType == EnemyIntentionType.Attack || NextAbility.Intention.EnemyIntentionType == EnemyIntentionType.Debuff)
             {
