@@ -135,7 +135,7 @@ namespace NueGames.NueDeck.Scripts.Card
             GameManager.Instance.PersistentGameplayData.CurrentMana -= value;
         }
         
-        public virtual void SetInactiveMaterialState(bool isInactive, Material inactiveMaterial = null) 
+        public virtual void SetInactiveMaterialState(bool isInactive) 
         {
             if (!IsPlayable) return;
             if (isInactive == this.IsInactive) return; 

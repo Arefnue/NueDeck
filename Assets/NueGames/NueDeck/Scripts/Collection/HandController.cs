@@ -27,9 +27,7 @@ namespace NueGames.NueDeck.Scripts.Collection
         public LayerMask selectableLayer;
         public LayerMask targetLayer;
         public Camera cam = null;
-        public List<CardBase> hand; // Cards currently in hand
-        [SerializeField] private Material inactiveCardMaterial = null;
-
+        [HideInInspector]public List<CardBase> hand; // Cards currently in hand
         
         private Plane _plane; // world XY plane, used for mouse position raycasts
         private Vector3 _a, _b, _c; // Used for shaping hand into curve
@@ -146,7 +144,7 @@ namespace NueGames.NueDeck.Scripts.Collection
                 var cardTransform = card.transform;
 
                 // Set to inactive material if not enough mana required to use card
-                card.SetInactiveMaterialState(GameManager.Instance.PersistentGameplayData.CurrentMana < card.CardData.ManaCost, inactiveCardMaterial);
+                card.SetInactiveMaterialState(GameManager.Instance.PersistentGameplayData.CurrentMana < card.CardData.ManaCost);
 
                 var noCardHeld = _heldCard == null; // Whether a card is "held" (outside of hand)
                 var onSelectedCard = noCardHeld && _selected == i;

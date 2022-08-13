@@ -9,11 +9,7 @@ namespace NueGames.NueDeck.Scripts.Card
     {
         [Header("3D Settings")]
         [SerializeField] private Canvas canvas;
-        
-        private readonly Vector2 _dissolveOffset = new Vector2(0.1f, 0);
-        private readonly Vector2 _dissolveSpeed = new Vector2(2f, 2f);
-
-        
+      
         public override void SetCard(CardData targetProfile,bool isPlayable)
         {
             base.SetCard(targetProfile,isPlayable);
@@ -21,11 +17,10 @@ namespace NueGames.NueDeck.Scripts.Card
             if (canvas)
                 canvas.worldCamera = CollectionManager.Instance.HandController.cam;
         }
-
-
-        public override void SetInactiveMaterialState(bool isInactive, Material inactiveMaterial = null)
+        
+        public override void SetInactiveMaterialState(bool isInactive)
         {
-            base.SetInactiveMaterialState(isInactive, inactiveMaterial);
+            base.SetInactiveMaterialState(isInactive);
         }
     }
 }
