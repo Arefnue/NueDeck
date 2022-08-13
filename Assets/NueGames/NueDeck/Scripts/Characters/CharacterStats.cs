@@ -14,8 +14,6 @@ namespace NueGames.NueDeck.Scripts.Characters
         public bool CanNegativeStack { get; set; }
         public bool ClearAtNextTurn { get; set; }
         
-       
-        
         public Action OnTriggerAction;
         public StatusStats(StatusType statusType,int statusValue,bool decreaseOverTurn = false, bool isPermanent = false,bool isActive = false,bool canNegativeStack = false,bool clearAtNextTurn = false)
         {

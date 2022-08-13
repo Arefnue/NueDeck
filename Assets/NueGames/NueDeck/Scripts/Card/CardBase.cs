@@ -26,13 +26,15 @@ namespace NueGames.NueDeck.Scripts.Card
         [SerializeField] protected TextMeshProUGUI nameTextField;
         [SerializeField] protected TextMeshProUGUI descTextField;
         [SerializeField] protected TextMeshProUGUI manaTextField;
-        
+
+        #region Cache
         public CardData CardData { get; private set; }
         public bool IsInactive { get; protected set; }
         protected Transform CachedTransform { get; set; }
         protected WaitForEndOfFrame CachedWaitFrame { get; set; }
-
         public bool IsPlayable { get; protected set; } = true;
+
+        #endregion
         
         #region Setup
         protected virtual void Awake()

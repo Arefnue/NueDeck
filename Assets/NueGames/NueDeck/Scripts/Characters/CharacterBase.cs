@@ -29,22 +29,7 @@ namespace NueGames.NueDeck.Scripts.Characters
         {
             
         }
-
-        public virtual void OnCardTargetHighlight()
-        {
-            
-        }
-
-        public virtual void OnCardOverHighlight()
-        {
-            
-        }
-
-        public virtual void OnCardPlayedOnMe()
-        {
-           
-        }
-
+        
         public  CharacterBase GetCharacterBase()
         {
             return this;

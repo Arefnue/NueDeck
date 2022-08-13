@@ -13,11 +13,6 @@ namespace NueGames.NueDeck.Scripts.Characters
         [SerializeField] private AllyCharacterData allyCharacterData;
         public AllyCanvas AllyCanvas => allyCanvas;
         public AllyCharacterData AllyCharacterData => allyCharacterData;
-
-        public override void Awake()
-        {
-            base.Awake();
-        }
         
         public override void BuildCharacter()
         {

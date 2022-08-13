@@ -23,12 +23,11 @@ namespace NueGames.NueDeck.Scripts.Characters
         [SerializeField] protected Transform descriptionRoot;
         [SerializeField] protected StatusIconsData statusIconsData;
         [SerializeField] protected TextMeshProUGUI currentHealthText;
-        [SerializeField] protected Image highlightImage;
+       
+        protected Dictionary<StatusType, StatusIconBase> StatusDict = new Dictionary<StatusType, StatusIconBase>();
+
+        protected Canvas TargetCanvas;
         
-        protected Dictionary<StatusType, StatusIconBase> _statusDict = new Dictionary<StatusType, StatusIconBase>();
-
-        protected Canvas _canvas;
-
         #region Setup
 
         public void InitCanvas()
@@ -36,12 +35,12 @@ namespace NueGames.NueDeck.Scripts.Characters
             highlightRoot.gameObject.SetActive(false);
             
             for (int i = 0; i < Enum.GetNames(typeof(StatusType)).Length; i++)
-                _statusDict.Add((StatusType) i, null);
+                StatusDict.Add((StatusType) i, null);
 
-            _canvas = GetComponent<Canvas>();
+            TargetCanvas = GetComponent<Canvas>();
 
-            if (_canvas)
-                _canvas.worldCamera = Camera.main;
+            if (TargetCanvas)
+                TargetCanvas.worldCamera = Camera.main;
         }
 
         #endregion
@@ -49,7 +48,7 @@ namespace NueGames.NueDeck.Scripts.Characters
         #region Public Methods
         public void ApplyStatus(StatusType targetStatus, int value)
         {
-            if (_statusDict[targetStatus] == null)
+            if (StatusDict[targetStatus] == null)
             {
                 var targetData = statusIconsData.StatusIconList.FirstOrDefault(x => x.IconStatus == targetStatus);
                 
@@ -57,27 +56,27 @@ namespace NueGames.NueDeck.Scripts.Characters
                 
                 var clone = Instantiate(statusIconsData.StatusIconBasePrefab, statusIconRoot);
                 clone.SetStatus(targetData);
-                _statusDict[targetStatus] = clone;
+                StatusDict[targetStatus] = clone;
             }
             
-            _statusDict[targetStatus].SetStatusValue(value);
+            StatusDict[targetStatus].SetStatusValue(value);
         }
 
         public void ClearStatus(StatusType targetStatus)
         {
-            if (_statusDict[targetStatus])
+            if (StatusDict[targetStatus])
             {
-                Destroy(_statusDict[targetStatus].gameObject);
+                Destroy(StatusDict[targetStatus].gameObject);
             }
            
-            _statusDict[targetStatus] = null;
+            StatusDict[targetStatus] = null;
         }
         
         public void UpdateStatusText(StatusType targetStatus, int value)
         {
-            if (_statusDict[targetStatus] == null) return;
+            if (StatusDict[targetStatus] == null) return;
           
-            _statusDict[targetStatus].StatusValueText.text = $"{value}";
+            StatusDict[targetStatus].StatusValueText.text = $"{value}";
         }
         
         public void UpdateHealthText(int currentHealth,int maxHealth) =>  currentHealthText.text = $"{currentHealth}/{maxHealth}";
@@ -104,7 +103,7 @@ namespace NueGames.NueDeck.Scripts.Characters
             var tooltipManager = TooltipManager.Instance;
             var specialKeywords = new List<SpecialKeywords>();
             
-            foreach (var statusIcon in _statusDict)
+            foreach (var statusIcon in StatusDict)
             {
                 if (statusIcon.Value == null) continue;
                
