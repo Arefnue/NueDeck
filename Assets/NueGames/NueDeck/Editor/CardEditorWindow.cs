@@ -7,6 +7,7 @@ using NueGames.NueDeck.Scripts.Enums;
 using NueGames.NueDeck.Scripts.NueExtentions;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace NueGames.NueDeck.Editor
 {
@@ -118,6 +119,7 @@ namespace NueGames.NueDeck.Editor
             EditorGUILayout.LabelField("Cards",EditorStyles.boldLabel,GUILayout.Width(50),GUILayout.Height(20));
             
             GUILayout.FlexibleSpace();
+            
             var oldColor = GUI.backgroundColor;
             GUI.backgroundColor = Color.blue;
             if (GUILayout.Button("Refresh",GUILayout.Width(75),GUILayout.Height(20)))
@@ -133,6 +135,7 @@ namespace NueGames.NueDeck.Editor
                     SelectedCardData = data;
                     _serializedObject = new SerializedObject(SelectedCardData);
                     CacheCardData();
+                    GUI.FocusControl(null);
                 }
 
             if (GUILayout.Button("+",GUILayout.MaxWidth(150)))
@@ -202,6 +205,10 @@ namespace NueGames.NueDeck.Editor
         #endregion
 
         #region Card Data Methods
+
+        private void ResetEditorCardData()
+        {
+        }
         private void ChangeId()
         {
             CardId = EditorGUILayout.TextField("Card Id:", CardId);
