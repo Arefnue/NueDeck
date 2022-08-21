@@ -24,3 +24,5 @@ MonoBehaviour:
   - specialKeyword: 3
     contentText: After using <color=yellow>Exhaust</color>, remove it from your deck
       for this combat
+  - specialKeyword: 5
+    contentText: Can not use any action

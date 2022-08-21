@@ -6,6 +6,7 @@
         Strength,
         Poison,
         Exhaust,
-        Dexterity
+        Dexterity,
+        Stun
     }
 }

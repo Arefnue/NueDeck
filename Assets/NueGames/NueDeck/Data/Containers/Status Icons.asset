@@ -26,3 +26,6 @@ MonoBehaviour:
   - iconStatus: 4
     iconSprite: {fileID: 21300000, guid: b814f523022834b4eb4ef10d01cf8faf, type: 3}
     specialKeywords: 04000000
+  - iconStatus: 5
+    iconSprite: {fileID: 1944889613778695005, guid: 1fb0c0cb02c616d49815abb7a9a0fc0f, type: 3}
+    specialKeywords: 05000000
