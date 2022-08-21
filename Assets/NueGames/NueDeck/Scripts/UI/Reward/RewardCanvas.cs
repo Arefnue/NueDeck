@@ -88,9 +88,9 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
         #region Private Methods
         private void GetGoldReward(RewardContainer rewardContainer,int amount)
         {
-            GameManager.Instance.PersistentGameplayData.CurrentGold += amount;
+            GameManager.PersistentGameplayData.CurrentGold += amount;
             _currentRewardsList.Remove(rewardContainer);
-            UIManager.Instance.InformationCanvas.SetGoldText(GameManager.Instance.PersistentGameplayData.CurrentGold);
+            UIManager.InformationCanvas.SetGoldText(GameManager.PersistentGameplayData.CurrentGold);
             Destroy(rewardContainer.gameObject);
         }
 

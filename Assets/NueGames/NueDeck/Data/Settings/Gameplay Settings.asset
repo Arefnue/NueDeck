@@ -12,15 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01dd2752105b4ecbbc5e92d535616897, type: 3}
   m_Name: Gameplay Settings
   m_EditorClassIdentifier: 
-  drawCount: 4
+  drawCount: 5
   maxMana: 3
-  canUseCards: 1
-  canSelectCards: 1
-  isRandomHand: 0
-  allyList:
+  initalAllyList:
   - {fileID: 2835035829204582327, guid: 6472d62dc90afc04db103b9a3f293860, type: 3}
   initalDeck: {fileID: 11400000, guid: 1f1db59d6dc1c1046b2ad72c336c615e, type: 2}
-  randomCardCount: 10
   maxCardOnHand: 10
   allCardsList:
   - {fileID: 11400000, guid: 1e43cdb39f5836b44942f367125cadde, type: 2}
@@ -32,6 +28,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1e5671bf6b0f90b428df809497a2f125, type: 2}
   - {fileID: 11400000, guid: 5d6b018bf7dec554ba0a2eabfd89d3b1, type: 2}
   - {fileID: 11400000, guid: ffd3079242e164645ba9365c7c965def, type: 2}
-  cardPrefab: {fileID: 2689473134106589740, guid: a9728682a56595f4989b8f224d934689, type: 3}
+  cardPrefab: {fileID: 8876905202521797724, guid: 036311fd7fba31149957b48b3f26905c, type: 3}
   defaultName: Nue
   useStageSystem: 0
+  isRandomHand: 0
+  randomCardCount: 10

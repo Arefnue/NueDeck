@@ -33,9 +33,9 @@ namespace NueGames.NueDeck.Scripts.UI
         #region Public Methods
         public void SetPileTexts()
         {
-            DrawPileTextField.text = $"{CollectionManager.Instance.DrawPile.Count.ToString()}";
-            DiscardPileTextField.text = $"{CollectionManager.Instance.DiscardPile.Count.ToString()}";
-            ManaTextTextField.text = $"{GameManager.Instance.PersistentGameplayData.CurrentMana.ToString()}/{GameManager.Instance.PersistentGameplayData.MaxMana}";
+            DrawPileTextField.text = $"{CollectionManager.DrawPile.Count.ToString()}";
+            DiscardPileTextField.text = $"{CollectionManager.DiscardPile.Count.ToString()}";
+            ManaTextTextField.text = $"{GameManager.PersistentGameplayData.CurrentMana.ToString()}/{GameManager.PersistentGameplayData.MaxMana}";
         }
 
         public override void ResetCanvas()
@@ -47,8 +47,8 @@ namespace NueGames.NueDeck.Scripts.UI
 
         public void EndTurn()
         {
-            if (CombatManager.Instance.CurrentCombatStateType == CombatStateType.AllyTurn)
-                CombatManager.Instance.EndTurn();
+            if (CombatManager.CurrentCombatStateType == CombatStateType.AllyTurn)
+                CombatManager.EndTurn();
         }
         #endregion
     }

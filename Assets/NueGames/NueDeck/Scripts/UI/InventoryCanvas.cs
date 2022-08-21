@@ -57,15 +57,15 @@ namespace NueGames.NueDeck.Scripts.UI
         public override void OpenCanvas()
         {
             base.OpenCanvas();
-            if (CollectionManager.Instance)
-                CollectionManager.Instance.HandController.DisableDragging();
+            if (CollectionManager)
+                CollectionManager.HandController.DisableDragging();
         }
 
         public override void CloseCanvas()
         {
             base.CloseCanvas();
-            if (CollectionManager.Instance)
-                CollectionManager.Instance.HandController.EnableDragging();
+            if (CollectionManager)
+                CollectionManager.HandController.EnableDragging();
         }
 
         public override void ResetCanvas()

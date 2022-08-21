@@ -54,10 +54,10 @@ namespace NueGames.NueDeck.Scripts.Data.Settings
             DrawCount = _gameplayData.DrawCount;
             MaxMana = _gameplayData.MaxMana;
             CurrentMana = MaxMana;
-            CanUseCards = _gameplayData.CanUseCards;
-            CanSelectCards = _gameplayData.CanSelectCards;
+            CanUseCards = true;
+            CanSelectCards = true;
             IsRandomHand = _gameplayData.IsRandomHand;
-            AllyList = new List<AllyBase>(_gameplayData.AllyList);
+            AllyList = new List<AllyBase>(_gameplayData.InitalAllyList);
             CurrentEncounterId = 0;
             CurrentStageId = 0;
             CurrentGold = 0;

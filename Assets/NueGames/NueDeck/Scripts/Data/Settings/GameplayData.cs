@@ -12,14 +12,10 @@ namespace NueGames.NueDeck.Scripts.Data.Settings
         [Header("Gameplay Settings")] 
         [SerializeField] private int drawCount = 4;
         [SerializeField] private int maxMana = 3;
-        [SerializeField] private bool canUseCards = true;
-        [SerializeField] private bool canSelectCards = true;
-        [SerializeField] private bool isRandomHand = false;
-        [SerializeField] private List<AllyBase> allyList;
+        [SerializeField] private List<AllyBase> initalAllyList;
         
         [Header("Decks")] 
         [SerializeField] private DeckData initalDeck;
-        [SerializeField] private int randomCardCount;
         [SerializeField] private int maxCardOnHand;
         
         [Header("Card Settings")] 
@@ -30,13 +26,15 @@ namespace NueGames.NueDeck.Scripts.Data.Settings
         [SerializeField] private string defaultName = "Nue";
         [SerializeField] private bool useStageSystem;
         
+        [Header("Modifiers")]
+        [SerializeField] private bool isRandomHand = false;
+        [SerializeField] private int randomCardCount;
+        
         #region Encapsulation
         public int DrawCount => drawCount;
         public int MaxMana => maxMana;
-        public bool CanUseCards => canUseCards;
-        public bool CanSelectCards => canSelectCards;
         public bool IsRandomHand => isRandomHand;
-        public List<AllyBase> AllyList => allyList;
+        public List<AllyBase> InitalAllyList => initalAllyList;
         public DeckData InitalDeck => initalDeck;
         public int RandomCardCount => randomCardCount;
         public int MaxCardOnHand => maxCardOnHand;
