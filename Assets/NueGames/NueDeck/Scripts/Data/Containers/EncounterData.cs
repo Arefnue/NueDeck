@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NueGames.NueDeck.Scripts.Characters;
+using NueGames.NueDeck.Scripts.Enums;
 using NueGames.NueDeck.Scripts.NueExtentions;
 using UnityEngine;
 
@@ -45,9 +46,17 @@ namespace NueGames.NueDeck.Scripts.Data.Containers
     
     
     [Serializable]
-    public class EnemyEncounter
+    public class EnemyEncounter : EncounterBase
     {
         [SerializeField] private List<EnemyBase> enemyList;
         public List<EnemyBase> EnemyList => enemyList;
+    }
+    
+    [Serializable]
+    public abstract class EncounterBase
+    {
+        [SerializeField] private BackgroundTypes targetBackgroundType;
+
+        public BackgroundTypes TargetBackgroundType => targetBackgroundType;
     }
 }

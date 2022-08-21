@@ -17,17 +17,21 @@ MonoBehaviour:
   - name: Stage 1
     stageId: 0
     bossEncounterList:
-    - enemyList:
+    - targetBackgroundType: 0
+      enemyList:
       - {fileID: 243822687015991123, guid: 12422914cfeeb1349afec0d663b87504, type: 3}
       - {fileID: 243822687015991123, guid: 9fec376b8bc12e645a735f176747a31b, type: 3}
       - {fileID: 243822687015991123, guid: 12422914cfeeb1349afec0d663b87504, type: 3}
     enemyEncounterList:
-    - enemyList:
+    - targetBackgroundType: 0
+      enemyList:
       - {fileID: 243822687015991123, guid: c973aeb67e007d54c97fd480d7f50773, type: 3}
-    - enemyList:
+    - targetBackgroundType: 0
+      enemyList:
       - {fileID: 243822687015991123, guid: c973aeb67e007d54c97fd480d7f50773, type: 3}
       - {fileID: 243822687015991123, guid: 9fec376b8bc12e645a735f176747a31b, type: 3}
-    - enemyList:
+    - targetBackgroundType: 0
+      enemyList:
       - {fileID: 243822687015991123, guid: c973aeb67e007d54c97fd480d7f50773, type: 3}
       - {fileID: 243822687015991123, guid: 9fec376b8bc12e645a735f176747a31b, type: 3}
       - {fileID: 243822687015991123, guid: 12422914cfeeb1349afec0d663b87504, type: 3}
