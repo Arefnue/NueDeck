@@ -201,7 +201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3975758537094236638
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1430,7 +1430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354e83f72cd44271a70cfc99db01f969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardData: {fileID: 11400000, guid: 576255f7c5abd6d44800bc419cf6fbf8, type: 2}
+  rewardContainerData: {fileID: 11400000, guid: 576255f7c5abd6d44800bc419cf6fbf8, type: 2}
   rewardRoot: {fileID: 8356462358083751223}
   rewardContainerPrefab: {fileID: 4144854971553763347, guid: 7728fa9ef774a574fa112e56a3a8c0ef, type: 3}
   use3DCard: 0
