@@ -31,7 +31,7 @@ RectTransform:
   m_Children:
   - {fileID: 3125254616850605296}
   m_Father: {fileID: 4144906860905666486}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -219,7 +219,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 523900399423584285, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 523900399423584285, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -407,7 +407,7 @@ PrefabInstance:
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8075278134763003534, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8539056878642388646, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
       propertyPath: m_Name
@@ -450,17 +450,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5946678429437462350, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
   m_PrefabInstance: {fileID: 3573731487287099629}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6341537072825432521 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7609354405499549988, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
-  m_PrefabInstance: {fileID: 3573731487287099629}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3953374843238594800 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 523900399423584285, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
@@ -483,6 +472,5 @@ MonoBehaviour:
   descriptionRoot: {fileID: 3953374843238594800}
   statusIconsData: {fileID: 11400000, guid: b03aa86ece2bc1b4a9afba4ab8e5a0d0, type: 2}
   currentHealthText: {fileID: 6775776604672554816}
-  highlightImage: {fileID: 6341537072825432521}
   intentImage: {fileID: 8576760959144301459}
   nextActionValueText: {fileID: 2911335580396430737}

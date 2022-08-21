@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8075278134763003534, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
@@ -139,17 +139,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5946678429437462350, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
   m_PrefabInstance: {fileID: 2971957499443707859}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4658789223333938935 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7609354405499549988, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
-  m_PrefabInstance: {fileID: 2971957499443707859}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3349489802833921998 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 523900399423584285, guid: f4013d3459e7e8141bdf38f5fa58416b, type: 3}
@@ -172,4 +161,3 @@ MonoBehaviour:
   descriptionRoot: {fileID: 3349489802833921998}
   statusIconsData: {fileID: 11400000, guid: b03aa86ece2bc1b4a9afba4ab8e5a0d0, type: 2}
   currentHealthText: {fileID: 5093173911016622206}
-  highlightImage: {fileID: 4658789223333938935}

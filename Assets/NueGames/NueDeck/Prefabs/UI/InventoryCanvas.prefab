@@ -155,7 +155,7 @@ RectTransform:
   m_GameObject: {fileID: 718088413356912646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6483425684488289664}
   m_Father: {fileID: 0}
@@ -242,7 +242,6 @@ MonoBehaviour:
   titleTextField: {fileID: 9127871942361017765}
   cardSpawnRoot: {fileID: 7024743219473920872}
   cardUIPrefab: {fileID: 8876905202521797724, guid: 036311fd7fba31149957b48b3f26905c, type: 3}
-  scrollView: {fileID: 3802783144762382696}
 --- !u!1 &1235933608894134585
 GameObject:
   m_ObjectHideFlags: 0
