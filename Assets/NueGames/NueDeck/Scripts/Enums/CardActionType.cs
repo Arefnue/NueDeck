@@ -9,6 +9,7 @@
         IncreaseMaxHealth,
         Draw,
         EarnMana,
-        LifeSteal
+        LifeSteal,
+        Stun
     }
 }

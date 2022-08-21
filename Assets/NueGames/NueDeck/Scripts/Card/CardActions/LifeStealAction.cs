@@ -17,15 +17,15 @@ namespace NueGames.NueDeck.Scripts.Card.CardActions
             actionParameters.TargetCharacter.CharacterStats.Damage(value);
             actionParameters.SelfCharacter.CharacterStats.Heal(value);
             
-            if (FxManager.Instance != null)
+            if (FxManager != null)
             {
-                FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
-                FxManager.Instance.PlayFx(actionParameters.SelfCharacter.transform,FxType.Heal);
-                FxManager.Instance.SpawnFloatingText(actionParameters.TargetCharacter.TextSpawnRoot,value.ToString());
+                FxManager.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
+                FxManager.PlayFx(actionParameters.SelfCharacter.transform,FxType.Heal);
+                FxManager.SpawnFloatingText(actionParameters.TargetCharacter.TextSpawnRoot,value.ToString());
             }
            
-            if (AudioManager.Instance != null) 
-                AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType);
+            if (AudioManager != null) 
+                AudioManager.PlayOneShot(actionParameters.CardData.AudioType);
         }
     }
 }

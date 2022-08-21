@@ -12,6 +12,8 @@ namespace NueGames.NueDeck.Scripts.Card
         private CardBase _cardBase;
         private Vector3 _initalScale;
         public Action OnCardChose;
+        public GameManager GameManager => GameManager.Instance;
+        public UIManager UIManager => UIManager.Instance;
         
         public void BuildReward(CardData cardData)
         {
@@ -24,13 +26,14 @@ namespace NueGames.NueDeck.Scripts.Card
 
         private void OnChoice()
         {
-            if (GameManager.Instance != null)
-                GameManager.Instance.PersistentGameplayData.CurrentCardsList.Add(_cardBase.CardData);
+            if (GameManager != null)
+                GameManager.PersistentGameplayData.CurrentCardsList.Add(_cardBase.CardData);
 
-            if (UIManager.Instance != null)
-                UIManager.Instance.RewardCanvas.ChoicePanel.DisablePanel();
+            if (UIManager != null)
+                UIManager.RewardCanvas.ChoicePanel.DisablePanel();
             OnCardChose?.Invoke();
         }
+
 
         public void OnPointerEnter(PointerEventData eventData)
         {

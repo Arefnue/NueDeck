@@ -11,18 +11,21 @@ namespace NueGames.NueDeck.Scripts.Card.CardActions
         {
             if (!actionParameters.TargetCharacter) return;
             
-            var value = actionParameters.Value +
-                        actionParameters.SelfCharacter.CharacterStats.StatusDict[StatusType.Strength].StatusValue;
-            actionParameters.TargetCharacter.CharacterStats.Damage(Mathf.RoundToInt(value));
+            var targetCharacter = actionParameters.TargetCharacter;
+            var selfCharacter = actionParameters.SelfCharacter;
+            
+            var value = actionParameters.Value + targetCharacter.CharacterStats.StatusDict[StatusType.Strength].StatusValue; 
+            
+            selfCharacter.CharacterStats.Damage(Mathf.RoundToInt(value));
 
-            if (FxManager.Instance != null)
+            if (FxManager != null)
             {
-                FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
-                FxManager.Instance.SpawnFloatingText(actionParameters.TargetCharacter.TextSpawnRoot,value.ToString());
+                FxManager.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
+                FxManager.SpawnFloatingText(actionParameters.TargetCharacter.TextSpawnRoot,value.ToString());
             }
            
-            if (AudioManager.Instance != null) 
-                AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType);
+            if (AudioManager != null) 
+                AudioManager.PlayOneShot(actionParameters.CardData.AudioType);
         }
     }
 }

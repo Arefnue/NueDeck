@@ -38,6 +38,11 @@ namespace NueGames.NueDeck.Scripts.Card
         public bool IsPlayable { get; protected set; } = true;
 
         public List<RarityRoot> RarityRootList => rarityRootList;
+        protected FxManager FxManager => FxManager.Instance;
+        protected AudioManager AudioManager => AudioManager.Instance;
+        protected GameManager GameManager => GameManager.Instance;
+        protected CombatManager CombatManager => CombatManager.Instance;
+        protected CollectionManager CollectionManager => CollectionManager.Instance;
 
         #endregion
         
@@ -84,7 +89,7 @@ namespace NueGames.NueDeck.Scripts.Card
                         .DoAction(new CardActionParameters(playerAction.ActionValue,
                             target,self,CardData));
             }
-            CollectionManager.Instance.OnCardPlayed(this);
+            CollectionManager.OnCardPlayed(this);
             StartCoroutine(DiscardRoutine());
         }
 
@@ -127,7 +132,7 @@ namespace NueGames.NueDeck.Scripts.Card
         public virtual void Discard()
         {
             if (!IsPlayable) return;
-            CollectionManager.Instance.OnCardDiscarded(this);
+            CollectionManager.OnCardDiscarded(this);
             StartCoroutine(DiscardRoutine());
         }
         public virtual void Exhaust()
@@ -139,7 +144,7 @@ namespace NueGames.NueDeck.Scripts.Card
         protected virtual void SpendMana(int value)
         {
             if (!IsPlayable) return;
-            GameManager.Instance.PersistentGameplayData.CurrentMana -= value;
+            GameManager.PersistentGameplayData.CurrentMana -= value;
         }
         
         public virtual void SetInactiveMaterialState(bool isInactive) 
@@ -165,7 +170,7 @@ namespace NueGames.NueDeck.Scripts.Card
         protected virtual IEnumerator DiscardRoutine(bool destroy = true)
         {
             var timer = 0f;
-            transform.SetParent(CollectionManager.Instance.HandController.discardTransform);
+            transform.SetParent(CollectionManager.HandController.discardTransform);
             
             var startPos = CachedTransform.localPosition;
             var endPos = Vector3.zero;
@@ -229,7 +234,7 @@ namespace NueGames.NueDeck.Scripts.Card
             {
                 var specialKeyword = tooltipManager.SpecialKeywordData.SpecialKeywordBaseList.Find(x=>x.SpecialKeyword == cardDataSpecialKeyword);
                 if (specialKeyword != null)
-                    ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot,CursorType.Default,CollectionManager.Instance ? CollectionManager.Instance.HandController.cam : Camera.main);
+                    ShowTooltipInfo(tooltipManager,specialKeyword.GetContent(),specialKeyword.GetHeader(),descriptionRoot,CursorType.Default,CollectionManager ? CollectionManager.HandController.cam : Camera.main);
             }
         }
         public virtual void ShowTooltipInfo(TooltipManager tooltipManager, string content, string header = "", Transform tooltipStaticTransform = null, CursorType targetCursor = CursorType.Default,Camera cam = null, float delayShow =0)

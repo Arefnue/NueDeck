@@ -19,11 +19,11 @@ namespace NueGames.NueDeck.Scripts.Card.CardActions
                 Mathf.RoundToInt(actionParameters.Value + actionParameters.SelfCharacter.CharacterStats
                     .StatusDict[StatusType.Dexterity].StatusValue));
 
-            if (FxManager.Instance != null) 
-                FxManager.Instance.PlayFx(newTarget.transform, FxType.Block);
+            if (FxManager != null) 
+                FxManager.PlayFx(newTarget.transform, FxType.Block);
             
-            if (AudioManager.Instance != null) 
-                AudioManager.Instance.PlayOneShot(actionParameters.CardData.AudioType);
+            if (AudioManager != null) 
+                AudioManager.PlayOneShot(actionParameters.CardData.AudioType);
         }
     }
 }

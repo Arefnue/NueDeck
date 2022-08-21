@@ -56,4 +56,6 @@ MonoBehaviour:
     fxPrefab: {fileID: 306904137279546315, guid: a966665c25c808a4fa9a24cbbd6bbb67, type: 3}
   - fxType: 5
     fxPrefab: {fileID: 4399970628791159158, guid: 11a5c265e67f20144a9ec55a3e948415, type: 3}
+  - fxType: 6
+    fxPrefab: {fileID: 306904137279546315, guid: 9f4840041868be74ea8d4f988e961a5f, type: 3}
   floatingTextPrefab: {fileID: 5875565574366412673, guid: ff5e71a98d9a7364e9d9fbe0d5a58c35, type: 3}

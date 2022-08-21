@@ -15,7 +15,7 @@ namespace NueGames.NueDeck.Scripts.Card
             base.SetCard(targetProfile,isPlayable);
            
             if (canvas)
-                canvas.worldCamera = CollectionManager.Instance.HandController.cam;
+                canvas.worldCamera = CollectionManager.HandController.cam;
         }
         
         public override void SetInactiveMaterialState(bool isInactive)

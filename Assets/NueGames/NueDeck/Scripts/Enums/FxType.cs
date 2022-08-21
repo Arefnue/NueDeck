@@ -7,6 +7,7 @@
         Poison,
         Block,
         Str,
-        Buff
+        Buff,
+        Stun
     }
 }
