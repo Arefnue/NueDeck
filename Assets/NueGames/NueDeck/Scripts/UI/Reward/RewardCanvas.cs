@@ -16,7 +16,7 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
         [SerializeField] private RewardContainerData rewardContainerData;
         [SerializeField] private Transform rewardRoot;
         [SerializeField] private RewardContainer rewardContainerPrefab;
-
+        [SerializeField] private Transform rewardPanelRoot;
         [Header("Choice")] 
         [SerializeField] private bool use3DCard;
         [SerializeField] private List<Transform> choiceCardSpawnTransformList;
@@ -32,6 +32,11 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
         public ChoicePanel ChoicePanel => choicePanel;
         
         #region Public Methods
+
+        public void PrepareCanvas()
+        {
+            rewardPanelRoot.gameObject.SetActive(true);
+        }
         public void BuildReward(RewardType rewardType)
         {
             var rewardClone = Instantiate(rewardContainerPrefab, rewardRoot);
