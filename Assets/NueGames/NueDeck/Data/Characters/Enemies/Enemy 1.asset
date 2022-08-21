@@ -19,18 +19,16 @@ MonoBehaviour:
   followAbilityPattern: 1
   enemyAbilityList:
   - name: Attack Single
-    abilityTargetType: 1
     intention: {fileID: 11400000, guid: 2af475f5121b73d4c99b67551230aa48, type: 2}
-    soundProfile: {fileID: 11400000, guid: 9c4dc29fc2148ed43a7e14bb55832e50, type: 2}
     hideActionValue: 0
     actionList:
     - actionType: 0
-      actionValue: 10
+      minActionValue: 6
+      maxActionValue: 6
   - name: Block
-    abilityTargetType: 0
     intention: {fileID: 11400000, guid: b0b1e7f2f78bb444eb1666e4accf22ee, type: 2}
-    soundProfile: {fileID: 11400000, guid: ff6628141ca0c2b47ae1c7ef0636513c, type: 2}
-    hideActionValue: 1
+    hideActionValue: 0
     actionList:
     - actionType: 3
-      actionValue: 10
+      minActionValue: 5
+      maxActionValue: 8

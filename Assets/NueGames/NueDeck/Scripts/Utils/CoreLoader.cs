@@ -1,4 +1,4 @@
-﻿using NueGames.NueDeck.Scripts.Data.Settings;
+﻿using System;
 using NueGames.NueDeck.Scripts.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,9 +10,18 @@ namespace NueGames.NueDeck.Scripts.Utils
     {
         private void Awake()
         {
-            if (!GameManager.Instance)
-                SceneManager.LoadScene("NueCore", LoadSceneMode.Additive);
-            Destroy(gameObject);
+            try
+            {
+                if (!GameManager.Instance)
+                    SceneManager.LoadScene("NueCore", LoadSceneMode.Additive);
+                Destroy(gameObject);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("You should add NueCore scene to build settings!");
+                throw;
+            }
+           
         }
     }
 }

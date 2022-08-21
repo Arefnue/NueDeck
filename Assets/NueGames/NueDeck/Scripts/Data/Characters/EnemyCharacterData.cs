@@ -4,6 +4,7 @@ using NueGames.NueDeck.Scripts.Data.Containers;
 using NueGames.NueDeck.Scripts.Enums;
 using NueGames.NueDeck.Scripts.NueExtentions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace NueGames.NueDeck.Scripts.Data.Characters
 {
@@ -38,16 +39,12 @@ namespace NueGames.NueDeck.Scripts.Data.Characters
     {
         [Header("Settings")]
         [SerializeField] private string name;
-        [SerializeField] private ActionTargetType abilityTargetType;
         [SerializeField] private EnemyIntentionData intention;
-        [SerializeField] private SoundProfileData soundProfile;
         [SerializeField] private bool hideActionValue;
         [SerializeField] private List<EnemyActionData> actionList;
         public string Name => name;
-        public ActionTargetType AbilityTargetType => abilityTargetType;
         public EnemyIntentionData Intention => intention;
         public List<EnemyActionData> ActionList => actionList;
-        public SoundProfileData SoundProfile => soundProfile;
         public bool HideActionValue => hideActionValue;
     }
     
@@ -55,9 +52,11 @@ namespace NueGames.NueDeck.Scripts.Data.Characters
     public class EnemyActionData
     {
         [SerializeField] private EnemyActionType actionType;
-        [SerializeField] private float actionValue;
+        [SerializeField] private int minActionValue;
+        [SerializeField] private int maxActionValue;
         public EnemyActionType ActionType => actionType;
-        public float ActionValue => actionValue;
+        public int ActionValue => Random.Range(minActionValue,maxActionValue);
+        
     }
     
     

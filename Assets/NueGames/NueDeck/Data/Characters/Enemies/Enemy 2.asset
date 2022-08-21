@@ -19,58 +19,51 @@ MonoBehaviour:
   followAbilityPattern: 1
   enemyAbilityList:
   - name: Poison
-    abilityTargetType: 1
     intention: {fileID: 11400000, guid: e7deaaa3f01f8f54ab8c29a0ce3c8f31, type: 2}
-    soundProfile: {fileID: 11400000, guid: c558e0a45b0633a4d9313997a50bb80a, type: 2}
     hideActionValue: 0
     actionList:
     - actionType: 2
-      actionValue: 3
+      minActionValue: 3
+      maxActionValue: 3
   - name: Block
-    abilityTargetType: 0
     intention: {fileID: 11400000, guid: b0b1e7f2f78bb444eb1666e4accf22ee, type: 2}
-    soundProfile: {fileID: 11400000, guid: ff6628141ca0c2b47ae1c7ef0636513c, type: 2}
     hideActionValue: 1
     actionList:
     - actionType: 3
-      actionValue: 15
+      minActionValue: 5
+      maxActionValue: 6
   - name: Poison
-    abilityTargetType: 1
     intention: {fileID: 11400000, guid: e7deaaa3f01f8f54ab8c29a0ce3c8f31, type: 2}
-    soundProfile: {fileID: 11400000, guid: c558e0a45b0633a4d9313997a50bb80a, type: 2}
     hideActionValue: 0
     actionList:
     - actionType: 2
-      actionValue: 4
+      minActionValue: 4
+      maxActionValue: 4
   - name: Poison
-    abilityTargetType: 1
     intention: {fileID: 11400000, guid: e7deaaa3f01f8f54ab8c29a0ce3c8f31, type: 2}
-    soundProfile: {fileID: 11400000, guid: c558e0a45b0633a4d9313997a50bb80a, type: 2}
     hideActionValue: 0
     actionList:
     - actionType: 2
-      actionValue: 5
+      minActionValue: 4
+      maxActionValue: 5
   - name: Poison
-    abilityTargetType: 1
     intention: {fileID: 11400000, guid: e7deaaa3f01f8f54ab8c29a0ce3c8f31, type: 2}
-    soundProfile: {fileID: 11400000, guid: c558e0a45b0633a4d9313997a50bb80a, type: 2}
     hideActionValue: 0
     actionList:
     - actionType: 2
-      actionValue: 6
+      minActionValue: 5
+      maxActionValue: 6
   - name: Block
-    abilityTargetType: 0
     intention: {fileID: 11400000, guid: b0b1e7f2f78bb444eb1666e4accf22ee, type: 2}
-    soundProfile: {fileID: 11400000, guid: ff6628141ca0c2b47ae1c7ef0636513c, type: 2}
     hideActionValue: 1
     actionList:
     - actionType: 3
-      actionValue: 30
+      minActionValue: 5
+      maxActionValue: 10
   - name: Block
-    abilityTargetType: 0
     intention: {fileID: 11400000, guid: b0b1e7f2f78bb444eb1666e4accf22ee, type: 2}
-    soundProfile: {fileID: 11400000, guid: ff6628141ca0c2b47ae1c7ef0636513c, type: 2}
     hideActionValue: 1
     actionList:
     - actionType: 3
-      actionValue: 30
+      minActionValue: 10
+      maxActionValue: 20
