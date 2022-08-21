@@ -16,6 +16,7 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
         [SerializeField] private string cardName;
         [SerializeField] private int manaCost;
         [SerializeField] private Sprite cardSprite;
+        [SerializeField] private RarityType rarity;
         
         [Header("Action Settings")]
         [SerializeField] private bool usableWithoutTarget;
@@ -39,7 +40,9 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
         public List<SpecialKeywords> KeywordsList => specialKeywordsList;
         public AudioActionType AudioType => audioType;
         public string MyDescription { get; set; }
-        
+
+        public RarityType Rarity => rarity;
+
         #endregion
         
         #region Methods
@@ -63,6 +66,7 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
         public void EditCardName(string newName) => cardName = newName;
         public void EditId(string newId) => id = newId;
         public void EditManaCost(int newCost) => manaCost = newCost;
+        public void EditRarity(RarityType targetRarity) => rarity = targetRarity;
         public void EditCardSprite(Sprite newSprite) => cardSprite = newSprite;
         public void EditUsableWithoutTarget(bool newStatus) => usableWithoutTarget = newStatus;
         public void EditCardActionDataList(List<CardActionData> newCardActionDataList) =>

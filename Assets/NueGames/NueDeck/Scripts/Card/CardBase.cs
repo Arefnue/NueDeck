@@ -6,6 +6,7 @@ using NueGames.NueDeck.Scripts.Data.Collection;
 using NueGames.NueDeck.Scripts.Enums;
 using NueGames.NueDeck.Scripts.Managers;
 using NueGames.NueDeck.Scripts.NueExtentions;
+using NueGames.NueDeck.Scripts.Utils;
 using NueGames.NueDeck.ThirdParty.NueTooltip.Core;
 using NueGames.NueDeck.ThirdParty.NueTooltip.CursorSystem;
 using NueGames.NueDeck.ThirdParty.NueTooltip.Interfaces;
@@ -26,6 +27,8 @@ namespace NueGames.NueDeck.Scripts.Card
         [SerializeField] protected TextMeshProUGUI nameTextField;
         [SerializeField] protected TextMeshProUGUI descTextField;
         [SerializeField] protected TextMeshProUGUI manaTextField;
+        [SerializeField] protected List<RarityRoot> rarityRootList;
+        
 
         #region Cache
         public CardData CardData { get; private set; }
@@ -33,6 +36,8 @@ namespace NueGames.NueDeck.Scripts.Card
         protected Transform CachedTransform { get; set; }
         protected WaitForEndOfFrame CachedWaitFrame { get; set; }
         public bool IsPlayable { get; protected set; } = true;
+
+        public List<RarityRoot> RarityRootList => rarityRootList;
 
         #endregion
         
@@ -51,6 +56,8 @@ namespace NueGames.NueDeck.Scripts.Card
             descTextField.text = CardData.MyDescription;
             manaTextField.text = CardData.ManaCost.ToString();
             cardImage.sprite = CardData.CardSprite;
+            foreach (var rarityRoot in RarityRootList)
+                rarityRoot.gameObject.SetActive(rarityRoot.Rarity == CardData.Rarity);
         }
         
         #endregion

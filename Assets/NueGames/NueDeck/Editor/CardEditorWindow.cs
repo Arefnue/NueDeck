@@ -34,6 +34,8 @@ namespace NueGames.NueDeck.Editor
         private List<CardDescriptionData> CardDescriptionDataList{ get; set; }
         private List<SpecialKeywords> SpecialKeywordsList{ get; set; }
         private AudioActionType AudioType{ get; set; }
+        
+        private RarityType CardRarity { get; set; }
 
         private void CacheCardData()
         {
@@ -46,7 +48,7 @@ namespace NueGames.NueDeck.Editor
             CardDescriptionDataList = SelectedCardData.CardDescriptionDataList.Count>0 ? new List<CardDescriptionData>(SelectedCardData.CardDescriptionDataList) : new List<CardDescriptionData>();
             SpecialKeywordsList = SelectedCardData.KeywordsList.Count>0 ? new List<SpecialKeywords>(SelectedCardData.KeywordsList) : new List<SpecialKeywords>();
             AudioType = SelectedCardData.AudioType;
-
+            CardRarity = SelectedCardData.Rarity;
         }
         
         private void ClearCachedCardData()
@@ -60,6 +62,7 @@ namespace NueGames.NueDeck.Editor
             CardDescriptionDataList?.Clear();
             SpecialKeywordsList?.Clear();
             AudioType = AudioActionType.Attack;
+            CardRarity = RarityType.Common;
         }
         #endregion
         
@@ -158,6 +161,7 @@ namespace NueGames.NueDeck.Editor
             clone.EditCardActionDataList(new List<CardActionData>());
             clone.EditCardDescriptionDataList(new List<CardDescriptionData>());
             clone.EditSpecialKeywordsList(new List<SpecialKeywords>());
+            clone.EditRarity(RarityType.Common);
             var path = str.Insert(0, CardDataDefaultPath).Append(".asset").ToString();
             var uniquePath = AssetDatabase.GenerateUniqueAssetPath(path);
             AssetDatabase.CreateAsset(clone, uniquePath);
@@ -206,9 +210,6 @@ namespace NueGames.NueDeck.Editor
 
         #region Card Data Methods
 
-        private void ResetEditorCardData()
-        {
-        }
         private void ChangeId()
         {
             CardId = EditorGUILayout.TextField("Card Id:", CardId);
@@ -220,6 +221,11 @@ namespace NueGames.NueDeck.Editor
         private void ChangeManaCost()
         {
             ManaCost = EditorGUILayout.IntField("Mana Cost:", ManaCost);
+        }
+        
+        private void ChangeRarity()
+        { 
+            CardRarity = (RarityType) EditorGUILayout.EnumPopup("Rarity: ",CardRarity,GUILayout.Width(250));
         }
         private void ChangeCardSprite()
         {
@@ -249,6 +255,7 @@ namespace NueGames.NueDeck.Editor
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.BeginVertical();
             ChangeManaCost();
+            ChangeRarity();
             ChangeUsableWithoutTarget();
             ChangeAudioActionType();
             EditorGUILayout.EndVertical();
