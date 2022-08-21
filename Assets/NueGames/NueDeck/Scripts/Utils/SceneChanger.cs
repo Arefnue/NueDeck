@@ -9,6 +9,9 @@ namespace NueGames.NueDeck.Scripts.Utils
 {
     public class SceneChanger : MonoBehaviour
     {
+        private GameManager GameManager => GameManager.Instance;
+        private UIManager UIManager => UIManager.Instance;
+        
         private enum SceneType
         {
             MainMenu,
@@ -21,32 +24,32 @@ namespace NueGames.NueDeck.Scripts.Utils
         }
         private IEnumerator DelaySceneChange(SceneType type)
         {
-            UIManager.Instance.SetCanvas(UIManager.Instance.InventoryCanvas,false,true);
+            UIManager.SetCanvas(UIManager.Instance.InventoryCanvas,false,true);
             yield return StartCoroutine(UIManager.Instance.Fade(true));
 
             switch (type)
             {
                 case SceneType.MainMenu:
-                    UIManager.Instance.ChangeScene(GameManager.Instance.SceneData.mainMenuSceneIndex);
-                    UIManager.Instance.SetCanvas(UIManager.Instance.CombatCanvas,false,true);
-                    UIManager.Instance.SetCanvas(UIManager.Instance.InformationCanvas,false,true);
-                    UIManager.Instance.SetCanvas(UIManager.Instance.RewardCanvas,false,true);
+                    UIManager.ChangeScene(GameManager.SceneData.mainMenuSceneIndex);
+                    UIManager.SetCanvas(UIManager.CombatCanvas,false,true);
+                    UIManager.SetCanvas(UIManager.InformationCanvas,false,true);
+                    UIManager.SetCanvas(UIManager.RewardCanvas,false,true);
                    
-                    GameManager.Instance.InitGameplayData();
-                    GameManager.Instance.SetInitalHand();
+                    GameManager.InitGameplayData();
+                    GameManager.SetInitalHand();
                     break;
                 case SceneType.Map:
-                    UIManager.Instance.ChangeScene(GameManager.Instance.SceneData.mapSceneIndex);
-                    UIManager.Instance.SetCanvas(UIManager.Instance.CombatCanvas,false,true);
-                    UIManager.Instance.SetCanvas(UIManager.Instance.InformationCanvas,true,false);
-                    UIManager.Instance.SetCanvas(UIManager.Instance.RewardCanvas,false,true);
+                    UIManager.ChangeScene(GameManager.SceneData.mapSceneIndex);
+                    UIManager.SetCanvas(UIManager.CombatCanvas,false,true);
+                    UIManager.SetCanvas(UIManager.InformationCanvas,true,false);
+                    UIManager.SetCanvas(UIManager.RewardCanvas,false,true);
                    
                     break;
                 case SceneType.Combat:
-                    UIManager.Instance.ChangeScene(GameManager.Instance.SceneData.combatSceneIndex);
-                    UIManager.Instance.SetCanvas(UIManager.Instance.CombatCanvas,false,true);
-                    UIManager.Instance.SetCanvas(UIManager.Instance.InformationCanvas,true,false);
-                    UIManager.Instance.SetCanvas(UIManager.Instance.RewardCanvas,false,true);
+                    UIManager.ChangeScene(GameManager.SceneData.combatSceneIndex);
+                    UIManager.SetCanvas(UIManager.CombatCanvas,false,true);
+                    UIManager.SetCanvas(UIManager.InformationCanvas,true,false);
+                    UIManager.SetCanvas(UIManager.RewardCanvas,false,true);
                     
                     break;
                 default:
@@ -64,11 +67,11 @@ namespace NueGames.NueDeck.Scripts.Utils
         public void ChangeScene(int sceneId)
         {
 
-            if (sceneId == GameManager.Instance.SceneData.mainMenuSceneIndex)
+            if (sceneId == GameManager.SceneData.mainMenuSceneIndex)
                 OpenMainMenuScene();
-            else if (sceneId == GameManager.Instance.SceneData.mapSceneIndex)
+            else if (sceneId == GameManager.SceneData.mapSceneIndex)
                 OpenMapScene();
-            else if (sceneId == GameManager.Instance.SceneData.combatSceneIndex)
+            else if (sceneId == GameManager.SceneData.combatSceneIndex)
                 OpenCombatScene();
             else
                 SceneManager.LoadScene(sceneId);
@@ -77,7 +80,7 @@ namespace NueGames.NueDeck.Scripts.Utils
         }
         public void ExitApp()
         {
-            GameManager.Instance.OnExitApp();
+            GameManager.OnExitApp();
             Application.Quit();
         }
     }

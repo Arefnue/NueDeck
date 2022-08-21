@@ -13,6 +13,8 @@ namespace NueGames.NueDeck.Scripts.UI
         [SerializeField] private Image completedImage;
         [SerializeField] private bool isFinal;
         
+        protected GameManager GameManager => GameManager.Instance;
+        
         private void Awake()
         {
             completedImage.gameObject.SetActive(false);
@@ -24,7 +26,7 @@ namespace NueGames.NueDeck.Scripts.UI
             {
                 case EncounterButtonStatus.Active:
                     button.interactable = true;
-                    if (isFinal) GameManager.Instance.PersistentGameplayData.IsFinalEncounter = true;
+                    if (isFinal) GameManager.PersistentGameplayData.IsFinalEncounter = true;
                     
                     break;
                 case EncounterButtonStatus.Passive:

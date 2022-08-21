@@ -30,17 +30,17 @@ namespace NueGames.NueDeck.Scripts.Characters
             CharacterStats = new CharacterStats(EnemyCharacterData.MaxHealth,EnemyCanvas);
             CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
-            CombatManager.Instance.OnAllyTurnStarted += ShowNextAbility;
-            CombatManager.Instance.OnEnemyTurnStarted += CharacterStats.TriggerAllStatus;
+            CombatManager.OnAllyTurnStarted += ShowNextAbility;
+            CombatManager.OnEnemyTurnStarted += CharacterStats.TriggerAllStatus;
         }
         protected override void OnDeath()
         {
             base.OnDeath();
-            CombatManager.Instance.OnAllyTurnStarted -= ShowNextAbility;
-            CombatManager.Instance.OnEnemyTurnStarted -= CharacterStats.TriggerAllStatus;
+            CombatManager.OnAllyTurnStarted -= ShowNextAbility;
+            CombatManager.OnEnemyTurnStarted -= CharacterStats.TriggerAllStatus;
            
-            CombatManager.Instance.OnEnemyDeath(this);
-            AudioManager.Instance.PlayOneShot(DeathSoundProfileData.GetRandomClip());
+            CombatManager.OnEnemyDeath(this);
+            AudioManager.PlayOneShot(DeathSoundProfileData.GetRandomClip());
             Destroy(gameObject);
         }
         #endregion
@@ -89,9 +89,9 @@ namespace NueGames.NueDeck.Scripts.Characters
         {
             var waitFrame = new WaitForEndOfFrame();
 
-            if (CombatManager.Instance == null) yield break;
+            if (CombatManager == null) yield break;
             
-            var target = CombatManager.Instance.CurrentAlliesList.RandomItem();
+            var target = CombatManager.CurrentAlliesList.RandomItem();
             
             var startPos = transform.position;
             var endPos = target.transform.position;
@@ -110,7 +110,7 @@ namespace NueGames.NueDeck.Scripts.Characters
         {
             var waitFrame = new WaitForEndOfFrame();
             
-            var target = CombatManager.Instance.CurrentEnemiesList.RandomItem();
+            var target = CombatManager.CurrentEnemiesList.RandomItem();
             
             var startPos = transform.position;
             var endPos = startPos+new Vector3(0,0.2f,0);

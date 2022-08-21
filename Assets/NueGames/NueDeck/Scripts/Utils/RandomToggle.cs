@@ -8,11 +8,11 @@ namespace NueGames.NueDeck.Scripts.Utils
     {
         [SerializeField] private Toggle toggle;
 
-        
+        private GameManager GameManager => GameManager.Instance;
         public void CheckToggle()
         {
-            GameManager.Instance.PersistentGameplayData.IsRandomHand = toggle.isOn;
-            GameManager.Instance.SetInitalHand();
+            GameManager.PersistentGameplayData.IsRandomHand = toggle.isOn;
+            GameManager.SetInitalHand();
         }
     }
 }

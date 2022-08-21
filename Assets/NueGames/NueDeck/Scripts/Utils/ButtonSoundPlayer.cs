@@ -12,12 +12,13 @@ namespace NueGames.NueDeck.Scripts.Utils
 
         private Button _btn;
         private SoundProfileData SoundProfileData => soundProfileData;
+        private AudioManager AudioManager => AudioManager.Instance;
         private void Awake()
         {
             _btn = GetComponent<Button>();
             _btn.onClick.AddListener(PlayButton);
         }
         
-        public void PlayButton() => AudioManager.Instance.PlayOneShotButton(SoundProfileData.GetRandomClip());
+        public void PlayButton() => AudioManager.PlayOneShotButton(SoundProfileData.GetRandomClip());
     }
 }

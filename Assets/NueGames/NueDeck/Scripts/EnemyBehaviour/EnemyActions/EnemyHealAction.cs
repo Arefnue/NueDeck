@@ -17,11 +17,11 @@ namespace NueGames.NueDeck.Scripts.EnemyBehaviour.EnemyActions
             
             newTarget.CharacterStats.Heal(Mathf.RoundToInt(actionParameters.Value));
 
-            if (FxManager.Instance != null) 
-                FxManager.Instance.PlayFx(newTarget.transform, FxType.Heal);
+            if (FxManager != null) 
+                FxManager.PlayFx(newTarget.transform, FxType.Heal);
             
-            if (AudioManager.Instance != null) 
-                AudioManager.Instance.PlayOneShot(AudioActionType.Heal);
+            if (AudioManager != null) 
+                AudioManager.PlayOneShot(AudioActionType.Heal);
         }
     }
 }

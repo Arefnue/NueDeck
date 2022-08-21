@@ -20,11 +20,15 @@ namespace NueGames.NueDeck.Scripts.Managers
         [SerializeField] private EncounterData encounterData;
         [SerializeField] private SceneData sceneData;
 
+
+        #region Cache
         public SceneData SceneData => sceneData;
         public EncounterData EncounterData => encounterData;
         public GameplayData GameplayData => gameplayData;
         public PersistentGameplayData PersistentGameplayData { get; private set; }
-
+        protected UIManager UIManager => UIManager.Instance;
+        #endregion
+        
         #region Setup
         private void Awake()
         {
@@ -51,8 +55,8 @@ namespace NueGames.NueDeck.Scripts.Managers
         public void InitGameplayData()
         { 
             PersistentGameplayData = new PersistentGameplayData(gameplayData);
-            if (UIManager.Instance)
-                UIManager.Instance.InformationCanvas.ResetCanvas();
+            if (UIManager)
+                UIManager.InformationCanvas.ResetCanvas();
            
         } 
         public CardBase BuildAndGetCard(CardData targetData, Transform parent)

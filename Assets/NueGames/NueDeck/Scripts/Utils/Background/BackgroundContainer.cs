@@ -10,9 +10,11 @@ namespace NueGames.NueDeck.Scripts.Utils.Background
         [SerializeField] private List<BackgroundRoot> backgroundRootList;
         public List<BackgroundRoot> BackgroundRootList => backgroundRootList;
         
+        private CombatManager CombatManager => CombatManager.Instance;
+        
         public void OpenSelectedBackground()
         {
-            var encounter = CombatManager.Instance.CurrentEncounter;
+            var encounter = CombatManager.CurrentEncounter;
             foreach (var backgroundRoot in BackgroundRootList)
                 backgroundRoot.gameObject.SetActive(encounter.TargetBackgroundType == backgroundRoot.BackgroundType);
         }

@@ -19,7 +19,9 @@ namespace NueGames.NueDeck.Scripts.Managers
         [SerializeField] private BackgroundContainer backgroundContainer;
         [SerializeField] private List<Transform> enemyPosList;
         [SerializeField] private List<Transform> allyPosList;
+ 
         
+        #region Cache
         public List<EnemyBase> CurrentEnemiesList { get; private set; } = new List<EnemyBase>();
         public List<AllyBase> CurrentAlliesList { get; private set; }= new List<AllyBase>();
 
@@ -44,8 +46,15 @@ namespace NueGames.NueDeck.Scripts.Managers
         }
         
         private CombatStateType _currentCombatStateType;
+        protected FxManager FxManager => FxManager.Instance;
+        protected AudioManager AudioManager => AudioManager.Instance;
+        protected GameManager GameManager => GameManager.Instance;
+        protected UIManager UIManager => UIManager.Instance;
 
-        private GameManager GameManager => GameManager.Instance;
+        protected CollectionManager CollectionManager => CollectionManager.Instance;
+
+        #endregion
+        
         
         #region Setup
         private void Awake()
@@ -73,10 +82,10 @@ namespace NueGames.NueDeck.Scripts.Managers
             BuildAllies();
             backgroundContainer.OpenSelectedBackground();
           
-            CollectionManager.Instance.SetGameDeck();
+            CollectionManager.SetGameDeck();
            
-            UIManager.Instance.CombatCanvas.gameObject.SetActive(true);
-            UIManager.Instance.InformationCanvas.gameObject.SetActive(true);
+            UIManager.CombatCanvas.gameObject.SetActive(true);
+            UIManager.InformationCanvas.gameObject.SetActive(true);
             CurrentCombatStateType = CombatStateType.AllyTurn;
         }
         
@@ -98,7 +107,7 @@ namespace NueGames.NueDeck.Scripts.Managers
                     
                     GameManager.PersistentGameplayData.CurrentMana = GameManager.PersistentGameplayData.MaxMana;
                    
-                    CollectionManager.Instance.DrawCards(GameManager.PersistentGameplayData.DrawCount);
+                    CollectionManager.DrawCards(GameManager.PersistentGameplayData.DrawCount);
                     
                     GameManager.PersistentGameplayData.CanSelectCards = true;
                     
@@ -107,7 +116,7 @@ namespace NueGames.NueDeck.Scripts.Managers
 
                     OnEnemyTurnStarted?.Invoke();
                     
-                    CollectionManager.Instance.DiscardHand();
+                    CollectionManager.DiscardHand();
                     
                     StartCoroutine(nameof(EnemyTurnRoutine));
                     
@@ -137,7 +146,7 @@ namespace NueGames.NueDeck.Scripts.Managers
             if (GameManager.PersistentGameplayData.AllyList.Count>1)
                 GameManager.PersistentGameplayData.AllyList.Remove(targetAllyData);
             CurrentAlliesList.Remove(targetAlly);
-            UIManager.Instance.InformationCanvas.ResetCanvas();
+            UIManager.InformationCanvas.ResetCanvas();
             if (CurrentAlliesList.Count<=0)
                 LoseCombat();
         }
@@ -158,7 +167,7 @@ namespace NueGames.NueDeck.Scripts.Managers
         public void IncreaseMana(int target)
         {
             GameManager.PersistentGameplayData.CurrentMana += target;
-            UIManager.Instance.CombatCanvas.SetPileTexts();
+            UIManager.CombatCanvas.SetPileTexts();
         }
         public void HighlightCardTarget(ActionTargetType targetTypeTargetType)
         {
@@ -225,13 +234,13 @@ namespace NueGames.NueDeck.Scripts.Managers
             
             CurrentCombatStateType = CombatStateType.EndCombat;
             
-            CollectionManager.Instance.DiscardHand();
-            CollectionManager.Instance.DiscardPile.Clear();
-            CollectionManager.Instance.DrawPile.Clear();
-            CollectionManager.Instance.HandPile.Clear();
-            CollectionManager.Instance.HandController.hand.Clear();
-            UIManager.Instance.CombatCanvas.gameObject.SetActive(true);
-            UIManager.Instance.CombatCanvas.CombatLosePanel.SetActive(true);
+            CollectionManager.DiscardHand();
+            CollectionManager.DiscardPile.Clear();
+            CollectionManager.DrawPile.Clear();
+            CollectionManager.HandPile.Clear();
+            CollectionManager.HandController.hand.Clear();
+            UIManager.CombatCanvas.gameObject.SetActive(true);
+            UIManager.CombatCanvas.CombatLosePanel.SetActive(true);
         }
         private void WinCombat()
         {
@@ -244,24 +253,24 @@ namespace NueGames.NueDeck.Scripts.Managers
                 GameManager.PersistentGameplayData.SetAllyHealthData(allyBase.AllyCharacterData.CharacterID,
                     allyBase.CharacterStats.CurrentHealth, allyBase.CharacterStats.MaxHealth);
             }
-            CollectionManager.Instance.DiscardPile.Clear();
-            CollectionManager.Instance.DrawPile.Clear();
-            CollectionManager.Instance.HandPile.Clear();
-            CollectionManager.Instance.HandController.hand.Clear();
+            CollectionManager.DiscardPile.Clear();
+            CollectionManager.DrawPile.Clear();
+            CollectionManager.HandPile.Clear();
+            CollectionManager.HandController.hand.Clear();
             
            
             if (GameManager.PersistentGameplayData.IsFinalEncounter)
             {
-                UIManager.Instance.CombatCanvas.CombatWinPanel.SetActive(true);
+                UIManager.CombatCanvas.CombatWinPanel.SetActive(true);
             }
             else
             {
                 CurrentMainAlly.CharacterStats.ClearAllStatus();
                 GameManager.PersistentGameplayData.CurrentEncounterId++;
-                UIManager.Instance.CombatCanvas.gameObject.SetActive(false);
-                UIManager.Instance.RewardCanvas.gameObject.SetActive(true);
-                UIManager.Instance.RewardCanvas.BuildReward(RewardType.Gold);
-                UIManager.Instance.RewardCanvas.BuildReward(RewardType.Card);
+                UIManager.CombatCanvas.gameObject.SetActive(false);
+                UIManager.RewardCanvas.gameObject.SetActive(true);
+                UIManager.RewardCanvas.BuildReward(RewardType.Gold);
+                UIManager.RewardCanvas.BuildReward(RewardType.Card);
             }
            
         }

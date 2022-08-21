@@ -20,10 +20,10 @@ namespace NueGames.NueDeck.Scripts.Characters
             allyCanvas.InitCanvas();
             CharacterStats = new CharacterStats(allyCharacterData.MaxHealth,allyCanvas);
 
-            if (!GameManager.Instance)
+            if (!GameManager)
                 throw new Exception("There is no GameManager");
             
-            var data = GameManager.Instance.PersistentGameplayData.AllyHealthDataList.Find(x =>
+            var data = GameManager.PersistentGameplayData.AllyHealthDataList.Find(x =>
                 x.CharacterId == AllyCharacterData.CharacterID);
             
             if (data != null)
@@ -33,23 +33,23 @@ namespace NueGames.NueDeck.Scripts.Characters
             }
             else
             {
-                GameManager.Instance.PersistentGameplayData.SetAllyHealthData(AllyCharacterData.CharacterID,CharacterStats.CurrentHealth,CharacterStats.MaxHealth);
+                GameManager.PersistentGameplayData.SetAllyHealthData(AllyCharacterData.CharacterID,CharacterStats.CurrentHealth,CharacterStats.MaxHealth);
             }
             
             CharacterStats.OnDeath += OnDeath;
             CharacterStats.SetCurrentHealth(CharacterStats.CurrentHealth);
             
-            if (CombatManager.Instance != null)
-                CombatManager.Instance.OnAllyTurnStarted += CharacterStats.TriggerAllStatus;
+            if (CombatManager != null)
+                CombatManager.OnAllyTurnStarted += CharacterStats.TriggerAllStatus;
         }
         
         protected override void OnDeath()
         {
             base.OnDeath();
-            if (CombatManager.Instance != null)
+            if (CombatManager != null)
             {
-                CombatManager.Instance.OnAllyTurnStarted -= CharacterStats.TriggerAllStatus;
-                CombatManager.Instance.OnAllyDeath(this);
+                CombatManager.OnAllyTurnStarted -= CharacterStats.TriggerAllStatus;
+                CombatManager.OnAllyDeath(this);
             }
 
             Destroy(gameObject);

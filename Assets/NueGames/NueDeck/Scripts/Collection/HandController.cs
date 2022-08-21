@@ -28,6 +28,14 @@ namespace NueGames.NueDeck.Scripts.Collection
         public LayerMask targetLayer;
         public Camera cam = null;
         [HideInInspector]public List<CardBase> hand; // Cards currently in hand
+
+        #region Cache
+        protected FxManager FxManager => FxManager.Instance;
+        protected AudioManager AudioManager => AudioManager.Instance;
+        protected GameManager GameManager => GameManager.Instance;
+        protected CombatManager CombatManager => CombatManager.Instance;
+        protected CollectionManager CollectionManager => CollectionManager.Instance;
+        protected UIManager UIManager => UIManager.Instance;
         
         private Plane _plane; // world XY plane, used for mouse position raycasts
         private Vector3 _a, _b, _c; // Used for shaping hand into curve
@@ -49,11 +57,12 @@ namespace NueGames.NueDeck.Scripts.Collection
         private bool showDebugGizmos = true;
         
         private Camera _mainCam;
-
+        
         public bool IsDraggingActive { get; private set; } = true;
 
-        #region Setup
+        #endregion
 
+        #region Setup
         private void Awake()
         {
             _mainCam = Camera.main;
@@ -77,6 +86,7 @@ namespace NueGames.NueDeck.Scripts.Collection
 
         #endregion
 
+        #region Process
         private void Update()
         {
             // --------------------------------------------------------
@@ -107,9 +117,9 @@ namespace NueGames.NueDeck.Scripts.Collection
 
             HandleDraggedCardOutsideHand(mouseButton, mousePos);
         }
-
+        #endregion
+        
         #region Methods
-
         public void EnableDragging() => IsDraggingActive = true;
         public void DisableDragging() => IsDraggingActive = false;
 
@@ -144,7 +154,7 @@ namespace NueGames.NueDeck.Scripts.Collection
                 var cardTransform = card.transform;
 
                 // Set to inactive material if not enough mana required to use card
-                card.SetInactiveMaterialState(GameManager.Instance.PersistentGameplayData.CurrentMana < card.CardData.ManaCost);
+                card.SetInactiveMaterialState(GameManager.PersistentGameplayData.CurrentMana < card.CardData.ManaCost);
 
                 var noCardHeld = _heldCard == null; // Whether a card is "held" (outside of hand)
                 var onSelectedCard = noCardHeld && _selected == i;
@@ -218,7 +228,7 @@ namespace NueGames.NueDeck.Scripts.Collection
                 }
 
                 // Get Selected Card
-                if (GameManager.Instance.PersistentGameplayData.CanSelectCards)
+                if (GameManager.PersistentGameplayData.CanSelectCards)
                 {
                     //float d = (p - mouseWorldPos).sqrMagnitude;
                     if (d < sqrDistance)
@@ -266,10 +276,10 @@ namespace NueGames.NueDeck.Scripts.Collection
                     Quaternion.LookRotation(cardForward, cardUp), 80f * Time.deltaTime);
                 cardTransform.position = cardPos;
 
-                CombatManager.Instance.HighlightCardTarget(_heldCard.CardData.CardActionDataList[0].ActionTargetType);
+                CombatManager.HighlightCardTarget(_heldCard.CardData.CardActionDataList[0].ActionTargetType);
 
                 //if (!canSelectCards || cardTransform.position.y <= transform.position.y + 0.5f) {
-                if (!GameManager.Instance.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
+                if (!GameManager.PersistentGameplayData.CanSelectCards || _mouseInsideHand)
                 {
                     //  || sqrDistance <= 2
                     // Card has gone back into hand
@@ -278,7 +288,7 @@ namespace NueGames.NueDeck.Scripts.Collection
                     _selected = -1;
                     _heldCard = null;
 
-                    CombatManager.Instance.DeactivateCardHighlights();
+                    CombatManager.DeactivateCardHighlights();
 
                     return;
                 }
@@ -295,15 +305,15 @@ namespace NueGames.NueDeck.Scripts.Collection
             if (!mouseButtonUp) return;
             
             //Remove highlights
-            CombatManager.Instance.DeactivateCardHighlights();
+            CombatManager.DeactivateCardHighlights();
             bool backToHand = true;
                 
-            if (GameManager.Instance.PersistentGameplayData.CanUseCards && GameManager.Instance.PersistentGameplayData.CurrentMana >= _heldCard.CardData.ManaCost)
+            if (GameManager.PersistentGameplayData.CanUseCards && GameManager.PersistentGameplayData.CurrentMana >= _heldCard.CardData.ManaCost)
             {
                 RaycastHit hit;
                 var mainRay = _mainCam.ScreenPointToRay(mousePos);
                 var _canUse = false;
-                CharacterBase selfCharacter = CombatManager.Instance.CurrentMainAlly;
+                CharacterBase selfCharacter = CombatManager.CurrentMainAlly;
                 CharacterBase targetCharacter = null;
 
                 _canUse = _heldCard.CardData.UsableWithoutTarget || CheckPlayOnCharacter(mainRay, _canUse, ref selfCharacter, ref targetCharacter);
@@ -311,7 +321,7 @@ namespace NueGames.NueDeck.Scripts.Collection
                 if (_canUse)
                 {
                     backToHand = false;
-                    _heldCard.Use(selfCharacter,targetCharacter,CombatManager.Instance.CurrentEnemiesList,CombatManager.Instance.CurrentAlliesList);
+                    _heldCard.Use(selfCharacter,targetCharacter,CombatManager.CurrentEnemiesList,CombatManager.CurrentAlliesList);
                 }
             }
 
@@ -339,7 +349,7 @@ namespace NueGames.NueDeck.Scripts.Collection
                     if (checkEnemy || checkAlly)
                     {
                         _canUse = true;
-                        selfCharacter = CombatManager.Instance.CurrentMainAlly;
+                        selfCharacter = CombatManager.CurrentMainAlly;
                         targetCharacter = character.GetCharacterBase();
                     }
                 }
@@ -517,6 +527,7 @@ namespace NueGames.NueDeck.Scripts.Collection
 
         #endregion
 
+        #region Editor
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
@@ -544,5 +555,8 @@ namespace NueGames.NueDeck.Scripts.Collection
             Gizmos.DrawWireCube(handOffset, handSize);
         }
 #endif
+
+        #endregion
+
     }
 }

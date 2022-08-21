@@ -11,6 +11,8 @@ namespace NueGames.NueDeck.Scripts.Managers
 
         public List<EncounterButton> EncounterButtonList => encounterButtonList;
         
+        private GameManager GameManager => GameManager.Instance;
+        
         private void Start()
         {
             PrepareEncounters();
@@ -21,9 +23,9 @@ namespace NueGames.NueDeck.Scripts.Managers
             for (int i = 0; i < EncounterButtonList.Count; i++)
             {
                 var btn = EncounterButtonList[i];
-                if (GameManager.Instance.PersistentGameplayData.CurrentEncounterId == i)
+                if (GameManager.PersistentGameplayData.CurrentEncounterId == i)
                     btn.SetStatus(EncounterButtonStatus.Active);
-                else if (GameManager.Instance.PersistentGameplayData.CurrentEncounterId > i)
+                else if (GameManager.PersistentGameplayData.CurrentEncounterId > i)
                     btn.SetStatus(EncounterButtonStatus.Completed);
                 else
                     btn.SetStatus(EncounterButtonStatus.Passive);

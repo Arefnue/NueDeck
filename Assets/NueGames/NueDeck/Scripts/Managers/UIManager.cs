@@ -24,11 +24,14 @@ namespace NueGames.NueDeck.Scripts.Managers
         [Header("Fader")]
         [SerializeField] private CanvasGroup fader;
         [SerializeField] private float fadeSpeed = 1f;
-        
+
+
+        #region Cache
         public CombatCanvas CombatCanvas => combatCanvas;
         public InformationCanvas InformationCanvas => informationCanvas;
         public RewardCanvas RewardCanvas => rewardCanvas;
         public InventoryCanvas InventoryCanvas => inventoryCanvas;
+        #endregion
 
         #region Setup
         private void Awake()

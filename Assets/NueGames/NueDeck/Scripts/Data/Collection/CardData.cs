@@ -29,7 +29,7 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
         [Header("Fx")]
         [SerializeField] private AudioActionType audioType;
 
-        #region Encapsulation
+        #region Cache
         public string Id => id;
         public bool UsableWithoutTarget => usableWithoutTarget;
         public int ManaCost => manaCost;
@@ -40,9 +40,8 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
         public List<SpecialKeywords> KeywordsList => specialKeywordsList;
         public AudioActionType AudioType => audioType;
         public string MyDescription { get; set; }
-
         public RarityType Rarity => rarity;
-
+        
         #endregion
         
         #region Methods
@@ -134,6 +133,8 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
         public bool UsePrefixOnModifiedValue => usePrefixOnModifiedValue;
         public string ModifiedValuePrefix => modifiedValuePrefix;
         public bool OverrideColorOnValueScaled => overrideColorOnValueScaled;
+        
+        private CombatManager CombatManager => CombatManager.Instance;
 
         public string GetDescription()
         {
@@ -160,9 +161,9 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
             var str = new StringBuilder();
             var value = cardData.CardActionDataList[ModifiedActionValueIndex].ActionValue;
             var modifer = 0;
-            if (CombatManager.Instance)
+            if (CombatManager)
             {
-                var player = CombatManager.Instance.CurrentMainAlly;
+                var player = CombatManager.CurrentMainAlly;
                
                 if (player)
                 {
@@ -220,9 +221,9 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
             
             var str = new StringBuilder();
             var value = cardData.CardActionDataList[ModifiedActionValueIndex].ActionValue;
-            if (CombatManager.Instance)
+            if (CombatManager)
             {
-                var player = CombatManager.Instance.CurrentMainAlly;
+                var player = CombatManager.CurrentMainAlly;
                 if (player)
                 {
                     var modifer =player.CharacterStats.StatusDict[ModiferStats].StatusValue;

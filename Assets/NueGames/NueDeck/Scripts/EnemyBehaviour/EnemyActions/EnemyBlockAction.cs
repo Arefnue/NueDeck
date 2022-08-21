@@ -21,11 +21,11 @@ namespace NueGames.NueDeck.Scripts.EnemyBehaviour.EnemyActions
                 Mathf.RoundToInt(actionParameters.Value + actionParameters.SelfCharacter.CharacterStats
                     .StatusDict[StatusType.Dexterity].StatusValue));
             
-            if (FxManager.Instance != null)
-                FxManager.Instance.PlayFx(newTarget.transform,FxType.Block);
+            if (FxManager != null)
+                FxManager.PlayFx(newTarget.transform,FxType.Block);
 
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.PlayOneShot(AudioActionType.Block);
+            if (AudioManager != null)
+                AudioManager.PlayOneShot(AudioActionType.Block);
         }
     }
 }

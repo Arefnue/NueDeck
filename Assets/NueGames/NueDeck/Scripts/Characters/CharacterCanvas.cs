@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NueGames.NueDeck.Scripts.Data.Containers;
 using NueGames.NueDeck.Scripts.Enums;
+using NueGames.NueDeck.Scripts.Managers;
 using NueGames.NueDeck.Scripts.UI;
 using NueGames.NueDeck.ThirdParty.NueTooltip.Core;
 using NueGames.NueDeck.ThirdParty.NueTooltip.CursorSystem;
@@ -23,10 +24,21 @@ namespace NueGames.NueDeck.Scripts.Characters
         [SerializeField] protected Transform descriptionRoot;
         [SerializeField] protected StatusIconsData statusIconsData;
         [SerializeField] protected TextMeshProUGUI currentHealthText;
-       
+        
+        #region Cache
+
         protected Dictionary<StatusType, StatusIconBase> StatusDict = new Dictionary<StatusType, StatusIconBase>();
 
         protected Canvas TargetCanvas;
+        
+        protected FxManager FxManager => FxManager.Instance;
+        protected AudioManager AudioManager => AudioManager.Instance;
+        protected GameManager GameManager => GameManager.Instance;
+        protected CombatManager CombatManager => CombatManager.Instance;
+        protected CollectionManager CollectionManager => CollectionManager.Instance;
+        protected UIManager UIManager => UIManager.Instance;
+
+        #endregion
         
         #region Setup
 

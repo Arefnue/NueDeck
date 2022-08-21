@@ -15,14 +15,14 @@ namespace NueGames.NueDeck.Scripts.EnemyBehaviour.EnemyActions
                                          actionParameters.SelfCharacter.CharacterStats.StatusDict[StatusType.Strength]
                                              .StatusValue);
             actionParameters.TargetCharacter.CharacterStats.Damage(value);
-            if (FxManager.Instance != null)
+            if (FxManager != null)
             {
-                FxManager.Instance.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
-                FxManager.Instance.SpawnFloatingText(actionParameters.TargetCharacter.TextSpawnRoot,value.ToString());
+                FxManager.PlayFx(actionParameters.TargetCharacter.transform,FxType.Attack);
+                FxManager.SpawnFloatingText(actionParameters.TargetCharacter.TextSpawnRoot,value.ToString());
             }
 
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.PlayOneShot(AudioActionType.Attack);
+            if (AudioManager != null)
+                AudioManager.PlayOneShot(AudioActionType.Attack);
            
         }
     }
