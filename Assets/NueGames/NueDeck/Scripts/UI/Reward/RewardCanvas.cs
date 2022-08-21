@@ -16,11 +16,8 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
         [SerializeField] private Transform rewardRoot;
         [SerializeField] private RewardContainer rewardContainerPrefab;
         [SerializeField] private Transform rewardPanelRoot;
-        [Header("Choice")] 
-        [SerializeField] private bool use3DCard;
-        [SerializeField] private List<Transform> choiceCardSpawnTransformList;
+        [Header("Choice")]
         [SerializeField] private Transform choice2DCardSpawnRoot;
-        [SerializeField] private ChoiceCard choiceCardPrefab;
         [SerializeField] private ChoiceCard choiceCardUIPrefab;
         [SerializeField] private ChoicePanel choicePanel;
         
@@ -106,9 +103,9 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
             
             for (int i = 0; i < amount; i++)
             {
-                Transform spawnTransform = use3DCard ? choiceCardSpawnTransformList[i] : choice2DCardSpawnRoot;
+                Transform spawnTransform = choice2DCardSpawnRoot;
               
-                var choice = Instantiate(use3DCard ?choiceCardPrefab : choiceCardUIPrefab, spawnTransform);
+                var choice = Instantiate(choiceCardUIPrefab, spawnTransform);
                 
                 var reward = _cardRewardList.RandomItem();
                 choice.BuildReward(reward);
@@ -118,8 +115,6 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
                 _spawnedChoiceList.Add(choice);
                 _currentRewardsList.Remove(rewardContainer);
                 
-                if (use3DCard)
-                    choice.transform.localPosition = Vector3.zero;
             }
             
             Destroy(rewardContainer.gameObject);
