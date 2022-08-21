@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 namespace NueGames.NueDeck.Scripts.Managers
 {
-    [DefaultExecutionOrder(-5)]
+    [DefaultExecutionOrder(-10)]
     public class GameManager : MonoBehaviour
     { 
         public GameManager(){}

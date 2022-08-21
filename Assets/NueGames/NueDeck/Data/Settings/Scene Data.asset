@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c19f723f78e42a798bd113ce9533921, type: 3}
   m_Name: Scene Data
   m_EditorClassIdentifier: 
-  mainMenuSceneIndex: 1
-  mapSceneIndex: 2
-  combatSceneIndex: 3
+  coreSceneIndex: 0
+  mainMenuSceneIndex: 0
+  mapSceneIndex: 1
+  combatSceneIndex: 2

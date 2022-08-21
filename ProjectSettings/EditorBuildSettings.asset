@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/NueGames/NueDeck/Scenes/0-NueCore.unity
-    guid: b5be09f8de7e1a741a9881491d2c01cd
-  - enabled: 1
     path: Assets/NueGames/NueDeck/Scenes/1-MainMenu.unity
     guid: 48751a452190d044a846c99f53ee72aa
   - enabled: 1
@@ -17,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/NueGames/NueDeck/Scenes/3-CombatScene.unity
     guid: 27c8685eabe409f4fa3d614fc62e702d
+  - enabled: 1
+    path: Assets/NueGames/NueDeck/Scenes/NueCore.unity
+    guid: 8730f6846a1505f4cbae9e87de5abdc9
   m_configObjects: {}
