@@ -13,7 +13,7 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
     public class RewardCanvas : CanvasBase
     {
         [Header("References")]
-        [SerializeField] private RewardData rewardData;
+        [SerializeField] private RewardContainerData rewardContainerData;
         [SerializeField] private Transform rewardRoot;
         [SerializeField] private RewardContainer rewardContainerPrefab;
 
@@ -36,16 +36,20 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
         {
             var rewardClone = Instantiate(rewardContainerPrefab, rewardRoot);
             _currentRewardsList.Add(rewardClone);
-            //var rewardDescription = "";
+            
             switch (rewardType)
             {
                 case RewardType.Gold:
-                    var rewardGold = rewardData.GetRandomGoldReward();
-                    rewardClone.BuildReward(rewardData.GoldReward.RewardSprite,rewardData.GoldReward.RewardDescription);
+                    var rewardGold = rewardContainerData.GetRandomGoldReward(out var goldRewardData);
+                    rewardClone.BuildReward(goldRewardData.RewardSprite,goldRewardData.RewardDescription);
                     rewardClone.RewardButton.onClick.AddListener(()=>GetGoldReward(rewardClone,rewardGold));
                     break;
                 case RewardType.Card:
-                    rewardClone.BuildReward(rewardData.CardReward.RewardSprite,rewardData.CardReward.RewardDescription);
+                    var rewardCardList = rewardContainerData.GetRandomCardRewardList(out var cardRewardData);
+                    _cardRewardList.Clear();
+                    foreach (var cardData in rewardCardList)
+                        _cardRewardList.Add(cardData);
+                    rewardClone.BuildReward(cardRewardData.RewardSprite,cardRewardData.RewardDescription);
                     rewardClone.RewardButton.onClick.AddListener(()=>GetCardReward(rewardClone,3));
                     break;
                 case RewardType.Relic:
@@ -65,9 +69,7 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
         private void ResetRewards()
         {
             foreach (var rewardContainer in _currentRewardsList)
-            {
                 Destroy(rewardContainer.gameObject);
-            }
 
             _currentRewardsList?.Clear();
         }
@@ -97,9 +99,6 @@ namespace NueGames.NueDeck.Scripts.UI.Reward
         private void GetCardReward(RewardContainer rewardContainer,int amount = 3)
         {
             ChoicePanel.gameObject.SetActive(true);
-
-            foreach (var cardData in rewardData.CardReward.RewardCardList)
-                _cardRewardList.Add(cardData);
             
             for (int i = 0; i < amount; i++)
             {
