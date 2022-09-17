@@ -137,6 +137,7 @@ namespace NueGames.NueDeck.Scripts.Card
             CollectionManager.OnCardDiscarded(this);
             StartCoroutine(DiscardRoutine());
         }
+        
         public virtual void Exhaust(bool destroy = true)
         {
             if (IsExhausted) return;
