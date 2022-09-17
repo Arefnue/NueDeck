@@ -16,6 +16,7 @@ MonoBehaviour:
   characterName: Enemy 1
   characterDescription: Enemy Description
   maxHealth: 50
+  enemyPrefab: {fileID: 243822687015991123, guid: c973aeb67e007d54c97fd480d7f50773, type: 3}
   followAbilityPattern: 1
   enemyAbilityList:
   - name: Attack Single

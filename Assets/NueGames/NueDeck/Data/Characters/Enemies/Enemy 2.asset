@@ -16,6 +16,7 @@ MonoBehaviour:
   characterName: Enemy 2
   characterDescription: Enemy Description
   maxHealth: 30
+  enemyPrefab: {fileID: 243822687015991123, guid: 9fec376b8bc12e645a735f176747a31b, type: 3}
   followAbilityPattern: 1
   enemyAbilityList:
   - name: Poison

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NueGames.NueDeck.Scripts.Characters;
 using NueGames.NueDeck.Scripts.Data.Containers;
 using NueGames.NueDeck.Scripts.Enums;
 using NueGames.NueDeck.Scripts.NueExtentions;
@@ -12,10 +13,12 @@ namespace NueGames.NueDeck.Scripts.Data.Characters
     public class EnemyCharacterData : CharacterDataBase
     {
         [Header("Enemy Defaults")] 
+        [SerializeField] private EnemyBase enemyPrefab;
         [SerializeField] private bool followAbilityPattern;
         [SerializeField] private List<EnemyAbilityData> enemyAbilityList;
-
         public List<EnemyAbilityData> EnemyAbilityList => enemyAbilityList;
+
+        public EnemyBase EnemyPrefab => enemyPrefab;
 
         public EnemyAbilityData GetAbility()
         {

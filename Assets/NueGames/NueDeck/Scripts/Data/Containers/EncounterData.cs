@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NueGames.NueDeck.Scripts.Characters;
+using NueGames.NueDeck.Scripts.Data.Characters;
 using NueGames.NueDeck.Scripts.Enums;
 using NueGames.NueDeck.Scripts.NueExtentions;
 using UnityEngine;
@@ -48,8 +49,8 @@ namespace NueGames.NueDeck.Scripts.Data.Containers
     [Serializable]
     public class EnemyEncounter : EncounterBase
     {
-        [SerializeField] private List<EnemyBase> enemyList;
-        public List<EnemyBase> EnemyList => enemyList;
+        [SerializeField] private List<EnemyCharacterData> enemyList;
+        public List<EnemyCharacterData> EnemyList => enemyList;
     }
     
     [Serializable]

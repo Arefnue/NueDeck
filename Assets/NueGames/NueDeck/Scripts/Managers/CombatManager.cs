@@ -214,7 +214,7 @@ namespace NueGames.NueDeck.Scripts.Managers
             var enemyList = CurrentEncounter.EnemyList;
             for (var i = 0; i < enemyList.Count; i++)
             {
-                var clone = Instantiate(enemyList[i], EnemyPosList.Count >= i ? EnemyPosList[i] : EnemyPosList[0]);
+                var clone = Instantiate(enemyList[i].EnemyPrefab, EnemyPosList.Count >= i ? EnemyPosList[i] : EnemyPosList[0]);
                 clone.BuildCharacter();
                 CurrentEnemiesList.Add(clone);
             }

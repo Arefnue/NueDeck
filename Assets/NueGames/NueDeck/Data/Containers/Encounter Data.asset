@@ -19,19 +19,19 @@ MonoBehaviour:
     bossEncounterList:
     - targetBackgroundType: 0
       enemyList:
-      - {fileID: 243822687015991123, guid: 12422914cfeeb1349afec0d663b87504, type: 3}
-      - {fileID: 243822687015991123, guid: 9fec376b8bc12e645a735f176747a31b, type: 3}
-      - {fileID: 243822687015991123, guid: 12422914cfeeb1349afec0d663b87504, type: 3}
+      - {fileID: 11400000, guid: 2a3e3cac54ff7a84a81dc5f60d34fb2b, type: 2}
+      - {fileID: 11400000, guid: ac6937a4cc8afb94cac0a1ffdf9f72e0, type: 2}
+      - {fileID: 11400000, guid: 2a3e3cac54ff7a84a81dc5f60d34fb2b, type: 2}
     enemyEncounterList:
     - targetBackgroundType: 0
       enemyList:
-      - {fileID: 243822687015991123, guid: c973aeb67e007d54c97fd480d7f50773, type: 3}
+      - {fileID: 11400000, guid: ab4b1aaf78f9c8747a5708430c68f051, type: 2}
     - targetBackgroundType: 0
       enemyList:
-      - {fileID: 243822687015991123, guid: c973aeb67e007d54c97fd480d7f50773, type: 3}
-      - {fileID: 243822687015991123, guid: 9fec376b8bc12e645a735f176747a31b, type: 3}
+      - {fileID: 11400000, guid: ab4b1aaf78f9c8747a5708430c68f051, type: 2}
+      - {fileID: 11400000, guid: ac6937a4cc8afb94cac0a1ffdf9f72e0, type: 2}
     - targetBackgroundType: 0
       enemyList:
-      - {fileID: 243822687015991123, guid: c973aeb67e007d54c97fd480d7f50773, type: 3}
-      - {fileID: 243822687015991123, guid: 9fec376b8bc12e645a735f176747a31b, type: 3}
-      - {fileID: 243822687015991123, guid: 12422914cfeeb1349afec0d663b87504, type: 3}
+      - {fileID: 11400000, guid: ab4b1aaf78f9c8747a5708430c68f051, type: 2}
+      - {fileID: 11400000, guid: ac6937a4cc8afb94cac0a1ffdf9f72e0, type: 2}
+      - {fileID: 11400000, guid: 2a3e3cac54ff7a84a81dc5f60d34fb2b, type: 2}
