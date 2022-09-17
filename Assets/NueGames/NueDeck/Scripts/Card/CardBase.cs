@@ -90,7 +90,6 @@ namespace NueGames.NueDeck.Scripts.Card
                             target,self,CardData));
             }
             CollectionManager.OnCardPlayed(this);
-            StartCoroutine(DiscardRoutine());
         }
 
         private static List<CharacterBase> DetermineTargets(CharacterBase targetCharacter, List<EnemyBase> allEnemies, List<AllyBase> allAllies,
@@ -138,7 +137,8 @@ namespace NueGames.NueDeck.Scripts.Card
         public virtual void Exhaust()
         {
             if (!IsPlayable) return;
-            //StartCoroutine(nameof(Dissolve));
+            CollectionManager.OnCardExhausted(this);
+            StartCoroutine(ExhaustRoutine());
         }
 
         protected virtual void SpendMana(int value)
@@ -171,6 +171,38 @@ namespace NueGames.NueDeck.Scripts.Card
         {
             var timer = 0f;
             transform.SetParent(CollectionManager.HandController.discardTransform);
+            
+            var startPos = CachedTransform.localPosition;
+            var endPos = Vector3.zero;
+
+            var startScale = CachedTransform.localScale;
+            var endScale = Vector3.zero;
+
+            var startRot = CachedTransform.localRotation;
+            var endRot = Quaternion.Euler(Random.value * 360, Random.value * 360, Random.value * 360);
+            
+            while (true)
+            {
+                timer += Time.deltaTime*5;
+
+                CachedTransform.localPosition = Vector3.Lerp(startPos, endPos, timer);
+                CachedTransform.localRotation = Quaternion.Lerp(startRot,endRot,timer);
+                CachedTransform.localScale = Vector3.Lerp(startScale, endScale, timer);
+                
+                if (timer>=1f)  break;
+                
+                yield return CachedWaitFrame;
+            }
+
+            if (destroy)
+                Destroy(gameObject);
+           
+        }
+        
+        protected virtual IEnumerator ExhaustRoutine(bool destroy = true)
+        {
+            var timer = 0f;
+            transform.SetParent(CollectionManager.HandController.exhaustTransform);
             
             var startPos = CachedTransform.localPosition;
             var endPos = Vector3.zero;

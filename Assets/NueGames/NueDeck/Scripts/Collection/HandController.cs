@@ -23,6 +23,7 @@ namespace NueGames.NueDeck.Scripts.Collection
 
         [Header("References")]
         public Transform discardTransform;
+        public Transform exhaustTransform;
         public Transform drawTransform;
         public LayerMask selectableLayer;
         public LayerMask targetLayer;

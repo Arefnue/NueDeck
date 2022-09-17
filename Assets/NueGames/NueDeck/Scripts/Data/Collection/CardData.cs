@@ -20,6 +20,7 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
         
         [Header("Action Settings")]
         [SerializeField] private bool usableWithoutTarget;
+        [SerializeField] private bool exhaustAfterPlay;
         [SerializeField] private List<CardActionData> cardActionDataList;
         
         [Header("Description")]
@@ -41,7 +42,9 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
         public AudioActionType AudioType => audioType;
         public string MyDescription { get; set; }
         public RarityType Rarity => rarity;
-        
+
+        public bool ExhaustAfterPlay => exhaustAfterPlay;
+
         #endregion
         
         #region Methods

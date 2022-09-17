@@ -25,6 +25,7 @@ namespace NueGames.NueDeck.Scripts.Utils
                     UIManager.OpenInventory(CollectionManager.Instance.DiscardPile,"Discard Pile");
                     break;
                 case InventoryTypes.ExhaustPile:
+                    UIManager.OpenInventory(CollectionManager.Instance.ExhaustPile,"Exhaust Pile");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

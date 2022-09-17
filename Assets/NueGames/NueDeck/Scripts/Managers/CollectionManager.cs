@@ -22,6 +22,8 @@ namespace NueGames.NueDeck.Scripts.Managers
         public List<CardData> DrawPile { get; private set; } = new List<CardData>();
         public List<CardData> HandPile { get; private set; } = new List<CardData>();
         public List<CardData> DiscardPile { get; private set; } = new List<CardData>();
+        
+        public List<CardData> ExhaustPile { get; private set; } = new List<CardData>();
         public HandController HandController => handController;
         protected FxManager FxManager => FxManager.Instance;
         protected AudioManager AudioManager => AudioManager.Instance;
@@ -89,58 +91,27 @@ namespace NueGames.NueDeck.Scripts.Managers
             
             HandController.hand.Clear();
         }
-        public void ExhaustRandomCard()
-        {
-            CardData targetCard = null;
-            if (DrawPile.Count > 0)
-            {
-                targetCard = DrawPile[Random.Range(0, DrawPile.Count)];
-                StartCoroutine(ExhaustCardRoutine(targetCard, HandController.drawTransform,
-                    CombatManager.CurrentEnemiesList[0].transform));
-            }
-            else if (DiscardPile.Count > 0)
-            {
-                targetCard = DiscardPile[Random.Range(0, DiscardPile.Count)];
-                StartCoroutine(ExhaustCardRoutine(targetCard, HandController.discardTransform,
-                    CombatManager.CurrentEnemiesList[0].transform));
-            }
-            else if (Instance.HandPile.Count > 0)
-            {
-                targetCard = HandPile[Random.Range(0, HandPile.Count)];
-                var tCard = HandController.hand[0];
-                foreach (var cardBase in HandController.hand)
-                    if (cardBase.CardData == targetCard)
-                    {
-                        tCard = cardBase;
-                        break;
-                    }
-
-                StartCoroutine(ExhaustCardRoutine(targetCard, tCard.transform,
-                    CombatManager.CurrentEnemiesList[0].transform));
-                HandController.hand?.Remove(tCard);
-                Destroy(tCard.gameObject);
-            }
-            else
-            {
-                //LevelManager.instance.LoseGame();
-            }
-
-            DrawPile?.Remove(targetCard);
-            HandPile?.Remove(targetCard);
-            DiscardPile?.Remove(targetCard);
-            UIManager.CombatCanvas.SetPileTexts();
-        }
+        
         public void OnCardDiscarded(CardBase targetCard)
         {
             HandPile.Remove(targetCard.CardData);
             DiscardPile.Add(targetCard.CardData);
             UIManager.CombatCanvas.SetPileTexts();
         }
-        public void OnCardPlayed(CardBase targetCard)
+        
+        public void OnCardExhausted(CardBase targetCard)
         {
             HandPile.Remove(targetCard.CardData);
-            DiscardPile.Add(targetCard.CardData);
+            ExhaustPile.Add(targetCard.CardData);
             UIManager.CombatCanvas.SetPileTexts();
+        }
+        public void OnCardPlayed(CardBase targetCard)
+        {
+            if (targetCard.CardData.ExhaustAfterPlay)
+                targetCard.Exhaust();
+            else
+                targetCard.Discard();
+          
             foreach (var cardObject in HandController.hand)
                 cardObject.UpdateCardText();
         }
@@ -148,6 +119,15 @@ namespace NueGames.NueDeck.Scripts.Managers
         {
             foreach (var i in GameManager.PersistentGameplayData.CurrentCardsList) 
                 DrawPile.Add(i);
+        }
+
+        public void ClearPiles()
+        {
+            DiscardPile.Clear();
+            DrawPile.Clear();
+            HandPile.Clear();
+            ExhaustPile.Clear();
+            HandController.hand.Clear();
         }
         #endregion
 
@@ -168,40 +148,5 @@ namespace NueGames.NueDeck.Scripts.Managers
         }
         #endregion
 
-        #region Routines
-
-        private IEnumerator ExhaustCardRoutine(CardData targetData, Transform startTransform, Transform endTransform)
-        {
-            var waitFrame = new WaitForEndOfFrame();
-            var timer = 0f;
-
-            var card = GameManager.BuildAndGetCard(targetData, startTransform);
-            card.transform.SetParent(endTransform);
-            var startPos = card.transform.localPosition;
-            var endPos = Vector3.zero;
-
-            var startScale = card.transform.localScale;
-            var endScale = Vector3.zero;
-
-            var startRot = transform.localRotation;
-            var endRot = Quaternion.Euler(Random.value * 360, Random.value * 360, Random.value * 360);
-
-            while (true)
-            {
-                timer += Time.deltaTime * 5;
-
-                card.transform.localPosition = Vector3.Lerp(startPos, endPos, timer);
-                card.transform.localScale = Vector3.Lerp(startScale, endScale, timer);
-                card.transform.localRotation = Quaternion.Lerp(startRot, endRot, timer);
-
-                if (timer >= 1f) break;
-
-                yield return waitFrame;
-            }
-
-            Destroy(card.gameObject);
-        }
-
-        #endregion
     }
 }

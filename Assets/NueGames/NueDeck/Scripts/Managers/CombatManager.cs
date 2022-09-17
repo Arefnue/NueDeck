@@ -253,10 +253,8 @@ namespace NueGames.NueDeck.Scripts.Managers
                 GameManager.PersistentGameplayData.SetAllyHealthData(allyBase.AllyCharacterData.CharacterID,
                     allyBase.CharacterStats.CurrentHealth, allyBase.CharacterStats.MaxHealth);
             }
-            CollectionManager.DiscardPile.Clear();
-            CollectionManager.DrawPile.Clear();
-            CollectionManager.HandPile.Clear();
-            CollectionManager.HandController.hand.Clear();
+            
+            CollectionManager.ClearPiles();
             
            
             if (GameManager.PersistentGameplayData.IsFinalEncounter)
