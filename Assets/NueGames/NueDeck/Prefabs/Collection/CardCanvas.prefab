@@ -907,7 +907,6 @@ GameObject:
   - component: {fileID: 7706099534493900888}
   - component: {fileID: 7275600629987442218}
   - component: {fileID: 4616222981672102690}
-  - component: {fileID: 8220683548794166879}
   m_Layer: 9
   m_Name: Crystal
   m_TagString: Untagged
@@ -985,27 +984,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rarity: 1
---- !u!223 &8220683548794166879
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4666382154267661344}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 1
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 1
-  m_TargetDisplay: 0
 --- !u!1 &5240779397303247492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,7 +1264,6 @@ GameObject:
   - component: {fileID: 625002204615118758}
   - component: {fileID: 4011009653973013806}
   - component: {fileID: 351185202770378902}
-  - component: {fileID: 3823891303966704456}
   m_Layer: 9
   m_Name: Crystal
   m_TagString: Untagged
@@ -1364,27 +1341,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rarity: 1
---- !u!223 &3823891303966704456
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6828812442556903586}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 1
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 1
-  m_TargetDisplay: 0
 --- !u!1 &7274435174525199977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,7 +1720,6 @@ GameObject:
   - component: {fileID: 8973694557083922725}
   - component: {fileID: 5358481092934456028}
   - component: {fileID: 6597690665545709625}
-  - component: {fileID: 7641539043489024873}
   m_Layer: 9
   m_Name: Crystal
   m_TagString: Untagged
@@ -1842,24 +1797,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rarity: 1
---- !u!223 &7641539043489024873
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8159342104048711428}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 1
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 1
-  m_TargetDisplay: 0
