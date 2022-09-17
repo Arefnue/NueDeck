@@ -6,6 +6,9 @@ namespace NueGames.NueDeck.Editor
 {
     public static class EditorUIHelpers
     {
+#if UNITY_EDITOR
+        
+
         // Hotkey: Alt+A
         [MenuItem("Tools/NueDeck/UIHelper/Anchor To Rect &a")]
         public static void MoveAnchorsToCorners()
@@ -36,10 +39,13 @@ namespace NueGames.NueDeck.Editor
                 it.MoveAnchorsToCorners_Height();
             });
         }
+#endif
     }
 
     public static class MoveAnchorsToCornersExtensions
     {
+#if UNITY_EDITOR
+
         public static void MoveAnchorsToCorners_Width(this RectTransform rectTransform)
         {
             Vector2 anchorMinOld = rectTransform.anchorMin;
@@ -123,11 +129,16 @@ namespace NueGames.NueDeck.Editor
             offsetMaxY = (1 - ownRectTransform.pivot.y) * anchorRect.height * (1 - ownRectTransform.localScale.y);
             ownRectTransform.offsetMax = new Vector2(offsetMaxX, offsetMaxY);
         }
+                
+#endif
 
     }
 
     public static class EditorUtils
     {
+#if UNITY_EDITOR
+        
+
         public static List<T> GetSelectedComponents<T>()
         {
             List<T> result = new List<T>();
@@ -148,5 +159,6 @@ namespace NueGames.NueDeck.Editor
             }
             return result;
         }
+#endif
     }
 }
