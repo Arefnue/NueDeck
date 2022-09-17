@@ -43,6 +43,8 @@ namespace NueGames.NueDeck.Scripts.Card
         protected GameManager GameManager => GameManager.Instance;
         protected CombatManager CombatManager => CombatManager.Instance;
         protected CollectionManager CollectionManager => CollectionManager.Instance;
+        
+        public bool IsExhausted { get; private set; }
 
         #endregion
         
@@ -87,7 +89,7 @@ namespace NueGames.NueDeck.Scripts.Card
                 foreach (var target in targetList)
                     CardActionProcessor.GetAction(playerAction.CardActionType)
                         .DoAction(new CardActionParameters(playerAction.ActionValue,
-                            target,self,CardData));
+                            target,self,CardData,this));
             }
             CollectionManager.OnCardPlayed(this);
         }
@@ -130,15 +132,18 @@ namespace NueGames.NueDeck.Scripts.Card
         
         public virtual void Discard()
         {
+            if (IsExhausted) return;
             if (!IsPlayable) return;
             CollectionManager.OnCardDiscarded(this);
             StartCoroutine(DiscardRoutine());
         }
-        public virtual void Exhaust()
+        public virtual void Exhaust(bool destroy = true)
         {
+            if (IsExhausted) return;
             if (!IsPlayable) return;
+            IsExhausted = true;
             CollectionManager.OnCardExhausted(this);
-            StartCoroutine(ExhaustRoutine());
+            StartCoroutine(ExhaustRoutine(destroy));
         }
 
         protected virtual void SpendMana(int value)

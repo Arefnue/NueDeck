@@ -10,6 +10,7 @@
         Draw,
         EarnMana,
         LifeSteal,
-        Stun
+        Stun,
+        Exhaust
     }
 }

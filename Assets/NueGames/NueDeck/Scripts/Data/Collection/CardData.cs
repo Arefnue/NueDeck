@@ -71,6 +71,7 @@ namespace NueGames.NueDeck.Scripts.Data.Collection
         public void EditRarity(RarityType targetRarity) => rarity = targetRarity;
         public void EditCardSprite(Sprite newSprite) => cardSprite = newSprite;
         public void EditUsableWithoutTarget(bool newStatus) => usableWithoutTarget = newStatus;
+        public void EditExhaustAfterPlay(bool newStatus) => exhaustAfterPlay = newStatus;
         public void EditCardActionDataList(List<CardActionData> newCardActionDataList) =>
             cardActionDataList = newCardActionDataList;
         public void EditCardDescriptionDataList(List<CardDescriptionData> newCardDescriptionDataList) =>

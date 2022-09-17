@@ -30,6 +30,7 @@ namespace NueGames.NueDeck.Editor
         private int ManaCost{ get; set; }
         private Sprite CardSprite{ get; set; }
         private bool UsableWithoutTarget{ get; set; }
+        private bool ExhaustAfterPlay{ get; set; }
         private List<CardActionData> CardActionDataList{ get; set; }
         private List<CardDescriptionData> CardDescriptionDataList{ get; set; }
         private List<SpecialKeywords> SpecialKeywordsList{ get; set; }
@@ -44,6 +45,7 @@ namespace NueGames.NueDeck.Editor
             ManaCost = SelectedCardData.ManaCost;
             CardSprite = SelectedCardData.CardSprite;
             UsableWithoutTarget = SelectedCardData.UsableWithoutTarget;
+            ExhaustAfterPlay = SelectedCardData.ExhaustAfterPlay;
             CardActionDataList = SelectedCardData.CardActionDataList.Count>0 ? new List<CardActionData>(SelectedCardData.CardActionDataList) : new List<CardActionData>();
             CardDescriptionDataList = SelectedCardData.CardDescriptionDataList.Count>0 ? new List<CardDescriptionData>(SelectedCardData.CardDescriptionDataList) : new List<CardDescriptionData>();
             SpecialKeywordsList = SelectedCardData.KeywordsList.Count>0 ? new List<SpecialKeywords>(SelectedCardData.KeywordsList) : new List<SpecialKeywords>();
@@ -58,6 +60,7 @@ namespace NueGames.NueDeck.Editor
             ManaCost = 0;
             CardSprite = null;
             UsableWithoutTarget = false;
+            ExhaustAfterPlay = false;
             CardActionDataList?.Clear();
             CardDescriptionDataList?.Clear();
             SpecialKeywordsList?.Clear();
@@ -239,6 +242,11 @@ namespace NueGames.NueDeck.Editor
             UsableWithoutTarget = EditorGUILayout.Toggle("Usable Without Target:", UsableWithoutTarget);
         }
         
+        private void ChangeExhaustAfterPlay()
+        {
+            ExhaustAfterPlay = EditorGUILayout.Toggle("Exhaust after play", ExhaustAfterPlay);
+        }
+        
         private bool _isGeneralSettingsFolded;
         private Vector2 _generalSettingsScrollPos;
         private void ChangeGeneralSettings()
@@ -257,6 +265,7 @@ namespace NueGames.NueDeck.Editor
             ChangeManaCost();
             ChangeRarity();
             ChangeUsableWithoutTarget();
+            ChangeExhaustAfterPlay();
             ChangeAudioActionType();
             EditorGUILayout.EndVertical();
             GUILayout.Space(100);
@@ -298,15 +307,19 @@ namespace NueGames.NueDeck.Editor
                     EditorGUILayout.EndHorizontal();
                     EditorGUILayout.Separator();
                     var newActionType = (CardActionType)EditorGUILayout.EnumPopup("Action Type",cardActionData.CardActionType,GUILayout.Width(250));
-                    var newActionTarget = (ActionTargetType)EditorGUILayout.EnumPopup("Target Type",cardActionData.ActionTargetType,GUILayout.Width(250));
-                   
-                   
-                    var newActionValue = EditorGUILayout.FloatField("Action Value: ",cardActionData.ActionValue);
+
+                    if (newActionType != CardActionType.Exhaust)
+                    {
+                        var newActionTarget = (ActionTargetType)EditorGUILayout.EnumPopup("Target Type",cardActionData.ActionTargetType,GUILayout.Width(250));
+                        var newActionValue = EditorGUILayout.FloatField("Action Value: ",cardActionData.ActionValue);
+                        cardActionData.EditActionValue(newActionValue);
+                        cardActionData.EditActionTarget(newActionTarget);
+                    }
+                    
                     var newActionDelay = EditorGUILayout.FloatField("Action Delay: ",cardActionData.ActionDelay);
-                    cardActionData.EditActionType(newActionType);
-                    cardActionData.EditActionValue(newActionValue);
-                    cardActionData.EditActionTarget(newActionTarget);
+                    
                     cardActionData.EditActionDelay(newActionDelay);
+                    cardActionData.EditActionType(newActionType);
                     EditorGUILayout.EndVertical();
                 }
 
@@ -385,8 +398,17 @@ namespace NueGames.NueDeck.Editor
                         EditorGUILayout.EndVertical();
                     }
                     else
-                    {
-                       descriptionData.EditDescriptionText(EditorGUILayout.TextArea(descriptionData.DescriptionText,GUILayout.Width(150),GUILayout.Height(50)));
+                    { 
+                        var desc = EditorGUILayout.TextArea(descriptionData.DescriptionText, GUILayout.Width(150),
+                            GUILayout.Height(50));
+
+                        // var hasExhaust = CardActionDataList.Find(x => x.CardActionType == CardActionType.Exhaust);
+                        // if (ExhaustAfterPlay || hasExhaust != null)
+                        // {
+                        //     desc += " Exhaust ";
+                        // }
+                        //
+                        descriptionData.EditDescriptionText(desc);
                     }
                     
                     EditorGUILayout.EndHorizontal();
@@ -487,6 +509,7 @@ namespace NueGames.NueDeck.Editor
             SelectedCardData.EditManaCost(ManaCost);
             SelectedCardData.EditCardSprite(CardSprite);
             SelectedCardData.EditUsableWithoutTarget(UsableWithoutTarget);
+            SelectedCardData.EditExhaustAfterPlay(ExhaustAfterPlay);
             SelectedCardData.EditCardActionDataList(CardActionDataList);
             SelectedCardData.EditCardDescriptionDataList(CardDescriptionDataList);
             SelectedCardData.EditSpecialKeywordsList(SpecialKeywordsList);
