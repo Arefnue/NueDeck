@@ -24,12 +24,12 @@ MonoBehaviour:
     hideActionValue: 0
     actionList:
     - actionType: 0
-      minActionValue: 6
-      maxActionValue: 6
+      minActionValue: 4
+      maxActionValue: 4
   - name: Block
     intention: {fileID: 11400000, guid: b0b1e7f2f78bb444eb1666e4accf22ee, type: 2}
     hideActionValue: 0
     actionList:
     - actionType: 3
       minActionValue: 5
-      maxActionValue: 8
+      maxActionValue: 10
